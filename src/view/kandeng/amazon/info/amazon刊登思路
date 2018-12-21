@@ -1,0 +1,16 @@
+
+amazon刊登
+
+index  入口文件
+relevance-goods.vue产品关联信息
+account-tab-box  tab容器
+account-tab-base     每个tab的基本信息
+account-tab-sku-set  每个tab的sku设置
+account-describ  每个tab的图片与描述
+
+实现思路
+   所有数据都在index中声明，单向流绑定到各个组件中，各个组件的交互通过抛出事件到index中，修改数据并更新视图；
+注意事项
+    基本信息， sku-设置   为后端返回数据动态生成dom， 规则已设置好，如需要增加dom，请与后端交流，增加返回数据
+
+

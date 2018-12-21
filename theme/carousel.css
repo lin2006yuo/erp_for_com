@@ -1,0 +1,214 @@
+@charset "UTF-8";
+:root{
+    /* Transition
+  -------------------------- */
+    /* Colors
+  -------------------------- */
+    /*--color-primary: #20a0ff;*/
+    /* Link
+  -------------------------- */
+    /* Border
+  -------------------------- */
+    /* Box-shadow
+  -------------------------- */
+    /* Fill
+  -------------------------- */
+    /* Font
+  -------------------------- */
+    /* Size
+  -------------------------- */
+    /* z-index
+  -------------------------- */
+    /* Disable base
+  -------------------------- */
+    /* Icon
+  -------------------------- */
+    /* Checkbox
+  -------------------------- */
+    /* Radio
+  -------------------------- */
+    /* Select
+  -------------------------- */
+    /* Alert
+  -------------------------- */
+    /* Message Box
+  -------------------------- */
+    /* Message
+  -------------------------- */
+    /* Notification
+  -------------------------- */
+    /* Input
+  -------------------------- */
+    /* Cascader
+  -------------------------- */
+    /* Group
+  -------------------------- */
+    /* Tab
+  -------------------------- */
+    /* Button
+  -------------------------- */
+    /* cascader
+  -------------------------- */
+    /* Switch
+ -------------------------- */
+    /* Dialog
+ -------------------------- */
+    /* Table
+ -------------------------- */
+    /* Pagination
+ -------------------------- */
+    /* Popover
+ -------------------------- */
+    /* Tooltip
+  -------------------------- */
+    /* Tag
+  -------------------------- */
+    /* Dropdown
+  -------------------------- */
+    /* Badge
+  -------------------------- */
+    /* Card
+  --------------------------*/
+    /* Slider
+  --------------------------*/
+    /* Steps
+  --------------------------*/
+    /* Steps
+  --------------------------*/
+    /* Rate
+  --------------------------*/
+    /* DatePicker
+  --------------------------*/
+    /* Loading
+ --------------------------*/
+}
+
+.el-carousel{
+    overflow-x: hidden;
+    position: relative;
+}
+
+.el-carousel__container{
+    position: relative;
+    height: 300px;
+}
+
+.el-carousel__arrow{
+    border: none;
+    outline: none;
+    padding: 0;
+    margin: 0;
+    width: var(--carousel-arrow-size);
+    height: var(--carousel-arrow-size);
+    cursor: pointer;
+    transition: .3s;
+    border-radius: 50%;
+    background-color: var(--carousel-arrow-background);
+    color: #fff;
+    position: absolute;
+    top: 50%;
+    z-index: 10;
+    transform: translateY(-50%);
+    text-align: center;
+    font-size: var(--carousel-arrow-font-size);
+}
+
+.el-carousel__arrow:hover{
+    background-color: var(--carousel-arrow-hover-background);
+}
+
+.el-carousel__arrow i{
+    cursor: pointer;
+}
+
+.el-carousel__arrow--left{
+    left: 16px;
+}
+
+.el-carousel__arrow--right{
+    right: 16px;
+}
+
+.el-carousel__indicators{
+    position: absolute;
+    list-style: none;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    margin: 0;
+    padding: 0;
+    z-index: 2;
+}
+
+.el-carousel__indicators--outside{
+    bottom: calc(var(--carousel-indicator-height) + var(--carousel-indicator-padding-vertical) * 2);
+    text-align: center;
+    position: static;
+    transform: none;
+}
+
+.el-carousel__indicators--outside .el-carousel__indicator:hover button {
+    opacity: 0.64;
+}
+
+.el-carousel__indicators--outside button {
+    background-color: var(--carousel-indicator-out-color);
+    opacity: 0.24;
+}
+
+.el-carousel__indicators--labels{
+    left: 0;
+    right: 0;
+    transform: none;
+    text-align: center;
+}
+
+.el-carousel__indicators--labels .el-carousel__button {
+    width: auto;
+    height: auto;
+    padding: 2px 18px;
+    font-size: 12px;
+}
+
+.el-carousel__indicators--labels .el-carousel__indicator {
+    padding: 6px 4px;
+}
+
+.el-carousel__indicator{
+    display: inline-block;
+    background-color: transparent;
+    padding: var(--carousel-indicator-padding-vertical) var(--carousel-indicator-padding-horizontal);
+    cursor: pointer;
+}
+
+.el-carousel__indicator:hover button{
+    opacity: 0.72;
+}
+
+.el-carousel__indicator.is-active button{
+    opacity: 1;
+}
+
+.el-carousel__button{
+    display: block;
+    opacity: 0.48;
+    width: var(--carousel-indicator-width);
+    height: var(--carousel-indicator-height);
+    background-color: #fff;
+    border: none;
+    outline: none;
+    padding: 0;
+    margin: 0;
+    cursor: pointer;
+    transition: .3s;
+}
+
+.carousel-arrow-left-enter, .carousel-arrow-left-leave-active {
+    transform: translateY(-50%) translateX(-10px);
+    opacity: 0;
+}
+
+.carousel-arrow-right-enter, .carousel-arrow-right-leave-active {
+    transform: translateY(-50%) translateX(10px);
+    opacity: 0;
+}

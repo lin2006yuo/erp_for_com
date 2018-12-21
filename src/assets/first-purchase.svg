@@ -1,0 +1,11 @@
+<?xml version="1.0" standalone="no"?><!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg width="32" height="32" xmlns="http://www.w3.org/2000/svg">
+ <!-- Created with Method Draw - http://github.com/duopixel/Method-Draw/ -->
+
+ <g>
+  <title>Layer 1</title>
+  <path id="svg_5" d="m0.5,-0.5625" opacity="0.5" stroke-opacity="null" stroke-width="0" stroke="#000" fill="#ffffff"/>
+  <path stroke="#000" transform="rotate(90 15.502502441406252,15.950312614440918) " id="svg_8" d="m-0.9975,32.450314l0,-33.000001l33.000001,33.000001l-33.000001,0z" stroke-opacity="null" stroke-width="0" fill="#278f8f"/>
+  <text transform="rotate(-45 10.999999999999996,10.937499999999998) " xml:space="preserve" text-anchor="start" font-family="Helvetica, Arial, sans-serif" font-size="10" id="svg_9" y="14.4375" x="0.5" fill-opacity="null" stroke-opacity="null" stroke-width="0" stroke="#000" fill="#ffffff">首采</text>
+ </g>
+</svg>

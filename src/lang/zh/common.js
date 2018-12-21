@@ -1,0 +1,15 @@
+export default {
+    confirm:'确定',
+    close:'关闭',
+    cancel:'取消',
+    search:'搜索',
+    clear:'清空搜索',
+    operating: '操作',
+    restore_modified: '还原修改',
+    snText: '可批量搜索，shift+回车换行...',
+    please_enter: '请输入内容',
+    del:'删除',
+    mdf:'修改',
+    clearAll:'清空所有',
+    tips:'提示',
+}

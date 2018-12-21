@@ -1,0 +1,35 @@
+组件库文档！
+http://element.eleme.io/#/component/quickstart
+
+项目目录下：
+    //安装项目(node4安装完运行会报错)
+    npm install
+
+    //运行项目
+    npm run dev
+
+
+项目结构：
+buid(项目环境配置)
+config(项目配置)
+doc(项目开发文档)
+src
+    api(请求服务器的API)
+    assets(会被编译的静态资源)
+    comonents(自定义的组件)
+    define(常量js)
+    lib(js自定义库)
+    mixins(vue混合库)
+    plugin(vue插件库)
+    routes(vue路由库，现在放弃使用)
+    scss(常用css文件)
+    view(项目页面)
+    vuex(数据状态)
+    App.vue(项目主页面)
+    main.js(项目主入口)
+    router.js(路由,现在放弃使用)
+    router_hook.js(现在放弃使用)
+    index.js(路由配置，现在放弃使用)
+static(不会被编译的静态资源)
+index.html(项目主index)
+

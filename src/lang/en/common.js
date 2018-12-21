@@ -1,0 +1,15 @@
+export default {
+    confirm:'Confirm',
+    close:'Close',
+    cancel:'Cancel',
+    search:'Search',
+    clear:'Empty search',
+    operating: 'Operating',
+    restore_modified: 'Restore modification',
+    snText: 'Batch searching,shift+enter→line break',
+    please_enter: 'Please enter',
+    del:'Delete',
+    mdf:'Modification',
+    clearAll:'Emptying all',
+    tips:'Hint',
+}
