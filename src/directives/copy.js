@@ -17,7 +17,7 @@ export default function(Vue){
                 bind.def.runs(el,bind)
             }
             bind.def.copy=copy;
-            el.addEventListener("dblclick",copy)
+            if(el) el.addEventListener("dblclick",copy)
         },
         unbind(el, bind){
             el.removeEventListener('dblclick', bind.def.func);

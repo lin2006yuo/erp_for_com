@@ -99,7 +99,7 @@
                     menu.children = menu.children || [];
                     if (menu.children.length > 0) {
                         return createElement('el-submenu', {
-                                props: {index: `${menu.id}`}
+                                props: {index: `${menu.path}`}
                             },
                             [
                                 createElement('div', {
@@ -125,7 +125,7 @@
                             ]
                         );
                     }
-                } else if (menu.type === 1&&menu.status===1) {
+                } else if (menu.type === 1) {
                     return createElement('el-menu-item', {
                         directives: [
                             {
@@ -143,12 +143,12 @@
                                     }
                                 ],
                             }
-                        ], props: {index: `${menu.id}`}
+                        ], props: {index: `${menu.path}`}
                     }, menu.title)
                 }
             };
             let self = this;
-            const dashbroad = createElement('el-menu-item', {props: {index: '3'}}, ["首页",
+            const dashbroad = createElement('el-menu-item', {props: {index: '/'}}, ["首页",
                     createElement('span', {
                         attrs: {title: "ctrl+s快捷键"},
                         class: ["homepage-search", "menu-search"],
@@ -240,7 +240,7 @@
                     width: this.width
                 },
                 props: {
-                    theme: "dark", "default-active": this.router, "menu-trigger": 'hover'
+                    theme: "dark", "default-active": this.router, "menu-trigger": 'hover',router: true
                 }
             }, [dashbroad, ...fastMenus, ...menus]);
             if (this.$refs.menu) {

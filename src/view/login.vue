@@ -271,27 +271,32 @@
             login(){
                 let lang = this.checkEnglish?'en':'zh';
                 sessionStorage.setItem('lang',lang);
-                this.$http(login, {
-                    username: this.account,
-                    password: this.password,
-                    code: this.authcode,
-                    captcha: this.captcha,
-                }).then(succ => {
-                    set_authorization(succ.token);
-                    this.$router.replace('/');
-                    loadLanguageAsync(lang);
-//                    this.$refs.canvas.animate = false;   登录页动画销毁
-                }).catch(code => {
-                    this.refresh_authcode();
-                    this.$message({
-                        type: 'error',
-                        message: code.message || code
-                    })
-                }).finally(()=>{
-                    setTimeout(() => {
-                        this.$reqKey('login', false);
-                    }, 300)
-                });
+//                 this.$http(login, {
+//                     username: this.account,
+//                     password: this.password,
+//                     code: this.authcode,
+//                     captcha: this.captcha,
+//                 }).then(succ => {
+//                     set_authorization(succ.token);
+//                     this.$router.replace('/');
+//                     loadLanguageAsync(lang);
+// //                    this.$refs.canvas.animate = false;   登录页动画销毁
+//                 }).catch(code => {
+//                     this.refresh_authcode();
+//                     this.$message({
+//                         type: 'error',
+//                         message: code.message || code
+//                     })
+//                 }).finally(()=>{
+//                     setTimeout(() => {
+//                         this.$reqKey('login', false);
+//                     }, 300)
+//                 });
+
+
+                set_authorization('123132');
+                this.$router.replace('/');
+                loadLanguageAsync(lang);
             },
             help(){
                 this.islogin = false;

@@ -16,7 +16,7 @@
     }
 </style>
 <script>
-
+    import routes from '@/routes_depr/routes'
     import {mapGetters,mapActions} from 'vuex';
     export default{
         name: 'left-menu',
@@ -33,21 +33,21 @@
             menuSearch(){
                 this.$emit('menu-search')
             },
-            select(menuid){
-                function find_node(items, id) {
-                    if(!items)return undefined;
-                    return items.findRet(row =>{
-                        if(parseInt(row.id) === id){
-                            return row;
-                        }else{
-                            return find_node(row.children, id);
-                        }
-                    });
-                }
-                let node = find_node(this.menus_all, parseInt(menuid));
-                console.log(node,'node');
-                this.$open(node);
-                this.router = node.id + '';
+            select(index, indexPath){
+                // function find_node(items, id) {
+                //     if(!items)return undefined;
+                //     return items.findRet(row =>{
+                //         if(parseInt(row.id) === id){
+                //             return row;
+                //         }else{
+                //             return find_node(row.children, id);
+                //         }
+                //     });
+                // }
+                // let node = find_node(this.menus_all, parseInt(menuid));
+                // console.log(node,'node');
+                // this.$open(node);
+                // this.router = node.id + '';
             },
             goswitcher(id){
                 this.$nextTick(() =>{
@@ -60,9 +60,11 @@
         },
         computed:{
             ...mapGetters({
-                'menus_get':'menu-nav/menus_get',
                 'menus_all':'menu-nav/menus_all',
-            })
+            }),
+            menus_get() {
+                return routes
+            }
         },
         components: {
             navMenu:require('./nav-menu').default

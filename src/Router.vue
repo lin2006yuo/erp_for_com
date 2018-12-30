@@ -5,11 +5,13 @@
             <left-menu v-show="viewMode === 'nav'"
                        ref="left" slot="left"
                        @menu-search="menuSearch=true" class="left-menu"></left-menu>
-            <nav-tabs @trigger="trigger"
-                      @dbtrigger="dbtrigger"
-                      @click-open-close="click_open_close"
-                      slot="right"
-                      class="nav-tabs"></nav-tabs>
+            <!--<nav-tabs @trigger="trigger"-->
+                      <!--@dbtrigger="dbtrigger"-->
+                      <!--@click-open-close="click_open_close"-->
+                      <!--slot="right"-->
+                      <!--class="nav-tabs"></nav-tabs>-->
+            <router-view slot="right"></router-view>
+
             <menu-search slot="other" v-model="menuSearch"></menu-search>
             <chat-message v-model="chatMessage"></chat-message>
         </panel-shrink>

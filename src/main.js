@@ -2,9 +2,9 @@
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 import "babel-polyfill";
 import Vue from 'vue';
-import './lib/screen';
-import './lib/printer';
-import './lib/pinyin-search';
+// import './lib/screen';
+// import './lib/printer';
+// import './lib/pinyin-search';
 import './lib/date';
 import './lib/element';
 import './lib/url';
@@ -12,24 +12,24 @@ import './lib/resize';
 import './config';
 import './lib/utils.js';
 import './lib/datef';
-import './lib/websocket';
-import './lib/throttle-debounce'
-import './lib/events';
-import './lib/log';
-import './lib/websockets';
+// import './lib/websocket';
+// import './lib/throttle-debounce'
+// import './lib/events';
+// import './lib/log';
+// import './lib/websockets';
 
 window.buildTime = process.env.buildTime;
 
 import vrouter from './routes_depr/router';
 
-window.$$VUE = Vue;
+// window.$$VUE = Vue;
 import './load-global-components';
 
-Vue.component('ui-div', {
-    render(createElmement) {
-        return createElmement('div', {}, this.$slots.default)
-    }
-});
+// Vue.component('ui-div', {
+//     render(createElmement) {
+//         return createElmement('div', {}, this.$slo ts.default)
+//     }
+// });
 import searchCard from './components/search-card';
 import pageDialog from './components/page-dialog';
 import uiTip from './components/ui-tip';
@@ -81,11 +81,11 @@ if (process.env.NODE_ENV === 'release') {
 }
 
 
-import VueKindEditor from 'vue-kindeditor'
-import 'kindeditor/kindeditor-all-min.js'
-import 'kindeditor/themes/default/default.css'
+// import VueKindEditor from 'vue-kindeditor'
+// import 'kindeditor/kindeditor-all-min.js'
+// import 'kindeditor/themes/default/default.css'
 
-Vue.use(VueKindEditor);
+// Vue.use(VueKindEditor);
 
 import './components/page-link';
 
@@ -103,22 +103,22 @@ Vue.use(VueLazyload, {
 
 Vue.config.devtools = true;
 
-Vue.config.keyCodes = {
-    v: 86,
-    f1: 112,
-    f2: 113,
-    f3: 114,
-    f4: 115,
-    f5: 116,
-    mediaPlayPause: 179
-};
-
-Vue.config.errorHandler = Vue.config.warnHandler = function (err, vm, info) {
-    console.log(vm);
-    console.log(info);
-    console.log(document.addEventListener);
-    console.error('errorHandler: ' + err);
-};
+// Vue.config.keyCodes = {
+//     v: 86,
+//     f1: 112,
+//     f2: 113,
+//     f3: 114,
+//     f4: 115,
+//     f5: 116,
+//     mediaPlayPause: 179
+// };
+//
+// Vue.config.errorHandler = Vue.config.warnHandler = function (err, vm, info) {
+//     console.log(vm);
+//     console.log(info);
+//     console.log(document.addEventListener);
+//     console.error('errorHandler: ' + err);
+// };
 
 import App from './App.vue';
 

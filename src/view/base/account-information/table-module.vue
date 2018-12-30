@@ -3,7 +3,6 @@
         <el-table :data="tableData.list"
                   class="scroll-bar"
                   v-resize="{height:41}"
-                  v-loading="loading"
                   highlight-current-row
                   @select="selectCheck($event)"
                   @select-all="selectCheck"
