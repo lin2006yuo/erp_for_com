@@ -69,11 +69,10 @@
                     type="primary"
                     size="mini"
                     class="ml-sm mt-xs mb-xs"
-                    :disabled="selectList.length===0"
+
                     @click.natvie="batchSet">批量设置上报周期</permission>
         <el-table :data="tableData"
                   class="scroll-bar"
-                  v-loading="loading"
                   highlightCurrentRow
                   element-loading-text="玩命加载中..."
                   @selection-change="handle_selection_change"

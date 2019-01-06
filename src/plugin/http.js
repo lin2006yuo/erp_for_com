@@ -79,7 +79,7 @@ export default {
                     });
                     call.catch((code, status)=>{
                         if(401 === status || code.message === 'Error: Token is not valid'){//登录码已失效了.
-                            this.$router.replace('/login');
+                            // this.$router.replace('/login');
                             quit();
                             code.message = "请登录";
                             return Promise.reject(code);

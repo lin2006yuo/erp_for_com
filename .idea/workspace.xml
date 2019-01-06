@@ -1,0 +1,764 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="6bb16809-1701-46a1-bf5e-003b21f9a3f3" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/view/lxy/components.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/view/warehouse/dataStatistics/unshipped.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Router.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/Router.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/integer-input.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/integer-input.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/select-printer.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/select-printer.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/ui-tip.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/ui-tip.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/plugin/audio_baidu.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/plugin/audio_baidu.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/plugin/http.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/plugin/http.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/plugin/printer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/plugin/printer.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/routes/maps.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/maps.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/routes_depr/routes.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes_depr/routes.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/view/base/monitor/amazon/index.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/base/monitor/amazon/index.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/view/base/server-management/index.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/base/server-management/index.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/view/entrepot/package-return/add-storage-order.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/entrepot/package-return/add-storage-order.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/view/entrepot/package-return/index.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/entrepot/package-return/index.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/view/entrepot/package-return/table-module.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/entrepot/package-return/table-module.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/view/entrepot/warehouse-reports/picking-report/index.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/entrepot/warehouse-reports/picking-report/index.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/view/entrepot/warehouse-reports/table-module.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/entrepot/warehouse-reports/table-module.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/view/virtual-rules/pop-up-windows.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/virtual-rules/pop-up-windows.vue" afterDir="false" />
+    </list>
+    <ignored path="$PROJECT_DIR$/.tmp/" />
+    <ignored path="$PROJECT_DIR$/temp/" />
+    <ignored path="$PROJECT_DIR$/tmp/" />
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileEditorManager">
+    <splitter split-orientation="horizontal" split-proportion="0.5080346">
+      <split-first>
+        <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+          <file pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/src/App.vue">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="105">
+                  <caret line="7" column="28" selection-start-line="7" selection-start-column="28" selection-end-line="7" selection-end-column="28" />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/src/view/warehouse/dataStatistics/unshipped.vue">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="390">
+                  <caret line="26" column="27" selection-start-line="26" selection-start-column="27" selection-end-line="26" selection-end-column="27" />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file pinned="false" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/src/view/lxy/components.vue">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="90">
+                  <caret line="6" column="45" selection-start-line="6" selection-start-column="45" selection-end-line="6" selection-end-column="45" />
+                </state>
+              </provider>
+            </entry>
+          </file>
+        </leaf>
+      </split-first>
+      <split-second>
+        <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+          <file pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/src/routes_depr/routes.js">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="661">
+                  <caret line="59" column="65" selection-start-line="59" selection-start-column="65" selection-end-line="59" selection-end-column="65" />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/src/view/entrepot/warehouse-reports/picking-report/index.vue">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="810">
+                  <caret line="54" column="45" lean-forward="true" selection-start-line="54" selection-start-column="45" selection-end-line="54" selection-end-column="45" />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/src/view/entrepot/warehouse-reports/table-module.vue">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="1155">
+                  <caret line="108" column="14" lean-forward="true" selection-start-line="108" selection-start-column="14" selection-end-line="108" selection-end-column="14" />
+                  <folding>
+                    <element signature="e#2308#3714#0" />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/src/view/entrepot/warehouse-reports/search-module.vue">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="210">
+                  <caret line="36" column="16" selection-start-line="36" selection-start-column="16" selection-end-line="36" selection-end-column="34" />
+                  <folding>
+                    <element signature="n#label-item#0;n#search-card#0;n#div#0;n#template#0;n#!!top" />
+                    <element signature="n#label-item#1;n#search-card#0;n#div#0;n#template#0;n#!!top" />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file pinned="false" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/src/components/ui-tip.vue">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="420">
+                  <caret line="100" column="23" lean-forward="true" selection-start-line="100" selection-start-column="23" selection-end-line="100" selection-end-column="23" />
+                </state>
+              </provider>
+            </entry>
+          </file>
+        </leaf>
+      </split-second>
+    </splitter>
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>url_info</find>
+      <find>confi</find>
+      <find>config</find>
+      <find>url_package</find>
+      <find>api_get_packages</find>
+      <find>req-key</find>
+      <find>api_get_packages_2</find>
+      <find>api_get_tracking_3</find>
+      <find>api_free_packages</find>
+      <find>api_apply_cancel</find>
+      <find>首页</find>
+      <find>menus_get</find>
+      <find>dashbroad</find>
+      <find>on:</find>
+      <find>menus_all</find>
+      <find>status</find>
+      <find>package-re</find>
+      <find>this.value=this.value.replace(this.regRule,'')</find>
+      <find>v-</find>
+      <find>value_</find>
+      <find>monitor/</find>
+      <find>server-</find>
+      <find>order_rate</find>
+      <find>apiReport</find>
+      <find>api_export_stock</find>
+      <find>tableData</find>
+      <find>table_module</find>
+      <find>/warehouse/report/picking</find>
+      <find>content</find>
+      <find>ahtml</find>
+    </findStrings>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/src/lib/url.js" />
+        <option value="$PROJECT_DIR$/src/view/order/parcel-list/table-data.vue" />
+        <option value="$PROJECT_DIR$/src/main.js" />
+        <option value="$PROJECT_DIR$/src/view/login.vue" />
+        <option value="$PROJECT_DIR$/src/view/lxy/index.vue" />
+        <option value="$PROJECT_DIR$/src/Router.vue" />
+        <option value="$PROJECT_DIR$/src/view/navs-comp.js" />
+        <option value="$PROJECT_DIR$/src/view/base/account-information/table-module.vue" />
+        <option value="$PROJECT_DIR$/src/view/left-menu.vue" />
+        <option value="$PROJECT_DIR$/src/view/nav-menu.vue" />
+        <option value="$PROJECT_DIR$/src/view/entrepot/package-return/table-module.vue" />
+        <option value="$PROJECT_DIR$/src/view/entrepot/package-return/index.vue" />
+        <option value="$PROJECT_DIR$/src/view/entrepot/package-return/add-storage-order.vue" />
+        <option value="$PROJECT_DIR$/src/routes/maps.js" />
+        <option value="$PROJECT_DIR$/src/components/integer-input.vue" />
+        <option value="$PROJECT_DIR$/src/view/base/monitor/amazon/index.vue" />
+        <option value="$PROJECT_DIR$/src/view/base/server-management/index.vue" />
+        <option value="$PROJECT_DIR$/src/view/entrepot/warehouse-reports/picking-report/index.vue" />
+        <option value="$PROJECT_DIR$/src/view/warehouse/dataStatistics/unshipped.vue" />
+        <option value="$PROJECT_DIR$/src/view/entrepot/warehouse-reports/table-module.vue" />
+        <option value="$PROJECT_DIR$/src/routes_depr/routes.js" />
+        <option value="$PROJECT_DIR$/src/view/lxy/components.vue" />
+        <option value="$PROJECT_DIR$/src/components/ui-tip.vue" />
+      </list>
+    </option>
+  </component>
+  <component name="JsFlowSettings">
+    <service-enabled>true</service-enabled>
+    <exe-path />
+    <other-services-enabled>true</other-services-enabled>
+    <auto-save>true</auto-save>
+  </component>
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="122" />
+    <option name="y" value="75" />
+    <option name="width" value="1750" />
+    <option name="height" value="930" />
+  </component>
+  <component name="ProjectView">
+    <navigator proportions="" version="1">
+      <foldersAlwaysOnTop value="true" />
+    </navigator>
+    <panes>
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="erp_for_com" type="b2602c69:ProjectViewProjectNode" />
+              <item name="erp_for_com" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="erp_for_com" type="b2602c69:ProjectViewProjectNode" />
+              <item name="erp_for_com" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="erp_for_com" type="b2602c69:ProjectViewProjectNode" />
+              <item name="erp_for_com" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="components" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="erp_for_com" type="b2602c69:ProjectViewProjectNode" />
+              <item name="erp_for_com" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="view" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="erp_for_com" type="b2602c69:ProjectViewProjectNode" />
+              <item name="erp_for_com" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="view" type="462c0819:PsiDirectoryNode" />
+              <item name="lxy" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="erp_for_com" type="b2602c69:ProjectViewProjectNode" />
+              <item name="erp_for_com" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="view" type="462c0819:PsiDirectoryNode" />
+              <item name="warehouse" type="462c0819:PsiDirectoryNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+      <pane id="Scope" />
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="editor.config.ad.shown" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
+    <property name="nodejs_npm_path_reset_for_default_project" value="true" />
+    <property name="nodejs_package_manager_path" value="npm" />
+    <property name="settings.editor.selected.configurable" value="settings.github" />
+    <property name="ts.external.directory.path" value="M:\WebStorm\plugins\JavaScriptLanguage\jsLanguageServicesImpl\external" />
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="6bb16809-1701-46a1-bf5e-003b21f9a3f3" name="Default Changelist" comment="" />
+      <created>1545485985506</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1545485985506</updated>
+      <workItem from="1545485988310" duration="155000" />
+      <workItem from="1545490532226" duration="1800000" />
+      <workItem from="1545527137641" duration="2087000" />
+      <workItem from="1545554962717" duration="10663000" />
+      <workItem from="1545570760505" duration="6446000" />
+      <workItem from="1546148458973" duration="26314000" />
+      <workItem from="1546231119029" duration="7126000" />
+      <workItem from="1546251827779" duration="48000" />
+      <workItem from="1546693360698" duration="3042000" />
+      <workItem from="1546740125413" duration="13778000" />
+    </task>
+    <task id="LOCAL-00001" summary="修改路由">
+      <created>1546164716073</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1546164716074</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
+    <servers />
+  </component>
+  <component name="TimeTrackingManager">
+    <option name="totallyTimeSpent" value="71459000" />
+  </component>
+  <component name="TodoView" selected-index="3">
+    <todo-panel id="selected-file">
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+    <todo-panel id="all">
+      <are-packages-shown value="true" />
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
+    <editor active="true" />
+    <layout>
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.14752372" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info id="npm" order="2" side_tool="true" />
+      <window_info id="Favorites" order="3" side_tool="true" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info active="true" anchor="bottom" id="Find" order="1" visible="true" weight="0.23411371" />
+      <window_info anchor="bottom" id="Run" order="2" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="6" sideWeight="0.49947312" weight="0.26867336" />
+      <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Version Control" order="8" sideWeight="0.49578503" weight="0.37569678" />
+      <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.5036881" side_tool="true" weight="0.1928651" />
+      <window_info anchor="bottom" id="Terminal" order="10" sideWeight="0.4963119" visible="true" weight="0.1928651" />
+      <window_info anchor="bottom" id="TypeScript" order="11" />
+      <window_info anchor="bottom" id="Messages" order="12" sideWeight="0.49894625" weight="0.32998884" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+    </layout>
+    <layout-to-restore>
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.17175975" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info id="npm" order="2" side_tool="true" />
+      <window_info id="Favorites" order="3" side_tool="true" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Find" order="1" />
+      <window_info anchor="bottom" id="Run" order="2" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="6" sideWeight="0.49947312" weight="0.26867336" />
+      <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Version Control" order="8" sideWeight="0.49578503" weight="0.37569678" />
+      <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.50316125" side_tool="true" weight="0.23411371" />
+      <window_info anchor="bottom" id="Terminal" order="10" sideWeight="0.49683878" visible="true" weight="0.23411371" />
+      <window_info anchor="bottom" id="TypeScript" order="11" />
+      <window_info anchor="bottom" id="Messages" order="12" sideWeight="0.49894625" weight="0.32998884" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+    </layout-to-restore>
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="BEK_SORT_TYPE" value="1" />
+              <option name="RECENTLY_FILTERED_USER_GROUPS">
+                <collection />
+              </option>
+              <option name="RECENTLY_FILTERED_BRANCH_GROUPS">
+                <collection />
+              </option>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="origin/master" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+              <option name="COLUMN_ORDER">
+                <list>
+                  <option value="0" />
+                  <option value="1" />
+                  <option value="2" />
+                  <option value="3" />
+                </list>
+              </option>
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="RECENT_FILTERS">
+      <map>
+        <entry key="Branch">
+          <value>
+            <list>
+              <RecentGroup>
+                <option name="FILTER_VALUES">
+                  <option value="origin/master" />
+                </option>
+              </RecentGroup>
+            </list>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="修改路由" />
+    <option name="LAST_COMMIT_MESSAGE" value="修改路由" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/src/view/entrepot/warehouse-reports/table-module.vue</url>
+          <line>68</line>
+          <properties lambdaOrdinal="-1" />
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/src/view/entrepot/warehouse-reports/table-module.vue</url>
+          <line>47</line>
+          <properties lambdaOrdinal="-1" />
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/src/vuex/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="9" column="23" lean-forward="true" selection-start-line="9" selection-start-column="23" selection-end-line="9" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/config/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="345">
+          <caret line="23" column="9" selection-start-line="23" selection-start-column="9" selection-end-line="23" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/routes_depr/task.js">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/routes_depr/system.js">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/routes_depr/setting.js">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/routes_depr/router_hook.js">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/routes_depr/router_access.js">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/routes_depr/mall.js">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/routes_depr/entrepot.js">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/routes_depr/order.js">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/routes/pack.js">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/routes_depr/router.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="165">
+          <caret line="11" column="8" lean-forward="true" selection-start-line="11" selection-start-column="8" selection-end-line="11" selection-end-column="8" />
+          <folding>
+            <element signature="e#38#60#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/view/login.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="853">
+          <caret line="261" column="28" lean-forward="true" selection-start-line="261" selection-start-column="28" selection-end-line="261" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/menu-list.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1260">
+          <caret line="84" column="39" lean-forward="true" selection-start-line="84" selection-start-column="39" selection-end-line="84" selection-end-column="39" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/view/home.vue">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/view/header.vue">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/view/nav-item.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="216">
+          <caret line="58" column="18" selection-start-line="58" selection-start-column="18" selection-end-line="58" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/panel-shrink.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1005">
+          <caret line="67" column="8" selection-start-line="67" selection-start-column="8" selection-end-line="67" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/vuex/modules/menu-nav.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3945">
+          <caret line="343" column="57" selection-start-line="343" selection-start-column="57" selection-end-line="343" selection-end-column="57" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/directives/copy.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="225">
+          <caret line="15" column="23" selection-start-line="15" selection-start-column="23" selection-end-line="15" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/api/package-return.js">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/view/base/account-information/index.vue">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/view/lxy/index.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="30">
+          <caret line="2" column="11" selection-start-line="2" selection-start-column="11" selection-end-line="2" selection-end-column="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/routes_depr/stat.js">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/view/base/monitor/amazon/index.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="443">
+          <caret line="234" column="41" lean-forward="true" selection-start-line="234" selection-start-column="41" selection-end-line="234" selection-end-column="41" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/view/base/monitor/amazon/batch-set.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="630">
+          <caret line="42" column="28" selection-start-line="42" selection-start-column="28" selection-end-line="42" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/view/base/server-management/batch-set.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="330">
+          <caret line="22" column="14" selection-start-line="22" selection-start-column="14" selection-end-line="22" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/integer-input.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="375">
+          <caret line="33" column="14" selection-start-line="33" selection-start-column="14" selection-end-line="33" selection-end-column="14" />
+          <folding>
+            <element signature="n#style#0;n#!!top" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/view/entrepot/package-return/table-module.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="150">
+          <caret line="10" column="26" selection-start-line="10" selection-start-column="24" selection-end-line="10" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Router.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="4" column="17" lean-forward="true" selection-start-line="4" selection-start-column="17" selection-end-line="4" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/view/left-menu.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="195">
+          <caret line="13" column="25" lean-forward="true" selection-start-line="13" selection-start-column="25" selection-end-line="13" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/view/nav-tabs.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="330">
+          <caret line="22" column="21" selection-start-line="22" selection-start-column="21" selection-end-line="22" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/view/nav-menu.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="631">
+          <caret line="221" column="45" selection-start-line="221" selection-start-column="45" selection-end-line="221" selection-end-column="45" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/view/base/account-information/table-module.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="525">
+          <caret line="89" column="34" lean-forward="true" selection-start-line="89" selection-start-column="34" selection-end-line="89" selection-end-column="34" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/view/navs-comp.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="631">
+          <caret line="138" column="15" selection-start-line="138" selection-start-column="15" selection-end-line="138" selection-end-column="15" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/view/entrepot/package-return/add-storage-order.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="675">
+          <caret line="72" column="35" selection-start-line="72" selection-start-column="34" selection-end-line="72" selection-end-column="35" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/view/entrepot/package-return/index.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="135">
+          <caret line="9" column="23" selection-start-line="9" selection-start-column="23" selection-end-line="9" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/view/base/monitor/amazon/manage-table.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="555">
+          <caret line="37" column="102" selection-start-line="37" selection-start-column="92" selection-end-line="37" selection-end-column="102" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/view/base/server-management/index.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="631">
+          <caret line="69" column="31" selection-start-line="69" selection-start-column="31" selection-end-line="69" selection-end-column="31" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/routes/maps.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="631">
+          <caret line="302" column="16" selection-start-line="302" selection-start-column="8" selection-end-line="302" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="228">
+          <caret line="36" column="32" lean-forward="true" selection-start-line="36" selection-start-column="32" selection-end-line="36" selection-end-column="32" />
+          <folding>
+            <element signature="e#140#164#0" expanded="true" />
+            <element signature="e#274#294#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/view/entrepot/warehouse-reports/search-module.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="210">
+          <caret line="36" column="16" selection-start-line="36" selection-start-column="16" selection-end-line="36" selection-end-column="34" />
+          <folding>
+            <element signature="n#label-item#0;n#search-card#0;n#div#0;n#template#0;n#!!top" />
+            <element signature="n#label-item#1;n#search-card#0;n#div#0;n#template#0;n#!!top" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/App.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="105">
+          <caret line="7" column="28" selection-start-line="7" selection-start-column="28" selection-end-line="7" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/routes_depr/routes.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="661">
+          <caret line="59" column="65" selection-start-line="59" selection-start-column="65" selection-end-line="59" selection-end-column="65" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/view/entrepot/warehouse-reports/picking-report/index.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="810">
+          <caret line="54" column="45" lean-forward="true" selection-start-line="54" selection-start-column="45" selection-end-line="54" selection-end-column="45" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/search-card.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="375">
+          <caret line="25" column="19" selection-start-line="25" selection-start-column="19" selection-end-line="25" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/view/warehouse/dataStatistics/unshipped.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="390">
+          <caret line="26" column="27" selection-start-line="26" selection-start-column="27" selection-end-line="26" selection-end-column="27" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$APPLICATION_HOME_DIR$/lib/platform-impl.jar!/resources/html5-schema/html5/phrase.rnc">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-2160">
+          <caret line="9" column="16" selection-start-line="9" selection-start-column="16" selection-end-line="9" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/view/entrepot/warehouse-reports/table-module.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1155">
+          <caret line="108" column="14" lean-forward="true" selection-start-line="108" selection-start-column="14" selection-end-line="108" selection-end-column="14" />
+          <folding>
+            <element signature="e#2308#3714#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/view/lxy/components.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="6" column="45" selection-start-line="6" selection-start-column="45" selection-end-line="6" selection-end-column="45" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/ui-tip.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="420">
+          <caret line="100" column="23" lean-forward="true" selection-start-line="100" selection-start-column="23" selection-end-line="100" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+  </component>
+</project>

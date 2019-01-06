@@ -70,15 +70,16 @@
                 inline-template
                 label="总数量">
                 <div>
-                    <ui-tip :content="row.sku_quantity" :width="98"></ui-tip>
+                    <ui-tip :content="row.sku_quantity" :width="50"></ui-tip>
                 </div>
             </el-table-column>
             <el-table-column
                 inline-template
-                width="120"
+                width="200"
                 :label="`${storageAction.mean}库数量`">
                 <div>
-                    <integer-input :value="row.quantity" :min="0" @input="(val)=>{regNumber(row, val, $index)}" class="width-xs"  ></integer-input>
+                    <span>良品：</span><integer-input  :value="row.quantity" :max="row.sku_quantity" :min="0" @input="(val)=>{regNumber(row, val, $index, 'quantity', 'fake')}" class="inline-block"  ></integer-input>
+                    <span>次品：</span><integer-input  :value="row.fake" :max="row.sku_quantity" :min="0" @input="(val)=>{regNumber(row, val, $index, 'fake', 'quantity')}" class="inline-block"  ></integer-input>
                 </div>
             </el-table-column>
         </el-table>
@@ -96,7 +97,10 @@
     </page-dialog>
 </template>
 <style lang="stylus">
-
+    .inline-block {
+        display inline-block
+        width: 50px
+    }
 </style>
 <script>
     import {api_warehouse_get} from '@/api/transfer-plan';
@@ -179,16 +183,17 @@
                 });
             },
 
-            regNumber(row, val, index){
-                let reg=/^[1-9]\d*$/;
-                row.quantity = val;
+            regNumber(row, val, index, me, other){
+                console.log(val)
+                let reg=/^[0-9]\d*$/g;
                 if(val){
-                    if(reg.test(Number(val)) && Number(val)<= row.sku_quantity){
-
-                    }else{
-                        this.$nextTick(_=>{
-                            row.quantity = row.sku_quantity;
-                        })
+                    if(Number(val)<= row.sku_quantity){
+                        row[me] = +val
+                        row[other] = +row.sku_quantity - +row[me]
+                    }else {
+                        console.log('***')
+                        row[me] = +row.sku_quantity
+                        row[other] = 0
                     }
                 }
             }

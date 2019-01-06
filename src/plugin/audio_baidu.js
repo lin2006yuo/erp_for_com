@@ -122,14 +122,14 @@ function create_audio() {
 function get_token() {
     console.log(`GET token`, config.apiHost);
     let url = config.apiHost + 'delivery-check/get-baidu-token';
-    let timer = setInterval(() => {
-        request_print_list(url).then(token => {
-            $$VUE_GLOBAL.$store.dispatch('audio/set_token', token)
-            clearInterval(timer);
-        }).catch(_ => {
-            clearInterval(timer);
-        })
-    }, 500);
+    // let timer = setInterval(() => {
+    //     request_print_list(url).then(token => {
+    //         $$VUE_GLOBAL.$store.dispatch('audio/set_token', token)
+    //         clearInterval(timer);
+    //     }).catch(_ => {
+    //         clearInterval(timer);
+    //     })
+    // }, 500);
     setTimeout(() => {
         timer && clearInterval(timer)
     }, 2000);

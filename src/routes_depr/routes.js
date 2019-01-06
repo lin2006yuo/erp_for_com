@@ -18,7 +18,7 @@ export default [
                 component: () => import('@/view/lxy'),
                 type: 1, title: '林学裕'
             },
-            { path: '/login', component: () => import('@/view/login'),title: '登录',type: 1,index:'123'},
+            // { path: '/login', component: () => import('@/view/login'),title: '登录',type: 1,index:'123'},
             { path: '/test', component: () => import('@/view/test'),title: '测试',type: 1},
             { path: '/delivery-check/single-box/single-sku',
                 component: () => import('./../view/entrepot/delivery-check/single-box/single-sku/single-sku.vue'),
@@ -31,6 +31,35 @@ export default [
                 component: () => import('@/components/pdf-preview'),
                 title: 'PDF预览',type: 1
             },
+            {
+                path: '/warehouse/report/picking',
+                component: () => import('@/view/entrepot/warehouse-reports/picking-report/index.vue'),
+                title: '仓库管理',type: 1
+            },
+            {
+                path: '/package-return',
+                component: () => import('../view/entrepot/package-return/index.vue'),
+                title: '包裹回退', type: 1
+            },
+            {
+                path: '/servers',
+                component: () => import('../view/base/server-management/index.vue'),
+                title: '服务管理', type: 1
+            }
+        ]
+    },
+    {path: '/warehouse',component: () => import('./../Router.vue'),title: '仓库',type: 0,
+        children: [
+            {
+                path: '/shipped',
+                component: () => import('../view/warehouse/dataStatistics/unshipped.vue'),
+                type: 1, title: '未发货记录'
+            },
+            {
+                path: '/components/test',
+                component: () => import('@/view/lxy/components'),
+                type: 1, title: '组件测试'
+            }
         ]
     }
 ];
