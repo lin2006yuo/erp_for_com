@@ -54,27 +54,42 @@
                 });
             },
             markWarehouse(row){
+                this.storageVisible = true;
+                this.storageData = {
+                    warehouse_id:23,
+                    warehouse_type:1,
+                    package_return_number:23,
+                    details:[
+                        {
+                            sku: 5,
+                            quantity: 3,
+                            sku_quantity: 8,
+                            fake: 0
+                        }
+                    ],
+                    remark:'12'
+                };
                 this.storageAction = {
                     mean:'入',
                     title:'生成入库单号',
                     id:row.id
                 };
-                this.$http(api_get_info, row.id).then(res=>{
-                    res.detail = res.detail.map(row=>{
-                        this.$set(row, 'quantity', row.sku_quantity);
-                        return row;
-                    });
-                    this.storageData = {
-                        warehouse_id:this.searchData.warehouse_id,
-                        warehouse_type:15,
-                        package_return_number:row.package_return_number,
-                        details:res.detail,
-                        remark:''
-                    };
-                    this.storageVisible = true;
-                }).catch(code=>{
-                    this.$message({type:"error",message:code.message || code});
-                });
+                // this.$http(api_get_info, row.id).then(res=>{
+                //     res.detail = res.detail.map(row=>{
+                //         this.$set(row, 'quantity', row.sku_quantity);
+                //         return row;
+                //     });
+                //     this.storageData = {
+                //         warehouse_id:this.searchData.warehouse_id,
+                //         warehouse_type:15,
+                //         package_return_number:row.package_return_number,
+                //         details:res.detail,
+                //         remark:''
+                //     };
+                //     this.storageVisible = true;
+                // }).catch(code=>{
+                //     this.$message({type:"error",message:code.message || code});
+                // });
             },
             delete_table(id){
                 console.log(id);

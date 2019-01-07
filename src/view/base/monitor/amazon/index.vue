@@ -7,7 +7,7 @@
             <div class="mt-xs mb-xs ">
                 <el-button type="primary"
                            size="mini"
-                           :disabled="multipleSelection.length===0"
+
                            class="ml-sm"
                            @click="batch_monitor">设置批量监控值
                 </el-button>
@@ -26,7 +26,7 @@
         </div>
         <manage-table :table-data="tableData"
                       :unit="unit"
-                      :loading="loading"
+                      :loading="false"
                       :first-loading="firstLoading"
                       :search-data="searchData"
                       :total="total"
@@ -40,7 +40,7 @@
         <edit-view-dialog
                 v-model="dialogShow"
                 :unit="unit"
-                :is-view="isView"
+                :is-view="true"
                 :current-data="currentData">
         </edit-view-dialog>
         <!--批量设置框-->
@@ -78,7 +78,9 @@
                 total:1,
                 firstLoading: true,
                 loading: false,
-                tableData: [],
+                tableData: [
+                    {name: 1}
+                ],
                 unit:{},
                 searchData: {
                     account_id: '',//账号id
@@ -126,7 +128,7 @@
                     params.time_end = datef('YYYY-MM-dd',e.getTime()/1000);
                 }
                 this.$http(api_amazon_account_health,params).then(res => {
-                    this.tableData = res.data;
+                    this.tableData = [...this.tableData,...res.data];
                     this.unit = res.unit;
                     this.total = res.count;
                     this.loading = false;

@@ -6,7 +6,7 @@ export default {
         Vue.mixin({
             created() {
                 this.$printersInit = () =>{
-                    initGlobalPrinters(Vue, options);
+                    
                 };
                 this.$printer = (printer, data) => {
                     if(!printer){

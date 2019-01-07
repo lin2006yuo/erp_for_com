@@ -186,8 +186,8 @@
         },
         mounted(){
             this.get_mes_type();
-            this.init_http();
-            this.init_interval();
+            // this.init_http();
+            // this.init_interval();
         },
         methods: {
             init_interval(){

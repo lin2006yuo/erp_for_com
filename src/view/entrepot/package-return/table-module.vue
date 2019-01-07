@@ -247,7 +247,12 @@
         data() {
             return {
                 loading: false,
-                tableData: [],
+                tableData: [
+                    {
+                        package_return_number: 1,
+                        status: 3,
+                    }
+                ],
                 total: 0,
                 visibletes: false,
                 visible: {},
@@ -359,7 +364,7 @@
                 let data = this.deal_time(this.searchData);
 
                 this.$http(api_get_return, data).then(res => {
-                    this.tableData = res.data;
+                    this.tableData = [...this.tableData,...res.data]
                     this.total = res.count;
                     this.loading = false;
                 }).catch(code => {

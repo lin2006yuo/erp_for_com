@@ -64,10 +64,10 @@
             value:{},
         },
         destroyed(){
-            if(this.unwatch){
-                this.$store.unwatch(this.unwatch);
-                this.unwatch = null;
-            }
+            // if(this.unwatch){
+            //     // this.$store.unwatch(this.unwatch);
+            //     // this.unwatch = null;
+            // }
         },
         components:{
 

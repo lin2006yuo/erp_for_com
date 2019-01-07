@@ -48,9 +48,10 @@
             async init(){
                 try {
                     this.loading = true;
-                    this.tableData = [];
+                    this.tableData = []
                     let data = this.deal_time(this.searchData);
                     let request = http(Url2(this.apiReport), data);
+                    console.log(data)
                     const res = await this.$http(request);
                     this.tableData = res.data;
                     this.total = res.count;
