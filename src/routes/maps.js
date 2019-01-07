@@ -4,22 +4,22 @@
 import Vue from 'vue';
 
 export default {
-    '/test': {
-        realPath: '/test',
-        component: Vue.component('test', function (resolve) {
-            require(['../view/test.vue'], resolve);
-        })
-    },
-    '/login': {
-        component: Vue.component('login', function (resolve) {
-            require(['../view/login.vue'], resolve);
-        })
-    },
-    '/setting-printer': {
-        component: Vue.component('setting-printer', function (resolve) {
-            require(['../view/setting-printer.vue'], resolve);
-        })
-    },
+    // '/test': {
+    //     realPath: '/test',
+    //     component: Vue.component('test', function (resolve) {
+    //         require(['../view/test.vue'], resolve);
+    //     })
+    // },
+    // '/login': {
+    //     component: Vue.component('login', function (resolve) {
+    //         require(['../view/login.vue'], resolve);
+    //     })
+    // },
+    // '/setting-printer': {
+    //     component: Vue.component('setting-printer', function (resolve) {
+    //         require(['../view/setting-printer.vue'], resolve);
+    //     })
+    // },
     // '/help': {
     //     component: Vue.component('help', function (resolve) {
     //         require(['../view/help.vue'], resolve);
