@@ -67,7 +67,12 @@
         },
         methods: {
             batch_report() {
-
+                return new Promise((resolve, reject) => {
+                    setTimeout(() => {
+                        console.log('timeout')
+                        resolve()
+                    },1000)
+                })
             },
             search(){
                 console.log('init')

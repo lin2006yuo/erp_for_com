@@ -46,6 +46,9 @@
                 ]
             }
         },
+        mounted() {
+            console.log(this)
+        },
         components: {
             uiTip
         }
