@@ -8,7 +8,7 @@
                         :value="warehouse.value"
                         :key="warehouse.value"
                 ></el-option>
-            </el-select>
+            </el-select> 
         </label-item>
         <search-card :params="searchData" @search="search" :clears="clears" class="mt-xs">
             <label-buttons label="卡板状态：" :buttons="cardboardStatus" @select="change_select"></label-buttons>
