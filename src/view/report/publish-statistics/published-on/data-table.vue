@@ -14,14 +14,14 @@
                     label="平台"
                     prop="channel"
             ></el-table-column>
-            <el-table-column label="账号" prop="account"></el-table-column>
+            <el-table-column label="账号简称" prop="account"></el-table-column>
             <el-table-column label="刊登日期" prop="time"></el-table-column>
             <el-table-column label="销售员" prop="shelf_name"></el-table-column>
             <el-table-column label="分类" prop="catetory"></el-table-column>
-            <el-table-column label="SPU总数"   inline-template>
+            <el-table-column label="上架数量"   inline-template>
                 <span class='operate' @click="showSPU(row)"> {{row.goodsC}}</span>
             </el-table-column>
-            <el-table-column label="Sku累加" prop="quantity"></el-table-column>
+            <!--<el-table-column label="Sku累加" prop="quantity"></el-table-column>-->
             <el-table-column label="部门" prop="department"></el-table-column>
         </el-table>
         <div class="block">

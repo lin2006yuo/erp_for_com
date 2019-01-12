@@ -53,6 +53,8 @@
                     date_e:'',
                     account_id:'',
                     spu:'',
+                    range_max: '',
+                    range_min: ''
                 },
                 accountList:[],
                 tableData:{
@@ -118,6 +120,8 @@
                         let Time =this.toTime(time)
                         this.$set(k,'time',Time)
                     })
+                    this.loading = false;
+                    this.firstLoading = false;
                     this.count=res.count
                 }).catch(code => {
                     this.$message({type: 'error', message: code.message || code});

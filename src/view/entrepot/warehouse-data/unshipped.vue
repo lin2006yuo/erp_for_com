@@ -18,10 +18,12 @@
         </search-card>
         <request-button :request="batch_report" class="mb-xs mt-xs ml-sm">批量导出</request-button>
         <table-module
-            :search-data="searchData"
-            :api-report="apiReport"
+            :search-data.sync="searchData"
             :table-columns="columnList"
-            ref="tableModule"
+            :table-data="tableData"
+            :total="total"
+            @size-change="handleSizeChange"
+            @current-change="hanldeCurrentChange"
         ></table-module>
     </page>
 </template>
@@ -31,7 +33,7 @@ export default {
         return {
             searchData: {
                 date_from: "",
-                date_to: "",
+                date_to: new Date(),
                 page: 1,
                 pageSize: 20
             },
@@ -41,6 +43,10 @@ export default {
                 { label: "金华仓", value: "jinhua" },
                 { label: "合计", value: "sum" }
             ],
+            tableData: [],
+            //数据总数量
+            total: 50,
+            //+号转时间戳，听说效率会高
             startTimeLimit: {
                 disabledDate: time => {
                     if (this.searchData.date_to) {
@@ -77,13 +83,35 @@ export default {
             });
         },
         search() {
-            console.log("init");
-            this.$refs.tableModule.init();
+            //重置到第一页
+            this.reset()
+            this.init()
+        },
+        init() {
+            console.log('请求数据')
+            const params = this.handleData(this.searchData)
+            console.log({params})
+        },
+        handleSizeChange(val) {
+            this.searchData.pageSize = val
+            this.init()
+        },
+        hanldeCurrentChange(val) {
+            this.searchData.page = val
+            this.init()
+        },
+        reset() {
+            this.searchData.page = 1
+        },
+        //处理数据格式
+        handleData(data) {
+            let date_from = data.date_from ? datef('YYYY-mm-dd', +data.date_from) : '';
+            return {...data, date_from, date_to};
         }
     },
     components: {
         requestButton: require("@/global-components/request-button").default,
-        tableModule: require("@/view/entrepot/warehouse-reports/table-module").default,
+        tableModule: require("./table-module").default,
         labelItem: require("@/components/label-buttons").default
     }
 };

@@ -38,6 +38,17 @@ export const api_confirm_export = function (data,head) {
 
 //导出字段标题
 export const url_get_export_title = "get|report/express-confirm/export-title";
-export const api_get_export_title = function () {
-    return http(url_get_export_title);
+export const api_get_export_title = function (params) {
+    return http(url_get_export_title,params);
 };
+
+//导出汇总
+export const url_confirm_export_all = "post|report/express-confirm/exports"
+export const api_confirm_export_all = function (data, head) {
+    return http(url_confirm_export_all, data, head)
+}
+//导出汇总excel字段
+export const url_get_export_title_all = "get|report/export-title"
+export const api_get_export_title_all = function (params) {
+    return http(url_get_export_title_all,params)
+}

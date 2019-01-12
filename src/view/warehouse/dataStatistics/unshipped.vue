@@ -45,6 +45,7 @@
                     {label: '金华仓', value: 'jinhua'},
                     {label: '合计', value: 'sum'},
                 ],
+                //+号转时间戳
                 startTimeLimit: {
                     disabledDate: (time) => {
                         if(this.searchData.date_to) {

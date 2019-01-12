@@ -14,11 +14,6 @@ export default [
                 component: () => import('../view/base/account-information/index.vue'),
                 type: 1, title: '用户信息'
             },
-            {
-                path: '/lxy',
-                component: () => import('@/view/lxy'),
-                type: 1, title: '林学裕'
-            },
             { path: '/login', component: () => import('@/view/login'), title: '登录', type: 1, index: '123' },
             { path: '/test', component: () => import('@/view/test'), title: '测试', type: 1 },
             // { path: '/login', component: () => import('@/view/login'),title: '登录',type: 1,index:'123'},
@@ -63,6 +58,11 @@ export default [
     {path: '/warehouse',component: () => import('./../Router.vue'),title: '仓库',type: 0,
         children: [
             {
+                path: '/lab',
+                component: () => import('@/view/lxy/lab'),
+                type: 1, title: '实验室'
+            },
+            {
                 path: '/shipped',
                 component: () => import('../view/warehouse/dataStatistics/unshipped.vue'),
                 type: 1, title: '未发货记录测试'
@@ -70,7 +70,7 @@ export default [
             {
                 path: '/cardboard',
                 component: () => import('../view/entrepot/package/cardboard/index.vue'),
-                type: 1, title: '拆包异常列别'
+                type: 1, title: '拆包异常列表'
             },
             {
                 path: '/components/test',
@@ -81,6 +81,21 @@ export default [
                 path: '/warehouse/shipped',
                 component: () => import('../view/entrepot/warehouse-data/unshipped.vue'),
                 type: 1, title: '未发货记录'
+            },
+            {
+                path: '/pulish-by-shelf',
+                component: () => import('../view/report/publish-statistics/published-on/index.vue'),
+                type: 1, title: '刊登上架spu'
+            },
+            {
+                path: '/publish-by-picking',
+                component: () => import('../view/report/publish-statistics/published-off/index.vue'),
+                type: 1, title: '刊登下架spu'
+            },
+            {
+                path: '/report/export-files',
+                component: () => import('../view/report/export-manage/index.vue'),
+                type:　1, title: '导出管理列表'
             }
         ]
     }
