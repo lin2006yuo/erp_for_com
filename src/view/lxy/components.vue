@@ -18,6 +18,10 @@
                     </el-table-column>
                 </el-table>
             </div>
+            <div>
+                <span class="title">request-button</span>
+                <div><request-button :request="request">请求按钮</request-button></div>
+            </div>
         </el-card>
     </page>
 </template>
@@ -51,6 +55,18 @@
         },
         components: {
             uiTip
+        },
+        methods: {
+            request() {
+                return new Promise((resolve, reject) => {
+                    setTimeout(() => {
+                        resolve('请求成功')
+                    }, 100)
+                }).then(res => {
+                    console.log(res)
+                    return Promise.resolve()
+                })
+            }
         }
     }
 </script>

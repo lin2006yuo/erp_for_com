@@ -5,6 +5,8 @@
                 :data="tableData.list"
                 element-loading-text="玩命加载中..."
                 v-loading="loading"
+                v-resize="{height: 41}"
+                @sort-change="sortChange"
         >
             <div slot="empty" class="no-data-reminder">
                 <i></i>
@@ -17,8 +19,8 @@
             <el-table-column label="账号简称" prop="account"></el-table-column>
             <el-table-column label="刊登日期" prop="time"></el-table-column>
             <el-table-column label="销售员" prop="shelf_name"></el-table-column>
-            <el-table-column label="分类" prop="catetory"></el-table-column>
-            <el-table-column label="上架数量"   inline-template>
+            <el-table-column label="分类" prop="catetory" ></el-table-column>
+            <el-table-column label="上架数量"   inline-template sortable="custom">
                 <span class='operate' @click="showSPU(row)"> {{row.goodsC}}</span>
             </el-table-column>
             <!--<el-table-column label="Sku累加" prop="quantity"></el-table-column>-->
@@ -57,6 +59,10 @@
             showSPU(row){
                 this.$emit('get-spu',row);
                 this.$emit('update:resSpu',row)
+            },
+            sortChange(a,b) {
+                console.log(a,b)
+                this.$emit('sort-change')
             }
         },
         computed: {

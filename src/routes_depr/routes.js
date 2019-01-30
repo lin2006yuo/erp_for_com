@@ -64,8 +64,8 @@ export default [
             },
             {
                 path: '/shipped',
-                component: () => import('../view/warehouse/dataStatistics/unshipped.vue'),
-                type: 1, title: '未发货记录测试'
+                component: () => import('../view/warehouse/dataStatistics/shipped.vue'),
+                type: 1, title: '已发货记录测试'
             },
             {
                 path: '/cardboard',
@@ -96,6 +96,11 @@ export default [
                 path: '/report/export-files',
                 component: () => import('../view/report/export-manage/index.vue'),
                 type:　1, title: '导出管理列表'
+            },
+            {
+                path: '/pattern',
+                component: () => import('../view/lxy/pattern/pattern.vue'),
+                type: 1, title: '设计模式'
             }
         ]
     }
