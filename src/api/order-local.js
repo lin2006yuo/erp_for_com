@@ -8,7 +8,7 @@ export const url_get = "get|orders";
 export const api_get = function(data){
   return http(url_get, data,{
         contentType:'application/x-www-form-urlencoded',
-            timeout:60000
+            timeout:INFINITE
     });
 };
 
@@ -17,13 +17,16 @@ export const url_get_stock_orders = "get|stock-orders";
 export const api_get_stock_orders = function(data){
     return http(url_get_stock_orders, data,{
         contentType: 'application/x-www-form-urlencoded',
-        timeout: 60000
+        timeout: INFINITE
     });
 };
 
 export const url_info = "get|orders/:id";
 export const api_info = function(id){
-    return http(Url2(url_info,{id:id}));
+    return http(Url2(url_info,{id:id}),{},{
+        contentType: 'application/x-www-form-urlencoded',
+        timeout: INFINITE
+    });
 };
 
 export const url_update = "put|orders/:id";
@@ -46,6 +49,13 @@ export const api_cancel_invalid = function(order_id,status,data){
   return http(Url2(url_cancel_invalid,{order_id:order_id}));
 };
 
+
+//查询虚拟跟踪号,是否有保存值
+export const url_virtual_tracking_synchronize= "get|virtual-tracking/:id/synchronize";
+export const api_virtual_tracking_synchronize = function(id,data){
+  return http(Url2(url_virtual_tracking_synchronize,{id:id},data));
+};
+
 //删除备注
 export const url_delete_note = "post|orders/:order_id/delNote";
 export const api_delete_note = function(order_id,id){
@@ -56,6 +66,18 @@ export const api_delete_note = function(order_id,id){
 export const url_status_list = "get|orders/statusList/info";
 export const api_status_list = function(){
   return http(url_status_list, {});
+};
+
+//获取账号
+export const url_get_accounts_list = "get|orders/accounts";
+export const api_get_accounts_list = function (data) {
+    return http(url_get_accounts_list,data);
+};
+
+//获取站点
+export const url_get_sites = "get|orders/sites";
+export const api_get_sites = function (data) {
+    return http(url_get_sites,data);
 };
 
 export const url_account_list = "get|orders/account";
@@ -121,6 +143,29 @@ export const url_get_channel = "get|orders/channel";
 export const api_get_channel = function () {
     return http(url_get_channel);
 };
+
+//生成单个虚拟跟踪号
+export const url_virtual_tracking_virtual_number = "post|virtual-tracking/:id/virtual-number";
+export const api_virtual_tracking_virtual_number = function (id, data) {
+   return http(Url2(url_virtual_tracking_virtual_number,{id:id}), data);
+};
+//保存单个虚拟跟踪号
+export const url_save_virtual_number = "put|virtual-tracking/:id/virtual-number";
+export const api_save_virtual_number = function (id, data) {
+   return http(Url2(url_save_virtual_number, {id: id}), data);
+};
+//批量生成虚拟跟踪号
+export const url_batch_virtual_tracking_virtual_number = "post|virtual-tracking/batch/virtual-number";
+export const api_batch_virtual_tracking_virtual_number = function (data) {
+   return http(url_batch_virtual_tracking_virtual_number,data);
+};
+
+//批量保存虚拟跟踪号
+export const url_batch_save_tracking_virtual_number = "put|virtual-tracking/batch/virtual-number";
+export const api_batch_save_tracking_virtual_number = function (data) {
+   return http(url_batch_save_tracking_virtual_number,data);
+};
+
 //获取拆包裹的订单信息
 export const url_get_splitInfo = "get|orders/:id/split";
 export const api_get_splitInfo = function(id, data){
@@ -183,8 +228,8 @@ export const api_brush_orders_list = function(data){
 };
 //获取物流商 shipping-method/list-order
 export const url_shipping_method = "get|shipping-method/list-order";
-export const api_shipping_method = function(){
-    return http(url_shipping_method);
+export const api_shipping_method = function(data){
+    return http(url_shipping_method,data);
 };
 //获取发货状态
 export const url_delivery_type = "get|orders/deliveryType/info";
@@ -311,4 +356,9 @@ export const api_orders_order_renew_refund = function (data) {
 export const url_mark_refund_failed = "post|orders/mark-refund-failed";
 export const api_mark_refund_failed = function (data) {
     return http(url_mark_refund_failed,data);
+};
+//批量导入备注
+export const url_orders_batch_import = "post|orders/batch-import";
+export const api_orders_batch_import = function (data) {
+    return http(url_orders_batch_import,data);
 };

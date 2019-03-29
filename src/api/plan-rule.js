@@ -6,8 +6,8 @@
 import {http} from '../lib/http-plus';
 
 export const url_get = "get|purchase-rules";
-export const api_get = function () {
-    return http(Url2(url_get));
+export const api_get = function (data) {
+    return http(Url2(url_get), data);
 };
 
 export const url_sort = "post|purchase-rules/sort";
@@ -32,7 +32,10 @@ export const api_add = function (params) {
 
 export const url_update = "put|purchase-rules/:id";
 export const api_update = function (id, params) {
-    return http(Url2(url_update, {id}), params);
+    return http(Url2(url_update, {id}), params, {
+        contentType:'application/x-www-form-urlencoded',
+        timeout:INFINITE
+    });
 };
 
 export const url_lookup = "get|purchase-rules/:id/edit";
@@ -41,8 +44,8 @@ export const api_lookup = function (id) {
 };
 
 export const url_rule_items = "get|purchase-rules-items";
-export const api_rule_items = function () {
-    return http(Url2(url_rule_items));
+export const api_rule_items = function (data) {
+    return http(Url2(url_rule_items), data);
 };
 
 export const url_get_resource = "post|purchase-rules/resources";

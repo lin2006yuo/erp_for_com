@@ -98,3 +98,9 @@ export const url_delete_warehouse_config = "delete|warehouse/delete-config";
 export const api_delete_warehouse_config = function (data) {
     return http(url_delete_warehouse_config, data);
 };
+
+//获取邮寄方式
+export const url_get_shipping = "get|warehouse/:id/shipping-list";
+export const api_get_shipping = function (id,data) {
+    return http(Url2(url_get_shipping, {id}), data);
+};

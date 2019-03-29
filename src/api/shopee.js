@@ -39,4 +39,9 @@ export const url_post_batch_set = "post|shopee-account/batch-set";
 export const api_shopee_post_batch_set = function(data){
     return http(url_post_batch_set,data);
 };
+//保存shopee授权信息
+export const url_shopee_permit = "put|shopee-account/save-token";
+export const api_shopee_permit = function(data){
+    return http(url_shopee_permit,data);
+};
 

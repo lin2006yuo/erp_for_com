@@ -16,12 +16,12 @@ export const api_get_packages_error = function (data) {
     return http(url_get_packages_error,data);
 };
 //添加错误信息
-export const url_get_packages_error_add = "post|packages-error/";
+export const url_get_packages_error_add = "post|packages-error";
 export const api_get_packages_error_add = function (data) {
     return http(url_get_packages_error_add,data);
 };
 //编辑错误信息
-export const url_get_packages_error_edit = "put|packages-error/";
-export const api_get_packages_error_edit = function (data) {
-    return http(url_get_packages_error_edit,data);
+export const url_get_packages_error_edit = "put|packages-error/:id";
+export const api_get_packages_error_edit = function (id,data) {
+    return http(Url2(url_get_packages_error_edit,{id}),data);
 };

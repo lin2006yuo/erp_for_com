@@ -56,3 +56,8 @@ export const url_import_settle = "post|wish-order/import-settle";
 export const api_import_settle = function(data){
     return http(url_import_settle,data)
 };
+
+export const url_wish_order_export_fields = "get|wish-orders/export-fields";
+export const api_wish_order_export_fields = data=>{
+    return http(url_wish_order_export_fields,data)
+};

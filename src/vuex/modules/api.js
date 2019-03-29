@@ -1,6 +1,7 @@
 /**
  * Created by wuchuguang on 17-5-11.
  */
+import Vue from 'vue'
 export default {
     namespaced:true,
     state: {
@@ -64,7 +65,7 @@ export default {
           state.getAccounts = getAccounts;
         },
         set_publish_account(state,data){
-            state.publishAccount[data.type]= data.data;
+            Vue.set(state.publishAccount, data.type, data.data)
         },
         warehouseCargo(state,warehouseCargo){
             state.warehouseCargo = warehouseCargo;

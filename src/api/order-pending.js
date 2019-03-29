@@ -6,7 +6,10 @@ import {http} from '../lib/http-plus';
 
 export const url_get = "get|orders-audit";
 export const api_get = function (datas) {
-    return http(Url2(url_get), datas);
+    return http(url_get, datas,{
+        contentType:'application/x-www-form-urlencoded',
+        timeout:INFINITE
+    });
 };
 
 export const url_platform2accout = "get|orders-audit/getChannelAccount";
@@ -44,6 +47,19 @@ export const url_account_list ="get|orders/account";
 export const api_account_list = function (datas) {
     return http(Url2(url_account_list), datas);
 };
+//获取账号
+export const url_get_accounts_list = "get|orders/accounts";
+export const api_get_accounts_list = function (data) {
+    return http(url_get_accounts_list,data);
+};
+
+//获取站点
+export const url_get_sites = "get|orders/sites";
+export const api_get_sites = function (data) {
+    return http(url_get_sites,data);
+};
+
+
 //获取平台
 export const url_get_channel_categories ="get|orders/channel";
 export const api_get_channel_categories = function () {

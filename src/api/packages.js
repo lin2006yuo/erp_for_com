@@ -2,13 +2,18 @@ import {http} from '../lib/http-plus';
 
 export const url_get_list = "get|packages";
 export const api_get_list = function (data) {
-    return http(url_get_list, data);
+    return http(url_get_list, data, {
+        timeout:INFINITE
+    });
 };
 
 //订单系统-物流异常包裹列表页面/providers-exception
 export const url_get_providers_exception = "get|providers-exception";
 export const api_get_providers_exception = function (data) {
-    return http(url_get_providers_exception, data);
+    return http(url_get_providers_exception, data, {
+        contentType:'application/x-www-form-urlencoded',
+        timeout:INFINITE
+    });
 };
 
 //打印面单号
@@ -97,4 +102,28 @@ export const api_test_print = function (id, data) {
 export const url_test_custom_print = "post|delivery-check/:package_id/test-html-print";
 export const api_test_custom_print = function (id, data) {
     return http(Url2(url_test_custom_print, {package_id: id}), data);
+};
+
+//同步物流商发货
+export const url_sync_logistics = "put|packages/batch/logistics-delivery";
+export const api_sync_logistics = function (data) {
+    return http(Url2(url_sync_logistics), data)
+};
+
+//同步签收状态
+export const url_sync_sign = "put|packages/batch/logistics-receipt";
+export const api_sync_sign = function (data) {
+    return http(Url2(url_sync_sign), data)
+};
+
+//批量更换包裹号
+export const url_batch_package_number = "put|packages/batch/package-number";
+export const api_batch_package_number = function (data) {
+    return http(url_batch_package_number, data)
+};
+
+//预览报关面单
+export const url_declare_view = "get|packages/:id/declare-view";
+export const api_declare_view = function (id, data) {
+    return http(Url2(url_declare_view, {id}), data);
 };

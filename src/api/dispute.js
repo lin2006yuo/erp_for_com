@@ -5,7 +5,10 @@ import {http} from '../lib/http-plus';
 //速卖通纠纷
 export const url_get_account = "get|orders/account";
 export const api_get_account = function (data) {
-    return http(url_get_account,data)
+    return http(url_get_account,data, {
+        contentType:'application/x-www-form-urlencoded',
+        timeout:INFINITE
+    })
 };
 //查看速卖通纠纷
 export const url_get_ali_issue_id = "get|ali-issue/:id";

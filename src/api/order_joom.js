@@ -18,13 +18,26 @@ export const api_order_joom_status = function(data){
   return http(url_api_order_joom_status,data);
 };
 
-//---渠道账号
-export const url_api_order_joom_getAccount = "get|orders/account";
+//---店铺简称
+export const url_api_order_joom_getAccount = "post|joom-orders/stores";
 export const api_order_joom_getAccount = function(data){
   return http(url_api_order_joom_getAccount,data);
 };
 //导出订单joom-orders/export
-export const url_joom_orders_export = "post|joom-orders/export";
+export const url_joom_orders_export = "get|joom-orders/export";
 export const api_joom_orders_export = function(data) {
     return http(url_joom_orders_export, data);
 };
+//账号
+export const url_joom_orders_account_names = "post|joom-orders/account-names ";
+export const api_joom_orders_account_names = function(data){
+    return http(url_joom_orders_account_names, data);
+};
+
+export const url_get_joom_orders_export = "get|joom-orders/export";
+export const api_get_joom_orders_export = function(data){
+return http(url_get_joom_orders_export, data);
+};
+
+
+

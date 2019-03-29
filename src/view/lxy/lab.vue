@@ -10,9 +10,12 @@
             shipping_ids: <input type="text" v-model="deliverydata.shipping_ids">
             page: <input type="text" v-model="deliverydata.page">
             pageSize: <input type="text" v-model="deliverydata.pageSize">
+            <div v-html="space"></div>
+            <pre>{{spacePre}}</pre>
         </el-row>
         <el-button @click="export_excel">导出汇总</el-button>
         <export-dialog v-model="visible"></export-dialog>
+        <p class="elip" title='aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa'> aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</p>
     </div>
 </template>
 
@@ -24,6 +27,8 @@
         data() {
             return {
                 visible: false,
+                space: '123&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2132',
+                spacePre: '123213                     12312',
                 deliverydata: {
                     channel_id: 0,
                     warehouse_id: "",
@@ -85,5 +90,11 @@
 <style scoped>
     input {
         width: 120px;
+    }
+    .elip {
+        width: 50px;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis
     }
 </style>

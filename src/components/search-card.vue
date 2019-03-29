@@ -127,6 +127,7 @@
                 this.$emit('init-params');
             },
             isChangeParam(old_, new_) {//if change return true ,else false;
+                if(!old_ || !new_) return
                 if (old_.constructor.name === new_.constructor.name) {
                     const type = old_.constructor.name;
                     switch (type) {

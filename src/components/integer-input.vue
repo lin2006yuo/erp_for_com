@@ -8,7 +8,6 @@
                onafterpaste="if(this.value.length==1){this.value=this.value.replace(/[^1-9]/g,'0')}else{this.value=this.value.replace(/\D/g,'')}"
                v-model="value_"
                :min="min" :max="max" name="points" ref="input" @input="change($event)" @keyup="key_updown($event)">
-        {{value}}
     </div>
 </template>
 <style lang="stylus" scoped>

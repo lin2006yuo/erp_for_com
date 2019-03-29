@@ -50,10 +50,10 @@ export  const  api_off_spu=function (data) {
 export  const url_on_spu="get|report/publish-by-shelf/sup"
 export const api_on_spu=function (data) {
         return http(url_on_spu,data)
-}
+};
 
 //获取销售员
 export const url_get_seller = "get|user/sales/staffs";
 export const api_get_seller = function (data) {
     return http(url_get_seller, data)
-}
+};

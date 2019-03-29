@@ -125,3 +125,15 @@ export const api_package_return_export = function(data){
     return http(url_package_return_export,data);
 };
 
+//批量导入
+export const url_package_return_import = "post|package-return/import";
+export const api_package_return_import = function(data){
+    return http(url_package_return_import,data);
+};
+
+//保存导入
+export const url_package_return_save_import = "post|package-return/save-import";
+export const api_package_return_save_import = function(data){
+    return http(url_package_return_save_import,data);
+};
+

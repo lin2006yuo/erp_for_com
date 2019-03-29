@@ -83,3 +83,18 @@ export const url_member_ship_department = "get|user/:id/get-department"
 export const api_member_ship_department = function(id){
   return http(Url2(url_member_ship_department,{id:id}));
 };
+//成员管理
+export const url_channel_user_account = "get|member-ship/channel-user-account"
+export const api_channel_user_account = function(data){
+    return http(url_channel_user_account, data);
+};
+// 批量添加、删除账号成员
+export const url_ship_add_account = "post|member-ship/add-account";
+export const api_ship_add_account = function (data) {
+    return http(url_ship_add_account, data);
+};
+//获取平台店铺信息
+export const url_get_shop = "get|orders/shop";
+export const api_get_shop = function (data) {
+    return http(url_get_shop,data);
+};

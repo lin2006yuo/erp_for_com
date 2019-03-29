@@ -4,7 +4,10 @@ import {http} from '../lib/http-plus';
 //已刊登列表
 export const url_has_publish_list = "get|publish/amazon-listing";
 export const api_has_publish_list = function(data) {
-    return http(Url2(url_has_publish_list), data);
+    return http(Url2(url_has_publish_list), data,{
+        contentType:'application/x-www-form-urlencoded',
+        timeout:90000
+    });
 };
 
 export const url_account_site = "get|orders/account";
@@ -116,6 +119,61 @@ export const url_publish_amazon_review_asin = 'post|publish/amazon/review-asin';
 export const api_publish_amazon_review_asin = function (data) {
     return http(url_publish_amazon_review_asin,data)
 };
-
-
-
+// 侵权记录
+export const url_publish_amazon_infringement='get|publish/amazon/goods-tort-info/:goods_id';
+export const api_publish_amazon_infringement= function(goods_id){
+    return http(Url2(url_publish_amazon_infringement,{goods_id}))
+}
+//获取产品标签
+export const url_publish_amazon_tags='get|publish/amazon-task/tags';
+export const api_publish_amazon_tags=function(data){
+    return http(url_publish_amazon_tags,data);
+}
+//获取每日刊登数据
+export const url_publish_amazon_task='get|publish/amazon-task';
+export const api_publish_amazon_task=function(data){
+    return http(url_publish_amazon_task,data);
+}
+//listing列表导出
+export const url_publish_amazon_export='get|publish/amazon-listing/export';
+export const  api_publish_amazon_export=function(data){
+    return http(url_publish_amazon_export,data,{
+        contentType:'application/x-www-form-urlencoded',
+        timeout:90000
+    });
+}
+//获取销售员
+export const url_publish_amazon_seller='get|department/:id/department-users';
+export const api_publish_amazon_seller=function(id){
+    return http(Url2(url_publish_amazon_seller,{id:id}))
+}
+//ASIN核查
+export const url_publish_amazon_asins='post|publish/amazon-listing/asins';
+export const api_publish_amazon_asins=function(data){
+    return http(url_publish_amazon_asins,data);
+}
+//亚马逊Listing管理  批量删除
+export const url_publish_amazon_goods='delete|publish/amazon-listing/batch';
+export const api_publish_amazon_goods=function(data){
+    return http(url_publish_amazon_goods,data);
+}
+//亚马逊刊登详情 获取后台运费模板
+export const url_publish_amazon_template='get|publish/amazon-shipping-group-name/:account_id/read';
+export const api_publish_amazon_template=function(id){
+    return http(Url2(url_publish_amazon_template,{account_id:id}));
+}
+//亚马逊刊登详情 添加 后台运费模板
+export const url_publish_amazon_add_template='post|publish/amazon-shipping-group-name';
+export const api_publish_amazon_add_template=function(data){
+    return http(url_publish_amazon_add_template,data);
+}
+//亚马逊刊登详情 修改 后台运费模板
+export const url_publish_amazon_editor_template='put|publish/amazon-shipping-group-name';
+export const api_url_publish_amazon_editor_template=function(data){
+    return http(url_publish_amazon_editor_template,data);
+}
+//亚马逊刊登详情 删除 后台运费模板
+export const url_publish_amazon_delete_template='delete|publish/amazon-shipping-group-name';
+export const api_publish_amazon_delete_template=function(data){
+    return http(url_publish_amazon_delete_template,data);
+}

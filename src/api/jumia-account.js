@@ -33,3 +33,8 @@ export const url_post_batch_set = "post|jumia-account/batch-set";
 export const api_jumia_post_batch_set = function(data){
     return http(url_post_batch_set,data);
 };
+//保存jumia授权信息
+export const url_jumia_permit = "put|jumia-account/save-token";
+export const api_jumia_permit = function(data){
+    return http(url_jumia_permit,data);
+};

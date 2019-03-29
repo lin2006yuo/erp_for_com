@@ -11,6 +11,16 @@ export const api_get_company_name = ()=>{
     return http("get|account-company/company");
 };
 
+//公司类型
+export const api_get_company_type = ()=>{
+    return http("get|account-company/type");
+};
+
+//公司资料来源sour测
+export const api_get_company_source = ()=>{
+    return http("get|account-company/source");
+};
+
 //适用平台
 export const api_get_channel = ()=>{
     return http("get|orders/channel");

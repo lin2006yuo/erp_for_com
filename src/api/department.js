@@ -26,6 +26,10 @@ export const url_depart_edit = "get|department/:id/edit";
 export const depart_edit = function(id) {
     return http(Url2(url_depart_edit,{id:id}));
 };
+export const url_depart_logs = "get|department/:id/logs";
+export const depart_logs = function(id) {
+    return http(Url2(url_depart_logs,{id:id}));
+};
 export const url_depart_check = "get|department/:id";
 export const depart_check = function(id) {
     return http(Url2(url_depart_check,{id:id}));
@@ -63,4 +67,10 @@ export const url_department_type = "get|department/type";
 export const api_department_type = function(data) {
     return http(url_department_type,data);
 };
+//获取渠道
+export const url_get_channel="get|orders/channel";
+export const api_get_channel=function(data){
+    return http(url_get_channel);
+}
+
 

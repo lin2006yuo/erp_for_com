@@ -3,6 +3,15 @@
  */
 
 import {http} from '../lib/http-plus';
+
+//任务列表
+export const url_get_task_list = "get|task";
+export const api_get_task_list = ()=>{
+    return http(url_get_task_list,{
+        contentType: 'application/x-www-form-urlencoded',
+        timeout: INFINITE
+    });
+};
 export const url_get = "get|task";
 export const api_get = function(){
     return http(url_get,{
@@ -71,6 +80,35 @@ export const url_global_task_change = "put|task/global_task_change"
 export const api_global_task_change = function(data){
     return http(url_global_task_change,data);
 };
+
+
+//任务工作器类列表 el-row按钮 内层安装和卸载
+export const url_get_task_classes = "get|task/classes";
+export const api_get_task_classes = ()=>{
+    return http(url_get_task_classes);
+};
+
+
+//任务工作器类安装
+export const url_install_task_class = "get|task/install";
+export const api_install_task_class = (task)=>{
+    return http(url_install_task_class,{task_class:task});
+};
+
+//任务工作器卸载
+export const url_uninstall_task_class = "get|task/uninstall";
+export const api_uninstall_task_class = (task)=>{
+    return http(url_uninstall_task_class, {task_class:task});
+};
+
+
+//某任务工作器的执行列表
+export const url_get_task_worker = "get|task/workers";
+export const api_get_task_worker = (task)=>{
+    return http(url_get_task_worker,{task_class:task});
+};
+
+
 
 
 

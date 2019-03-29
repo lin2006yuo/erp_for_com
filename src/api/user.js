@@ -6,8 +6,8 @@
 import {http} from '../lib/http-plus';
 
 export const url_menus = "get|menu/pages"
-export const api_menus = function(){
-    return http(url_menus);
+export const api_menus = function(lang){
+    return http(url_menus,lang);
 };
 export const url_login_info = "get|login/info"
 export const api_login_info = function(){

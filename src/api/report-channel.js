@@ -34,43 +34,64 @@ export const api_account_list = function(datas){
 //eBay平台利润报表接口
 export const url_report_eBay = "get|report/financial/profit-statement";
 export const api_report_eBay = function(datas){
-    return http(url_report_eBay, datas);
+    return http(url_report_eBay, datas, {
+        contentType:'application/x-www-form-urlencoded',
+        timeout:INFINITE
+    });
 };
 
 //亚马逊平台利润报表接口
 export const url_report_Amazon = "get|report/financial/profit-statement/amazon";
 export const api_report_Amazon = function(datas){
-    return http(url_report_Amazon, datas);
+    return http(url_report_Amazon, datas, {
+        contentType:'application/x-www-form-urlencoded',
+            timeout:INFINITE
+    });
 };
 
 //wish平台利润报表接口
 export const url_report_wish = "get|report/financial/profit-statement/wish";
 export const api_report_wish = function(datas){
-    return http(url_report_wish, datas);
+    return http(url_report_wish, datas, {
+        contentType:'application/x-www-form-urlencoded',
+        timeout:INFINITE
+    });
 };
 
 //速卖通平台利润报表接口
 export const url_report_aliexpress = "get|report/financial/profit-statement/ali-express";
 export const api_report_aliexpress = function(datas){
-    return http(url_report_aliexpress, datas);
+    return http(url_report_aliexpress, datas, {
+        contentType:'application/x-www-form-urlencoded',
+        timeout:INFINITE
+    });
 };
 
 //FBA利润报表接口
 export const url_report_fba = "get|report/financial/profit-statement/fba";
 export const api_report_fba = function(datas){
-    return http(url_report_fba, datas);
+    return http(url_report_fba, datas, {
+        contentType:'application/x-www-form-urlencoded',
+        timeout:INFINITE
+    });
 };
 
 //导出利润报表
 export const url_export_report= "post|report/financial/export/profit-statement";
 export const api_export_report = function(datas){
-    return http(url_export_report, datas);
+    return http(url_export_report, datas, {
+        contentType:'application/x-www-form-urlencoded',
+        timeout:INFINITE
+    });
 };
 
 //获取订单货品
 export const url_get_orders_skus= "get|report/financial/order/skus";
 export const api_get_orders_skus = function(datas){
-    return http(url_get_orders_skus, datas);
+    return http(url_get_orders_skus, datas, {
+        contentType:'application/x-www-form-urlencoded',
+        timeout:INFINITE
+    });
 };
 
 export const api_report_channel = function(){
@@ -80,79 +101,126 @@ export const api_report_channel = function(){
 //joom平台利润报表接口
 export const url_report_joom = "get|report/financial/profit-statement/joom";
 export const api_report_joom = function(datas){
-    return http(url_report_joom, datas);
+    return http(url_report_joom, datas, {
+        contentType:'application/x-www-form-urlencoded',
+        timeout:INFINITE
+    });
 };
 
 //lazada平台利润报表接口
 export const url_report_lazada = "get|report/financial/profit-statement/lazada";
 export const api_report_lazada = function(datas){
-    return http(url_report_lazada, datas);
+    return http(url_report_lazada, datas, {
+        contentType:'application/x-www-form-urlencoded',
+        timeout:INFINITE
+    });
 };
 
 //shopee平台利润报表接口
 export const url_report_shopee = "get|report/financial/profit-statement/shopee";
 export const api_report_shopee = function(datas){
-    return http(url_report_shopee, datas);
+    return http(url_report_shopee, datas, {
+        contentType:'application/x-www-form-urlencoded',
+        timeout:INFINITE
+    });
 };
 
 //paytm平台利润报表接口
 export const url_report_paytm = "get|report/financial/profit-statement/paytm";
 export const api_report_paytm = function(datas){
-    return http(url_report_paytm, datas);
+    return http(url_report_paytm, datas, {
+        contentType:'application/x-www-form-urlencoded',
+        timeout:INFINITE
+    });
 };
 
 //walmart平台利润报表接口
 export const url_report_walmart = "get|report/financial/profit-statement/walmart";
 export const api_report_walmart = function(datas){
-    return http(url_report_walmart, datas);
+    return http(url_report_walmart, datas, {
+        contentType:'application/x-www-form-urlencoded',
+        timeout:INFINITE
+    });
 };
 
 //mymall平台利润报表接口
 export const url_report_mymall = "get|report/financial/profit-statement/pandao";
 export const api_report_mymall = function(datas){
-    return http(url_report_mymall, datas);
+    return http(url_report_mymall, datas, {
+        contentType:'application/x-www-form-urlencoded',
+        timeout:INFINITE
+    });
 };
 
 //jumia平台利润报表接口
 export const url_report_jumia = "get|report/financial/profit-statement/jumia";
 export const api_report_jumia = function(datas){
-    return http(url_report_jumia, datas);
+    return http(url_report_jumia, datas, {
+        contentType:'application/x-www-form-urlencoded',
+        timeout:INFINITE
+    });
 };
 
 //vova平台利润报表接口
 export const url_report_vova = "get|report/financial/profit-statement/vova";
 export const api_report_vova = function(datas){
-    return http(url_report_vova, datas);
+    return http(url_report_vova, datas, {
+        contentType:'application/x-www-form-urlencoded',
+        timeout:INFINITE
+    });
 };
 
 //umka平台利润报表接口
 export const url_report_umka = "get|report/financial/profit-statement/umka";
 export const api_report_umka = function(datas){
-    return http(url_report_umka, datas);
+    return http(url_report_umka, datas, {
+        contentType:'application/x-www-form-urlencoded',
+        timeout:INFINITE
+    });
 };
 
 //cd平台利润报表接口
 export const url_report_cd = "get|report/financial/profit-statement/cd";
 export const api_report_cd = function(datas){
-    return http(url_report_cd, datas);
+    return http(url_report_cd, datas, {
+        contentType:'application/x-www-form-urlencoded',
+        timeout:INFINITE
+    });
 };
 
 //newegg平台利润报表接口
 export const url_report_newegg = "get|report/financial/profit-statement/newegg";
 export const api_report_newegg = function(datas){
-    return http(url_report_newegg, datas);
+    return http(url_report_newegg, datas, {
+        contentType:'application/x-www-form-urlencoded',
+        timeout:INFINITE
+    });
 };
 
 //oberlo平台利润报表接口
 export const url_report_oberlo = "get|report/financial/profit-statement/oberlo";
 export const api_report_oberlo = function(datas){
-    return http(url_report_oberlo, datas);
+    return http(url_report_oberlo, datas, {
+        contentType:'application/x-www-form-urlencoded',
+        timeout:INFINITE
+    });
 };
-
+//yandex平台利润报表接口
+export const url_report_yandex = "get|report/financial/profit-statement/yandex";
+export const api_report_yandex = function(datas){
+    // header.timeout请求超时时间为90秒
+    return http(url_report_yandex, datas, {
+        contentType:'application/x-www-form-urlencoded',
+        timeout:90000
+    });
+};
 //zoodmall平台利润报表接口
 export const url_report_zoodmall = "get|report/financial/profit-statement/zoodmall";
 export const api_report_zoodmall = function(datas){
-    return http(url_report_zoodmall, datas);
+    return http(url_report_zoodmall, datas, {
+        contentType:'application/x-www-form-urlencoded',
+        timeout:INFINITE
+    });
 };
 
 //SKU销量动态表列表

@@ -53,7 +53,10 @@ export const api_get_warehouse = function () {
 //新增售后订单
 export const url_add_order = "post|order-sales";
 export const api_add_order = function (data) {
-    return http(url_add_order,data)
+    return http(url_add_order,data,{
+        contentType:'application/x-www-form-urlencoded',
+        timeout:INFINITE
+    })
 }
 //查看
 export const url_look_over = "get|order-sales/:id";

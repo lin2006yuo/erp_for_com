@@ -52,3 +52,9 @@ export const url_get_export_title_all = "get|report/export-title"
 export const api_get_export_title_all = function (params) {
     return http(url_get_export_title_all,params)
 }
+//揽收商列表
+export  const url_get_collectorlist = 'get|collector/list'
+export const api_get_collectorlist = function () {
+    return http(url_get_collectorlist)
+}
+

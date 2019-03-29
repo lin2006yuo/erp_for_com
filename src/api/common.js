@@ -32,6 +32,17 @@ export const url_account_list = "get|orders/account";
 export const api_account_list = function(datas){
     return http(url_account_list, datas);
 };
+//获取账号
+export const url_get_accounts_list = "get|orders/accounts";
+export const api_get_accounts_list = function (data) {
+    return http(url_get_accounts_list,data);
+};
+
+//获取站点
+export const url_get_sites = "get|orders/sites";
+export const api_get_sites = function (data) {
+    return http(url_get_sites,data);
+};
 //获取包裹的分配库存状态
 export const url_distribution_type_info = "get|packages/distribution-type/info";
 export const api_distribution_type_info = function(){
@@ -47,3 +58,8 @@ export const url_packing_type_info = "get|packages/packing-type/info";
 export const api_packing_type_info = function(){
     return http(url_packing_type_info);
 };
+//获取物流状态
+export const url_shipping_status = 'get|packages/shipping/type';
+export const api_shipping_status = function (data) {
+    return http(url_shipping_status)
+}

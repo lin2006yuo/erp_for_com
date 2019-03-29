@@ -1,5 +1,5 @@
 <template>
-    <div class="page-dialog" :style="outer" v-if="show" @click="out_click">
+    <div class="page-dialog" :style="outer" v-show="show" @click="out_click">
         <transition name="page-dialog">
             <div class="inner  showIn " :style="[inner,innerSize,innerPosition]" @click.stop="" ref="inner">
                 <div v-if="!_nottitle" class="dialog-header">

@@ -159,3 +159,14 @@ export const api_package_exception_export =(data,head) =>{
 export const api_package_exception_title = ()=>{
     return http("get|package-exception/export-title");
 };
+
+//vova批量下单
+export const url_placeorder_vova = "post|placeorder/vova";
+export const api_placeorder_vova = function (data) {
+    return http(url_placeorder_vova, data)
+};
+//vova获取跟踪号
+export const url_placeorder_vova_track = "post|placeorder/vova-tacking";
+export const api_placeorder_vova_track = function (data) {
+    return http(url_placeorder_vova_track, data)
+};

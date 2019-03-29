@@ -5,7 +5,10 @@ import {http} from '../lib/http-plus';
 //获取货架列表
 export const url_warehouse_cargo_goods = "get|warehouse-cargo-goods"
 export const warehouse_cargo_goods = function(data){
-    return http(url_warehouse_cargo_goods, data);
+    return http(url_warehouse_cargo_goods, data ,{
+        contentType:'application/x-www-form-urlencoded',
+        timeout:INFINITE
+    });
 };
 //获取仓库货位库存操作明细列表
 export const url_warehouse_cargo_detail = "get|warehouse-cargo-goods/logs"

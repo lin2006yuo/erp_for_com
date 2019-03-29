@@ -63,3 +63,8 @@ export const url_put_ebay_emails_cancel_top = "put|ebay-emails/cancel-top";
 export const api_put_ebay_emails_cancel_top = function (data) {
     return http(url_put_ebay_emails_cancel_top,data)
 };
+//获取侵权邮件箱列表
+export const url_get_ebay_emails_infringement_box = "get|ebay-emails/infringement-box";
+export const api_get_ebay_emails_infringement_box = function (data) {
+    return http(url_get_ebay_emails_infringement_box,data)
+};

@@ -19,7 +19,6 @@
                         v-sf.account_id
                         v-model="searchData.account_id"
                         :disabled="searchData.channel_id===''"
-                        :param="accountParam"
                         :refresh="true"
                         :fixResult="account_fix_result"
                         type="memberShipAccount"

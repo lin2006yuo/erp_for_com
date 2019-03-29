@@ -14,6 +14,14 @@
                     </el-option>
                 </el-select>
             </label-item>
+            <label-item label="生成人：" class="ml-sm">
+                <scroll-select v-model="staffs" style="width:120px" class="inline"
+                               textAlign="left"
+                               ref="creater"
+                               remote="get|user"
+                               :fix-params="fix_params_account"
+                               :fixResult="fix_result_account"></scroll-select>
+            </label-item>
             <label-item label="添加时间：" class="ml-xs">
                 <el-date-picker
                         v-sf.time_start
@@ -269,7 +277,28 @@
                 if(row.status !== 1){
                       return e.preventDefault()
                 }
-            }
+            },
+            //账号参数
+            fix_params_account({page, pageSize, keyword}) {
+                return {
+                    page: page,
+                    pageSize: pageSize,
+                    snText: keyword || "",
+                    snType: "realname"
+                };
+            },//账号结果
+            fix_result_account(res) {
+                return {
+                    options: res.data.map(row => {
+                        return {
+                            label: row.realname,
+                            value: row.id
+                        }
+                    }),
+                    page: res.page,
+                    count: res.count,
+                }
+            },
         },
         computed: {
             emptyText() {
@@ -281,7 +310,8 @@
         components: {
             labelItem:require('../../../components/label-item.vue').default,
             uiTip:require('../../../components/ui-tip.vue').default,
-            searchCard:require('../../../components/search-card.vue').default
+            searchCard:require('../../../components/search-card.vue').default,
+            scrollSelect: require('@/components/scroll-select.vue').default,
         },
     }
 </script>

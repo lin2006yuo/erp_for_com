@@ -36,8 +36,8 @@ export const api_get_detail = function(id){
 
 //完成盘点单
 export const url_finish_detail = "get|warehouse-goods-check/finish/:id";
-export const api_finish_detail = function(id){
-    return http(Url2(url_finish_detail, {id:id}));
+export const api_finish_detail = function(id, data){
+    return http(Url2(url_finish_detail, {id:id}) ,data);
 };
 
 //获取仓库人员

@@ -51,6 +51,26 @@ export const url_department_role = "get|user/departmentAndRole";
 export const api_department_role = function () {
     return http(Url2(url_department_role));
 };
+//保存联系人模板
+export const url_preserve_user_template='post|internal-letters/templates';
+export const api_preserve_user_template=function (data) {
+    return http(url_preserve_user_template,data)
+}
+//获取联系人模板
+export const url_user_template="get|internal-letters/templates";
+export const api_user_template=function () {
+    return http(url_user_template)
+}
+//删除联系人模板
+export const url_delete_user="delete|internal-letters/templates";
+export const api_delete_user=function (data) {
+    return http(url_delete_user,data);
+}
+//获取联系人模板详情
+export const url_user_deta="get|internal-letters/templates—detail";
+export const api_user_dete=function (data) {
+    return http(url_user_deta,data);
+}
 
 export const url_role_access = "get|role/:roleid/access-rules";
 export const api_role_access = function (roleid) {
@@ -87,3 +107,8 @@ export const url_copy_role = "post|role/:role_id/copy";
 export const api_copy_role = function (role_id,data) {
     return http(Url2(url_copy_role, {role_id: role_id}),data);
 };
+//日志
+export const url_get_log="get|role/:role_id/log";
+export const api_get_log=function(id){
+    return http(Url2(url_get_log,{role_id:id}))
+}

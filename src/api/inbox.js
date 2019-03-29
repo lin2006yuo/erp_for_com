@@ -120,7 +120,10 @@ export const api_message_more = function(data){
 //获取账号信息
 export const url_message_account= "get|ebay-message/account";
 export const api_message_account = function(data){
-    return http(url_message_account, data);
+    return http(url_message_account, data, {
+        contentType:'application/x-www-form-urlencoded',
+        timeout:INFINITE
+    });
 };
 //根据单号获取邮箱账号
 export const url_message_setting_buyer='get|ebay-emails/getBuyerInfo';

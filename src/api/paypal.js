@@ -42,3 +42,10 @@ export const url_post_batch_set = "post|paypal-account/batch-set";
 export const api_paypal_batch_set = function(data){
     return http(url_post_batch_set,data);
 };
+
+
+//列表授权
+export const url_paypal_account_authorization = "put|paypal-account/:id/authorization";
+export const api_paypal_account_authorization = (id,param)=>{
+    return http(Url2(url_paypal_account_authorization, {id:id}),param);
+};

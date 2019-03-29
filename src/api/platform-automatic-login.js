@@ -36,3 +36,8 @@ export const url_account_list = "get|orders/account";
 export const api_account_list = function(datas){
     return http(url_account_list, datas);
 };
+//获取节点类型
+export const url_get_node = "get|channel-node/node-type";
+export const api_get_node = function(){
+    return http(url_get_node);
+}

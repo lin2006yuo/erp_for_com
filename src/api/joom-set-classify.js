@@ -13,7 +13,7 @@ export const api_get_joom_account = function (data) {
     return http(url_get_joom_account, data);
 };
 
-export const url_get_joom_store = 'get|joom-category/shops';
+export const url_get_joom_store = 'get|orders/shop';
 export const api_get_joom_store = function (data) {
     return http(url_get_joom_store, data);
 };

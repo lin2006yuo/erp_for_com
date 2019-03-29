@@ -50,4 +50,22 @@ export const api_shipping_detail = function (data) {
 export const url_cagro_log = "get|warehouse-goods/cargo-log";
 export const api_cagro_log = function (data) {
     return http(url_cagro_log, data);
+};
+
+//库存备货信息获取
+export const url_stocking_detail = "get|warehouse-goods/stocking-detail";
+export const api_stocking_detail = function (data) {
+    return http(url_stocking_detail, data);
+};
+
+//库存备货锁定信息
+export const url_stocking_lock_detail = "get|warehouse-goods/lock-detail";
+export const api_stocking_lock_detail = function (data) {
+    return http(url_stocking_lock_detail, data);
+};
+
+//获取库龄详情
+export const url_get_age_detail = "get|warehouse-goods/age-detail";
+export const api_get_age_detali = function (data) {
+    return http(url_get_age_detail, data)
 }

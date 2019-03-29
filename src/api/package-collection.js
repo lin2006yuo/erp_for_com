@@ -59,7 +59,7 @@ export const api_invalid_collection = function (id) {
     return http(Url2(url_invalid_collection, {id: id}));
 };
 
-//批量交接
+//批量出库
 export const url_batch_out_collection = "post|package-collection/batch-out";
 export const api_batch_out_collection = function (data) {
     return http(url_batch_out_collection, data)
@@ -78,4 +78,10 @@ export const api_export_package = function (data) {
 export const url_batch_check_package = "post|package-collection/batch-check";
 export const api_batch_check_package = function (data) {
     return http(url_batch_check_package, data);
-}
+};
+
+//批量加入队列出货
+export const url_batch_queue_collection = "post|package-collection/batch/out-queue";
+export const api_batch_queue_collection = function (data) {
+    return http(url_batch_queue_collection, data);
+};

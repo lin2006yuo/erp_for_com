@@ -3,6 +3,16 @@
  */
 import {http} from '../lib/http-plus';
 
+export  const url_getuser_message='get|user/login-user-position'
+export  const api_getuser_message=function (data) {
+    return http(url_getuser_message,data);
+}
+
+export const url_set='put|sku-map/batch/virtual'
+export  const api_set=function (data) {
+    return http(url_set,data)
+}
+
 //获取列表
 export const url_gsMap_data = "get|sku-map";
 export const api_gsMap_data = function(data){

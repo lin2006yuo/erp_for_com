@@ -124,4 +124,10 @@ export const api_unpack_name_list = function () {
 export const url_edit_parcel_exception = "put|purchase-parcels/batch/abnormal";
 export const api_edit_parcel_exception = function (data) {
     return http(url_edit_parcel_exception, data);
-}
+};
+
+//拆包异常批量标记已处理
+export const url_parcel_batch_end = "put|purchase-parcels/batch/end";
+export const api_parcel_batch_end = function (data) {
+    return http(url_parcel_batch_end, data);
+};

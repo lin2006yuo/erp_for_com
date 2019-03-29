@@ -42,7 +42,7 @@ export const api_amazon_account_health_single = function (amazon_account_id,data
 };
 
 //获取账号简称及站点列表
-export const url_account_list = "get|orders/account";
+export const url_account_list = "get|amazon-account-health/account";
 export const api_account_list = function(datas){
     return http(url_account_list, datas);
 };

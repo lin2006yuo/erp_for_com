@@ -43,6 +43,12 @@ export const api_look_allocation = function (id) {
     return http(Url2(url_look_allocation, {id: id}));
 };
 
+//装箱清单
+export const url_allocation_box_list = "get|allocation/:id/box-list";
+export const api_allocation_box_list = function (id) {
+    return http(Url2(url_allocation_box_list, {id}));
+};
+
 //修改调拨单运单
 export const url_put_waybill = "put|allocation/:id/waybill";
 export const api_put_waybill = function (id, data) {
@@ -59,6 +65,18 @@ export const api_put_audit = function (id, data) {
 export const url_put_allocation = "put|allocation/:id";
 export const api_put_allocation = function (id, data) {
     return http(Url2(url_put_allocation, {id: id}), data);
+};
+
+//作废调拨单
+export const url_allocation_cancel = "put|allocation/:id/cancel";
+export const api_allocation_cancel = function (id, data) {
+    return http(Url2(url_allocation_cancel, {id}), data);
+};
+
+//强制作废调拨单
+export const url_allocation_force_cancel = "put|allocation/:id/force-cancel";
+export const api_allocation_force_cancel = function (id, data) {
+    return http(Url2(url_allocation_force_cancel, {id}), data);
 };
 
 //生成入库单
@@ -108,3 +126,21 @@ export const url_allocation_log = "get|allocation/:id/logs";
 export const api_allocation_log = function (id) {
     return http(Url2(url_allocation_log, {id: id}));
 };
+
+// 从备货计划导入
+export const url_stock_list_by_code = "get|allocation/stocking-detail";
+export const api_stock_list_by_code = function (data) {
+    return http(url_stock_list_by_code, data);
+};
+
+//校验FNSKU
+export const url_verify_fn_sku = "post|allocation/verify-fnsku"
+export const api_verify_fn_sku = function (data) {
+    return http(url_verify_fn_sku,data);
+};
+
+//打印商品条码
+export const url_allocation_barcode_print = "get|warehouse-goods/barcode";
+export const api_allocation_barcode_print = function (data) {
+    return http(url_allocation_barcode_print, data);
+}

@@ -6,11 +6,15 @@
             v-loading="loading"
             element-loading-text="玩命加载中..."
             class="scroll-bar"
+            ref="tableModule"
+            @selection-change="handle_selection_change"
+            @row-click="handle_row_click"
             highlightCurrentRow>
             <div slot="empty" class="no-data-reminder">
                 <i></i>
                 {{emptyText}}
             </div>
+            <el-table-column v-if="selection" type="selection"></el-table-column>
             <el-table-column
                 v-for="(item, index) in tableColumns"
                 :key="`${item.value}-${index}-${item.label}`"
@@ -44,7 +48,13 @@
             },
             handle_current_change(val) {
                 this.$emit('current-change',val)
-            }
+            },
+            handle_selection_change(val) {
+                this.$emit('selection-change', val)
+            },
+            handle_row_click(row) {
+                 this.$refs.tableModule.toggleRowSelection(row)
+            },
         },
         props: {
             searchData: {
@@ -64,6 +74,10 @@
             },
             total: {
                 default: 0
+            },
+            selection: {
+                type: Boolean,
+                default: false
             }
         }
     }

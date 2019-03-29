@@ -5,7 +5,7 @@ import {http} from '../lib/http-plus';
 
 export const url_logistics_list = "get|carrier";
 export const logistics_list = function (data) {
-    return http(Url2(url_logistics_list), data);
+    return http(url_logistics_list, data);
 };
 export const url_logistics_check = "get|carrier/:id";
 export const logistics_check = function (id, data) {
@@ -13,21 +13,21 @@ export const logistics_check = function (id, data) {
 };
 export const url_logistics_status = "post|carrier/status";
 export const logistics_status = function (data) {
-    return http(Url2(url_logistics_status), data);
+    return http(url_logistics_status, data);
 };
 //同步邮寄方式
 export const url_logistics_shipping = "post|carrier/down/shipping";
 export const logistics_shipping = function (data) {
-    return http(Url2(url_logistics_shipping), data);
+    return http(url_logistics_shipping, data);
 };
 //添加邮寄方式
 export const url_add_logistics = "post|shipping-method";
 export const api_add_logistics = function (data) {
-    return http(Url2(url_add_logistics), data);
+    return http(url_add_logistics, data);
 };
 export const url_logistics_add = "post|carrier";
 export const logistics_add = function (data) {
-    return http(Url2(url_logistics_add), data);
+    return http(url_logistics_add, data);
 };
 export const url_logistics_update = "put|carrier/:id";
 export const logistics_update = function (id, data) {
@@ -41,7 +41,7 @@ export const logistics_enabled = function (id, data) {
 /*----类型*/
 export const url_logistics_type = "get|carrier/index-code";
 export const logistics_type = function () {
-    return http(Url2(url_logistics_type));
+    return http(url_logistics_type);
 };
 //获取物流方式基本信息
 export const url_logistics_base = "get|shipping-method/:id";
@@ -62,6 +62,11 @@ export const api_effective = function (id) {
 export const url_logistics_channel = "get|shipping-method/channel/:id";
 export const api_logistics_channel = function (id) {
     return http(Url2(url_logistics_channel, {id}));
+};
+//获取运费折扣信息
+export const url_logistics_fee = "get|shipping-method/fee/:id";
+export const api_logistics_fee = function(id){
+    return http(Url2(url_logistics_fee,{id}))
 };
 //获取速卖通线上发货地址
 export const url_ali_address = "get|ali-address";
@@ -96,43 +101,66 @@ export const url_logistics_channel_keep = "put|shipping-method/channel/:id";
 export const api_logistics_channel_keep = function (id, data) {
     return http(Url2(url_logistics_channel_keep, {id}), data);
 };
+//修改运费折扣信息
+export const url_logistics_update_keep = "put|shipping-method/update-fee/:id";
+export const api_logistics_update_keep = function(id,data){
+    return http(Url2(url_logistics_update_keep,{id}),data)
+};
 //获取分区编码
 export const url_get_zone = "get|zone";
 export const api_get_zone = function () {
-    return http(Url2(url_get_zone));
+    return http(url_get_zone);
 };
 //获取分区编码
 export const url_get_country = "get|country";
 export const api_get_country = function (data) {
-    return http(Url2(url_get_country), data);
+    return http(url_get_country, data);
 };
 //获取分区编码2 ‘添加国家’ 页面使用
 export const url_get_country_list = "get|country/lists";
 export const api_get_country_list = function (data) {
-    return http(Url2(url_get_country_list), data);
+    return http(url_get_country_list, data);
 };
 
 //获取币种
 export const url_get_currency = "get|packing/getCurrency";
 export const api_get_currency = function () {
-    return http(Url2(url_get_currency));
+    return http(url_get_currency);
 };
 
-//excel导入
+//excel分组导入
 export const url_shipping_detail = "post|shipping-method/import/detail";
 export const api_shipping_detail = function (data) {
-    return http(Url2(url_shipping_detail), data);
+    return http(url_shipping_detail, data);
 };
+
+// 导入分段收费
+export const url_shipping_fee_import = "post|shipping-method/import/stage-fee";
+export const api_shipping_fee_import = function (data) {
+    return http(url_shipping_fee_import, data)
+};
+
+//导入可达天数
+export const url_shipping_day_import = "post|shipping-method/import-day";
+export const api_shipping_day_import = function(data){
+    return http(url_shipping_day_import,data)
+}
+
+// 修改分区状态
+export const url_shipping_detail_status = "put|shipping-method/detail/status";
+export const api_shipping_detail_status = function (data) {
+    return http(url_shipping_detail_status, data);
+}
 
 //获取url地址
 export const url_shipping_token_url = "get|carrier/wishpost-url";
 export const api_shipping_token_url = function (data) {
-    return http(Url2(url_shipping_token_url), data);
+    return http(url_shipping_token_url, data);
 };
 //获取旺集地址 get|carrier/wangjipost-url
 export const url_shipping_wangjipost_url = "get|carrier/wangjipost-url";
 export const api_shipping_wangjipost_url = function (data) {
-    return http(Url2(url_shipping_wangjipost_url), data);
+    return http(url_shipping_wangjipost_url, data);
 };
 //获取物流商面单序列号 carrier/sequence-number
 export const url_get_sequence_number = "get|carrier/sequence-number";
@@ -186,4 +214,22 @@ export const api_shipping_list = function () {
 export const url_special_list = "get|shipping-method/label-norm-list";
 export const api_special_list = function () {
     return http(url_special_list);
+};
+
+//获取站点信息
+export const url_account_list = "get|orders/account";
+export const api_account_list = function(data){
+    return http(url_account_list,data)
+}
+
+//批量设置地址
+export const url_address_batch = "put|shipping-method/ali-address/batch";
+export const api_address_batch = function(params){
+    return http(url_address_batch ,params)
+}
+
+// 价格对比
+export const url_compare_price = "post|shipping-method/compare-price";
+export const api_compare_price = function (data) {
+    return http(url_compare_price, data);
 };

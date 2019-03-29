@@ -49,3 +49,27 @@ export const url_force_task = "get|queue/force-kill";
 export const api_force_task = function(key, task){
     return http(url_force_task, {key,task});
 };
+
+//获取队列类型
+export const url_get_queue_type = "get|queue/runtypes";
+export const api_get_queue_type = ()=>{
+    return http(url_get_queue_type);
+};
+
+//更改类型
+export const url_change_queue_type = "put|queue/change-runtype";
+export const api_change_queue_type = data=>{
+    return http(url_change_queue_type,data);
+};
+
+//删除当前队列的某元素
+export const url_del_remove_element = "delete|queue/remove-element";
+export const api_del_remove_element = data=>{
+    return http(url_del_remove_element,data);
+};
+
+//详情列表消费点击
+export const url_get_queue_consuming = "get|queue/consuming";
+export const api_get_queue_consuming = data=>{
+    return http(url_get_queue_consuming,data);
+};

@@ -79,32 +79,35 @@ export const url_publish_skuinfo_edit = "get|goods/skuinfo/:id/edit";
 export const publish_skuinfo_edit  = function(id) {
     return http(Url2(url_publish_skuinfo_edit, {id:id}));
 };
-
-
 //编辑商品的单位
 export const url_publish_edit_unit = "get|unit/dictionary";
 export const publish_edit_unit  = function() {
-    return http(Url2(url_publish_edit_unit));
+    return http(url_publish_edit_unit);
 };
 export const url_publish_edit_packing = "get|packing/dictionary";
 export const publish_edit_packing  = function() {
-    return http(Url2(url_publish_edit_packing));
+    return http(url_publish_edit_packing);
 };
 export const url_publish_edit_tag= "get|tag/dictionary";
 export const publish_edit_tag  = function() {
-    return http(Url2(url_publish_edit_tag));
+    return http(url_publish_edit_tag);
 };
 export const url_publish_edit_brand= "get|brand/dictionary";
 export const publish_edit_brand  = function() {
-    return http(Url2(url_publish_edit_brand));
+    return http(url_publish_edit_brand);
 };
 export const url_publish_edit_tort= "get|tort/dictionary";
 export const publish_edit_tort  = function() {
-    return http(Url2(url_publish_edit_tort));
+    return http(url_publish_edit_tort);
 };
 export const url_publish_edit_lang= "get|lang/dictionary";
 export const publish_edit_lang= function() {
-    return http(Url2(url_publish_edit_lang));
+    return http(url_publish_edit_lang);
+};
+/*获取产品物流属性*/
+export const url_get_transport_property= "get|goods/transport-property";
+export const api_get_transport_property = function() {
+    return http(url_get_transport_property);
 };
 /*更新产品描述*/
 export const url_update_desc = "put|goodsdev/description/:id";
@@ -253,7 +256,6 @@ export const api_goods_export_template = function (data) {
     return http(url_goods_export_template,data);
 };
 // 获取导出模板详情
-
 export const url_goods_export_template_info = "get|export-template/:id";
 export const api_goods_export_template_info = function (id,data) {
     return http(Url2(url_goods_export_template_info,{id:id}),data);
@@ -328,6 +330,46 @@ export const url_distribution_push = "post|goods/distribution-push";
 export const api_distribution_push = function (data) {
     return http(url_distribution_push,data);
 };
-
-
-
+//获取侵权记录
+export const url_get_goods_description='get|goods/:id/goods-tort-description';
+export const api_get_goods_description=function(id,data){
+    return http(Url2(url_get_goods_description,{id:id}),data);
+}
+//获取平台列表
+export const url_get_channel_categories="get|channel-categories";
+export const api_get_channel_categories=function(data){
+    return http(url_get_channel_categories,data);
+}
+//获取站点列表
+export const url_get_site_list="get|channel-categories/ebay";
+export const api_get_site_list=function(data){
+    return http(url_get_site_list,data);
+}
+//新增侵权记录
+export const url_put_Infringement="put|goods/:id/goods-tort-description";
+export const api_put_Infringement=function(id,data){
+    return http(Url2(url_put_Infringement,{id:id}),data);
+}
+//删除侵权记录
+export const url_delete_Infringement="delete|goods/:id/goods-tort-description";
+export const api_delete_Infringement=function(id,data){
+    return http(Url2(url_delete_Infringement,{id:id}),data);
+}
+//编辑侵权记录
+export const url_edit_Infringement='get|goods/goods-tort-description/:id';
+export const api_edit_Infringement=function(id){
+    return http(Url2(url_edit_Infringement,{id:id}));
+}
+//批量设置停售SKU -》获取四大平台
+export const url_get_channelList ='get|goods-sku/stopped-channel';
+export const api_get_channelList = function(){
+    return http(url_get_channelList);
+}
+//批量设置停售SKU
+export const url_batch_stopped_sku ='post|goods-sku/batch/stopped';
+export const api_batch_stopped_sku = function(data){
+    return http(url_batch_stopped_sku,data,{
+        contentType:'application/x-www-form-urlencoded',
+        timeout:180000
+    });
+}

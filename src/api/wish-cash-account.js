@@ -8,7 +8,7 @@ export const url_wish_account_list = "get|wish-settlement/index_settle";
 export const api_wish_account_list = function (data) {
     return http(url_wish_account_list,data)
 };
-export const url_wish_account_export = "post|wish-settlement/export";
+export const url_wish_account_export = "post|wish-settlement/export-sum";
 export const api_wish_account_export = function (data) {
     return http(url_wish_account_export,data)
 };
@@ -16,4 +16,10 @@ export const api_wish_account_export = function (data) {
 export const url_get_wish_users = "get|publish/wish/wishUsers";
 export const api_get_wish_users = function(data){
     return http(url_get_wish_users, data);
+};
+
+///获取账号简称
+export const url_get_account_short = "get|publish/wish/getSellers";
+export const api_get_account_short = ()=>{
+    return http(url_get_account_short);
 };

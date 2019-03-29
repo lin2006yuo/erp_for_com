@@ -54,6 +54,17 @@ export const api_purchase_plan_detail = function(data) {
     return http(Url2(url_purchase_plan_detail),data);
 };
 
+//批量修改采购员
+export const  url_purchase_plan_purchaser = "put|purchase-plan/purchaser";
+export const api_purchase_plan_purchaser = function (data) {
+    return http(Url2(url_purchase_plan_purchaser) ,data);
+};
+//批量修改结算方式
+export const  url_purchase_plan_balance_type = "put|purchase-plan/balance-type";
+export const api_purchase_plan_balance_type = function (data) {
+    return http(Url2(url_purchase_plan_balance_type) ,data);
+};
+
 export const url_look_log = "get|purchase-plan/getLogDetail";
 export const add_look_log = function(data) {
     return http(Url2(url_look_log),data);
@@ -67,7 +78,10 @@ export const api_plan_edit = function (id) {
 
 export const url_updata_plan = "put|purchase-plan/:id";
 export const api_updata_plan = function(id,data) {
-    return http(Url2(url_updata_plan , {id:id}),data);
+    return http(Url2(url_updata_plan , {id:id}),data, {
+        contentType:'application/x-www-form-urlencoded',
+        timeout:INFINITE
+    });
 };
 //状态
 export const url_post_purchase_plan_cancel = "post|purchase-plan/cancel";

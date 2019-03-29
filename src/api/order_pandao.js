@@ -13,11 +13,25 @@ export const api_order_pandao_check = function(id){
   return http(Url2(url_api_order_pandao_check,{id:id}));
 };
 
+//同步ebay订单状态
+export const url_post_pandao_orders_sysc = "post|pandao-orders/sync";
+export const api_post_pandao_orders_sysc = function(data){
+    return http(url_post_pandao_orders_sysc,data)
+};
+//推送至订单系统
+export const url_push_pandao_order = "post|pandao-orders/push-pandao-order";
+export const api_push_pandao_order = function(data){
+    return http(url_push_pandao_order,data)
+};
+//抓取亚马逊订单
+export const url_catch_pandao_order = "post|pandao-orders/sysc-pandao-order";
+export const api_catch_pandao_order = function(data){
+    return http(url_catch_pandao_order,data)
+};
 export const url_api_order_pandao_status = "get|pandao-orders/status-count";
 export const api_order_pandao_status = function(data){
   return http(url_api_order_pandao_status,data);
 };
-
 //---渠道账号
 export const url_api_order_pandao_getAccount = "get|orders/account";
 export const api_order_pandao_getAccount = function(data){
@@ -27,4 +41,9 @@ export const api_order_pandao_getAccount = function(data){
 export const url_pandao_orders_export = "post|pandao-orders/export";
 export const api_pandao_orders_export = function(data) {
     return http(url_pandao_orders_export, data);
+};
+
+export const url_get_pandao_orders_export_fields = "get|pandao-orders/export-fields";
+export const api_get_pandao_orders_export_fields = data=>{
+    return http(url_get_pandao_orders_export_fields,data)
 };

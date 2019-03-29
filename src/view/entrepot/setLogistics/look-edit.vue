@@ -11,17 +11,18 @@
             </el-tab-pane>
             <el-tab-pane name="express-info" class="scroll" v-resize="{height: 150}" label="面单信息" key="express-info">
                 <express-info
-                        v-if="expressShow"
-                        :express-data="expressData"
-                        :shipping-method="shippingMethod"
-                        :shortname-method="shortnameMethod"
-                        :special-picking-list="specialPickingList"
-                        :editable="editable"
-                        :carrier_id="carrier_id"
-                        ref="express"></express-info>
+                    v-if="expressShow"
+                    :express-data="expressData"
+                    :shipping-method="shippingMethod"
+                    :shortname-method="shortnameMethod"
+                    :special-picking-list="specialPickingList"
+                    :editable="editable"
+                    :carrier_id="carrier_id"
+                    ref="express"></express-info>
             </el-tab-pane>
             <el-tab-pane name="effective" class="scroll" v-resize="{height: 150}" label="实效及运费" key="effective">
                 <effective v-if="effectiveShow" :effective-data="effData"
+                           ref="effective"
                            @effective-change="change_eff_data"
                            :editable="editable" :shipping-id="shipping"
                            @files-success="files_success"></effective>
@@ -31,6 +32,11 @@
                 <deliver-channel v-if="channelShow" :channel-data="channelData"
                                  :editable="editable"
                                  ref="channel"></deliver-channel>
+            </el-tab-pane>
+            <!--运费折扣-->
+            <el-tab-pane name="discount" class="scroll" v-resize="{height: 150}" label="运费折扣" key="discount">
+                <discount v-if="discountShow" :discount-data="discountData" @change_discount="discount_status"
+                          :editable="editable"></discount>
             </el-tab-pane>
         </el-tabs>
         <div slot="footer" class="dialog-footer">
@@ -59,7 +65,13 @@
     }
 </style>
 <script>
-    import {api_base_keep, api_effective_keep, api_express_keep, api_logistics_channel_keep} from "@/api/setLogistics"
+    import {
+        api_base_keep,
+        api_effective_keep,
+        api_express_keep,
+        api_logistics_channel_keep,
+        api_logistics_update_keep
+    } from "@/api/setLogistics"
 
     export default {
         data() {
@@ -69,14 +81,12 @@
                 expressShow: false,
                 effectiveShow: false,
                 channelShow: false,
+                discountShow: false,
+                channelStatue: false,
+                discountStatus:false,
             }
         },
         methods: {
-            channel_init() {
-                this.$nextTick(() => {
-                    this.$refs.channel.init();
-                });
-            },
             tab_click(val) {
                 switch (val.index) {
                     case '1':
@@ -84,10 +94,9 @@
                     case '2':
                         this.effectiveShow = true;
                     case '3':
-                        if (!this.channelShow) {
-                            this.channel_init();
-                        }
                         this.channelShow = true;
+                    case '4':
+                        this.discountShow = true;
                 }
                 this.action = val.name
             },
@@ -100,13 +109,20 @@
                         let arr = this.$refs.base.submit();
                         setTimeout(() => {
                             let flag = true;
-                            arr.forEach(row => {
+                            arr.forEach((row, index) => {
                                 if (row === false) {
                                     flag = false;
-                                    this.$message({
-                                        type: "error",
-                                        message: `请完善信息再保存!`
-                                    });
+                                    if(index === 0) {
+                                        this.$message({
+                                            type: "error",
+                                            message: `请正确填写信息!`
+                                        });
+                                    } else {
+                                        this.$message({
+                                            type: "error",
+                                            message: `请完善信息再保存!`
+                                        });
+                                    }
                                 }
                             });
                             flag && this.keep_base();
@@ -120,6 +136,9 @@
                         break;
                     case "deliver-channel":
                         this.keep_channel();
+                        break;
+                    case "discount":
+                        this.keep_discount();
                         break;
                 }
             },
@@ -265,14 +284,45 @@
                 })
             },
             keep_channel() {
+                this.channelStatue = false;
                 let data = clone(this.channelData);
-                data.channels.push(data.common);
-                this.$http(api_logistics_channel_keep, data.id, {data: data.channels}).then(res => {
+                this.affirm_channel(data)
+                if (this.channelStatue) {
+                    this.$http(api_logistics_channel_keep, data.id, {data: data.channels}).then(res => {
+                        this.$message({type: 'success', message: res.message || res});
+                        this.editVisible = false;
+                    }).catch(code => {
+                        this.$message({type: 'error', message: code.message || code});
+                    });
+                }
+                console.log("可发货平台data",data)
+            },
+            //修改运费和折扣
+            keep_discount() {
+                let data = clone(this.discountData);
+                //  折扣验证
+                let discount = Number(data.shipping_fee_discount);
+                if(discount > 2){
+                    this.$message({type:"warning",message:"折扣不能大于2"});
+                    return
+                }else if( discount <= 0){
+                    this.$message({type:"warning",message:"折扣输入有误"});
+                    return
+                }else {
+                    data.shipping_fee_discount = discount.toFixed(2);
+                }
+
+                this.$http(api_logistics_update_keep, data.id, data).then(res => {
                     this.$message({type: 'success', message: res.message || res});
                     this.editVisible = false;
                 }).catch(code => {
                     this.$message({type: 'error', message: code.message || code});
-                });
+                })
+
+            },
+            discount_status(val){
+                this.discountStatus = val
+                console.log("val",val)
             },
             copy_(data) {
                 data.forEach(row => {
@@ -312,21 +362,60 @@
                     this.expressShow = false;
                     this.effectiveShow = false;
                     this.channelShow = false;
+                    if(this.$refs.effective) this.$refs.effective.compare_code = '';
                     this.$emit('close_edit');
                 }
             },
             change_eff_data(val) {
                 this.effData = val;
-            }
-        },
+            },
+            //价格区间校验
+            affirm_validate(content) {
+                if(content.currency === '') {
+                    this.$message({type: 'error', message: '请选择币种'});
+                    return true;
+                }
+                if(content.min && content.max) {
+                    if(isNaN(Number(content.min)) || isNaN(Number(content.max)) || Number(content.min) > Number(content.max)) {
+                        this.$message({type: "error", message: "价格区间设置有误"});
+                        return true;
+                    }
+                }
+                return false;
+            },
+            //    可发货平台确认验证
+            affirm_channel(data) {
+                this.channelStatue = !data.channels.filter(item => {
+                    return item.enabled;
+                }).some(channel => {
+                    if (channel.use_site === 0) {
+                        return this.affirm_validate(channel.content[0]);
+                    } else {
+                        if (channel.content.length > 0) {
+                            return channel.content.some(content => {
+                                return this.affirm_validate(content);
+                            })
+                        } else {
+                            this.$message({type: 'error', message: '请选择站点'})
+                            return true
+                        }
+                    }
+                    return false
+                });
+            },
+
+        }
+        ,
         watch: {
             value(val) {
                 this.editVisible = val
-            },
+            }
+            ,
             editVisible(val) {
                 this.$emit("input", val)
             }
-        },
+        }
+        ,
 
         computed: {
             titleName() {
@@ -335,54 +424,84 @@
                 } else {
                     return `查看物流商：${this.title}邮件方式`
                 }
-            },
+            }
+            ,
             shipping() {
                 let shipping = [];
                 if (this.baseData) {
                     shipping = [this.baseData.carrier_id, this.baseData.id];
                 }
                 return shipping;
-            },
-        },
+            }
+            ,
+        }
+        ,
         props: {
             shippingMethod: {
                 type: Array
-            },
+            }
+            ,
             shortnameMethod: {
                 type: Array
-            },
-            specialPickingList: {},
-            value: {},
+            }
+            ,
+            specialPickingList: {}
+            ,
+            value: {}
+            ,
             effData: {
                 required: true,
-                type: Object
-            },
+                type:
+                Object
+            }
+            ,
             baseData: {
                 required: true,
-                type: Object
-            },
+                type:
+                Object
+            }
+            ,
             expressData: {
                 required: true,
-                type: Object
-            },
+                type:
+                Object
+            }
+            ,
             editable: {
                 required: true,
-                type: Boolean
-            },
+                type:
+                Boolean
+            }
+            ,
             channelData: {
                 required: true,
-                type: Object
-            },
+                type:
+                Object
+            }
+            ,
+            discountData: {
+                required: true,
+                type:
+                Object
+            }
+            ,
             title: '',
-            carrier_id: '',
-        },
+            carrier_id:
+                '',
+        }
+        ,
         components: {
             baseInfo: require('./base-info.vue').default,
 //            effective: require('./effective.vue').default,
-            effective: require('./effective-copy.vue').default,
-            pageDialog: require('@/components/page-dialog.vue').default,
-            expressInfo: require('./express-info.vue').default,
-            deliverChannel: require('./deliver-channel.vue').default,
+            effective:
+            require('./effective-copy.vue').default,
+            pageDialog:
+            require('@/components/page-dialog.vue').default,
+            expressInfo:
+            require('./express-info.vue').default,
+            deliverChannel:
+            require('./deliver-channel.vue').default,
+            discount: require('./discount.vue').default,
         }
     }
 </script>

@@ -451,3 +451,9 @@ export const url_publish_express_batch_add_fail_publish = "post|publish/express/
 export const api_publish_express_batch_add_fail_publish = function(data){
     return http(url_publish_express_batch_add_fail_publish,data);
 };
+
+/*未刊登侵权信息接口*/
+export const url_publish_express_goods_tort_info = "post|publish/express/goods-tort-info";
+export const api_publish_express_goods_tort_info = function(data){
+    return http(url_publish_express_goods_tort_info,data);
+};
