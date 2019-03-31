@@ -26,11 +26,11 @@ export default function(Vue){
                 let hei=height- top-less;
                 query.style.height =hei+"px";
                 let child=query.querySelector(".el-table__body-wrapper")
-                // if(child){
-                //     let table_head=query.querySelector(".el-table__header-wrapper")
-                //       let table_head_height=(parseInt(window.getComputedStyle(table_head).height)||29)+2;
-                //     child.style.height =hei-table_head_height+"px";
-                // }
+                if(child){
+                    let table_head=query.querySelector(".el-table__header-wrapper")
+                      let table_head_height=(parseInt(window.getComputedStyle(table_head).height)||29)+2;
+                    child.style.height =hei-table_head_height+"px";
+                }
         },
         componentUpdated(el,bind,vnode){
             if (el.timer){

@@ -1,6 +1,6 @@
 <template>
-    <div class="page-dialog" :style="outer" v-show="show" @click="out_click">
-        <transition name="page-dialog">
+    <div class="page-dialog" :style="outer" v-if="show" @click="out_click">
+        <!-- <transition name="page-dialog"> -->
             <div class="inner  showIn " :style="[inner,innerSize,innerPosition]" @click.stop="" ref="inner">
                 <div v-if="!_nottitle" class="dialog-header">
                     <span :class="`title${showRequired?` is-required`:``}`">{{title}}</span>
@@ -17,7 +17,7 @@
                     <slot name="footer"></slot>
                 </div>
             </div>
-        </transition>
+        <!-- </transition> -->
     </div>
 </template>
 <style lang="stylus">
@@ -50,10 +50,10 @@
             padding-bottom:45px;
         }
         .showIn{
-            animation: showIn .25s ease-out;
+            // animation: showIn .25s ease-out;
         }
         .showOut{
-            animation: showOut .25s ease-in;
+            // animation: showOut .25s ease-in;
         }
         .dialog-header {
             box-sizing: border-box;

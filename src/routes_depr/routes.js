@@ -73,6 +73,11 @@ export default [
                 type: 1, title: '物流设置'
             },
             {
+                path: '/carrier2',
+                component: () => import('../view/entrepot/setLogistics/index2.vue'),
+                type: 1, title: '物流设置2'
+            },
+            {
                 path: '/report/maintain-information',
                 component: () => import('../view/entrepot/maintain-information/index.vue'),
                 type:　1, title: '物流商包裹信息维护'

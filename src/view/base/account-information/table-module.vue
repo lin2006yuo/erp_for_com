@@ -2,7 +2,7 @@
     <div>
         <el-table :data="tableData.list"
                   class="scroll-bar"
-
+                  v-resize="{height:41}"
                   highlight-current-row
                   @select="selectCheck($event)"
                   @select-all="selectCheck"

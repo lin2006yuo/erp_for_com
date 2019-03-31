@@ -1,5 +1,5 @@
 <template>
-    <page-dialog title="添加城市" v-model="value" @close="close" width="300px">
+    <page-dialog title="添加城市" :value.sync="value" @close="close" width="300px">
         <el-table
             :data="city"
             ref="cityTabel"
@@ -21,11 +21,13 @@ export default {
     data() {
         return {
             city: [
-                {en: 'Amarica', cn: '美国'},
-                {en: 'China', cn: '中国'},
-                {en: 'Janpen', cn: '日本'},
+                {id: 1, cn: '新疆'},
+                {id: 2, cn: '广东'},
+                {id: 3, cn: '浙江'},
+                {id: 4, cn: '福建'},
             ],
-            selectOptions: []
+            selectOptions: [],
+            visible: this.value
         }
     },
     methods: {
@@ -36,6 +38,7 @@ export default {
             this.$emit('input', false)
         },
         handle_selection_change(val) {
+            console.log('change')
             this.selectOptions = val
         },
         handle_row_click(row) {
@@ -46,7 +49,32 @@ export default {
         pageDialog: require('@/components/page-dialog.vue').default,
     },
     props: {
-        value: ''
+        value: '',
+        select: {
+            type: Array,
+            default: () => []
+        },
+    },
+    watch: {
+        value(show) {
+            if(show) {
+                // setTimeout(() => {
+                //     this.select.forEach(row => {
+                //         console.log(row)
+                //         this.$refs.cityTabel.toggleRowSelection(row, true)
+                //     })
+                // }, 200);
+                this.$nextTick(() => {
+                    this.select.forEach(row => {
+                        for(let val of this.city) {
+                            if(val.id === row.id) {
+                                this.$refs.cityTabel.toggleRowSelection(val, true)
+                            }
+                        }
+                    })
+                })
+            }
+        }
     }
 }
 </script>

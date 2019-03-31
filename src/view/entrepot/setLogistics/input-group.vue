@@ -11,7 +11,6 @@
     </div>
 </template>
 <script>
-import _ from 'lodash'
 export default {
     data() {
         return {
@@ -41,26 +40,27 @@ export default {
             if(!input.value) {
                 this.inputDomain.splice(index, 1)
             }
-            const groupValue = this.inputDomain.reduce((total, cur) => {
-                const values = cur.value.split('-')
-                // debugger
-                console.log({total, cur})
-                //如果没有-分隔符，直接返回
-                if(values.length === 1) return [...total, ...values]
-                //如果多于两个-分隔符，不合法
-                if(values.length > 2) {
-                    this.$message({ type: 'warning', message: '输入不合法' })
-                    return [...total]
-                } else {
-                //包含分隔符-
-                    const span = _.range(Number(values[0]), Number(values[1]))
-                    return [
-                        ...total,
-                        ...span,
-                    ]
-                }
-            }, [])
-            this.$emit('input', groupValue)
+            const groupValue = this.inputDomain.map(i => i.value)
+            // const groupValue = this.inputDomain.reduce((total, cur) => {
+            //     const values = cur.value.split('-')
+            //     // debugger
+            //     console.log({total, cur})
+            //     //如果没有-分隔符，直接返回
+            //     if(values.length === 1) return [...total, ...values]
+            //     //如果多于两个-分隔符，不合法
+            //     if(values.length > 2) {
+            //         this.$message({ type: 'warning', message: '输入不合法' })
+            //         return [...total]
+            //     } else {
+            //     //包含分隔符-
+            //         const span = _.range(Number(values[0]), Number(values[1]))
+            //         return [
+            //             ...total,
+            //             ...span,
+            //         ]
+            //     }
+            // }, [])
+            this.$emit('group-value-blur', groupValue)
         }
     },
     props: {
@@ -72,10 +72,13 @@ export default {
         },
         value: {
             default: () => []
+        },
+        data: {
+            default: () => []
         }
     },
     watch: {
-        value: {
+        data: {
             immediate: true, 
             handler (inputData) {
                 const inputDomain = []
