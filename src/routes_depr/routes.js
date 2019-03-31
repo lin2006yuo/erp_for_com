@@ -83,6 +83,11 @@ export default [
                 type:　1, title: '物流商包裹信息维护'
             },
             {
+                path: '/report/price-comparsion',
+                component: () => import('../view/entrepot/price-comparsion/index.vue'),
+                type:　1, title: '报价对比表格'
+            },
+            {
                 path: '/report/exceed',
                 component: () => import('../view/entrepot/warehouse-data/exceed.vue'),
                 type:　1, title: '超库零报表'

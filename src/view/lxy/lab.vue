@@ -16,11 +16,13 @@
         <el-button @click="export_excel">导出汇总</el-button>
         <export-dialog v-model="visible"></export-dialog>
         <p class="elip" title='aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa'> aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</p>
+        <listener />
     </div>
 </template>
 
 <script>
     import {api_get_confirm,api_confirm_export,api_get_export_title,url_confirm_export,api_confirm_export_all,api_get_export_title_all} from '@/api/delivery-list';
+    import listener from './listener'
     import {downloadFile} from '@/lib/http';
     export default {
         name: "lab",
@@ -83,6 +85,7 @@
         },
         components: {
             exportDialog:require('./export-dialog.vue').default,
+            listener
         }
     }
 </script>
