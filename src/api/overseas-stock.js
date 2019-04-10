@@ -109,4 +109,14 @@ export const api_third_channel_detail = function (data) {
 export const url_batch_allocate = "post|warehouse-goods/third-multi-allocate";
 export const api_batch_allocate = function (data) {
     return http(url_batch_allocate, data);
-}
+};
+//设置备货周期
+export const url_set_stock_cycle = "put|warehouse/stocking-cycle";
+export const api_set_stock_cycle = function (data) {
+    return http(url_set_stock_cycle, data);
+};
+// 获取备货周期
+export const url_get_stock_cycle = "get|warehouse/stocking-cycle";
+export const api_get_stock_cycle = function (data) {
+    return http(url_get_stock_cycle, data);
+};

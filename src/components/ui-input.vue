@@ -25,10 +25,10 @@
         },
         watch:{
             value(val){
-                this.value_ = val.toString().trim();
+                this.value_ = val && val.toString().trim();
             },
             value_(val){
-                this.$emit('input',val.trim());
+                if(val) this.$emit('input',val.trim());
             }
         },
         props:{

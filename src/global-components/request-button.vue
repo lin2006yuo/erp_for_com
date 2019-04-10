@@ -33,6 +33,7 @@
                             switch(res.constructor.name){
                                 case 'Promise':
                                     res.then(res =>{
+                                        console.log('request-button' + res)
                                         this.setReqKey(false);
                                     }).catch(fail =>{
                                         this.setReqKey(false);

@@ -3,6 +3,7 @@
         <el-table
             :data="tableData"
             v-resize="{height: 41}"
+            v-loading="loading"
             element-loading-text="玩命加载中"
             border
             highlightCurrentRow
@@ -11,19 +12,19 @@
                 <i></i>暂无数据
             </div>
             <el-table-column
-                prop="channel"
+                prop="name"
                 label="平台"
             ></el-table-column>
             <el-table-column
-                prop="website"
+                prop="site"
                 label="站点"
             ></el-table-column>
             <el-table-column
-                prop="account"
+                prop="account_name"
                 label="账号简称"
             ></el-table-column>
             <el-table-column
-                prop="seller"
+                prop="user_name"
                 label="销售员"
             ></el-table-column>
             <el-table-column
@@ -31,19 +32,19 @@
                 label="部门"
             ></el-table-column>
             <el-table-column
-                prop="listing_goal"
+                prop="list_num"
                 label="listing目标数量"
             ></el-table-column>
             <el-table-column
-                prop="active_date"
+                prop="create_time"
                 label="激活日期"
             ></el-table-column>
             <el-table-column
-                prop="exp_num"
+                prop="estimate_num"
                 label="预估数量"
             ></el-table-column>
             <el-table-column
-                prop="act_num"
+                prop="real_quantity"
                 label="实际数量"
             ></el-table-column>
         </el-table>
@@ -84,7 +85,8 @@
                 require: true,
                 default: () => {}
             },
-            total:{}
+            total:{},
+            loading: {}
         }
     }
 </script>

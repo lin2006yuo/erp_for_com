@@ -182,6 +182,11 @@ export const url_up_img_requirement = 'put|goodsdev/:id/img-requirement';
 export const api_up_img_requirement = function (id,data) {
     return http(Url2(url_up_img_requirement,{id:id}),data);
 };
+//获取spu侵权列表
+export const url_get_spu_tort_list = 'get|goods/goods-tort-description';
+export const api_get_spu_tort_list = function (data){
+    return http(url_get_spu_tort_list,data);
+}
 
 
 

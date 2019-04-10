@@ -17,6 +17,16 @@ export  const api_surplus = function (data) {
   return http(Url2(url_surplus),data)
 }
 
+//批量生成虚拟跟踪号
+export const url_batch_virtual_tracking_virtual_number = "post|virtual-tracking/batch/virtual-number";
+export const api_batch_virtual_tracking_virtual_number = function (data) {
+    return http(url_batch_virtual_tracking_virtual_number,data);
+};
+
+export const url_synchronizes_renew ='put|synchronizes/renew';
+export  const api_synchronizes_renew = function (data) {
+  return http(url_synchronizes_renew,data)
+}
 
 export const url_status ='get|synchronizes/:type/status';
 export  const api_order_status = function (data) {

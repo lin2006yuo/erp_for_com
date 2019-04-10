@@ -79,3 +79,32 @@ export const api_account_users_batch = function (data) {
     return http(url_account_users_batch, data);
 };
 
+//列表查看日志
+export const url_get_operation_log = "get|account-basics/:account_id/log";
+export const api_get_operation_log = (id)=> {
+    return http(Url2(url_get_operation_log,{account_id:id}));
+};
+
+//日志列表部门
+export const url_get_operation_log_department = "get|user/:id/get-department";
+export const api_get_operation_log_department = (id)=> {
+    return http(Url2(url_get_operation_log_department,{id:id}));
+};
+
+//获取公司名称
+export const api_get_company_name = data=>{
+    return http("get|account-company/company",data);
+};
+
+//获取公司资料
+export const url_get_company_data = "get|account-company/:id";
+export const api_get_company_data = id=> {
+    return http(Url2(url_get_company_data,{id:id}));
+};
+
+//获取已绑定过的手机号
+export const url_get_has_bind_phone = "get|account-basics/:account_id/phone-log";
+export const api_get_has_bind_phone = id=> {
+    return http(Url2(url_get_has_bind_phone,{account_id:id}));
+};
+

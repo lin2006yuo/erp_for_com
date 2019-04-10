@@ -38,8 +38,11 @@ export const api_get_account = function (data) {
 }
 //获取amazon账号
 export const url_get_amazon_message_account = "get|amazon-message/account";
-export const api_get_amazon_message_account = function () {
-    return http(url_get_amazon_message_account)
+export const api_get_amazon_message_account = function (data) {
+    return http(url_get_amazon_message_account, data, {
+        contentType:'application/x-www-form-urlencoded',
+        timeout:INFINITE
+    })
 }
 //获取table内容
 export const url_get_table = "get|orders/buyer-amazon-orders/:buyer_id";

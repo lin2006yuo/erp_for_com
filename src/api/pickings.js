@@ -76,7 +76,9 @@ export const api_wait_picking = function (data) {
 //未符合生成拣货单包裹列表
 export const not_conforming_picking = "get|wait-for-make-picking/not-conforming";
 export const api_not_conforming_picking = function (data) {
-    return http(Url2(not_conforming_picking), data)
+    return http(Url2(not_conforming_picking), data, {
+        timeout: 120000
+    })
 };
 
 //等待生成拣货单邮寄方式
@@ -177,8 +179,8 @@ export const api_look_turnover = function (id) {
 
 //打印面单号
 export const url_post_print = "post|delivery-check/:package_id/print";
-export const api_post_print = function (id) {
-    return http(Url2(url_post_print, id));
+export const api_post_print = function (id, data) {
+    return http(Url2(url_post_print, {package_id: id}), data);
 };
 //查看异常包裹详情pickings/exception-detail
 export const url_pickings_exception_detail = "get|pickings-exception/exception-detail";

@@ -8,5 +8,8 @@ export const api_warehouse_info = function(params){
 // FBA库存 Get：  http://172.18.8.242/warehouse-goods/fba
 export const url_fba_stock_list = "get|warehouse-goods/fba";
 export const api_stock_list = function(params){
-    return http(url_fba_stock_list, params);
+    return http(url_fba_stock_list, params, {
+        contentType:'application/x-www-form-urlencoded',
+        timeout:INFINITE
+    });
 };

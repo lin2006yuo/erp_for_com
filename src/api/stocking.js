@@ -5,7 +5,10 @@ import {http} from '../lib/http-plus';
 //备货申请列表
 export const url_apply_list = "get|stocking/apply-list";
 export const api_apply_list = function (data) {
-    return http(url_apply_list, data);
+    return http(url_apply_list, data, {
+        contentType:'application/x-www-form-urlencoded',
+        timeout:INFINITE
+    });
 };
 //确认备货
 export const url_stocking_batch_sure = "put|stocking/batch/sure";
@@ -21,6 +24,16 @@ export const api_stocking_batch_delete = function (data) {
 export const url_stocking_status = "get|stocking/status";
 export const api_stocking_status = function (data) {
     return http(url_stocking_status, data);
+};
+//备货计划--开发处理状态
+export const url_stocking_develop_status = "get|stocking/development-status";
+export const api_stocking_develop_status = function (data) {
+    return http(url_stocking_develop_status, data);
+};
+//备货计划--采购处理状态
+export const url_stocking_purchase_status = "get|stocking/purchase-status";
+export const api_stocking_purchase_status = function (data) {
+    return http(url_stocking_purchase_status, data);
 };
 //备货计划--列表
 export const url_stocking = "get|stocking";
@@ -58,6 +71,30 @@ export const api_stock_batck_commit = function (data) {
 export const url_stock_delete_sku = "delete|stocking/:id/sku/:sku_id";
 export const api_stock_delete_sku = function (id, sku_id) {
     return http(Url2(url_stock_delete_sku, {id: id, sku_id: sku_id}));
+};
+
+//备货计划--释放库存
+export const url_stock_release_inventory = "post|stocking/batch-release";
+export const api_stock_release_inventory = function (data) {
+    return http(url_stock_release_inventory, data);
+};
+
+//备货计划--作废
+export const url_stock_cancel = "delete|stocking/:id";
+export const api_stock_cancel = function (id, data) {
+    return http(Url2(url_stock_cancel, {id: id}), data);
+};
+
+//备货计划--导出
+export const url_stock_export = "post|stocking/export";
+export const api_stock_export = function(data,head){
+    return http(url_stock_export,data,head)
+};
+
+//获取导出标题
+export const url_stock_export_title = "get|stocking/export-title";
+export const api_stock_export_title = function () {
+    return http(url_stock_export_title);
 };
 
 //备货计划--编辑提交

@@ -52,4 +52,16 @@ export const api_get_notice_info = function(data){
 export const url_post_set_amazon_notice = "post|publish/amazon-notice/set-notice";
 export const api_post_set_amazon_notice = function(data){
     return http(url_post_set_amazon_notice,data);
+
 };
+
+//批量更新亚马逊状态
+export const url_update_amazon_status = "put|amazon-account/batch-set-valid";
+export const api_update_amazon_status = data=>{
+    return http(url_update_amazon_status,data);
+};
+//保存授权信息
+export const url_amazon_permit = "put|amazon-account-token/:id";
+export const api_amazon_permit = function(id,data){
+    return http(Url2(url_amazon_permit,{id:id}),data);
+}

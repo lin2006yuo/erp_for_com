@@ -5,10 +5,11 @@ export const  url_amazon_orders_list = "get|report/amazon-settlement/summary";
 export const api_amazon_orders_list = function (data) {
     return http(url_amazon_orders_list,data)
 };
-export const url_get_amazon_site = 'get|publish/amazon/site';
-export const api_get_amazon_site = function(){
-    return http(url_get_amazon_site);
-};
+// export const url_get_amazon_site = 'get|publish/amazon/site';
+// export const api_get_amazon_site = function(){
+//     return http(url_get_amazon_site);
+// };
+
 //导出
 export const url_amazon_orders_exports = "post|report/amazon-settlement/summary-export";
 export const api_amazon_orders_exports = function (data) {
@@ -34,4 +35,16 @@ export const api_amazon_details = function (data) {
 export const url_seller_list = "get|channel/seller-list";
 export const api_seller_list =function (data) {
     return http(url_seller_list,data)
+};
+
+//获取亚马逊站点
+export const url_get_amazon_site = "get|amazon/site";
+export const api_get_amazon_site =()=>{
+    return http(url_get_amazon_site);
+};
+
+//获取账号简称orders/account
+export const url_get_amazon_account='get|orders/account';
+export const api_get_amazon_account=(data)=>{
+    return http(url_get_amazon_account,data);
 };

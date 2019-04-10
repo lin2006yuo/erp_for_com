@@ -91,8 +91,8 @@
                     account_id:"",
                     warehouse_id:"",
                     time_field:'shipping_time',
-                    time_start:new Date(Date.now()).setDate(1),
-                    time_end:Date.now(),
+                    time_start: new Date('2018-5-5'),
+                    time_end:new Date('2018-5-6'),
                     page:1,
                     pageSize:20
                 },

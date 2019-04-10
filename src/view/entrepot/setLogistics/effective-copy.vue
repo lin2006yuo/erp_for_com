@@ -65,7 +65,8 @@
                 </el-form-item>
             </el-form>
         </el-card>
-        <el-form ref="form2" :model="effData" label-width="80px" class="mt-sm">
+        <!--新功能等待上线,运费折扣暂时用旧功能-->
+        <!--<el-form ref="form2" :model="effData" label-width="80px" class="mt-sm">
             <el-row>
                 <el-col :span="18">
                     <el-form-item label="运费折扣：">
@@ -88,16 +89,16 @@
                                    class="width-md"
                                    :disabled="!editable">
                             <el-option
-                                    :key="item.code"
-                                    v-for="item in moneys"
-                                    :label="item.name"
-                                    :value="item.code">
+                                :key="item.code"
+                                v-for="item in moneys"
+                                :label="item.name"
+                                :value="item.code">
                             </el-option>
                         </el-select>
                     </el-form-item>
                 </el-col>
             </el-row>
-        </el-form>
+        </el-form>-->
         <el-card>
             <el-row style="overflow-y: auto">
                 <div class="mb-xs">
@@ -112,14 +113,36 @@
                         </el-radio>
                     </el-radio-group>
                 </div>
+                <!--添加材积和附加费-->
+                <label-item label="计算材积：" class="mb-xs" v-if="effData.arriveable_type===2">
+                    <div slot="label">
+                        <span>起重：</span><el-input  :disabled="!editable" v-number:int  v-model="effData.volume_min_weight" class="inline input-width"></el-input><span> g</span>&nbsp;
+                        <span>实重与材积差异倍数：</span><el-input :disabled="!editable" v-number:fixed="2" v-model="effData.weight_multiple" class="inline input-width"></el-input><span> 倍</span>&nbsp;
+                        <span>材积(kg)=长(cm)*宽(cm)*高(cm)÷</span><el-input v-model="effData.volumn_weight" v-number:fixed="0" :disabled="!editable" class="inline input-width"></el-input>&nbsp;&nbsp;&nbsp;
+                        <span>最长长度：</span><span>长 </span><el-input v-number:fixed="2" v-model="effData.max_length" class="inline input-width" :disabled="!editable"></el-input><span> cm</span>&nbsp;
+                        <span>宽 </span><el-input v-number:fixed="2" v-model="effData.max_width" class="inline input-width" :disabled="!editable"></el-input><span> cm</span>&nbsp;
+                        <span>高 </span><el-input v-number:fixed="2" v-model="effData.max_height" class="inline input-width" :disabled="!editable"></el-input><span> cm</span>&nbsp;
+                        <span>三边和 </span><el-input v-number:fixed="2" v-model="effData.max_perimeter" class="inline input-width" :disabled="!editable"></el-input><span> cm</span>&nbsp;
+                        <span>附加费率：</span><el-input  v-number:fixed v-model="effData.oli_additional_fee" :disabled="!editable" class="inline input-width"></el-input><span>%</span>
+                    </div>
+                </label-item>
                 <div style="padding-bottom: 5px;" v-if="effData.arriveable_type!==0">
                     <label style="width:84px;">Excel导入：</label>
-                    <el-button type="primary" size="mini" :disabled="!editable" @click="excelVisible=true">
+                    <!--<el-button type="primary" size="mini" :disabled="!editable" @click="excelVisible=true">
                         选择上传的Excel表格
+                    </el-button>-->
+                    <el-button type="primary" size="mini" :disabled="!editable" @click="import_group">
+                        导入分组
                     </el-button>
-                    <el-button type="primary" size="mini" @click="download_file">
+                    <el-button type="primary" size="mini" :disabled="!editable" @click="import_section">
+                        导入分段价格
+                    </el-button>
+                    <el-button type="primary" size="mini" :disabled="!editable" @click="import_day">
+                        导入可达天数
+                    </el-button>
+                    <!--<el-button type="primary" size="mini" @click="download_file">
                         {{file_url}}
-                    </el-button>
+                    </el-button>-->
                 </div>
                 <!--全球可达(相同运费)-->
                 <div v-if="effData.arriveable_type===0"
@@ -179,6 +202,12 @@
                                          （0代表不限重）   同买家的多个订单合并包裹时总重量超过该值将会生成多个包裹
                                     </span>
                             </el-form-item>
+                            <el-form-item label="最长长度：">
+                                <span>长 </span><el-input v-number:fixed="2" v-model="item.max_length" class="inline input-width" :disabled="!editable"></el-input><span> cm</span>&nbsp;
+                                <span>宽 </span><el-input v-number:fixed="2" v-model="item.max_width" class="inline input-width" :disabled="!editable"></el-input><span> cm</span>&nbsp;
+                                <span>高 </span><el-input v-number:fixed="2" v-model="item.max_height" class="inline input-width" :disabled="!editable"></el-input><span> cm</span>&nbsp;
+                                <span>三边和 </span><el-input v-number:fixed="2" v-model="item.max_perimeter" class="inline input-width" :disabled="!editable"></el-input><span> cm</span>&nbsp;
+                            </el-form-item>
                             <el-form-item label="挂号费：" v-if="item.is_registered_fee">
                                 <el-input v-model="item.registered_fee"
                                           @blur="change_fee(item,'registered_fee')"
@@ -186,12 +215,24 @@
                                 </el-input>
                                 <span>元</span>
                             </el-form-item>
-                            <el-form-item label="材积：" v-if="item.is_volumn_weight">
+                            <el-form-item label="起重：" v-if="item.is_volumn_weight">
+                                <el-input  :disabled="!editable" v-number:int  v-model="item.volume_min_weight" class="inline input-width"></el-input><span> g</span>&nbsp;
+                                <span>实重与材积差异倍数：</span><el-input :disabled="!editable" v-number:fixed="2" v-model="item.weight_multiple" class="inline input-width"></el-input><span> 倍</span>&nbsp;
                                 <span>材积(kg)=长(cm)*宽(cm)*高(cm)÷</span>
                                 <el-input v-model="item.volumn_weight"
                                           @blur="change_fee(item,'volumn_weight')"
                                           :disabled="!editable" class="inline input-width">
                                 </el-input>
+                                <label-item label="计抛方式：" class="ml-sm">
+                                    <el-select v-model="item.throw_type" clearable class="width-sm">
+                                        <el-option
+                                            v-for="item in throw_type_list"
+                                            :key="item.value"
+                                            :label="item.label"
+                                            :value="item.value"
+                                        ></el-option>
+                                    </el-select>
+                                </label-item>
                             </el-form-item>
                             <el-form-item label="附加费率：" v-if="item.is_oli_additional">
                                 <el-input v-model="item.oli_additional_fee"
@@ -367,8 +408,8 @@
                         </el-form>
                     </rainbow-header>
                 </div>
-                <tabs class="relative">
-                    <tab-head v-if="navsList&&navsList.length>0"
+                <tabs v-if="navsList&&navsList.length>0" class="relative">
+                    <tab-head
                               :navs="navsList" @click-nav="click_nav"
                               @delete-curnav='delete_curnav($event)'
                               :is-fixed="false"
@@ -378,6 +419,16 @@
                             <rainbow-header v-if='navsList[curIndex]'
                                             :title="navsList[curIndex].label"
                                             :key='effData.arriveable_type' background-color="#ABCD05">
+                                <el-switch slot="header-right"
+                                           class="inline ml-sm"
+                                           :on-value="1"
+                                           :off-value="0"
+                                           on-text="启用"
+                                           off-text="停用"
+                                           v-model="curDetail2.status"
+                                           @change="change_status"
+                                           v-if="curIndex !== 0">
+                                </el-switch>
                                 <el-card v-if="curIndex!==0">
                                     <el-row>
                                         <span> 到达目的国家列表</span>
@@ -469,6 +520,12 @@
                                                      （0代表不限重）   同买家的多个订单合并包裹时总重量超过该值将会生成多个包裹
                                                 </span>
                                             </el-form-item>
+                                            <el-form-item label="最长长度：">
+                                                <span>长 </span><el-input v-number:fixed="2" v-model="curDetail2.max_length" class="inline input-width" :disabled="!editable"></el-input><span> cm</span>&nbsp;
+                                                <span>宽 </span><el-input v-number:fixed="2" v-model="curDetail2.max_width" class="inline input-width" :disabled="!editable"></el-input><span> cm</span>&nbsp;
+                                                <span>高 </span><el-input v-number:fixed="2" v-model="curDetail2.max_height" class="inline input-width" :disabled="!editable"></el-input><span> cm</span>&nbsp;
+                                                <span>三边和 </span><el-input v-number:fixed="2" v-model="curDetail2.max_perimeter" class="inline input-width" :disabled="!editable"></el-input><span> cm</span>&nbsp;
+                                            </el-form-item>
                                             <el-form-item label="挂号费：" v-if="curDetail2.is_registered_fee">
                                                 <el-input v-model="curDetail2.registered_fee"
                                                           @blur="change_fee(curDetail2, 'registered_fee')"
@@ -476,12 +533,24 @@
                                                 </el-input>
                                                 <span>元</span>
                                             </el-form-item>
-                                            <el-form-item label="材积：" v-if="curDetail2.is_volumn_weight">
+                                            <el-form-item label="起重：" v-if="curDetail2.is_volumn_weight">
+                                                <el-input  :disabled="!editable" v-number:int  v-model="curDetail2.volume_min_weight" class="inline input-width"></el-input><span> g</span>&nbsp;
+                                                <span>实重与材积差异倍数：</span><el-input :disabled="!editable" v-number:fixed="2" v-model="curDetail2.weight_multiple" class="inline input-width"></el-input><span> 倍</span>&nbsp;
                                                 <span>材积(kg)=长(cm)*宽(cm)*高(cm)÷</span>
                                                 <integer-input v-model="curDetail2.volumn_weight"
                                                                :min="1"
                                                                :disabled="!editable" class="inline input-width">
                                                 </integer-input>
+                                                <label-item label="计抛方式：" class="ml-sm">
+                                                    <el-select v-model="curDetail2.throw_type" clearable class="width-sm">
+                                                        <el-option
+                                                            v-for="item in throw_type_list"
+                                                            :key="item.value"
+                                                            :label="item.label"
+                                                            :value="item.value"
+                                                        ></el-option>
+                                                    </el-select>
+                                                </label-item>
                                             </el-form-item>
                                             <el-form-item label="附加费率：" v-if="curDetail2.is_oli_additional">
                                                 <el-input v-model="curDetail2.oli_additional_fee"
@@ -658,6 +727,15 @@
                         <div v-if="effData.arriveable_type===2">
                             <rainbow-header v-if='navsList[curIndex]' :title="navsList[curIndex].label"
                                             :key='effData.arriveable_type' background-color="#33B2FC">
+                                <el-switch slot="header-right"
+                                           class="inline ml-sm"
+                                           :on-value="1"
+                                           :off-value="0"
+                                           on-text="启用"
+                                           off-text="停用"
+                                           v-model="curDetail2.status"
+                                           @change="change_status">
+                                </el-switch>
                                 <el-card>
                                     <el-form :model="curDetail2" label-width="164px">
                                         <el-form-item label="适用于物流属性：" v-if="show_properties(curDetail2)">
@@ -707,7 +785,12 @@
                                     <el-checkbox v-model="curDetail2.is_stage_fee"
                                                  :disabled="!editable" class="inline">分段收费
                                     </el-checkbox>
+                                    <el-checkbox v-model="curDetail2.pianyuanfei"
+                                                :disabled="!editable" class="inline">偏远费
+                                    </el-checkbox>
                                     <el-form :model="curDetail2" label-width="90px">
+                                        <!-- 偏远费设置 -->
+                                        <district-fee v-if="curDetail2.pianyuanfei"/>
                                         <el-form-item label="可达天数：">
                                             <span>最快</span>
                                             <el-input v-model="curDetail2.earliest_days"
@@ -747,6 +830,12 @@
                                              （0代表不限重）   同买家的多个订单合并包裹时总重量超过该值将会生成多个包裹
                                         </span>
                                         </el-form-item>
+                                        <el-form-item label="最长长度：">
+                                            <span>长 </span><el-input v-number:fixed="2" v-model="curDetail2.max_length" class="inline input-width" :disabled="!editable"></el-input><span> cm</span>&nbsp;
+                                            <span>宽 </span><el-input v-number:fixed="2" v-model="curDetail2.max_width" class="inline input-width" :disabled="!editable"></el-input><span> cm</span>&nbsp;
+                                            <span>高 </span><el-input v-number:fixed="2" v-model="curDetail2.max_height" class="inline input-width" :disabled="!editable"></el-input><span> cm</span>&nbsp;
+                                            <span>三边和 </span><el-input v-number:fixed="2" v-model="curDetail2.max_perimeter" class="inline input-width" :disabled="!editable"></el-input><span> cm</span>&nbsp;
+                                        </el-form-item>
                                         <el-form-item label="挂号费：" v-if="curDetail2.is_registered_fee">
                                             <el-input v-model="curDetail2.registered_fee"
                                                       @blur="change_fee(curDetail2, 'registered_fee')"
@@ -754,12 +843,24 @@
                                             </el-input>
                                             <span>元</span>
                                         </el-form-item>
-                                        <el-form-item label="材积：" v-if="curDetail2.is_volumn_weight">
+                                        <el-form-item label="起重：" v-if="curDetail2.is_volumn_weight">
+                                            <el-input  :disabled="!editable" v-number:int  v-model="curDetail2.volume_min_weight" class="inline input-width"></el-input><span> g</span>&nbsp;
+                                            <span>实重与材积差异倍数：</span><el-input :disabled="!editable" v-number:fixed="2" v-model="curDetail2.weight_multiple" class="inline input-width"></el-input><span> 倍</span>&nbsp;
                                             <span>材积(kg)=长(cm)*宽(cm)*高(cm)÷</span>
                                             <integer-input v-model="curDetail2.volumn_weight"
                                                            :min="1"
                                                            :disabled="!editable" class="inline input-width">
                                             </integer-input>
+                                            <label-item label="计抛方式：" class="ml-sm">
+                                                <el-select v-model="curDetail2.throw_type" clearable class="width-sm">
+                                                    <el-option
+                                                        v-for="item in throw_type_list"
+                                                        :key="item.value"
+                                                        :label="item.label"
+                                                        :value="item.value"
+                                                    ></el-option>
+                                                </el-select>
+                                            </label-item>
                                         </el-form-item>
                                         <el-form-item label="附加费率：" v-if="curDetail2.is_oli_additional">
                                             <el-input v-model="curDetail2.oli_additional_fee"
@@ -935,12 +1036,20 @@
                 </tabs>
                 <div v-show="effData.arriveable_type!==0" class="mt-xs">
                     <el-button type="primary" size="mini" :disabled="!editable" @click="add_details">添加分区</el-button>
+                    <el-button type="primary" size="mini" :disabled="compare_code === ''" @click="download_compare">
+                        下载价格对比表
+                    </el-button>
                 </div>
                 <add-country ref="addCountry" v-model="countryVisible" @get-country="get_country"></add-country>
             </el-row>
         </el-card>
-        <import-excel v-model="excelVisible" :id="effData.id" :arrive_type="effData.arriveable_type"
+        <import-excel v-model="excelVisible" :id="effData.id"
+                      :import-data="importInfo"
+                      :arrive_type="effData.arriveable_type"
+                      @compare-success="compare_success"
                       @files-success="files_success"></import-excel>
+        <discontinue-shipping v-model="discontinueVisible" :action="action" @cancel="change_status_cancel"
+                              @sure="change_status_sure"></discontinue-shipping>
     </page>
 </template>
 <style lang="stylus">
@@ -974,12 +1083,24 @@
     }
 </style>
 <script>
-    import {api_get_currency, api_copy_shipping, api_shipping_list, api_effective} from "@/api/setLogistics"
+    import {
+        api_get_currency,
+        api_copy_shipping,
+        api_shipping_list,
+        api_effective,
+        api_shipping_detail_status
+    } from "@/api/setLogistics"
     import {api_get_shipping} from "@/api/common";
     import {downloadFile} from '@/lib/http';
 
     import mouseKey from '@/lib/mouse-key';
 
+    //派发事件   v-number指令辅助函数
+    const trigger = (el, type) => {
+        const e = document.createEvent('HTMLEvents')
+        e.initEvent(type, true, true)
+        el.dispatchEvent(e)
+    }
     export default {
         data() {
             return {
@@ -996,11 +1117,24 @@
                 excelVisible: false,
                 countryVisible: false,
                 downExcelUrl: config.apiHost + 'downfile',
+                importData: {
+                    code: '',
+                    file_name: '',
+                },
+                importInfo: {
+                    title: '',
+                    code: '',
+                    file_name: '',
+                },
                 classifys: [
                     {label: "无时效", value: 0},
                     {label: "经济型物流", value: 1},
                     {label: "标准型物流", value: 2},
                     {label: "特快型物流", value: 3},
+                ],
+                throw_type_list: [
+                    {label: '计半抛', value: 1},
+                    {label: '免三分之一抛', value: 2},
                 ],
                 moneys: [],
                 options: [
@@ -1074,6 +1208,13 @@
                     two: []
                 },
                 effData: {},
+                action: {
+                    short_name: '',
+                    type: 'group',
+                },
+                discontinueVisible: false,
+                // 价格对比表code
+                compare_code: '',
             }
         },
         mounted() {
@@ -1147,6 +1288,36 @@
                         return true
                     }
                 }
+            },
+            /* 导入分组 */
+            import_group() {
+                this.importInfo = {
+                    title: '分组Excel导入',
+                    file_name: '下载分组导入模板',
+                    code: 'carriage',
+                    type: 'group',
+                };
+                this.excelVisible = true;
+            },
+            /* 导入分段 */
+            import_section() {
+                this.importInfo = {
+                    title: '分段Excel导入',
+                    file_name: '下载分段导入模板',
+                    code: 'import_stage_fee',
+                    type: 'section',
+                };
+                this.excelVisible = true;
+            },
+            //导入可达天数
+            import_day(){
+                this.importInfo={
+                    title:'可达天数Excel导入',
+                    file_name:'下载可达天数导入模板',
+                    code:'shipping_arrive_day',
+                    type:'day',
+                };
+                this.excelVisible = true;
             },
             download_file() {
                 let url = this.downExcelUrl;
@@ -1326,10 +1497,18 @@
                     is_stage_fee: false,
                     is_registered_fee: false,
                     registered_fee: '',
+                    status: 1,
                     stages: [],
                     locations: [],
                     allow_properties: allow,
                     deny_properties: deny,
+                    volume_min_weight: 0,
+                    weight_multiple: 0,
+                    max_length: 0,
+                    max_width: 0,
+                    max_height: 0,
+                    max_perimeter: 0,
+                    throw_type: 0
                 });
                 let length = this.effData[det].length;
                 this.curIndex = length - 1;
@@ -1350,6 +1529,51 @@
             get_country(index, arry) {
                 let det = "details_" + this.effData.arriveable_type;
                 this.curDetail2.locations = arry;
+            },
+            change_status() {
+                if(!this.curDetail2.id) {
+                    this.$message({type: 'error', message: '新增分组不能进行状态操作！'});
+                    this.curDetail2.status = 1;
+                    return;
+                }
+                if (!this.curDetail2.status) {
+                    this.$confirm(`您将启用分组${this.curIndex + 1}的价格，确认此操作？`, '提示', {
+                        type: 'warning',
+                        confirmButtonText: '确认',
+                        cancelButtonText: '取消',
+                    }).then(() => {
+                        let data = {
+                            status: 1,
+                        };
+                        this.change_status_sure(data);
+                    }).catch(() => {
+                        this.curDetail2.status = 0;
+                        this.$message({type: 'info', message: '已取消'});
+                    });
+                } else {
+                    this.action = {
+                        shortname: `分组${this.curIndex + 1}的价格`,
+                        type: 'group',
+                    };
+                    this.discontinueVisible = true;
+                }
+            },
+            change_status_sure(data) {
+                Object.assign(data, {id: this.curDetail2.id});
+                this.$http(api_shipping_detail_status, data).then(res => {
+                    this.discontinueVisible = false;
+                    this.$message({type: 'success', message: res.message || res});
+                }).catch(code => {
+                    this.$message({type: 'error', message: code.message || code});
+                })
+            },
+            change_status_cancel() {
+                this.$message({
+                    type: 'info',
+                    message: '已取消停用'
+                });
+                this.discontinueVisible = false;
+                this.curDetail2.status = 1;
             },
             clone(obj) {
                 let o;
@@ -1586,6 +1810,21 @@
                         stage.end_weight = val;
                     }
                 }
+            },
+            compare_success(code){
+                this.compare_code = code;
+            },
+            // 下载价格对比表
+            download_compare() {
+                let code = {
+                    file_code: this.compare_code
+                };
+                downloadFile({
+                    url: config.apiHost + 'downloadFile/downExportFile',
+                    get: code,
+                    fileName: `价格对比表_${this.compare_code}`,
+                    suffix: '.xls',
+                });
             }
         },
         computed: {
@@ -1614,37 +1853,40 @@
                 },
             },
             navsList() {
-                let det = "details_" + this.effData.arriveable_type;
-                let effData = this.effData[det];
-                console.log(this.effData.arriveable_type, 'this.effData.arriveable_type');
-                console.log(det, 'det');
-                console.log(effData, 'effData');
-                if (!effData) return [];
-                let navs = effData.map((row, index) => {
-                    switch (this.effData.arriveable_type) {
-                        case 1:
-                            if (row.locations) {
+                if(this.effData) {
+                    let det = "details_" + this.effData.arriveable_type;
+                    let effData = this.effData[det];
+                    console.log(this.effData.arriveable_type, 'this.effData.arriveable_type');
+                    console.log(det, 'det');
+                    console.log(effData, 'effData');
+                    if (!effData) return [];
+                    let navs = effData.map((row, index) => {
+                        switch (this.effData.arriveable_type) {
+                            case 1:
+                                if (row.locations) {
+                                    let list = row.locations.map(row => row.country_cn_name).join(',');
+                                    return {
+                                        label: `分组${index + 1}: ${list}`,
+                                        action: `${index}+1+${row.id}`,
+                                    }
+                                } else {
+                                    return {
+                                        label: `默认分组`,
+                                        action: `${index}+1+${row.id}`,
+                                    }
+                                }
+                            case 2:
                                 let list = row.locations.map(row => row.country_cn_name).join(',');
                                 return {
                                     label: `分组${index + 1}: ${list}`,
-                                    action: `${index}+1+${row.id}`,
-                                }
-                            } else {
-                                return {
-                                    label: `默认分组`,
-                                    action: `${index}+1+${row.id}`,
-                                }
-                            }
-                        case 2:
-                            let list = row.locations.map(row => row.country_cn_name).join(',');
-                            return {
-                                label: `分组${index + 1}: ${list}`,
-                                action: `${index}+2+${row.id}`,
-                            };
-                    }
-                });
-                console.log(navs, 'navs');
-                return this.effData.arriveable_type === 0 ? [] : navs;
+                                    action: `${index}+2+${row.id}`,
+                                };
+                        }
+                    });
+                    console.log(navs, 'navs');
+                    return this.effData.arriveable_type === 0 ? [] : navs;
+                }
+                return [];
             },
         },
         watch: {
@@ -1673,6 +1915,64 @@
             },
             shippingId: {},
         },
+        directives: {
+            // 校验是否数字,不符合自动删除
+            // v-number:int  校验自然数
+            // v-number:fixed="arg"  格式化小数，arg保留的小数位，小数位数校验在blur事件触发
+            number: {
+                bind: function (el, binding) {
+                    const input = el.getElementsByTagName('input')[0]
+                    input.onkeyup = function (e) {
+                        const arg = binding.arg
+                        if(arg === 'int') {
+                            if (input.value.length === 1) {
+                                input.value = input.value.replace(/[^\d]/g, '')
+                            } else {
+                                input.value = input.value.replace(/[^\d]|(^[0]+)/g, '')
+                            }
+                        } else if(arg === 'fixed') {
+                            if (input.value.length === 1) {
+                                input.value = input.value.replace(/[^\d]/g, '')
+                            } else if(input.value.length === 2){
+                                input.value = input.value.replace(/[^(\d.)]|(00)/g, '')
+                            } else {
+                                input.value = input.value.replace(/[^\d.]/g, '')
+                            }
+                        }
+                        trigger(input, 'input')
+                    }
+                    //blur事件再次检验，防止暴力输入
+                    input.onblur = function (e) {
+                        if(input.value === "") {
+                            return
+                        }
+                        const arg = binding.arg
+                        if(arg === 'int') {
+                            if (input.value.length === 1) {
+                                input.value = input.value.replace(/[^\d]/g, '')
+                            } else {
+                                input.value = input.value.replace(/[^\d]|(^[0]+)/g, '')
+                            }
+                        } else if(arg === 'fixed') {
+                            const fixedLength = binding.expression
+                            console.log({fixedLength})
+                            if (input.value.length === 1) {
+                                input.value = input.value.replace(/[^\d]/g, '')
+                            } else if(input.value.length === 2){
+                                input.value = input.value.replace(/[^(\d)]|(00)/g, '')
+                            } else {
+                                const val = input.value.replace(/[^\d.]/g, '')
+                                if(fixedLength) {
+                                    const ret_value = Number(val).toFixed(fixedLength)
+                                    input.value = ret_value === 'NaN' ? 0 : ret_value
+                                }
+                            }
+                        }
+                        trigger(input, 'input')
+                    }
+                }
+            },
+        },
         components: {
             uiCard: require('@/components/ui-card').default,
             labelItem: require('@/components/label-item.vue').default,
@@ -1683,6 +1983,8 @@
             tabItem: require('@/components/tab-item.vue').default,
             rainbowHeader: require('@/components/rainbow-header.vue').default,
             integerInput: require('@/components/integer-input.vue').default,
+            discontinueShipping: require('./discontinue-shipping.vue').default,
+            districtFee: require('./district-fee.vue').default,
         }
     }
 </script>

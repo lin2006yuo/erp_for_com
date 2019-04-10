@@ -1,22 +1,22 @@
 <template>
     <page class="p-index">
         <search-time :search-data="searchData" @search="search" @getStatus="getStatus" :account-list="accountList"></search-time>
-        <request-button class="mt-xs mb-xs ml-sm"
+        <request-button class="mt-sm mb-sm ml-sm"
                         :disabled="tableData.list.length === 0"
                         :request="exports">部分导出</request-button>
         <data-table
-                :table-data="tableData"
-                :loading="loading"
-                :first-loading="firstLoading"
-                :count="count"
-                @size-change="handleSizeChange"
-                @current-change="handleCurrentChange"
-                v-model="dialogShow"
-                @get-spu="get_spu"
-                :resSpu.sync="spuRes"
+            :table-data="tableData"
+            :loading="loading"
+            :first-loading="firstLoading"
+            :count="count"
+            @size-change="handleSizeChange"
+            @get-spu="get_spu"
+            @current-change="handleCurrentChange"
+            @sort-change="sortChange"
+            :resSpu.sync="spuRes"
         ></data-table>
         <export-dialog v-model="visible"></export-dialog>
-        <dialog-module v-model="dialogShow" :title="title" :spu-form="spuForm"  :info="details"
+        <dialog-module v-model="dialogShow" :title="title" :spu-form="spuForm":info="details"
                        @get-spu="get_spu"
         ></dialog-module>
     </page>
@@ -30,7 +30,7 @@
     export default {
         data() {
             return {
-                title:'',
+                spuRes:{},
                 spuForm:{
                     list:[],
                     total:0,
@@ -41,20 +41,24 @@
                     page:1,
                     pageSize:10
                 },
-                dialogShow:false,
+                title:'',
                 platform:'',
+                dialogShow:false,
                 visible:false,
                 count:1,
                 firstLoading:true,
-                loading:true,
+                loading:false,
                 searchData:{
-                    channel_id:1,
-                    date_b:'',
-                    date_e:'',
-                    account_id:'',
-                    spu:'',
+                    channel_id:"",  // 平台
+                    date_b:'', // 开始时间
+                    date_e:'', // 结束时间
+                    account_code:'', // 用户简称
+                    spu:'', // SPU
+                    min_num: '',
+                    max_num: '',
+                    shelf_name: '',
+                    sort_val: ''
                 },
-                spuRes:{},
                 accountList:[],
                 tableData:{
                     list:[],
@@ -64,11 +68,11 @@
             }
         },
         mounted(){
-            this.init()
+            // this.init()
         },
         methods: {
             exports(){
-                let data=this.handelTime(this.searchData);
+                let data=this.handelData(this.searchData);
                 return this.$http(api_publised_off_export, data).then(res=>{
                     this.$message({type:"success",message:res.message||res});
                     this.visible = true;
@@ -77,15 +81,14 @@
                     this.$message({type:"error",message:code.message || code});
                 })
             },
-            search(val){
-                this.searchData.channel_id=val;
+            search(){
                 this.init()
             },
             getStatus(val){
                 this.loading=true;
-                this.searchData.channel_id=val;
+                this.searchData.channel_id=val
                 this.$http(api_account_list,{channel_id:this.searchData.channel_id}).then(res=>{
-                   this.accountList=[{label: "全部", value: ""},...res.account];
+                    this.accountList=[{label: "全部", value: ""},...res.account];
                     this.loading = false;
                     this.firstLoading = false
                 }).catch(code=>{
@@ -93,8 +96,8 @@
                 })
             },
             //处理时间
-            handelTime(searchData) {
-                let data = window.clone(searchData)
+            handelData(searchData) {
+                let data = window.clone(searchData);
                 if(!!data.date_b){
                     data.date_b=datef('YYYY-MM-dd', data.date_b/1000)
                 }else {
@@ -105,48 +108,31 @@
                 }else {
                     data.date_e=''
                 }
+                data.spu = data.spu.split('\n').join(',');
                 return data
             },
             init(){
-                let data=this.handelTime(this.searchData);
+                let data=this.handelData(this.searchData);
                 this.$set(data,'page',this.tableData.page);
                 this.$set(data,'pageSize',this.tableData.pageSize);
+                this.loading = true;
                 this.$http(api_publised_off,data).then(res=>{
-                    this.tableData.list = res.data;
                     this.title=`SPU总数`;
+                    this.tableData.list = res.data;
                     this.tableData.list.forEach(k=>{
                         let time = new Date(k.dateline*1000);
                         let Time =this.toTime(time);
                         this.$set(k,'time',Time)
                     });
+                    this.loading = false;
+                    this.firstLoading = false;
                     this.count=res.count
                 }).catch(code => {
                     this.$message({type: 'error', message: code.message || code});
                     this.loading = false;
                     this.firstLoading = false;
                 });
-            },
-            get_spu(){
-               this.$nextTick(()=>{
-                   let data ={
-                       channel_id:this.spuRes.channel_id,
-                       account_id:this.spuRes.account_id,
-                       dateline:this.spuRes.dateline,
-                       shelf_id:this.spuRes.shelf_id
-                   };
-                   this.$set(data,'page',this.details.page);
-                   this.$set(data,'pageSize',this.details.pageSize);
-                   this.$http(api_off_spu,data).then(res=>{
-                       this.spuForm.list=res.data;
-                       this.spuForm.total=res.count;
-                       this.spuForm.page=Number(res.page);
-                       this.spuForm.pageSize=Number(res.pageSize);
-                       this. dialogShow=true;
-                   }).catch(err=>{
-                       console.log(err);
-                   });
-                   this.details.page = 1;
-               })
+
             },
             toTime(time){
                 let Y = time.getFullYear() + '-';
@@ -154,7 +140,30 @@
                 let D = time.getDate() + ' ';
                 return Y+M+D;
             },
+            get_spu(){
+                this.$nextTick(()=>{
+                    let data ={
+                        channel_id:this.spuRes.channel_id,
+                        account_id:this.spuRes.account_id,
+                        dateline:this.spuRes.dateline,
+                        shelf_id:this.spuRes.shelf_id
+                    };
+                    this.$set(data,'page',this.details.page);
+                    this.$set(data,'pageSize',this.details.pageSize);
+                    this.$http(api_off_spu,data).then(res=>{
+                        this.spuForm.list=res.data;
+                        this.spuForm.total=res.count;
+                        this.spuForm.page=Number(res.page);
+                        this.spuForm.pageSize=Number(res.pageSize);
+                        this. dialogShow=true;
+                    }).catch(err=>{
+                        console.log(err)
+                    });
+                    this.details.page = 1
+                })
+            },
             handleSizeChange(val) {//------------分页
+                this.tableData.page = 1;
                 this.tableData.pageSize = val;
                 this.init();
             },
@@ -168,10 +177,9 @@
                 this.searchData.date_b = '';
                 this.searchData.date_e = '';
             },
-        },
-        watch:{
-            dialogShow(val){
-                this.dialogShow=val
+            sortChange() {
+                this.searchData.sort_val = this.searchData.sort_val === 'desc' ? 'asc' : 'desc';
+                this.init()
             }
         },
         components:{

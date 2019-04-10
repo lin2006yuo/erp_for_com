@@ -27,11 +27,16 @@ export const publish_edit_carrier  = function(data) {
 export const url_publish_carrier_list= "get|purchase-order";
 export const api_publish_edit_carrier  = function(data) {
     return http(Url2(url_publish_carrier_list),data);
-};
+};                                                                                                                //=========
 //添加采购单
 export const url_publish_add_pur= "post|purchase-order";
 export const api_publish_add_pur  = function(data) {
     return http(Url2(url_publish_add_pur),data);
+};
+//添加洽谈记录
+export const url_publish_add_discuss_record= "post|supplier-discuss-record";
+export const api_publish_add_discuss_record  = function(data) {
+    return http(Url2(url_publish_add_discuss_record),data);
 };
 //获取SKU 信息
 export const url_publish_add_sku= "get|purchase-order/getSkuInfo";
@@ -126,7 +131,10 @@ export const api_get_purchase_record  = function(id) {
 //同意审核
 export const not_waiting = "post|purchase-order/purchaseNotWaitingAudit";
 export const api_not_waiting  = function(data) {
-    return http(Url2(not_waiting), data);
+    return http(not_waiting, data,{
+        contentType:'application/x-www-form-urlencoded',
+        timeout:INFINITE
+    });
 };
 
 //到货记录sku
@@ -140,7 +148,11 @@ export const url_get_tracking_number = "get|/purchase-order/getTraceInformation"
 export const api_get_tracking_number = function(data) {
     return http(url_get_tracking_number, data);
 };
-
+//采购标记长时间未拆包
+export const url_purchase_long_time = "post|purchase-order/long-time";
+export const api_purchase_long_time = function(data) {
+    return http(url_purchase_long_time, data);
+};
 //批量获取网络下单 运单号
 export const url_get_tracking_numbers = "get|/purchase-order/getTraceInformationBatch";
 export const api_get_tracking_numbers = function(data) {
@@ -184,6 +196,11 @@ export const api_import_order = function(data) {
         contentType: 'application/x-www-form-urlencoded',
         timeout: 90000
     });
+};
+//批量修改结算方式
+export const url_change_states_balance_type = "put|purchase-order/balance-type";
+export const api_change_states_balance_type = function(data) {
+    return http(url_change_states_balance_type, data);
 };
 //查看物流跟踪信息
 export const url_logistics_detail = "get|purchase-order/:external_number/logisticsTraceInfos";
@@ -333,9 +350,34 @@ export const url_purchase_order_calculating_money = "get|purchase-order/calculat
 export const api_purchase_order_calculating_money = function (data) {
     return http(url_purchase_order_calculating_money,data);
 };
-
-
-
-
-
+//下载SKU标签
+export const url_purchase_order_down_sku_label = "get|purchase-order/down-sku-label";
+export const api_purchase_order_down_sku_label = function (data) {
+    return http(url_purchase_order_down_sku_label,data);
+};
+//退货单详情
+export const url_get_look_details = "get|purchase-return/:id";
+export const api_get_look_details = function (id) {
+    return http(Url2(url_get_look_details, {id: id}))
+};
+//获取采购员
+export const url_get_purchaser_staffs = "get|user/purchase/staffs";
+export const api_get_purchaser_staffs = function (data) {
+    return http(Url2(url_get_purchaser_staffs), data)
+};
+//获取开发员
+export const url_get_development_staffs = "get|user/development/staffs";
+export const api_get_development_staffs = function (data) {
+    return http(Url2(url_get_development_staffs), data)
+};
+//申请退款
+export const url_purchase_order_apply_refund = "get|purchase-order/:id/apply-refund";
+export const api_purchase_order_apply_refund = function (id) {
+    return http(Url2(url_purchase_order_apply_refund, {id: id}))
+};
+//提交申请退款
+export const url_purchase_order_apply_refund_submit = "post|purchase-order/:id/apply-refund";
+export const api_purchase_order_apply_refund_submit = function (id, data) {
+    return http(Url2(url_purchase_order_apply_refund_submit, {id: id}), data)
+};
 

@@ -323,3 +323,8 @@ export const api_kangdeng_local = function(data){
     return http(url_kangdeng_local,data);
 };
 
+/*wish 获取侵权记录列表*/
+export const url_goods_tort_description = "get|goods/:id/goods-tort-description";
+export const api_goods_tort_description = function(id,data){
+    return http(Url2(url_goods_tort_description,{id:id},data));
+};

@@ -38,3 +38,18 @@ export const url_lazada_orders_getallorder = "post|lazada-orders/getallorder";
 export const api_lazada_orders_getallorder = function(data) {
     return http(url_lazada_orders_getallorder, data);
 };
+//导出列表
+export const url_lazada_order_export = "post|lazada-orders/export";
+export const api_lazada_order_export = function(data) {
+    return http(url_lazada_order_export, data);
+};
+// 获取我的模板
+export const url_goods_export_template = "get|export-template";
+export const api_goods_export_template = function (data) {
+    return http(url_goods_export_template,data);
+};
+// 获取可供选择的导出字段
+export const url_lazada_orders_export_fields = "get|lazada-orders/export-fields";
+export const api_lazada_orders_export_fields = function (data) {
+    return http(url_lazada_orders_export_fields,data);
+};

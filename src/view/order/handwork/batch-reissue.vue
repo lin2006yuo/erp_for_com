@@ -115,7 +115,6 @@
             width: 100%;
             height: 100%;
         }.scroll-bar > .el-table__body-wrapper {
-             overflow-x: hidden;
              overflow-y: auto;
              height 615px;
          }

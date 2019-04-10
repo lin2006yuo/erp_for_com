@@ -89,12 +89,15 @@ export const api_edit_amazon_draft = function (id) {
 //保存到草稿箱 publish/amazon/draft
 export const url_publish_amazon_draft = 'post|publish/amazon/draft';
 export const api_publish_amazon_draft = function (data) {
-    return http(url_publish_amazon_draft,data)
+    return http(url_publish_amazon_draft,data,{
+        contentType:'application/x-www-form-urlencoded',
+        timeout:INFINITE
+    })
 };
 //获取UPC
-export const url_get_upc = 'get|publish/amazon/:number/upc';
+export const url_get_upc = 'get|publish/amazon/:num/upc';
 export const api_get_upc = function (number) {
-    return http(Url2(url_get_upc,{number:number}),{
+    return http(Url2(url_get_upc,{num:number}),{
         contentType:'application/x-www-form-urlencoded',
         timeout:INFINITE
     })
@@ -102,7 +105,10 @@ export const api_get_upc = function (number) {
 //翻译
 export const url_translate = 'post|publish/amazon/translate';
 export const api_translate = function (data) {
-    return http(url_translate,{data:data})
+    return http(url_translate,{data:data},{
+        contentType:'application/x-www-form-urlencoded',
+        timeout:INFINITE
+    })
 };
 
 //计算刊登销售价
@@ -110,4 +116,18 @@ export const url_pricing_rules = 'post|pricing-rules/calculate';
 export const api_pricing_rules = function (data) {
     return http(url_pricing_rules,data)
 };
-
+//跟卖获取信息
+export const url_publish_amazon_info='post|publish/amazon/heel-sale-info';
+export const api_get_heel_sale_info=function(data){
+    return http(url_publish_amazon_info,data);
+}
+//修改跟卖信息
+export const url_publish_amazon_change_info='post|publish/amazon/heel-sale-batch-edit';
+export const api_change_heel_sale_info=function(data){
+    return http(url_publish_amazon_change_info,data);
+}
+//批量删除
+export const url_publish_amazon_delete_info='post|publish/amazon/heel-sale-bath-del';
+export const api_delete_heel_sale_info=function(data){
+    return http(url_publish_amazon_delete_info,data);
+}

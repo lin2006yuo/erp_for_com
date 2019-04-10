@@ -48,7 +48,7 @@
             }
 		},
         refresh(){
-            this.init();
+            // this.init();
         },
         methods:{
             search(){

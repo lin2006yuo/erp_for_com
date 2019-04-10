@@ -52,7 +52,19 @@ export const api_aliexpress_order_push_system_order = (data)=> {
     return http(url_aliexpress_order_push_aliorder,data);
 };
 
+//速卖通更新最迟发货时间 /aliexpress-order/sysc
+export const url_aliexpress_order_sysc = "post|aliexpress-order/sysc";
+export const api_aliexpress_order_sysc = (data)=> {
+    return http(url_aliexpress_order_sysc,data);
+};
+
 //抓取速卖通订单
 export const api_grab_aliexpress_order = (data)=>{
     return http("post|aliexpress-order/sysc-aliorder",data);
 };
+//导入资金明细
+export const url_import_settle = "post|aliexpress-order/import-settle";
+export const api_import_settle = function(data){
+    return http(url_import_settle,data)
+};
+

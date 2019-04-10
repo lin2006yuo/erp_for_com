@@ -126,7 +126,7 @@
 		},
         mounted(){
             this.get_seller();
-            this.search();
+            // this.search();
         },
         methods:{
             get_seller(){

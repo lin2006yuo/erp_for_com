@@ -186,6 +186,7 @@
                    :special-picking-list="specialPickingList"
                    :shipping-method="shippingMethod"
                    :shortname-method="shortnameMethod"
+                   :discount-data="discountData"
                    @update-name="update_name"
                    @close_edit="close_edit"
                    @files-success="files_success"
@@ -226,6 +227,9 @@
         api_wangji_authors,
         api_express,
         api_special_list,
+        api_logistics_fee,
+        api_account_list,
+        api_logistics_update_fee,
         url_shipping_method_log,
         url_logistics_add,
         url_logistics_update,
@@ -235,6 +239,7 @@
     } from "@/api/setLogistics";
     import {http} from "@/lib/http-plus";
     import {api_get_shipping_by_collector} from "@/api/collector";
+    import {api_get_address_detail} from "@/api/shipping-address-setting";
 
     export default {
         permission: {
@@ -274,6 +279,7 @@
                 expressData: {},
                 channelData: {},
                 effData: {},
+                discountData:{},
                 shippingMethod: [],
                 shortnameMethod: [],
                 specialPickingList: [],
@@ -372,6 +378,7 @@
             }
         },
         mounted() {
+
             this.$http(logistics_type).then(res => {
                 this.index = res.map(data => {
                     return {
@@ -583,26 +590,26 @@
                             type: 'error',
                             message: code.message || code
                         });
-                        row.status = !row.status
+                        row.status = false;
                     })
                 }).catch((code) => {
                     this.$message({
                         type: 'info',
                         message: '已取消启用'
                     });
-                    row.status = !row.status
+                    row.status = false;
                 });
             },
             discontinue(row) {
                 this.discontinuationVisible = true;
-                this.action = row;
+                this.action = Object.assign(row, {type: 'shipping'});
             },
-            sure_discontinue(stop_pickup_time) {
+            sure_discontinue(data) {
                 let params = {
                     id: this.action.id,
                     status: 0,
-                    stop_pickup_time: stop_pickup_time
                 };
+                Object.assign(params, data);
                 this.$http(logistics_enabled, this.action.id, params).then(res => {
                     this.$message({
                         type: 'success',
@@ -615,7 +622,7 @@
                         type: 'error',
                         message: code.message || code
                     });
-                    this.action.status = !this.action.status
+                    this.action.status = true;
                 })
             },
             cancel_discontinue() {
@@ -628,8 +635,9 @@
             },
             get_ali(id) {
                 this.$http(api_ali_address, {shipping_id: id}).then(res => {
+                    console.log({result: res})
                     this.aliInfo.id = id;
-                    this.aliInfo.ali_address = res;
+                    this.aliInfo.ali_address = res
                     this.addressLoading = false;
                 }).catch(code => {
                     this.$message({type: "error", message: code.message || code})
@@ -671,9 +679,11 @@
                 this.expressData = {
                     special_picking_details: [],
                 };
-                this.channelData = {},
+                this.channelData = {};
+                this.discountData = {};
                 this.get_shipping_method(id);
                 // this.get_shortname_method(id, shortname);
+                //获取物流方式基本信息
                 let basePm = this.$http(api_base, id).then(res => {
                     res.is_sender_address = !!res.is_sender_address;
                     res.is_return_address = !!res.is_return_address;
@@ -691,6 +701,12 @@
                         });
                     });
                     this.baseData = res;
+                    this.baseData.sender_address_id = this.baseData.sender_address_id || '';
+                    this.baseData.pickup_address_id = this.baseData.pickup_address_id || '';
+                    this.baseData.return_address_id = this.baseData.return_address_id || '';
+                    this.change_address('sender_', res.sender_address_id);
+                    this.change_address('pickup_', res.pickup_address_id);
+                    this.change_address('return_', res.return_address_id);
                     this.get_short_name_method(this.baseData.collector_id, shortname);
                     return Promise.resolve()
                 }).catch(code => {
@@ -699,6 +715,7 @@
                         message: code.message || code
                     });
                 });
+                //获取面单信息
                 let expressPm = this.$http(api_express, id).then(res => {
                     res.merge_collection_ids = res.merge_collection_ids.map(res => {
                         return Number(res)
@@ -706,13 +723,14 @@
                     res.coordinate_x = Number(res.coordinate_x);
                     res.coordinate_y = Number(res.coordinate_y);
                     this.expressData = res;
-                    console.log(res, '接口请求res');
+                    // console.log(res, '接口请求res');
                 }).catch(code => {
                     this.$message({
                         type: "error",
                         message: code.message || code
                     });
                 });
+                //获取实效运费
                 let effPm = this.$http(api_effective, id).then(res => {
                     res.details.length !== 0 && res.details.forEach(row => {
                         row.is_volumn_weight = !!row.is_volumn_weight;
@@ -745,14 +763,43 @@
                         message: code.message || code
                     });
                 });
+                //获取可发货平台信息
                 let channelPm = this.$http(api_logistics_channel, id).then(res => {
-                    this.channelData = res;
+                    this.channelData = clone(res);
+                    this.get_account_list();
                 }).catch(code => {
                     this.$message({type: 'error', message: code.message || code});
                 });
-                Promise.all([basePm, expressPm, effPm, channelPm]).catch(err => {
+                //获取运费折扣信息
+                let feePm = this.$http(api_logistics_fee,id).then(res=>{
+                    this.discountData = res;
+                }).catch(code =>{
+                    this.$message({type:'error',message:code.message || code});
+                })
+                Promise.all([basePm, expressPm, effPm, channelPm,feePm]).catch(err => {
                     console.error(err)
                 });
+            },
+            change_address(type, id){
+                if(id){
+                    this.$http(api_get_address_detail, id).then(res => {
+                        let arr = ['name', 'company', 'country', 'state', 'province', 'city', 'district', 'street', 'zip_code', 'postcode', 'zipcode', 'mobile', 'phone', 'email'];
+                        this.set_value(arr, type, res);
+                    }).catch(code => {
+                        this.$message({type: 'error', message: code.message||code})
+                    })
+                }
+            },
+            set_value(arr, type, res){
+                arr.forEach(val => {
+                    if(val === 'state' || val === 'province'){
+                        this.$set(this.baseData, type+val, res.state)
+                    }else if(val === 'zipcode' || val === 'zip_code' || val === 'postcode'){
+                        this.$set(this.baseData, type+val, res.zipcode)
+                    }else{
+                        this.$set(this.baseData, type+val, res[val])
+                    }
+                })
             },
             look_operate(row) {
                 this.editable = false;
@@ -799,7 +846,13 @@
                         message: code.message || code
                     });
                 })
-            }
+            },
+            get_account_list(){
+                this.channelData.channels.forEach(item=>{
+                    this.$set(item, 'checkAll', false);
+                    this.$set(item, 'siteShow', true);
+                })
+            },
         },
         watch: {
             shipList(val) {

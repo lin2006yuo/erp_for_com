@@ -1,18 +1,19 @@
 <template>
     <page class="p-index">
         <search-time :search-data="searchData" @search="search" @getStatus="getStatus" :account-list="accountList"></search-time>
-        <request-button class="mt-xs mb-xs ml-sm"
+        <request-button class="mt-sm mb-sm ml-sm"
                         :disabled="tableData.list.length === 0"
                         :request="exports">部分导出</request-button>
         <data-table
-                :table-data="tableData"
-                :loading="loading"
-                :first-loading="firstLoading"
-                :count="count"
-                @size-change="handleSizeChange"
-                @get-spu="get_spu"
-                @current-change="handleCurrentChange"
-                :resSpu.sync="spuRes"
+            :table-data="tableData"
+            :loading="loading"
+            :first-loading="firstLoading"
+            :count="count"
+            @size-change="handleSizeChange"
+            @get-spu="get_spu"
+            @current-change="handleCurrentChange"
+            @sort-change="sortChange"
+            :resSpu.sync="spuRes"
         ></data-table>
         <export-dialog v-model="visible"></export-dialog>
         <dialog-module v-model="dialogShow" :title="title" :spu-form="spuForm":info="details"
@@ -46,15 +47,17 @@
                 visible:false,
                 count:1,
                 firstLoading:true,
-                loading:true,
+                loading:false,
                 searchData:{
-                    channel_id:1,
-                    date_b:'',
-                    date_e:'',
-                    account_id:'',
-                    spu:'',
-                    range_max: '',
-                    range_min: ''
+                    channel_id:"",  // 平台
+                    date_b:'', // 开始时间
+                    date_e:'', // 结束时间
+                    account_code:'', // 用户简称
+                    spu:'', // SPU
+                    min_num: 1,
+                    max_num: '',
+                    shelf_name: '',
+                    sort_val: ''
                 },
                 accountList:[],
                 tableData:{
@@ -65,11 +68,11 @@
             }
         },
         mounted(){
-            this.init()
+            // this.init()
         },
         methods: {
             exports(){
-                let data=this.handelTime(this.searchData);
+                let data=this.handelData(this.searchData);
                 return this.$http(api_publised_on_export, data).then(res=>{
                     this.$message({type:"success",message:res.message||res});
                     this.visible = true;
@@ -78,8 +81,7 @@
                     this.$message({type:"error",message:code.message || code});
                 })
             },
-            search(val){
-                this.searchData.channel_id=val
+            search(){
                 this.init()
             },
             getStatus(val){
@@ -94,8 +96,8 @@
                 })
             },
             //处理时间
-            handelTime(searchData) {
-                let data = window.clone(searchData)
+            handelData(searchData) {
+                let data = window.clone(searchData);
                 if(!!data.date_b){
                     data.date_b=datef('YYYY-MM-dd', data.date_b/1000)
                 }else {
@@ -106,20 +108,27 @@
                 }else {
                     data.date_e=''
                 }
+
+                let curString = data.spu.replace(new RegExp(' ', 'gm'), '\n');
+                let cur = curString.split('\n').filter(row => !!row);
+                let handelText = cur.map(row => row.trim());
+
+                data.spu = handelText
                 return data
             },
             init(){
-                let data=this.handelTime(this.searchData)
+                let data=this.handelData(this.searchData);
                 this.$set(data,'page',this.tableData.page);
-                this.$set(data,'pageSize',this.tableData.pageSize)
+                this.$set(data,'pageSize',this.tableData.pageSize);
+                this.loading = true
                 this.$http(api_publised_on,data).then(res=>{
-                    this.title=`SPU总数`
+                    this.title=`SPU总数`;
                     this.tableData.list = res.data;
                     this.tableData.list.forEach(k=>{
-                        let time = new Date(k.dateline*1000)
-                        let Time =this.toTime(time)
+                        let time = new Date(k.dateline*1000);
+                        let Time =this.toTime(time);
                         this.$set(k,'time',Time)
-                    })
+                    });
                     this.loading = false;
                     this.firstLoading = false;
                     this.count=res.count
@@ -128,6 +137,7 @@
                     this.loading = false;
                     this.firstLoading = false;
                 });
+
             },
             toTime(time){
                 let Y = time.getFullYear() + '-';
@@ -172,6 +182,10 @@
                 this.searchData.date_b = '';
                 this.searchData.date_e = '';
             },
+            sortChange() {
+                this.searchData.sort_val = this.searchData.sort_val === 'desc' ? 'asc' : 'desc';
+                this.init()
+            }
         },
         components:{
             searchTime:require('./search-time.vue').default,

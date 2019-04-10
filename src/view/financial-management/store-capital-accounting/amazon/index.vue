@@ -9,8 +9,10 @@
                     :route="apis.url_amazon_orders_exports"
                     :selects="partAllOptions"
                     @trigger="export_yms"></permission>
-        <table-list :table="table" @detail="detail" :loading="loading" :firstTime="firstTime" @selection-change="select_change" class="mt-sm">
-
+        <table-list class="mt-sm" 
+            @item-click="handle_item_click"
+            @select-change="handle_select_change"
+        >
         </table-list >
         <el-pagination
                 class="page-fixed"
@@ -22,10 +24,10 @@
                 layout="total, sizes, prev, pager, next, jumper"
                 :total="total">
         </el-pagination>
-        <detail-model v-model="detail_show" :detail_table="detail_table"
-                      @detailSizeChange="handleSizeChange"
-                      @detailCurrentChange="handleCurrentChange"
-                      :title="title">
+        <detail-model 
+            v-model="detail_show"
+            :detailData="detailData"
+        >
 
         </detail-model>
         <export-field :param="export_model_type" v-model="exportVisable" :fields="fields" :templates="templates"
@@ -99,7 +101,11 @@
                 flag:true,
                 page:1,
                 pageSize:20,
-                total:0
+                total:0,
+
+
+                //我的
+                detailData: {}  //弹窗的查询准备数据
             }
         },
         mounted(){
@@ -133,7 +139,7 @@
                 let data = this.init_params();
                 this.$http(api_amazon_orders_list,data).then(res=>{
                     this.loading = false;
-                    this.firstTime =false;
+
                     this.table.list= res.data;
                     this.total = res.count;
                     this.table.list.forEach(row=>{
@@ -152,9 +158,14 @@
                     console.log(err)
                 })
             },
-            select_change(val){
-                this.ids = val;
-            },
+
+            
+            // select_change(val){
+            //     this.ids = val;
+            // },
+
+
+
             get_fields() {
                 this.$http(api_amazon_filed).then(res => {
                     this.fields = res;
@@ -172,6 +183,9 @@
                     this.$message({type: "error", message: code.message || code})
                 });
             },
+
+
+
             export_yms(val) {
                 if (val.value === 2 && this.ids.length <= 0) return this.$message({
                     type: "warning",
@@ -240,35 +254,35 @@
                 })
                 return Promise.resolve()
             },
-            detail(val){
-                let params = this.init_params();
-                let data = {
-                    account_id:val.account_id,
-                    page:this.detail_table.page,
-                    pageSize:this.detail_table.pageSize
-                };
-                this.$set(data,'start_time',params.start_time);
-                this.$set(data,'end_time',params.end_time);
-                this.title= `账户${val.account_name}的结算周期报告`;
-                this.cloneId = val.account_id;
-                this.detail_show = true;
-                this.req_detail(data)
-            },
-            req_detail(data){
-                if(this.flag){
-                    this.flag = false;
-                    this.$http(api_amazon_details,data).then(res=>{
-                        this.flag = true;
-                        this.detail_table.list = res.data;
-                        this.detail_table.page = Number(res.page);
-                        this.detail_table.pageSize = Number(res.pageSize);
-                        this.detail_table.total = res.count;
-                    }).catch(err=>{
-                        this.flag = true;
-                        console.log(err)
-                    });
-                }
-            },
+            // detail(val){
+            //     let params = this.init_params();
+            //     let data = {
+            //         account_id:val.account_id,
+            //         page:this.detail_table.page,
+            //         pageSize:this.detail_table.pageSize
+            //     };
+            //     this.$set(data,'start_time',params.start_time);
+            //     this.$set(data,'end_time',params.end_time);
+            //     this.title= `账户${val.account_name}的结算周期报告`;
+            //     this.cloneId = val.account_id;
+            //     this.detail_show = true;
+            //     this.req_detail(data)
+            // },
+            // req_detail(data){
+            //     if(this.flag){
+            //         this.flag = false;
+            //         this.$http(api_amazon_details,data).then(res=>{
+            //             this.flag = true;
+            //             this.detail_table.list = res.data;
+            //             this.detail_table.page = Number(res.page);
+            //             this.detail_table.pageSize = Number(res.pageSize);
+            //             this.detail_table.total = res.count;
+            //         }).catch(err=>{
+            //             this.flag = true;
+            //             console.log(err)
+            //         });
+            //     }
+            // },
             list_size_change(val){
               this.pageSize =val;
               this.init()
@@ -277,24 +291,43 @@
                 this.page = val;
                 this.init()
             },
-            handleSizeChange(val){
-               this.detail_table.pageSize = val;
-               let data ={
-                   account_id:this.cloneId,
-                   page:this.detail_table.page,
-                   pageSize:this.detail_table.pageSize
-               };
-               this.req_detail(data)
+            // handleSizeChange(val){
+            //    this.detail_table.pageSize = val;
+            //    let data ={
+            //        account_id:this.cloneId,
+            //        page:this.detail_table.page,
+            //        pageSize:this.detail_table.pageSize
+            //    };
+            //    this.req_detail(data)
+            // },
+            // handleCurrentChange(val){
+            //   this.detail_table.page = val;
+            //     let data ={
+            //         account_id:this.cloneId,
+            //         page:this.detail_table.page,
+            //         pageSize:this.detail_table.pageSize
+            //     };
+            //     this.req_detail(data)
+            // },
+
+
+
+            //我的
+            handle_item_click(item) {
+                //准备数据给弹窗使用
+                let params = this.init_params();
+                this.detailData = {
+                    account_id: item.account_id,
+                    title: `账户${item.account_name}的结算周期报告`,
+                    start_time: params.start_time,
+                    end_time: params.end_time,
+                }
+                this.detail_show = true;
             },
-            handleCurrentChange(val){
-              this.detail_table.page = val;
-                let data ={
-                    account_id:this.cloneId,
-                    page:this.detail_table.page,
-                    pageSize:this.detail_table.pageSize
-                };
-                this.req_detail(data)
-            },
+            //复选框
+            handle_select_change(options) {
+                this.ids = options
+            }
         },
         components:{
             cardSearch:require('./card-search').default,

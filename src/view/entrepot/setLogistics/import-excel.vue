@@ -1,10 +1,15 @@
 <template>
-    <page-dialog class="p-import-excel" title="excel导入" v-model="visible" size="large" :close-on-click-modal="false">
+    <page-dialog class="p-import-excel" :title="importData.title" v-model="visible" size="large"
+                 @close="close"
+                 :close-on-click-modal="false">
         <div>
             <div class="file-btn">
                 请选择要导入的Excel文件
                 <input type="file" ref="file" multiple @change="file_change">
             </div>
+            <el-button type="primary" class="inline ml-sm" size="mini" @click="file_download">
+                导入模板下载
+            </el-button>
             <ul class="files">
                 <li v-if="files.length > 0" v-for="file in files">
                     <div>
@@ -26,7 +31,22 @@
             </ul>
         </div>
         <div slot="footer" class="dialog-footer">
-            <el-button type="primary" size="mini" @click="upload" :disabled="files.length<=0"
+            <template v-if="importData.type === 'group'">
+                <el-button type="primary" size="mini"
+                           :disabled="files.length<=0"
+                           v-loading.fullscreen.lock="fullscreenLoading"
+                           @click="compare_price">
+                    价格对比
+                </el-button>
+                <el-button type="primary" size="mini" @click="upload" :disabled="files.length<=0 || !compareSuccess"
+                           v-loading.fullscreen.lock="fullscreenLoading"
+                           element-loading-text="正在上传请稍后...">
+                    确认上传
+                </el-button>
+            </template>
+            <el-button type="primary" size="mini"
+                       v-else
+                       @click="upload" :disabled="files.length<=0"
                        v-loading.fullscreen.lock="fullscreenLoading"
                        element-loading-text="正在上传请稍后...">
                 确认上传
@@ -57,6 +77,7 @@
             opacity: 0;
         }
     }
+
     .p-import-excel {
         li {
             padding: 5px;
@@ -67,6 +88,7 @@
             }
         }
     }
+
     .prompt-message {
         color: #1F2D3D;
     }
@@ -80,7 +102,13 @@
     }
 </style>
 <script>
-    import {api_shipping_detail} from "../../../api/setLogistics"
+    import {
+        api_shipping_detail,
+        api_shipping_fee_import,
+        api_shipping_day_import,
+        api_compare_price
+    } from "@/api/setLogistics"
+    import {downloadFile} from '@/lib/http';
 
     export default {
         data() {
@@ -89,34 +117,66 @@
                 fullscreenLoading: false,
                 errors: [],
                 files: [],
+                downExcelUrl: config.apiHost + 'downfile',
+                compareSuccess: false,
             }
         },
         methods: {
+            close() {
+                this.errors = [];
+                this.files = [];
+                this.compareSuccess = false;
+                this.fullscreenLoading = false;
+            },
             remove(file) {
                 const index = this.files.indexOf(file);
                 this.files.splice(index, 1);
             },
+            compare_price() {
+                this.get_file((data) => {
+                    this.$http(api_compare_price, data).then(res => {
+                        this.$message({type: 'success', message: res.message || res});
+                        this.compareSuccess = true;
+                        this.$emit('compare-success', res.file_code);
+                    }).catch(code => {
+                        this.$message({type: 'error', message: code.message || code});
+                    }).finally(() => {
+                        setTimeout(() => {
+                            this.fullscreenLoading = false;
+                        }, 200);
+                    });
+                });
+            },
             upload() {
+                this.get_file((data, file) => {
+                    this.submit(data, file);
+                });
+            },
+            get_file(callback) {
                 this.fullscreenLoading = true;
                 this.files.forEach(({file}) => {
                     let data = {
                         id: this.id,
-                        arrive_type: this.arrive_type,
                         file: ''
                     };
                     let reader = new FileReader();
                     reader.readAsDataURL(file);
                     reader.onload = (e) => {
                         data.file = e.target.result;
-                        this.submit(file, data);
+                        callback(data, file);
                     };
                 });
             },
-            submit(file, data) {
+            submit(data, file) {
                 const index = this.files.indexOfFun(f => f.file === file);
-                this.$http(api_shipping_detail, data).then(res => {
-                    this.fullscreenLoading = false;
-                    if (res.message.includes(`导入成功`)) {
+                let api = this.importData.type === 'group' ?
+                    api_shipping_detail : this.importData.type === 'section' ?
+                        api_shipping_fee_import : api_shipping_day_import;
+                // 分组导入需要上传参数
+                this.importData.type === 'group' && (data.arrive_type = this.arrive_type);
+
+                this.$http(api, data).then(res => {
+                    if (res.message.includes(`导入成功`) || res.message.includes(`操作成功`)) {
                         this.$message({
                             type: 'success',
                             message: `导入文件成功!`
@@ -129,13 +189,17 @@
                         this.files[index].errors = res.message;
                     }
                 }).catch(code => {
-                    this.fullscreenLoading = false;
                     this.files[index].result = "上传有失败！";
                     this.files[index].errors = code.message;
-                })
+                }).finally(() => {
+                    setTimeout(() => {
+                        this.fullscreenLoading = false;
+                    }, 200);
+                });
             },
             file_change() {
                 const files = this.$refs.file.files;
+                console.log("files", files)
                 Object.keys(files).forEach(key => {
                     let file = files[key];
                     if ((/\.(?!(xlsx$|xls$))/.test(file.name))) {
@@ -149,6 +213,18 @@
                 });
                 //手动清掉input value
                 this.$refs.file.value = '';
+            },
+            file_download() {
+                let url = this.downExcelUrl;
+                let code = {
+                    code: this.importData.code
+                };
+                downloadFile({
+                    url: url,
+                    get: code,
+                    fileName: this.importData.file_name,
+                    suffix: '.xls',
+                });
             }
         },
         watch: {
@@ -163,7 +239,8 @@
         props: {
             value: {},
             id: {},
-            arrive_type: {}
+            arrive_type: {},
+            importData: {},
         },
         components: {
             pageDialog: require('../../../components/page-dialog.vue').default

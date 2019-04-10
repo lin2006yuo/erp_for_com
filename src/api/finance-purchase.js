@@ -20,7 +20,6 @@ export const url_finance_list = "get|finance-purchase";
 export const api_finance_list = function(data){
   return http(url_finance_list,data)
 };
-
 //付款
 export const url_finance_pay = "post|finance-purchase/batchChangeStatus";
 export const api_finance_pay = function(data){
@@ -42,7 +41,10 @@ export const api_finance_purchase_export = function(data){
 //付款申请导出purchase-apply/export
 export const url_purchase_apply_export = "post|purchase-apply/export";
 export const api_purchase_apply_export = function(data){
-    return http(url_purchase_apply_export,data)
+    return http(url_purchase_apply_export,data,{
+        contentType: 'application/x-www-form-urlencoded',
+        timeout: INFINITE
+    })
 };
 //查看状态
 export const url_purchase_look_apply = "get|purchase-apply/:id";
@@ -99,6 +101,11 @@ export const url_purchase_export_fuyou = "post|purchase-apply/export-fuyou";
 export const api_purchase_export_fuyou = function (data) {
     return http(url_purchase_export_fuyou,data);
 };
+//批量修改结算方式
+export const url_purchase_apply_balance_type = "put|purchase-apply/balance-type";
+export const api_purchase_apply_balance_type = function(data) {
+    return http(url_purchase_apply_balance_type, data);
+};
 // 获取我的模板
 export const url_goods_export_template = "get|export-template";
 export const api_goods_export_template = function (data) {
@@ -109,6 +116,28 @@ export const url_purchase_apply_export_fields = "get|purchase-apply/export-field
 export const api_purchase_apply_export_fields = function(data) {
     return http(Url2(url_purchase_apply_export_fields), data);
 };
-
-
-
+//获取付款申请日志接口
+export const url_purchase_operation_log = "get|purchase-apply/:id/log";
+export const api_purchase_operation_log = function (ids,data) {
+    return http(Url2(url_purchase_operation_log,{id:ids}), data);
+};
+//上传发票
+export const url_purchase_apply_upload_images = "post|purchase-apply/upload-images";
+export const api_purchase_apply_upload_images = function(data){
+    return http(url_purchase_apply_upload_images,data);
+};
+//导出发票
+export const url_purchase_apply_down_invoice = "get|purchase-apply/down-invoice/:id";
+export const api_purchase_apply_down_invoice = function(id) {
+    return http (Url2(url_purchase_apply_down_invoice, {id:id}));
+};
+//上传付款回单
+export const url_purchase_apply_upload_payment_images = "post|purchase-apply/upload-payment-images";
+export const api_purchase_apply_upload_payment_images = function(data) {
+    return http(url_purchase_apply_upload_payment_images, data);
+};
+//批量返回上一步状态
+export const url_purchase_apply_return_mark_payed = "put|purchase-apply/return-mark-payed";
+export const api_purchase_apply_return_mark_payed = function(data) {
+    return http(url_purchase_apply_return_mark_payed, data);
+};

@@ -18,8 +18,8 @@ export const api_order_shopee_status = function(data){
   return http(url_api_order_shopee_status,data);
 };
 
-//---渠道账号
-export const url_api_order_shopee_getAccount = "get|orders/account";
+//---账号简称
+export const url_api_order_shopee_getAccount = "get|shopee-account/account";
 export const api_order_shopee_getAccount = function(data){
   return http(url_api_order_shopee_getAccount,data);
 };
@@ -33,3 +33,4 @@ export const url_shopee_account_site = "get|shopee-account/site";
 export const api_shopee_account_site = function(){
     return http(url_shopee_account_site);
 };
+

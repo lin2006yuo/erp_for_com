@@ -51,8 +51,8 @@ export const api_send_rules_tree = function() {
 };
 //获取编辑新增时间列表
 export const url_send_rules_addtime = "get|msg-rule/triggerRules";
-export const api_send_rules_addtime = function() {
-    return http(url_send_rules_addtime);
+export const api_send_rules_addtime = function(data) {
+    return http(url_send_rules_addtime,data);
 };
 //获取发送邮寄规则列表
 export const url_send_rules_email = "get|msg-rule/emailRules";

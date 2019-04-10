@@ -10,6 +10,12 @@ export const api_get_account = function () {
     return http(url_get_account)
 };
 
+//获取mymall刊登账号
+export const url_get_mymallaccount='get|publish/pandao/accounts';
+export const api_get_mymallaccount=function (data) {
+    return http(url_get_mymallaccount,data)
+}
+
 //获取销售员
 export const url_get_sellers = "get|pandao-sellers";
 export const api_get_sellers = function () {

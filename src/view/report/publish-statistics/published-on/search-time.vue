@@ -1,14 +1,15 @@
 <template>
     <div class="spu-publish">
-        <search-card :params="searchData" :clears="clears" @search="search" @enter="search">
+        <search-card :params="searchData" :clears="clears" @search="search" >
 
             <label-item label="平台：">
                 <el-select
                     v-model="searchData.channel_id"
                     class="width-super"
                     size="small"
-                    clearable filterable multiple
+                    clearable filterable
                     collapse-tags
+                    @change="select_channel"
                 >
                     <el-option
                         v-for="item in channels"
@@ -23,12 +24,13 @@
                            v-sf.account_id
                            filterable remote clearable
                            placeholder="请输入简称"
-                           :remote-method="remote_method"
-                           v-model="searchData.account_id"
+                           :remote-method="fillter_methods"
+                           v-model="searchData.account_code"
+                           :loading="accountLoading"
                 >
                     <el-option v-for="item in options"
                                :key="item.value"
-                               :value="item.value"
+                               :value="item.label"
                                :label="item.label"
                     ></el-option>
                 </el-select>
@@ -44,30 +46,42 @@
                 </el-input>
             </label-item><br/>
             <label-item label="销售员：" class="mt-mini mb-mini">
-                <el-input placeholder="请选择/输入..."></el-input>
+                <el-select
+                    placeholder="请输入销售员名称"
+                    class="width-sm input"
+                    filterable remote clearable
+                    v-model="searchData.shelf_name"
+                    :remote-method="fillter_seller"
+                    :loading="sellerListLoading"
+                >
+                    <el-option
+                        v-for="(opt, index) in sellerOptions"
+                        :key="`seller_${index}`"
+                        :value="opt.realname"
+                        :label="opt.realname"
+                    ></el-option>
+                </el-select>
             </label-item>
             <label-item label="上架数量范围：" class="ml-sm">
-                <input type="number" v-model="searchData.range_min" class="number width-mini" v-range.number min="0" :max="searchData.range_max">
+                <input type="number" v-model="searchData.min_num" @blur="handle_keyup_min" @click="close_error"  class="number width-mini" v-range.number min="1" >
                 <span>&nbsp;--&nbsp;</span>
-                <input type="number" v-model="searchData.range_max" class="number width-mini" v-range.number :min="searchData.range_min || 0">
+                <input type="number" v-model="searchData.max_num" @blur="handle_keyup_max"  @click="close_error"  class="number width-mini" v-range.number min="1" >
             </label-item>
             <label-item label="刊登日期：" class="ml-sm">
                 <el-date-picker
-                    class="inline date"
+                    class="inline date width-sm"
                     v-model="searchData.date_b"
                     type="date"
                     placeholder="开始时间"
                     :picker-options="pickerstart"
-                    v-sf.date_b
                 ></el-date-picker>
                 <span>&nbsp;--&nbsp;</span>
                 <el-date-picker
-                    class="inline mr-sm date"
+                    class="inline mr-sm date width-sm"
                     v-model="searchData.date_e"
                     type="date"
                     placeholder="结束时间"
                     :picker-options="pickerend"
-                    v-sf.date_e
                 ></el-date-picker>
             </label-item>
         </search-card>
@@ -75,7 +89,8 @@
 </template>
 
 <script>
-    import {api_get_channel} from  '../../../../api/report-channel'
+    import {api_get_channel, api_account_list} from  '../../../../api/report-channel'
+    import {api_get_seller} from '@/api/platform-statistics'
     export default {
         data() {
             return {
@@ -83,6 +98,8 @@
                 channels:[],
                 clears:{},
                 query:'',
+                sellerQuery: '',
+                sellerLoading: false,
                 pickerstart:{
                     disabledDate:(time)=>{
                         if(this.searchData.date_e){
@@ -100,19 +117,23 @@
                             return false;
                         }
                     }
-                }
+                },
+                sellerList: [],
+                sellerListLoading: false,
+                accountList: [],
+                accountLoading: false,
+                maxInputError: false,
+                minInputError: false
             }
         },
         mounted(){
             this.clears=clone(this.searchData);
             this.init_status();
+            this.get_seller()
         },
         methods: {
-            remote_method(query){
-                this.query = query;
-            },
             search(){
-                this.$emit('search',this.channel_id);
+                this.$emit('search');
             },
             init_status(){
                 this.$http(api_get_channel).then(res=>{
@@ -128,7 +149,60 @@
                 this.$emit('getStatus',channel_id)
             },
             textarea_search() {
-                console.log('textarea_search')
+                this.$emit('search')
+            },
+            handle_keyup_min(e) {
+                const value = e.target.value;
+                if(+value >　+this.searchData.max_num && this.searchData.max_num !== '') {
+                    this.searchData.min_num = this.searchData.max_num;
+                } else {
+                    this.searchData.min_num = value;
+                }
+            },
+            handle_keyup_max(e) {
+               const value = e.target.value;
+               if(+value < +this.searchData.min_num) {
+                   this.searchData.max_num = this.searchData.min_num;
+               } else {
+                   this.searchData.max_num = value;
+               }
+            },
+            //改变channel_id, 获取账号简称
+            select_channel() {
+                // const promiseArr = [];
+                // this.searchData.channel_id.forEach(v => {
+                //     promiseArr.push(this.$http(api_account_list, {channel_id: v}))
+                // });
+                // Promise.all(promiseArr).then(res => {
+                //     const accountList = res.reduce((total, cur) => {
+                //         return  [
+                //             ...total,
+                //             ...cur.account
+                //         ]
+                //     }, []);
+                //     this.accountList = accountList;
+                // });
+                this.$http(api_account_list, {channel_id: this.searchData.channel_id}).then(res => {
+                    this.accountList = res.account;
+                })
+            },
+            //获取销售员
+            get_seller() {
+                this.$http(api_get_seller).then(res => {
+                    this.sellerList = res
+                })
+            },
+            //过滤销售员列表
+            fillter_seller(query) {
+                this.sellerQuery = query;
+            },
+            //过滤账号简称
+            fillter_methods(query) {
+                this.query = query
+            },
+            close_error() {
+                this.maxInputError = false;
+                this.minInputError = false;
             }
         },
         computed:{
@@ -140,14 +214,28 @@
                     })
                 }else{
                     if(this.accountList){
-                        return this.accountList.length>=50?this.accountList.splice(1,50):this.accountList;
+                        return this.accountList.length>=50?this.accountList.slice(0,50):this.accountList;
+                    }
+                }
+            },
+            sellerOptions() {
+                if(this.sellerQuery) {
+                    return this.sellerList.filter(v => {
+                        if(!isNaN(+this.sellerQuery)){
+                            return v.id.toString().indexOf(this.sellerQuery) > -1
+                        } else {
+                            return v.realname.indexOf(this.sellerQuery) > -1
+                        }
+                    })
+                } else {
+                    if(this.sellerList) {
+                        return this.sellerList.length>=50?this.sellerList.slice(0,50):this.sellerList;
                     }
                 }
             },
         },
         props:{
             searchData:{},
-            accountList:{}
         },
         components:{
             searchCard: require('@/components/search-card.vue').default,
@@ -162,13 +250,14 @@
                     const TEXTAREA_DOM = el.querySelector('textarea');
                     const callback = binding.value;
                     TEXTAREA_DOM.addEventListener('keydown', function (e) {
-                        //换行
-                        if(e.key === 'Enter' && e.shiftKey === true) {
+                        if(e.key === 'Enter') {
                             e.preventDefault();
-                            TEXTAREA_DOM.value += '\n';
-                        } else if(e.key === 'Enter') {
-                            e.preventDefault();
-                            callback()
+                            if(!e.shiftKey) {
+                                callback()
+                            } else {
+                                e.preventDefault();
+                                TEXTAREA_DOM.value += '\n';
+                            }
                         }
                     })
                 }
@@ -192,7 +281,6 @@
                         if(max && min) {
                             if(INPUT_DOM.value > max) {
                                 INPUT_DOM.value = max;
-                                console.log(INPUT_DOM.value)
                             } else if(INPUT_DOM.value < min) {
                                 INPUT_DOM.value = 0
                             }
@@ -201,7 +289,7 @@
                     el.addEventListener('keyup', handleInput)
                 }
             }
-        }
+        },
     }
 </script>
 
@@ -231,5 +319,8 @@
         &:focus {
             border-color: #33B2FC;
         }
+    }
+    .error {
+        border-color: red !important
     }
 </style>

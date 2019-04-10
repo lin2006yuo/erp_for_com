@@ -3,7 +3,7 @@
         {{currentOperate}}
         <el-dropdown-menu slot="dropdown">
             <el-dropdown-item v-for="item in handles"
-                              :key="item"
+                              :key="item[keys] || item.value"
                               :command="item.label">{{item.label}}</el-dropdown-item>
         </el-dropdown-menu>
     </el-dropdown>
@@ -28,7 +28,7 @@
                 command = this.handles.find(row=>row.label===command);
                 this.commandCurrent = command;
                 if(this.trigger === 'change'){
-                    this.current_operate();
+                    this.change_operate()
                 }
             },
             current_operate(){
@@ -37,6 +37,12 @@
                     action.call(this._renderContext, this.commandCurrent);
                 }
             },
+            change_operate() {
+                let change = this.commandCurrent.action || this.change ;
+                if(change){
+                    change.call(this._renderContext, this.commandCurrent);
+                }
+            }
         },
         computed:{
             currentOperate(){
@@ -49,6 +55,10 @@
             }
         },
         props:{
+            //key未保留字
+            keys: {
+                required:true
+            },
             handles:{
                 required:true,
                 type:Array
@@ -60,9 +70,13 @@
             trigger:{
                 type:String,
                 default(){
-                    return 'click';
+                    return 'change';
                 }
             },
+            change: {
+                required:false,
+                type:Function
+            }
         },
         components:{
 

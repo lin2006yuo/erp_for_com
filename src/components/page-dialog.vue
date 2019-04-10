@@ -2,8 +2,8 @@
     <div class="page-dialog" :style="outer" v-if="show" @click="out_click">
         <transition name="page-dialog">
             <div class="inner  showIn " :style="[inner,innerSize,innerPosition]" @click.stop="" ref="inner">
-                <div v-if="!_nottitle" class="dialog-header">
-                    <span :class="`title${showRequired?` is-required`:``}`">{{title}}</span>
+                <div v-if="!_nottitle" :class="{'dialog-header':true,'title-center':titleCenter}">
+                    <span :class="`title${showRequired?` is-required`:``} ${titleCenter?`titleFont`:``}`">{{title}}</span>
                     <span class="tag">{{tag}}</span>
                     <template v-if="showCloseIcon">
                         <i v-if="countDown" class="close close-text" :title="`${countDown}秒后关闭`" @click="close">{{countDown}}</i>
@@ -84,6 +84,7 @@
                 background:url('../assets/close-icon-default.png') no-repeat center center;
                 &:hover{
                     background:url('../assets/close-icon-active.png') no-repeat center center;
+                    cursor:pointer;
                 }
             }
             i.close-text{
@@ -100,6 +101,10 @@
             font-size: 14px;
             font-weight: 500;
             color: #1f2d3d;
+        }
+        .titleFont {
+            font-size: 16px !important;
+            font-weight:bolder !important;
         }
         .close {
             float: right;
@@ -118,6 +123,9 @@
             position: absolute;
             bottom:12px;
             right:30px;
+        }
+        .title-center {
+            text-align:center;
         }
     }
 
@@ -189,6 +197,7 @@
                 this.$set(this.outer, 'backgroundColor', 'rgba(0,0,0,.5)');
                 this.$set(this.outer, 'z-index', '1002');
                 this.$set(this.outer,'transition','all .2s');
+                console.log(nContent.width)
                 const innerStyle = window.getComputedStyle(this.$refs.inner);
                 const emptyWidth = Math.max(parseInt(nContent.width) - parseInt(innerStyle.width),0);
                 const emptyHeight = Math.max(parseInt(nContent.height) - parseInt(innerStyle.height),0);
@@ -289,6 +298,7 @@
                 }else{
                     this.warning('禁止关闭对话框');
                 }
+                this.$emit('close');
             },
             out_click() {
                 if(this.closeOnClickModal && this.outClose){
@@ -500,6 +510,12 @@
             canClose: {
                 type:[Function, Boolean],
                 default:true,
+            },
+            titleCenter:{
+                type:Boolean,
+                default(){
+                    return false
+                }
             }
         },
         components: {}

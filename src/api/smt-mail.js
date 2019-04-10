@@ -85,6 +85,11 @@ export const url_reply = "post|aliexpress-msg";
 export const api_reply = function (data) {
   return http(Url2(url_reply),data)
 };
+//发送
+export const url_orders_batch_send_messag = "post|orders/batch/send-message";
+export const api_orders_batch_send_messag = function (data) {
+    return http(url_orders_batch_send_messag,data)
+};
 
 export const url_ebay_send = "post|ebay-message/send";
 export const api_ebay_send = function (data) {
@@ -153,7 +158,10 @@ export const api_post_aliexpress_msg_sync = function (data) {
 };
 //获取button账号
 export const url_get_ali_express_msg_account = "get|aliexpress-msg/account";
-export const api_get_ali_express_msg_account = function () {
-    return http(Url2(url_get_ali_express_msg_account));
+export const api_get_ali_express_msg_account = function (data) {
+    return http(url_get_ali_express_msg_account, data, {
+        contentType:'application/x-www-form-urlencoded',
+        timeout:INFINITE
+    });
 }
 

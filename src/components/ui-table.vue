@@ -1,6 +1,6 @@
 <template>
     <div class="c-ui-table-important">
-        <table class="template ui-table-head" ref="tableheader">
+        <table class="template ui-table-head" ref="tableheader" >
             <colgroup>
                 <col v-for="head in cols" :width="head_width(head)">
             </colgroup>
@@ -24,7 +24,7 @@
             </tr>
             </tbody>
         </table>
-        <div  ref="table"  class="ui-table-body"   v-resize="{height:bodyHeight}" v-if="!isFix">
+        <div  ref="table"  class="ui-table-body"    v-resize="{height:bodyHeight}" v-if="!isFix">
             <table v-if="hasData" class="template secTable"    :style="table_resize()">
                 <colgroup>
                     <col v-for="head in cols" :width="head_width(head)">

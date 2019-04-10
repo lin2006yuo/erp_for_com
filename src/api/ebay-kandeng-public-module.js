@@ -39,27 +39,27 @@ export const api_delete_trans = function (data) {
     return http(url_delete_trans,data);
 };
 /*获取公共模板列表*/
-export const url_common_modeList = "post|Publish/EbayCommon/getCommonModeList";
+export const url_common_modeList = "get|publish-ebay/modules";
 export const api_common_modeList = function (data) {
     return http(url_common_modeList,data);
 };
 /*获取促销设置模块列表*/
-export const url_get_promotionList = "get|/Publish/EbayCommon/getPromotionList";
+export const url_get_promotionList = "get|publish-ebay/promotions";
 export const api_get_promotionList = function (data) {
     return http(url_get_promotionList,data);
 };
-/*模块组合列表*/
-export const url_get_combList = "get|Publish/EbayCommon/getCombList";
-export const api_get_combList = function (data) {
-    return http(url_get_combList,data);
+/*模块组合列表 公用*/
+export const url_get_combs = "get|publish-ebay/combs";
+export const api_get_combs = function (data) {
+    return http(url_get_combs,data);
 };
-/*模块组合保存*/
-export const url_save_combList = "post|Publish/EbayCommon/saveComb";
+/*模块组合保存 公用*/
+export const url_save_combList = "post|publish-ebay/module";
 export const api_save_combList = function (data) {
     return http(url_save_combList,data);
 };
-/*模块组合编辑*/
-export const url_edit_combList = "get|Publish/EbayCommon/editComb";
+/*模块组合编辑 公用*/
+export const url_edit_combList = "get|publish-ebay/module";
 export const api_edit_combList = function (data) {
     return http(url_edit_combList,data);
 };
@@ -70,9 +70,9 @@ export const api_delete_combList = function (data) {
 };
 
 /*自定义分类列表*/
-export const url_get_cateList =  "get|Publish/EbayCommon/getCateList";
-export const api_get_cateList = function (data) {
-    return http(url_get_cateList,data);
+export const url_get_combList = "get|publish-ebay/cates";
+export const api_get_combList = function (data) {
+    return http(url_get_combList,data);
 };
 /*自定义分类保存*/
 export const url_save_cateList =  "post|Publish/EbayCommon/saveCate";
@@ -205,6 +205,22 @@ export const api_save_listing = function (data) {
       timeout:INFINITE
   });
 };
+// 立即刊登
+export const url_save_listing_imm = "post|publish-ebay/publish-immediately";
+export const api_save_listing_imm = function (data) {
+    return  http(url_save_listing_imm,data,{
+        contentType:'application/x-www-form-urlencoded',
+        timeout:INFINITE
+    });
+};
+/*Ebay刊登(基础信息) 1.11保存listing队列刊登信息*/
+export const url_queque_listing = "post|publish-ebay/publish-queue/batch";
+export const api_queque_listing = function (data) {
+    return  http(url_queque_listing,data,{
+        contentType:'application/x-www-form-urlencoded',
+        timeout:INFINITE
+    });
+};
 /*1.12获取Listing列表*/
 export const url_listing_management = "post|Publish/EbayListing/listingManagement";
 export const api_listing_management = function (data) {
@@ -224,7 +240,7 @@ export const api_edit_listing = function (data) {
   });
 };
 /*1.20批量操作listing列表*/
-export const url_update_listing = "post|Publish/EbayListing/updateListingStatus";
+export const url_update_listing = "delete|publish-ebay/delete-listing/batch";
 export const api_update_listing = function (data) {
   return  http(url_update_listing,data);
 };
@@ -238,6 +254,11 @@ export const api_c_listing_byDraft = function (data) {
 export const url_c_draft_byDraft = "get|Publish/EbayListing/cDraftByDraft";
 export const api_c_draft_byDraft = function (data) {
     return  http(url_c_draft_byDraft,data);
+};
+/*复制listing并改名称*/
+export const url_copy_listing = "post|publish/ebay/copy-listing";
+export const api_copy_listing = function (data) {
+    return  http(url_copy_listing,data);
 };
 /*促销列表*/
 export const url_get_promotion_list = "get|Publish/EbayCommon/getPromotionList";
@@ -254,13 +275,13 @@ export const url_edit_promotion = "get|Publish/EbayCommon/editPromotion";
 export const api_edit_promotion = function (data) {
     return  http(url_edit_promotion,data);
 };
-/*促销删除*/
-export const url_delete_promotion = "get|Publish/EbayCommon/removePromotion";
+/*删除 公用*/
+export const url_delete_promotion = "delete|publish-ebay/module";
 export const api_delete_promotion = function (data) {
     return  http(url_delete_promotion,data);
 };
 /*刊登风格列表*/
-export const url_get_stylelist = "get|Publish/EbayCommon/getStyleList";
+export const url_get_stylelist = "get|publish-ebay/styles";
 export const api_get_stylelist = function (data) {
     return http(url_get_stylelist,data);
 };
@@ -286,7 +307,7 @@ export const api_bulk_heavy_listing = function(data){
   return http(url_bulk_heavy_listing,data);
 };
 /*获取listing的刊登费用*/
-export const url_get_listing_fee = "post|Publish/EbayListing/getListingFee";
+export const url_get_listing_fee = "post|publish-ebay/check-publish/batch";
 export const api_get_listing_fee = function (data) {
     return http(url_get_listing_fee,data,{
         contentType:'application/x-www-form-urlencoded',
@@ -342,6 +363,11 @@ export const url_remove_timing_rule_list = "get|Publish/EbayListing/removeTiming
 export const api_remove_timing_rule_list = function(data){
   return http(url_remove_timing_rule_list,data);
 };
+/*21.通过导入更新在线listing*/
+export const url_updata_listing="post|publish-ebay/update-listing/import";
+export const api_updata_listing=function (data) {
+    return http(url_updata_listing,data);
+}
 /*复制刊登*/
 export const url_copy_published  = "get|Publish/EbayListing/cListingByListing";
 export const api_copy_published = function(data){
@@ -353,12 +379,12 @@ export const api_cDraft_listing = function(data) {
     return http(url_cDraft_listing,data);
 };
 /*范本编辑  刊登到平台接口*/
-export const url_getDraft_imgs  = "get|Publish/EbayListing/getDraftImgs";
+export const url_getDraft_imgs  = "get|publish-ebay/publish-imgs/batch";
 export const api_getDraft_imgs = function(data) {
     return http(url_getDraft_imgs,data);
 };
 /*范本编辑  刊登到平台接口*/
-export const url_upDraft_imgs  = "post|Publish/EbayListing/upDraftImgs";
+export const url_upDraft_imgs  = "post|publish-ebay/publish-imgs/batch";
 export const api_upDraft_imgs = function(data) {
     return http(url_upDraft_imgs,data);
 };
@@ -412,13 +438,13 @@ export const url_pricing_rules = 'post|pricing-rules/calculate';
 export const api_pricing_rules = function (data) {
     return http(url_pricing_rules,data);
 }
-/*批量修改范本销售账号*/
-export const url_up_accounts = 'put|Publish/EbayListing/up-accounts';
+/*批量修改范本销售账号*///Publish/EbayListing/up-accounts
+export const url_up_accounts = 'post|publish-ebay/listing-account/batch';
 export const api_up_accounts = function (data) {
     return http(url_up_accounts,data);
 }
 /*http://api.rondaful.com/Publish/EbayListing/up-draftitle	*/
-export const url_up_draftitle = 'put|Publish/EbayListing/up-draftitle';
+export const url_up_draftitle = 'post|publish-ebay/chinese-price/batch';
 export const api_up_draftitle = function (data) {
     return http(url_up_draftitle,data);
 }
@@ -428,7 +454,7 @@ export const api_get_drfspecifics = function (data) {
     return http(url_get_drfspecifics,data);
 }
 /*批量修改多属性范本*/
-export const url_up_specifics = 'put|Publish/EbayListing/up-specifics';
+export const url_up_specifics = 'post|publish-ebay/specifics/batch';
 export const api_up_specifics = function (data) {
     return http(url_up_specifics,data);
 }
@@ -443,7 +469,7 @@ export const api_get_by_itemid = function (data) {
     return http(url_get_by_itemid,data);
 }
 /*立即刊登  提交数据 */
-export const url_publish_immediately_save = 'post|Publish/ebay-listing/publish-immediately-save';
+export const url_publish_immediately_save = 'post|publish-ebay/publish-immediately-save';
 export const api_publish_immediately_save = function (data) {
     return http(url_publish_immediately_save,data,{
         contentType:'application/x-www-form-urlencoded',
@@ -466,10 +492,15 @@ export const api_get_immediately_results = function (data) {
         timeout:INFINITE
     });
 }
-/*1.24 获取listing子产品列表*/
-export const url_ebay_variations = 'get|Publish/ebay-listing/variations';
+/*1.24 获取listing子产品列表 新接口*/
+export const url_ebay_variations = 'get|publish-ebay/spread-variants/batch';
 export const api_ebay_variations = function (data) {
     return http(url_ebay_variations,data);
+}
+/*1.24获取listing子产品列表 旧接口*/
+export const get_ebay_variations = 'get|Publish/ebay-listing/variations';
+export const api_get_ebay_variations = function (data) {
+    return http(get_ebay_variations,data);
 }
 
 /*1.58 获取OE兼容信息*/
@@ -540,6 +571,11 @@ export const url_up_listing_duration = "post|Publish/ebay-listing/up-listing-dur
 export const api_up_listing_duration = function(data){
     return http(url_up_listing_duration, data);
 };
+//1.44 指定itemID同步listing
+export const url_up_listing_itemid = "post|publish-ebay/pull-listing";
+export const api_up_listing_itemid = function(data){
+    return http(url_up_listing_itemid, data);
+};
 //批量修改范本名称（获取数据）
 export const url_pre_up_draftname = "get|Publish/EbayListing/preUpDraftname";
 export const api_pre_up_draftname = function(data){
@@ -592,10 +628,16 @@ export const api_batch_change_site = function (data) {
     return http(batch_change_site,data);
 };
 
-/*批量修改范本拍卖刊登天数*/
-export const url_ebay_d_chinese_listing_duration = "put|ebay/d-chinese-listing-duration/batch";
+/*批量修改刊登天数*/
+export const url_ebay_d_chinese_listing_duration = "post|publish-ebay/listing-duration/batch";
 export const api_ebay_d_chinese_listing_duration = function(data){
     return http(url_ebay_d_chinese_listing_duration,data)
+};
+
+//拍卖天数
+export const url_ebay_d_listing_duration = "put|ebay/d-chinese-listing-duration/batch";
+export const api_ebay_d_listing_duration = function(data){
+    return http(url_ebay_d_listing_duration,data)
 };
 /*关键词搜索 */
 export const url_suggested_categories = "get|ebay/suggested-categories";
@@ -611,4 +653,72 @@ export const api_translate_batch = function(data){
 export const url_draft_title_random = "put|publish/ebay/draft-title/random";
 export const api_draft_title_random = function(data){
     return http(url_draft_title_random,data)
+};
+// 虚拟仓发货设置
+export const url_ebay_virtual_send = "post|publish-ebay/virtual-send";
+export const api_ebay_virtual_send = function(data){
+    return http(url_ebay_virtual_send,data)
+};
+// 取消定时/队列刊登
+export const url_ebay_cancel_queue = "post|publish-ebay/cancel-queue-publish";
+export const api_ebay_cancel_queue = function(data){
+    return http(url_ebay_cancel_queue,data)
+};
+//在线listing数据导出
+export const url_ebay_online_export = "get|publish-ebay/online-export";
+export const api_ebay_online_export = function(data){
+    return http(url_ebay_online_export,data)
+};
+//修改在线数据导出
+export const url_ebay_online_export_modify = "get|publish-ebay/online-export-modify";
+export const api_ebay_online_export_modify = function(data){
+    return http(url_ebay_online_export_modify,data)
+};
+//25.获取范本信息
+export const url_publish_ebay_draft = "get|publish-ebay/draft";
+export const api_publish_ebay_draft = function(data){
+    return http(url_publish_ebay_draft,data)
+};
+// publish-ebay/draft
+//25.设置范本
+export const url_save_ebay_draft = "post|publish-ebay/draft";
+export const api_save_ebay_draft = function(data){
+    return http(url_save_ebay_draft,data)
+};
+
+//获取范本列表
+export const url_get_ebay_drafts = "get|publish-ebay/drafts";
+export const api_get_ebay_drafts = function(data){
+    return http(url_get_ebay_drafts,data)
+};
+
+//从范本复制转站点/账号
+export const url_change_site_drafts = "post|publish-ebay/change-site-from-draft/batch";
+export const api_change_site_drafts = function(data){
+    return http(url_change_site_drafts,data)
+};
+//spu刊登统计导出
+export const url_online_spu_export = "get|publish-ebay/online-spu/export";
+export const api_online_spu_export = function(data){
+    return http(url_online_spu_export,data)
+};
+//2.1获取beatOffer列表
+export const url_ebay_best_offer = "get|ebay/best-offers";
+export const api_ebay_best_offer = function(data){
+    return http(url_ebay_best_offer,data)
+};
+// beatOffer同步
+export const url_ebay_best_offer_sync = "post|ebay/best-offers/sync";
+export const api_ebay_best_offer_sync = function(data){
+    return http(url_ebay_best_offer_sync,data)
+};
+//beatOffer删除
+export const url_ebay_best_offer_delete = "delete|ebay/best-offers/batch";
+export const api_ebay_best_offer_delete = function(data){
+    return http(url_ebay_best_offer_delete,data)
+};
+//beatOffer处理
+export const url_best_offer_batch = "post|ebay/best-offers/batch";
+export const api_best_offer_batch = function(data){
+    return http(url_best_offer_batch,data)
 };

@@ -29,3 +29,15 @@ export const url_get_progress_permission = "get|progress-permission";
 export const api_get_progress_permission = function (data) {
     return http(url_get_progress_permission , data);
 };
+
+//获取需求负责人
+export const url_get_progress_principal = "get|progress-principal";
+export const api_get_progress__principal = function (data) {
+    return http(url_get_progress_principal, data);
+};
+
+//获取功能模块
+export const url_get_progress_module = "get|progress-module";
+export const api_get_progress__module = function (data) {
+    return http(url_get_progress_module, data);
+};

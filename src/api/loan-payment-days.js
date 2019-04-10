@@ -16,7 +16,7 @@ export const api_account_list = function(datas){
 //获取列表接口
 export  const url_index_settle = "get|settlement/index_settle";
 export const api_index_settle = function (data) {
-    return http(url_index_settle,data)
+    return http(url_index_settle,data, {timeout: 90000})
 };
 
 //获取详情

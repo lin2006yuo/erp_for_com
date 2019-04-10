@@ -29,30 +29,35 @@ export default [
                 title: '双倍排序', type: 1
             },
             {
-                path: '/pdf-preview',
-                component: () => import('@/components/pdf-preview'),
-                title: 'PDF预览', type: 1
+                path: '/test/array',
+                component: () => import('@/test/array.vue'),
+                title: 'Vue数组响应', type: 1
             },
-            {
-                path: '/amazon-account-management',
-                component: () => import('@/view/report/account-monitor-amazon'),
-                title: '亚马逊账号管理', type: 1
-            },
-            {
-                path: '/warehouse/report/picking',
-                component: () => import('@/view/entrepot/warehouse-reports/picking-report/index.vue'),
-                title: '仓库管理',type: 1
-            },
-            {
-                path: '/package-return',
-                component: () => import('../view/entrepot/package-return/index.vue'),
-                title: '包裹回退', type: 1
-            },
-            {
-                path: '/servers',
-                component: () => import('../view/base/server-management/index.vue'),
-                title: '服务管理', type: 1
-            }
+            // {
+            //     path: '/pdf-preview',
+            //     component: () => import('@/components/pdf-preview'),
+            //     title: 'PDF预览', type: 1
+            // },
+            // {
+            //     path: '/amazon-account-management',
+            //     component: () => import('@/view/report/account-monitor-amazon'),
+            //     title: '亚马逊账号管理', type: 1
+            // },
+            // {
+            //     path: '/warehouse/report/picking',
+            //     component: () => import('@/view/entrepot/warehouse-reports/picking-report/index.vue'),
+            //     title: '仓库管理',type: 1
+            // },
+            // {
+            //     path: '/package-return',
+            //     component: () => import('../view/entrepot/package-return/index.vue'),
+            //     title: '包裹回退', type: 1
+            // },
+            // {
+            //     path: '/servers',
+            //     component: () => import('../view/base/server-management/index.vue'),
+            //     title: '服务管理', type: 1
+            // }
         ]
     },
     {path: '/warehouse',component: () => import('./../Router.vue'),title: '仓库',type: 0,
@@ -63,40 +68,95 @@ export default [
                 type: 1, title: '实验室'
             },
             {
-                path: '/shipped',
-                component: () => import('../view/warehouse/dataStatistics/unshipped.vue'),
-                type: 1, title: '未发货记录测试'
+                path: '/carrier',
+                component: () => import('../view/entrepot/setLogistics/index.vue'),
+                type: 1, title: '物流设置'
             },
             {
-                path: '/cardboard',
-                component: () => import('../view/entrepot/package/cardboard/index.vue'),
-                type: 1, title: '拆包异常列表'
+                path: '/carrier2',
+                component: () => import('../view/entrepot/setLogistics/index2.vue'),
+                type: 1, title: '物流设置2'
             },
             {
-                path: '/components/test',
-                component: () => import('@/view/lxy/components'),
-                type: 1, title: '组件测试'
+                path: '/report/maintain-information',
+                component: () => import('../view/entrepot/maintain-information/index.vue'),
+                type:　1, title: '物流商包裹信息维护'
             },
             {
-                path: '/warehouse/shipped',
-                component: () => import('../view/entrepot/warehouse-data/unshipped.vue'),
-                type: 1, title: '未发货记录'
+                path: '/report/price-comparsion',
+                component: () => import('../view/entrepot/price-comparsion/index.vue'),
+                type:　1, title: '报价对比表格'
             },
             {
-                path: '/pulish-by-shelf',
-                component: () => import('../view/report/publish-statistics/published-on/index.vue'),
-                type: 1, title: '刊登上架spu'
+                path: '/report/exceed',
+                component: () => import('../view/entrepot/warehouse-data/exceed.vue'),
+                type:　1, title: '超库零报表'
             },
             {
-                path: '/publish-by-picking',
-                component: () => import('../view/report/publish-statistics/published-off/index.vue'),
-                type: 1, title: '刊登下架spu'
+                // /report/sale-stock
+                path: '/report/sale-stock',
+                component: () => import('../view/report/stock-control/index.vue'),
+                type:　1, title: '销售及库存管理'
+            },
+        ]
+    },
+    {path: '/report',component: () => import('./../Router.vue'),title: '报表',type: 0,
+        children: [
+            {
+                path: '/inventory',
+                component: () => import('@/view/report/inventory'),
+                type: 1, title: ' 商品进销存'
             },
             {
-                path: '/report/export-files',
-                component: () => import('../view/report/export-manage/index.vue'),
-                type:　1, title: '导出管理列表'
-            }
+                path: '/export',
+                component: () => import('@/view/report/export-manage'),
+                type: 1, title: '报表导出管理'
+            },
+            {
+                path: '/report/goods-analysis',
+                component: () => import('@/view/report/commodity-sales'),
+                type: 1, title: '商品销量分析表'
+            },
+            {
+                path: '/report/area-analysis',
+                component: () => import('@/view/report/area-analysis'),
+                type: 1, title: '区域销量分析'
+            },
+            {
+                path: '/report/financial/performance/amazon',
+                component: () => import('@/view/report/selling-profit/amazon/index.vue'),
+                type: 1, title: 'amazon'
+            },
+            // '/package-collection/problem': {
+            //     component: Vue.component('parcel-abnormalities', function (resolve) {
+            //         require(['../view/entrepot/parcel-abnormalities/index.vue'], resolve)
+            //     })
+            // },
+            {
+                path: '/package-collection/problem',
+                component: () => import('@/view/entrepot/parcel-abnormalities2/index.vue'),
+                type: 1, title: '计抛拦截包裹'
+            },
+            // '/member-ship': {
+            //     component: Vue.component('base-member-ship', function (resolve) {
+            //         require(['../view/base/member-ship/index.vue'], resolve)
+            //     })
+            // },
+            {
+                path: '/member-ship',
+                component: () => import('@/view/base/member-ship/index.vue'),
+                type: 1, title: '平台站好绑定'
+            },
+            // '/report/amazon-settlement/summary': {
+            //     component: Vue.component('financial-management-store-capital-accounting-amazon', function (resolve) {
+            //         require(['../view/financial-management/store-capital-accounting/amazon/index.vue'], resolve)
+            //     })
+            // },
+            {
+                path: '/report/amazon-settlement/summary',
+                component: () => import('@/view/financial-management/store-capital-accounting/amazon/index.vue'),
+                type: 1, title: '财务管理资金核算'
+            },
         ]
     }
 ];

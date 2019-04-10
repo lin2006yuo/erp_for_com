@@ -38,3 +38,21 @@ export const url_purchase_search_export = "post|purchase-parcels/export";
 export const api_purchase_search_export = function (data) {
     return http(url_purchase_search_export, data);
 };
+
+// 获取具体异常类型
+export const url_abnormal_type = "get|purchase-parcels/abnormal-type";
+export const api_abnormal_type = function () {
+    return http(url_abnormal_type);
+};
+
+// 标记异常
+export const url_mark_parcel_abnormal = "post|purchase-parcels/parcel-abnormal";
+export const api_mark_parcel_abnormal = function (data) {
+    return http(url_mark_parcel_abnormal, data);
+};
+
+// 获取异常来源
+export const url_abnormal_source = "get|purchase-parcels/abnormal-source";
+export const api_abnormal_source = function () {
+    return http(url_abnormal_source);
+};

@@ -102,3 +102,9 @@ export const api_coordinate_batch_deny = function (data) {
     return http(url_coordinate_batch_deny, data);
 };
 
+//获取借调锁定详情
+export const url_lock_detail = "get|warehouse-goods-channel-log/lock-detail";
+export const api_lock_detail = function (data) {
+    return http(url_lock_detail, data);
+};
+

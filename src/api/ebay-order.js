@@ -6,7 +6,10 @@ import {http} from '../lib/http-plus';
 
 export const url_get = "get|ebay-orders";
 export const api_get = function(data){
-  return http(url_get,data)
+  return http(url_get,data,{
+      contentType:'application/x-www-form-urlencoded',
+      timeout:INFINITE
+  })
 };
 
 export const url_info = "get|ebay-orders/:id";
@@ -66,4 +69,14 @@ export const api_post_ebay_orders_export = function(data){
         contentType:'application/x-www-form-urlencoded',
         timeout:90000
     })
+};
+//推送至系统订单
+export const url_post_ebay_orders_ebay = "post|ebay-orders/push-ebay-order";
+export const api_post_ebay_orders_ebay = function(data){
+    return http(url_post_ebay_orders_ebay,data)
+};
+//拉取订单
+export const url_post_ebay_orders_sysc_ebayorder = "post|ebay-orders/sysc-ebayorder";
+export const api_post_ebay_orders_sysc_ebayorder = function(data){
+    return http(url_post_ebay_orders_sysc_ebayorder,data)
 };

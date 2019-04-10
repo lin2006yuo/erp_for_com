@@ -23,7 +23,7 @@ export const api_edit_ebay_title = function(data){
   return http(url_edit_ebay_title,data)
 };
 /*1.3批量修改商品商品一口价和可售数量*/
-export const url_edit_ebay_product_price_quantity = "post|editEbayProductPriceQuantity"
+export const url_edit_ebay_product_price_quantity = "post|publish-ebay/fixed-price-qty/batch"
 export const api_edit_ebay_product_price_quantity = function(data){
   return http(url_edit_ebay_product_price_quantity,data)
 };
@@ -38,7 +38,7 @@ export const api_rsync_edit_ebay_product = function(data){
   return http(url_rsync_edit_ebay_product,data)
 };
 /*1.6批量修改拍卖价*/
-export const url_edit_ebay_product_auction_price = "post|editEbayProductAuctionPrice"
+export const url_edit_ebay_product_auction_price = "post|publish-ebay/chinese-price/batch"
 export const api_edit_ebay_product_auction_price = function(data){
   return http(url_edit_ebay_product_auction_price,data)
 };
@@ -63,7 +63,7 @@ export const api_custom_category_tree = function(data){
   return http(url_custom_category_ree,data)
 };
 /*2.3应用公共模块*/
-export const url_ebay_common_module = "post|application-ebay-common-module"
+export const url_ebay_common_module = "post|publish-ebay/apply-common-module/batch"
 export const api_ebay_common_module = function(data){
   return http(url_ebay_common_module,data)
 };
@@ -88,7 +88,7 @@ export const api_ebay_adjust_price = function(data){
     return http(url_ebay_adjust_price,data)
 };
 /*5.批量修改范本店铺分类 */
-export const url_draft_store_category = "put|ebay/draft-store-category/batch"
+export const url_draft_store_category = "post|publish-ebay/listing-store-category/batch"
 export const api_draft_store_category = function(data){
     return http(url_draft_store_category,data)
 };

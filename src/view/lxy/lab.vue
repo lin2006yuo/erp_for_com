@@ -10,20 +10,27 @@
             shipping_ids: <input type="text" v-model="deliverydata.shipping_ids">
             page: <input type="text" v-model="deliverydata.page">
             pageSize: <input type="text" v-model="deliverydata.pageSize">
+            <div v-html="space"></div>
+            <pre>{{spacePre}}</pre>
         </el-row>
         <el-button @click="export_excel">导出汇总</el-button>
         <export-dialog v-model="visible"></export-dialog>
+        <p class="elip" title='aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa'> aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</p>
+        <listener />
     </div>
 </template>
 
 <script>
     import {api_get_confirm,api_confirm_export,api_get_export_title,url_confirm_export,api_confirm_export_all,api_get_export_title_all} from '@/api/delivery-list';
+    import listener from './listener'
     import {downloadFile} from '@/lib/http';
     export default {
         name: "lab",
         data() {
             return {
                 visible: false,
+                space: '123&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2132',
+                spacePre: '123213                     12312',
                 deliverydata: {
                     channel_id: 0,
                     warehouse_id: "",
@@ -78,6 +85,7 @@
         },
         components: {
             exportDialog:require('./export-dialog.vue').default,
+            listener
         }
     }
 </script>
@@ -85,5 +93,11 @@
 <style scoped>
     input {
         width: 120px;
+    }
+    .elip {
+        width: 50px;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis
     }
 </style>

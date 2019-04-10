@@ -29,3 +29,15 @@ export const url_post_modify_status = "post|software/:id/status";
 export const api_post_modify_status = function (id,data) {
     return http(Url2(url_post_modify_status,{id:id}),data)
 };
+
+//发布软件版本
+export const url_post_software_version = "post|software/:id/version";
+export const api_post_software_version = function (id,data) {
+    return http(Url2(url_post_software_version,{id:id}),data)
+};
+
+//软件历史记录
+export const url_get_software_version = "get|software/:id/version";
+export const api_get_software_version = function (id,data) {
+    return http(Url2(url_get_software_version,{id:id}),data)
+};

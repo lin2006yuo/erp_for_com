@@ -46,4 +46,10 @@ export const api_process_status = function (data) {
 export const url_abnormal_count = "get|purchase-parcels/abnormal-count";
 export const api_abnormal_count = function () {
     return http(url_abnormal_count);
-}
+};
+
+//收包异常列表上传凭证
+export const url_abnormal_certificate = "put|purchase-parcels/certificate";
+export const api_abnormal_certificate = function (data) {
+    return http(url_abnormal_certificate, data);
+};

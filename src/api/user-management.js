@@ -66,4 +66,10 @@ export const url_get_department = "get|job";
 export const api_department_code = function(data){
     return http(url_get_department,data);
 };
+//获取用户日志
+export const url_logs = "get|user/:id/logs"
+export const api_logs = function(id){
+    return http(Url2(url_logs,{id:id}));
+};
+
 

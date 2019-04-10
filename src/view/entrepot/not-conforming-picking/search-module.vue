@@ -75,6 +75,27 @@
                              @keydown="key_down"
                              v-sf.snText></order-input>
             </label-item>
+            <el-select class="inline width-xs"
+                       v-sf.snDate
+                       v-model="searchData.snDate">
+                <el-option v-for="item in times"
+                           :label="item.label"
+                           :key="item.value"
+                           :value="item.value">
+                </el-option>
+            </el-select>
+            <el-date-picker class="date inline"
+                            v-model="searchData.date_b"
+                            :picker-options="picker_b"
+                            v-sf.date_b
+                            placeholder="开始时间"></el-date-picker>
+            <span>&nbsp;--&nbsp;</span>
+            <el-date-picker
+                    class="date inline mr-sm"
+                    placeholder="结束时间"
+                    v-sf.date_e
+                    :picker-options="picker_e"
+                    v-model="searchData.date_e"></el-date-picker>
         </search-card>
     </div>
 </template>
@@ -105,7 +126,10 @@
                     snText: '',
                     module: 1,
                     page: 1,
-                    pageSize: 20
+                    pageSize: 20,
+                    snDate: 'distribution_time',
+                    date_b: '',
+                    date_e: ''
                 },
                 clears: {
                     snType: 'number',
@@ -124,6 +148,27 @@
                     {label: "处理号", value: "process_code"},
                     {label: "SKU", value: "sku"}
                 ],
+                times: [
+                    { label: '配货时间', value: 'distribution_time' }
+                ],
+                picker_b: {
+                    disabledDate: (time) => {
+                        if (this.searchData.date_e) {
+                            return time.getTime() > this.searchData.date_e;
+                        } else {
+                            return false;
+                        }
+                    }
+                },
+                picker_e: {
+                    disabledDate: (time) => {
+                        if (this.searchData.date_b) {
+                            return time.getTime() < this.searchData.date_b;
+                        } else {
+                            return false;
+                        }
+                    }
+                },
             }
         },
         created() {
@@ -142,6 +187,8 @@
                     searchData.snText = list.length <= 1 ? this.searchData.snText.trim() : list;
                 }
                 Object.assign(searchData,{warehouse_id: this.warehouse_id});
+                searchData.date_e ? searchData.date_e = datef('YYYY-MM-dd', +new Date(searchData.date_e) / 1000) : null
+                searchData.date_b ? searchData.date_b = datef('YYYY-MM-dd', +new Date(searchData.date_b) / 1000) : null
                 this.$emit("init", searchData);
             },
             init_warehouse() {

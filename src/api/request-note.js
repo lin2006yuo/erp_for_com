@@ -17,6 +17,17 @@ export const url_account_list = "get|orders/account";
 export const api_account_list = function(datas){
     return http(url_account_list, datas);
 };
+//获取账号
+export const url_get_accounts_list = "get|orders/accounts";
+export const api_get_accounts_list = function (data) {
+    return http(url_get_accounts_list,data);
+};
+
+//获取站点
+export const url_get_sites = "get|orders/sites";
+export const api_get_sites = function (data) {
+    return http(url_get_sites,data);
+};
 //获取状态
 export const url_virtual_order = "get|virtual-order/status";
 export const api_virtual_order = function(data){

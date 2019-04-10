@@ -104,10 +104,9 @@ export const upload = function (options) {
     })
 };
 
-export const downloadFile = function(options){
+export const downloadFile = function(options, callback){
     let xhr = new XMLHttpRequest();  // XMLHttpRequest 对象
-    // xhr.overrideMimeType('text/xml');
-    let url = options.url+'?' + obj2url(options.get || {});
+    let url = obj2url(options.get || {})?`${options.url}?${obj2url(options.get || {})}`:options.url;
     xhr.open("GET", url, true);
     xhr.setRequestHeader('Authorization', authorization());
     xhr.responseType = "blob";//这里是关键，它指明返回的数据的类型是二进制
@@ -121,6 +120,13 @@ export const downloadFile = function(options){
             link.download = options.fileName+options.suffix;
             link.href = URL.createObjectURL(response);
             link.dispatchEvent(evt);
+            if(typeof options.success === 'function') {
+                options.success(xhr.response)
+            }
+        } else if(xhr.readyState === 4 &&  xhr.status === 500) {
+            if(typeof options.error === 'function') {
+                options.error()
+            }
         }
     }
 };

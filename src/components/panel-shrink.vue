@@ -67,7 +67,7 @@
     export default{
         data(){
             return {
-                contentStyle:{ flex:1}
+                contentStyle:{ flex:1, overflow: 'scroll'}
             };
         },
         mounted(){

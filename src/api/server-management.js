@@ -98,6 +98,22 @@ export const url_delete_user_info = "delete|servers/:id/user";
 export const api_delete_user_info = (id,data)=> {
     return http(Url2(url_delete_user_info, {id:id}),data);
 };
+
+//批量再次推送
+export const url_delete_again_info = "post|servers/:id/again";
+export const api_delete_again_info = (id,data)=> {
+    return http(Url2(url_delete_again_info, {id:id}),data,{
+        contentType:'application/x-www-form-urlencoded',
+        timeout:90000
+    });
+};
+
+//批量设置服务器状态
+export const url_post_batch_status = "post|servers/batch/status";
+export const api_post_batch_status = function (data) {
+    return http(url_post_batch_status,data);
+};
+
 //服务器日志
 export const url_servers_log = "get|servers/:id/log";
 export const api_servers_log = function (data) {
@@ -109,3 +125,11 @@ export const url_get_user_id_get_department = "get|user/:id/get-department";
 export const api_get_user_id_get_department = function (id) {
     return http(Url2(url_get_user_id_get_department,{id}));
 };
+
+//服务器外网类型
+export const url_get_servers_type = "get|servers/extranet-type";
+export const api_get_servers_type = function () {
+    return http(url_get_servers_type);
+};
+
+//

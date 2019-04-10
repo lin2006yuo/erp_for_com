@@ -11,29 +11,18 @@
         <search-card :params="searchData" :clears="clear" @enter="table_create" @search="table_create"
                      @init-params="init_status_btn">
             <!--获取表格的处理状态-->
-            <div class="mb-mini">
-                <label-buttons
-                        class="inline"
-                        :buttons="buttons"
-                        label="处理状态："
-                        @select="select_status">
-                </label-buttons>
-                <label-buttons
-                        label="异常原因："
-                        @select="select_type"
-                        :buttons="typeList"
-                        :max="15"
-                        class="ml-sm inline">
-                </label-buttons>
-            </div>
-            <div class="mb-mini">
-                <label-buttons label="处理措施："
-                               v-if="searchData.status === 2"
-                               :buttons="abnormalList"
-                               class="inline"
-                               @select="select_method">
-                </label-buttons>
-            </div>
+            <label-buttons
+                    class="inline"
+                    :buttons="buttons"
+                    label="处理状态："
+                    @select="select_status">
+            </label-buttons>
+            <label-buttons label="处理措施："
+                            v-if="searchData.status === 2"
+                            :buttons="abnormalList"
+                            class="inline"
+                            @select="select_method">
+            </label-buttons>
             <label>面单号：</label>
             <order-input v-sf.shipping_number
                          ref="batchInput"

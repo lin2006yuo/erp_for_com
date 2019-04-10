@@ -7,8 +7,8 @@ import {http} from '../lib/http-plus';
 
 //获取审核规则列表
 export const url_stock_rules = "get|stock-rules";
-export const api_stock_rules = function () {
-    return http(url_stock_rules);
+export const api_stock_rules = function (data) {
+    return http(url_stock_rules, data);
 };
 
 //审核规则排序
@@ -59,6 +59,18 @@ export const api_stock_rule_items = function () {
 export const url_get_stock_resource = "post|stock-rules/resources";
 export const api_get_stock_resource = function (params) {
     return http(url_get_stock_resource, params);
+};
+
+//获取默认规则
+export const url_get_default_stock_rule = "get|stock-rules/default";
+export const api_get_default_stock_rule = function (data) {
+    return http(url_get_default_stock_rule, data);
+};
+
+//保存默认规则
+export const url_save_default_stock_rule = "post|stock-rules/default";
+export const api_save_default_stock_rule = function (data) {
+    return http(url_save_default_stock_rule, data);
 };
 
 //修改状态

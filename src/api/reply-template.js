@@ -4,7 +4,7 @@
 import {http} from '../lib/http-plus';
 
 //获取平台
-export const url_reply_channel ="get|channel-categories";
+export const url_reply_channel ="get|msg-tpl/channels";
 export const api_reply_channel = function() {
     return http(Url2(url_reply_channel));
 };

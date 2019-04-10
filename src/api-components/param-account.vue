@@ -50,6 +50,7 @@
                             request = http(Url2(this.url, this.param),timeOut);
                         }
                         this.$http(request).then(res => {
+                                console.log({res})
                                 this.load({data: this.fixResult(res), type: this.type});
                             (typeof value !=="undefined")&&(this.account = value);
                         });

@@ -134,7 +134,7 @@
                     </el-select>
                 </label-item>
         </search-card>
-        <add-goods v-model="goodsDialog" @add-goods="goods_submit"></add-goods>
+        <add-goods v-model="goodsDialog" @add-goods="goods_submit" ref="addGoods"></add-goods>
     </div>
 </template>
 <style lang="stylus" scoped>
@@ -302,6 +302,7 @@
             clear_goods(){
                 this.goods_list = [];
                 this.searchData.sku_ids = [];
+                this.$refs.addGoods.clearSelection()
             },
             //子组件添加商品传过来的
             goods_submit(val){
@@ -358,7 +359,7 @@
         components: {
             labelItem:require('../../../components/label-item.vue').default,
             selectRemote:require('../../../components/select-remote.vue').default,
-            addGoods:require('../../../api-components/add-goods.vue').default,
+            addGoods:require('./add-goods.vue').default,
             paramAccount:require('../../../api-components/param-account.vue').default,
             searchCard:require('../../../components/search-card.vue').default
         },

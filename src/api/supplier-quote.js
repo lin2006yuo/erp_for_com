@@ -76,7 +76,6 @@ export const api_get_current = function(data){
     return http(url_get_current,data);
 };
 //搜索商品
-
 export const url_get_goods_sku = "get|supplier-offer/getGoodsSkus";
 export const api_get_goods_sku = function(data){
     return http(url_get_goods_sku,data);
@@ -86,7 +85,11 @@ export const url_get_goods_supper = "get|supplier-offer/getSupplierSkus";
 export const api_get_goods_supp = function(data){
     return http(url_get_goods_supper,data);
 };
-
+//修改供应商
+export const url_stocking_advice_supplier = "put|stocking-advice/supplier";
+export const api_stocking_advice_supplierp = function(data){
+    return http(url_stocking_advice_supplier,data);
+};
 //获取goods_id对应的供应商
 export const url_egt_sup = "get|goods/getGoodSupplierList";
 export const api_get_sup = function(data){
@@ -113,3 +116,4 @@ export const url_get_currency_select_list = "get|currency";
 export const api_get_currency_select_list = function(){
     return http(url_get_currency_select_list);
 };
+

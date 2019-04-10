@@ -191,6 +191,9 @@ export default {
             }
             state.navItems.splice(ind, 1);
             const maxIndex = state.navItems.length - 1;
+            if(state.navIndex > ind){
+                state.navIndex -=1;
+            }
             if(state.navIndex > maxIndex){
                 state.navIndex = maxIndex;
             }
@@ -251,7 +254,7 @@ export default {
                 if(item){
                     state.menus = item.children;
                 }
-                state.headerIndex = id; 
+                state.headerIndex = id;
             }
         },
 

@@ -9,84 +9,37 @@
                 <i></i>
                 {{ emptyText }}
             </div>
-            <template v-if="is_salesman">
-                <el-table-column key="account_code" label="账号简称" inline-template>
-                    <div>
-                        <ui-tip :content="row.account_code" :width="98"></ui-tip>
-                    </div>
-                </el-table-column>
-            </template>
-            <el-table-column label="销售员" inline-template>
-                <div>
-                    <ui-tip :content="row.sale_user" :width="98"></ui-tip>
-                </div>
+            <el-table-column key="account_code" label="账号简称" v-if="is_salesman">
             </el-table-column>
-            <template v-if="is_salesman">
-                <el-table-column key="sale_group_leader" label="销售组长" inline-template>
-                    <div>
-                        <ui-tip :content="row.sale_group_leader" :width="98"></ui-tip>
-                    </div>
-                </el-table-column>
-            </template>
-            <el-table-column label="订单数" inline-template>
-                <div>
-                    <ui-tip :content="row.order_num" :width="98"></ui-tip>
-                </div>
+            <el-table-column label="销售员" >
             </el-table-column>
-            <el-table-column label="售价CNY" inline-template>
-                <div>
-                    <ui-tip :content="row.sale_amount | toFixed2" :width="98"></ui-tip>
-                </div>
+            <el-table-column  label="销售组长" v-if="is_salesman">
             </el-table-column>
-            <el-table-column label="平台费用CNY" inline-template width="100">
-                <div>
-                    <ui-tip :content="row.channel_cost | toFixed2" :width="98"></ui-tip>
-                </div>
+            <el-table-column label="订单数" >
             </el-table-column>
-            <el-table-column label="P卡费用" inline-template>
-                <div>
-                    <ui-tip :content="row.p_fee | toFixed2" :width="98"></ui-tip>
-                </div>
+            <el-table-column label="售价CNY" >
             </el-table-column>
-            <el-table-column label="物流费用" inline-template>
-                <div>
-                    <ui-tip :content="row.shipping_fee | toFixed2" :width="98"></ui-tip>
-                </div>
+            <el-table-column label="平台费用CNY" >
             </el-table-column>
-            <el-table-column label="包装费用" inline-template>
-                <div>
-                    <ui-tip :content="row.package_fee | toFixed2" :width="98"></ui-tip>
-                </div>
+            <el-table-column label="P卡费用" >
             </el-table-column>
-            <el-table-column label="头程报关费" inline-template>
-                <div>
-                    <ui-tip :content="row.first_fee | toFixed2" :width="98"></ui-tip>
-                </div>
+            <el-table-column label="物流费用" >
             </el-table-column>
-            <el-table-column label="商品成本" inline-template>
-                <div>
-                    <ui-tip :content="row.goods_cost | toFixed2" :width="98"></ui-tip>
-                </div>
+            <el-table-column label="包装费用" >
             </el-table-column>
-            <el-table-column label="毛利" inline-template>
-                <div>
-                    <ui-tip :content="row.gross_profit | toFixed2" :width="98"></ui-tip>
-                </div>
+            <el-table-column label="头程报关费" >
             </el-table-column>
-            <el-table-column label="退款" inline-template>
-                <div>
-                    <ui-tip :content="row.refund_amount | toFixed2" :width="98"></ui-tip>
-                </div>
+            <el-table-column label="商品成本" >
             </el-table-column>
-            <el-table-column label="实际利润" inline-template>
-                <div>
-                    <ui-tip :content="row.profit | toFixed2" :width="98"></ui-tip>
-                </div>
+            <el-table-column label="毛利" >
             </el-table-column>
-            <el-table-column label="利润率" inline-template>
-                <div>
-                    <ui-tip :content="row.profit_rate" :width="98"></ui-tip>
-                </div>
+            <el-table-column label="转运费"  v-if="is_overwarehouse">
+            </el-table-column>
+            <el-table-column label="退款" >
+            </el-table-column>
+            <el-table-column label="实际利润" >
+            </el-table-column>
+            <el-table-column label="利润率" >
             </el-table-column>
         </el-table>
         <el-pagination
@@ -102,7 +55,6 @@
     </div>
 </template>
 <style lang="stylus">
-
 </style>
 <script>
     import {api_wish_list, api_export_performance} from '../../../../api/selling-profit';
@@ -181,6 +133,9 @@
         computed: {
             is_salesman(){
                 return this.searchData.report_type !== 'seller';
+            },
+            is_overwarehouse(){
+                return this.searchData.report_type !== 'overseas';
             },
             emptyText() {
                 return this.firstLoading ? '等待查询数据中...' : '暂无数据'

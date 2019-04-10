@@ -32,3 +32,8 @@ export const url_batch_save_title = 'put|publish/ebay/titles/batch';
 export const api_batch_save_title = function (data) {
     return http(url_batch_save_title, data);
 };
+//批量标题修改
+export const url_batch_change_title='get|title/suggest-word';
+export const api_batch_change_title = function (data) {
+    return http(url_batch_change_title,data);
+}

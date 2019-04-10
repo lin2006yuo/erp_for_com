@@ -23,3 +23,18 @@ export const url_account_list = "get|orders/account";
 export const api_account_list = function(data){
     return http(url_account_list, data);
 };
+//导出列表
+export const url_vova_orders_export = "post|vova-orders/export";
+export const api_vova_orders_export = function(data) {
+    return http(url_vova_orders_export,data);
+};
+// 获取我的模板
+export const url_goods_export_template = "get|export-template";
+export const api_goods_export_template = function (data) {
+    return http(url_goods_export_template,data);
+};
+// 获取可供选择的导出字段
+export const url_vova_orders_export_fields = "get|vova-orders/export-fields";
+export const api_vova_orders_export_fields = function (data) {
+    return http(url_vova_orders_export_fields,data);
+};
