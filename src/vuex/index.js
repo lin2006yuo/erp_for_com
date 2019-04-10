@@ -16,5 +16,4 @@ modules.keys().forEach(key => {
 const store = new Vuex.Store({
     modules: storeModules
 });
-
 export default store;

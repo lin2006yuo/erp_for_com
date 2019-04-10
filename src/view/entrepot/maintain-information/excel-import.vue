@@ -2,11 +2,11 @@
     <page-dialog class="p-import-excel" title="Excel导入" v-model="visible" size="large" :close-on-click-modal="false">
         <div>
             <div class="file-btn">
-                选取文件
+                选择要导入的Excel文件
                 <input type="file" ref="file" multiple @change="file_change">
             </div>
             <div class="file-btn ml-sm inline" style="width: 120px;" @click="download_file">
-                下载模板
+                下载物流商实际重量、计费重量和运费导入模板
             </div>
             <ul class="files">
                 <li v-if="files.length > 0" v-for="file in files">

@@ -30,8 +30,15 @@
                             :value="item.value"
                         ></el-option>
                     </el-select>
+                    <el-input
+                        class="ml-xs"
+                        v-if="searchData.snType === 'name'"
+                        v-model="searchData.snText"
+            
+                    ></el-input>
                     <order-input v-model="searchData.snText"
                                  class="inline s-width-large ml-xs"
+                                 v-else
                                  @keydown="init"
                                  placeholder="可批量搜索，Shift+回车换行..."></order-input>
                 </label-item>

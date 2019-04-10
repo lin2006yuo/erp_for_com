@@ -209,7 +209,7 @@ export default {
     .email-box {
         vertical-align: top;
         .email-name {
-            vertical-align: inherit
+            vertical-align: initial
         }
         .email-input-group {
             display: inline-block

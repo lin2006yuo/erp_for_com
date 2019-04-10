@@ -29,7 +29,7 @@ export default {
         add_input() {
             const inputDomain = this.inputDomain
             if(inputDomain.length && !inputDomain[inputDomain.length - 1].value) {
-                this.$message({type: 'info', message: '请填写邮编'})
+                this.$message({type: 'info', message: this.message})
                 return 
             } else {
                 inputDomain.push({value: ''})
@@ -75,6 +75,9 @@ export default {
         },
         data: {
             default: () => []
+        },
+        message: {
+            default: '请输入内容'
         }
     },
     watch: {

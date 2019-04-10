@@ -19,7 +19,8 @@
         >
             <el-table-column type="selection"></el-table-column>
             <el-table-column label="包裹号" prop="number"></el-table-column>
-            <el-table-column label="物流商称重" prop="providers_weight"></el-table-column>
+            <el-table-column label="物流商实际称重" prop="providers_actual_weight"></el-table-column>
+            <el-table-column label="物流商计费重量" prop="providers_weight"></el-table-column>
             <el-table-column label="物流商运费" prop="providers_fee"></el-table-column>
             <el-table-column label="物流商实际运费币种" prop="providers_currency_code"></el-table-column>
         </el-table>
@@ -65,7 +66,7 @@
         },
         methods: {
             open(){
-                // this.tableData = [];
+                this.tableData = [];
             },
             download_file(){//下载模板
                 let url = config.apiHost+'downfile';
@@ -88,15 +89,19 @@
                 }
             },
             change_table(val){
-                this.tableData = val;
-                this.tableData.forEach(row=>{
-                    this.$set(row,'isRed',false);
-                })
+                this.tableData = _.unionBy(val, this.tableData, 'number')
             },
             // 确认导入
             submit(){
                 if(this.selectOptions.length <= 0) return this.$message({type: 'warning', message: '请选择要到导出的记录'})
-                this.$http(api_import_save, {data: this.selectOptions})
+                this.$http(api_import_save, {data: this.selectOptions}).then(res =>　{
+                    if(res.failure > 0) {
+                        this.$message(({type: 'error', message: res.message}))
+                    } else {
+                        this.$message(({type: 'success', message: '导入成功'}))
+                        this.dialog = false
+                    }
+                })
             },
 
 

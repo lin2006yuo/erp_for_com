@@ -1,6 +1,6 @@
 <template>
     <page class="channel-profit">
-        <search-module @init-data="init_data" ref="search_module"></search-module>
+        <search-module @init-data="init_data" ref="search_module" :channel-id="3"></search-module>
         <request-button :disabled="hasData"
                    class="mt-xs mb-xs ml-sm"
                    :request="export_report">批量导出</request-button>
@@ -87,7 +87,7 @@
         watch:{},
         components:{
             exportDialog:require('../../export-dialog.vue').default,
-            searchModule:require('./search-module.vue').default,
+            searchModule:require('../search-module.vue').default,
             tableModule:require('./table-module.vue').default,
             requestButton:require('../../../../global-components/request-button.vue').default,
         }

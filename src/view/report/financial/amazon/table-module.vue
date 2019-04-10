@@ -5,7 +5,7 @@
                       :has-data="tableData.length>0"
                       class="local"
                       :body-height="41"
-                      :width="3780"
+                      :width="4000"
                       :first-loading="firstLoading"
                       :heads="[
                     //注意：更改此处size的时候需要更改indent-table标签的width宽度
@@ -21,6 +21,7 @@
                     {label:'发货日期',size:170},
                     {label:'仓库类型',size:100},
                     {label:'发货仓库',size:120},
+                    {label:'物流商',size:120},
                     {label:'邮寄方式',size:300},
                     {label:'包裹号',size:300},
                     {label:'跟踪号',size:150},
@@ -37,6 +38,7 @@
                     {label:'包装费用',size:100},
                     {label:'头程报关费',size:110},
                     {label:'利润',size:80},
+                    {label:'转运费',size:80},
                     {label:'货品总数',size:99}
                 ]"
         >
@@ -89,6 +91,10 @@
                         <ui-tip :content="order.warehouse_type" :width="79"></ui-tip>
                     </td>
                     <!--发货仓库-->
+                    <td width="120">
+                        <ui-tip :content="order.warehouse_name" :width="79"></ui-tip>
+                    </td>
+                    <!--物流商-->
                     <td width="120">
                         <ui-tip :content="order.warehouse_name" :width="79"></ui-tip>
                     </td>
@@ -153,6 +159,10 @@
                         <ui-tip :content="order.first_fee　| toFixed4" :width="98"></ui-tip>
                     </td>
                     <!--利润-->
+                    <td width="80">
+                        <ui-tip :content="order.profit | toFixed4" :width="79"></ui-tip>
+                    </td>
+                    <!--转运费-->
                     <td width="80">
                         <ui-tip :content="order.profit | toFixed4" :width="79"></ui-tip>
                     </td>

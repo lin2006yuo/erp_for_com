@@ -16,9 +16,19 @@
                 <i></i>
                 {{emptyText}}
             </div>
-            <el-table-column type="selection"></el-table-column>
-            <el-table-column label="运输方式" prop="number"></el-table-column>
-            <el-table-column label="修改时间" prop="order" :formatter="format_order"></el-table-column>
+            <el-table-column label="运输方式" prop="shipping_name"></el-table-column>
+            <el-table-column label="生成时间" prop="create_time"></el-table-column>
+            <el-table-column label="生成人" prop="creator" ></el-table-column>
+            <el-table-column label="操作" :width="180">
+                <template slot-scope="scope">
+                    <a 
+                        :href="`${scope.row.file_path}`" 
+                        class="" 
+                        download 
+                        @click="is_download(scope.row, $event)"
+                    >下载报表</a>
+                </template>
+            </el-table-column>
         </el-table>
         <el-pagination
             class="page-fixed"
@@ -63,7 +73,11 @@
             },
             format_weight(row, column, cellValue) {
                 return Number(cellValue).toFixed(0) + 'g'
-            }
+            },
+            deleteRow(index,row) {
+                this.$emit('download', index, row)
+            },
+            is_download() {}
         },
         props: {
             searchData: {
@@ -83,8 +97,14 @@
         }
     }
 </script>
-<style>
-    .warehouse-data .bold{
-        font-weight: bold;
+<style scope lang="stylus">
+    .warehouse-data{
+        a {
+            color: #69f;
+            cursor: pointer;
+        }
+        .exportColor{
+            color: #C0CCDA;
+        }
     }
 </style>

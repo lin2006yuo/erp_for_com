@@ -1,6 +1,6 @@
 <template>
     <page class='p-maintain-information'>
-        <search-card class="mb-xs" @search="init" :params="searchData" :clears="clears">
+        <search-card class="mb-xs" @search="search" :params="searchData" :clears="clears">
             <label-item label="">
                 <el-select v-model="searchData.snType" class="inline ml-sm width-md">
                     <el-option :key="item.value" v-for="item in selectList" :label="item.label" :value="item.value">
@@ -51,19 +51,19 @@
         </search-card>
         <el-row class="mb-xs">
             <permission class="ml-sm delivery_comfirm_btn" tag="selectDropdown" type="primary" size="mini" keys="value"
-                :route="apis.url_confirm_export" :handles="partAllOptions" :action="handle_export_click"
+                :route="apis.url_export_excel" :handles="partAllOptions" :action="handle_export_click"
                 :change="set_export_type">
             </permission>
-            <el-button size="mini" class="ml-sm" type="primary" @click="importPlatVisible = true">导入物流商称重和运费</el-button>
+            <el-button size="mini" class="ml-sm" type="primary" @click="importPlatVisible = true">导入物流商实际重量、计费重量和运费</el-button>
         </el-row>
         <!-- 表格 -->
         <table-module :search-data="searchData" :table-data="tableData" :total="total" :loading="loading" ref="table"
             @size-change="handle_size_change" @current-change="handle_current_change" @selection-change="handle_select">
         </table-module>
         <!-- 1.fields: 字段 2.templates: 模板id数组，用于匹配是否去后台获取相应模板 3. getTemplate 获取模板id-->
-        <export-field v-model="exportVisible" :fields="fields" :templates="templates" @getTemplate="get_templates"
+        <export-field :param="export_param" v-model="exportVisible" :fields="fields" :templates="templates" @getTemplate="get_templates"
             title="请选择自定义导出字段" :creat-excel="creat_excel"></export-field>
-        <import-order v-model="importPlatVisible" @save="save_mport"></import-order>
+        <import-order v-model="importPlatVisible"></import-order>
         <!-- <excel-import v-model="importVisible"></excel-import> -->
         <export-tip v-model="visible"></export-tip>
     </page>
@@ -74,60 +74,38 @@
     const EXPORT_BATCH = 0
 
     import { api_package_carriers, api_get_excel_field, 
-            api_export_tempalte, api_export_excel, api_goods_export_template } from '@/api/package-carriers'
+            api_export_tempalte, api_export_excel, api_goods_export_template, url_export_excel } from '@/api/package-carriers'
     import { api_get_warehouse, api_get_shipping } from '@/api/common.js';
+    import {downloadFile} from '@/lib/http';
     export default {
         permission: {
-            url_confirm_export: '12312'
+            url_export_excel
         },
         data() {
             return {
                 searchData: {
-                    snType: "order",
+                    snType: "order_number",
                     snText: '',
                     warehouse_id: '',
                     shipping_id: [],
                     date_type: 'shipping_time',
-                    date_b: '',
-                    date_e: '',
+                    date_b: new Date(Date.now() - 15 * 24 * 3600 *1000),
+                    date_e: new Date(),
                     page: 1,
                     pageSize: 20
                 },
                 clears: {
-                    snType: 'order',
+                    snType: 'order_number',
                     date_type: 'shipping_time',
                     page: 1,
-                    pageSize: 20
+                    pageSize: 20,
+                    date_b: new Date(Date.now() - 15 * 24 * 3600 *1000),
+                    date_e: new Date(),
                 },
-                tableData: [
-                    {
-                        id: 1,order_id: 123, order_number: 123, warehouse_id: 12312,
-                        shipping_id: 3243,
-                        estimated_weight: '1qe',
-                        estimated_fee: 'wqeq',
-                        package_weight: 'qwe',
-                        shipping_fee: 'qwe',
-                        providers_weight: 'asdsa',
-                    },
-                    {
-                        id: 2,order_id: 123, order_number: 123, warehouse_id: 12312,
-                        shipping_id: 3243,
-                        estimated_weight: '1qe',
-                        estimated_fee: 'wqeq',
-                        package_weight: 'qwe',
-                        shipping_fee: 'qwe',
-                        providers_weight: 'asdsa',
-                    },
-                    {
-                        id: 3,order_id: 123, order_number: 123, warehouse_id: 12312,
-                        shipping_id: 3243,
-                        estimated_weight: '1qe',
-                        estimated_fee: 'wqeq',
-                        package_weight: 'qwe',
-                        shipping_fee: 'qwe',
-                        providers_weight: 'asdsa',
-                    },
-                ],
+                export_param: {
+                    type:15
+                },
+                tableData: [],
                 fields: [],
                 warehouseList: [],
                 shippingList: [],
@@ -138,13 +116,13 @@
                 exportVisible: false,
                 importVisible: false,
                 importPlatVisible: false,
-                exportType: 1,
+                exportType: 0,
                 visible: '',
 
                 selectList: [
-                    { label: '包裹号', value: 'number ' },
-                    { label: '订单号', value: 'order' },
-                    { label: '物流商订单', value: 'tracking' },
+                    { label: '包裹号', value: 'number' },
+                    { label: '订单号', value: 'order_number' },
+                    { label: '物流商单号', value: 'tracking' },
                     { label: '物流商跟踪号', value: 'shipping_number' },
                 ],
                 partAllOptions: [
@@ -180,8 +158,13 @@
             this.get_shipping()
             this.get_template_title()
             this.get_templates()
+            this.init()
         },
         methods: {
+            search() {
+              this.searchData.page = 1
+              this.init()
+            },
             init() {
                 let params = this.get_params()
                 if (params.snText.length && params.snText.length > 300) return this.$message({ type: 'warning', message: '批量搜索只支持300条数据！' })
@@ -196,7 +179,7 @@
                 let fields = '';
                 if(param.field) fields = param.field.join(',');
                 const params = {
-                    ids: this.ids,
+                    ids: this.exportType === EXPORT_ALL ? "" : this.ids,
                     export_type: this.exportType
                 }
                 const header = {
@@ -204,7 +187,26 @@
                     contentType: 'application/x-www-form-urlencoded'
                 }
                 return this.$http(api_export_excel, params, header).then(res => {
-                    this.visible = true
+                    //队列下载
+                    if (res.join_queue === 1) {
+                        this.visible = true;
+                        this.$message({type: "success", message: res.message || res});
+                        //直接下载
+                    } else {
+                        let url = config.apiHost + 'downloadFile/downExportFile';
+                        let params = {
+                            file_code: res.file_code,
+                            page: this.searchData.page,
+                            pageSize: this.searchData.pageSize,
+                        };
+                        downloadFile({
+                            url: url,
+                            get: params,
+                            fileName: res.file_name,
+                            suffix: '.xls',
+                        });
+                        this.$message({type: "success", message: '导出成功' || res});
+                    }
                 })
             },
             //获取表头
@@ -222,9 +224,6 @@
                     this.templates = res;
                 }).catch(code => {this.$message({type: "error", message: code.message || code})});
             },
-            save_mport() {
-
-            },
             set_export_type(val) {
                 this.exportType = val.value
                 if (this.exportField === EXPORT_ALL) {
@@ -232,7 +231,7 @@
                 }
             },
             handle_export_click() {
-                if(this.selectOptions.length <= 0) return this.$message({type: 'warning', message: '请选择要导出的数据'})
+                if(this.selectOptions.length <= 0 && this.exportType === EXPORT_BATCH) return this.$message({type: 'warning', message: '请选择要导出的数据'})
                 this.exportVisible = true
             },
             handle_size_change(val) {
@@ -294,8 +293,11 @@
                         params[key] = params[key].trim();
                     }
                 });
-                if(params.shipping_id.length === 1) params.shipping_id = params.shipping_id[0]
-                else params.shipping_id = params.shipping_id[1]
+                //处理shipping_id
+                if(params.shipping_id && params.shipping_id.length === 1) params.shipping_id = params.shipping_id[0]
+                else if(params.shipping_id && params.shipping_id.length === 2) params.shipping_id = params.shipping_id[1]
+                else params.shipping_id = ""
+
                 if (params.date_b) {
                     params.date_b = datef('YYYY-MM-dd', this.searchData.date_b.getTime() / 1000);
                 }
@@ -320,7 +322,7 @@
                 }
             },
             ids() {
-                return this.selectOptions.map(r => Number(r.id))
+                return this.selectOptions.map(r => r.id)
             }
         },
         watch: {
@@ -344,10 +346,13 @@
         }
     }
 </script>
-<style lang='stylus' scoped>
+<style lang='stylus'>
     .p-maintain-information {
         .el-card {
             overflow: visible;
+        }
+        .scroll-bar > .el-table__body-wrapper {
+            overflow-x scroll
         }
     }
 </style>

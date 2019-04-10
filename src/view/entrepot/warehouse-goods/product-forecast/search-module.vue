@@ -174,10 +174,10 @@
                 });
             },
             search() {
-                let searchData = this.generate_params();
+                let searchData = this.get_params();
                 this.$emit('search', searchData);
             },
-            generate_params() {//生成查询条件
+            get_params() {//生成查询条件
                 if (this.cleared) {// 清空条件后，分页信息默认
                     this.$emit('clear');
                     this.cleared = false;
@@ -200,7 +200,7 @@
             },
             change_warehouse(val) {
                 this.warehouse_type = val;
-                this.$emit('warehouse-change', this.generate_params());
+                this.$emit('warehouse-change', this.get_params());
             }
         },
         watch: {

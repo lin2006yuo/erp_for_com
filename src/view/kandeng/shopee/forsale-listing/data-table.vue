@@ -33,64 +33,38 @@
                 ]">
             <tbody>
             <template v-for="(data, index) in tableData">
-                <tr :class="[data.show ? 'active' : '',data.heighLight?'active-color':'',data.listing_status===5?'redborder':'']" @click="addClass(index)"
-                    :key="data.id">
-                    <td><el-checkbox v-model="data.isCheck" @change="check_row"></el-checkbox></td>
-                    <td>
-                        <el-popover placement="right" trigger="hover">
-                            <img v-lazy="main_img(data.images,200)"
-                                 @click="search_img(data.images)"
-                                 width="200px" height="200px">
-                            <span slot="reference">
-                                <img v-lazy="main_img(data.images,100)"
-                                     @click="search_img(data.images)"
-                                     height="60px" width="60px" style="border:none">
-                            </span>
-                        </el-popover>
-                    </td>
-                    <td>
-                        <i @click="show_detail(data)" :class="[data.show? 'minus':'plus','fl']"></i>
-                        <ui-tip :content="data.item_id" :width="80"></ui-tip>
-                    </td>
-                    <td><ui-tip :content="data.item_sku"></ui-tip></td>
-                    <td><ui-tip :content="data.name" :width="74"></ui-tip></td>
-                    <td><ui-tip v-if='data.account' :content="data.account.code" :width="60"></ui-tip></td>
-                    <td><ui-tip :content="data.sellername" :width="80"></ui-tip></td>
-                    <td><ui-tip :content="data.likes" :width="80"></ui-tip></td>
-                    <td><ui-tip :content="data.sales" :width="80"></ui-tip></td>
-                    <td><times :time="data.create_time" :width="80"></times></td>
-                    <td><times :time="data.update_time"></times></td>
-                    <td>
-                        <trends-select
-                            class="inline"
-                            @trigger="operate(data,$event)"
-                            :selects="operatesList"
-                            type="primary"></trends-select>
-                    </td>
+                <tr height="50">
+                    <td rowspan="3" width="25%"><el-checkbox v-model="data.isCheck" @change="check_row"></el-checkbox></td>
+                    <td rowspan="3" width="25%">111</td>
+                    <td rowspan="3" width="25%">222</td>
+                    <td rowspan="3" width="25%">333</td>
+                    <!-- <td rowspan="3" width="10%">444</td>
+                    <td rowspan="3" width="10%">555</td>
+                    <td rowspan="3" width="10%">666</td>
+                    <td rowspan="3" width="10%">777</td>
+                    <td rowspan="3" width="10%">888</td>
+                    <td rowspan="3" width="10%">999</td>
+                    <td rowspan="3" width="10%">100</td>
+                    <td rowspan="3" width="10%">333</td> -->
                 </tr>
-                <template v-if="data.show">
-                    <tr style="font-weight:bold" :key="index" class="variant">
-                        <td colspan="2" :rowspan="`${(data.variants.length)+1}`"></td>
-                        <td colspan="2">平台SKU</td>
-                        <td colspan="1">本地SKU</td>
-                        <td colspan="2">商品规格属性</td>
-                        <td>销售价[{{data.currency}}]</td>
-                        <td>可售量</td>
-                        <td colspan="2">本地状态</td>
-                        <td :colspan="`${6-data.variants.length}`" :rowspan="`${data.variants.length+1}`"></td>
-                    </tr>
-                    <tr v-for="(item, item_i) in data.variants" :key="item.id"  class="variant">
-                        <td colspan="2"><ui-tip :content="item.variation_sku" :width="98"></ui-tip></td>
-                        <td colspan="1"><ui-tip :content="item.local_sku" :width="98"></ui-tip></td>
-                        <td colspan="2">{{item.name}}</td>
-                        <td>{{item.price}}</td>
-                        <td>{{item.stock}}</td>
-                        <td colspan="2">{{item.sku_sale_status}}</td>
-                    </tr>
-                </template>
             </template>
             </tbody>
         </ui-table>
+        <table width="100%" border>
+            <tr>
+                <td rowspan="2">1</td>
+                <td>1</td>
+                <td>1</td>
+                <td>1</td>
+                <td>1</td>
+            </tr>
+            <tr>
+                <td rowspan="2">2</td>
+                <td>2</td>
+                <td>2</td>
+            </tr>
+            <tr>3</tr>
+        </table>
         <stock-add v-model="stockaddEdit" @change-stock="change_stock" :selected-ids="selectedIds" :title="title"></stock-add>
         <price-add v-model="priceaddEdit" :selected-ids="selectedIds" :title="title"></price-add>
         <weight-add v-model="weightaddEdit" :selected-ids="selectedIds" :title="title"></weight-add>

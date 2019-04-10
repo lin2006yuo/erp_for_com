@@ -3,11 +3,18 @@
         <search-card @search="search" :params="searchData" :clears="clears">
             <div class="mb-mini">
                 <label-item label="平台：">
-                    <select-remote class="width-sm"
-                                   v-sf.channel_id
-                                   v-model="searchData.channel_id"
-                                   :remote="channel_remote">
-                    </select-remote>
+                    <el-select 
+                               class="width-sm"
+                               v-sf.channel_id
+                               @change="select_change(arguments,'channel_name')"
+                               filterable clearable
+                               v-model="searchData.channel_id">
+                        <el-option v-for="item in channelOptions"
+                                   :label="item.label"
+                                   :value="item.value"
+                                   :key="item.value">
+                        </el-option>
+                    </el-select>
                 </label-item>
                 <label-item label="站点：" class="ml-xs">
                     <el-select :disabled="siteOptions.length<=1"
@@ -29,6 +36,7 @@
                                v-sf.account_id
                                filterable clearable
                                :placeholder="accountPlaceholder"
+                               @change="select_change(arguments,'account_name')"
                                v-model="searchData.account_id">
                         <el-option v-for="item in accoutOptions"
                                    :label="item.label"
@@ -49,6 +57,13 @@
                             url="get|user/sales/staffs"
                             v-sf.developer_id>
                     </param-account>
+                </label-item>
+                <label-item label="测试：" class="ml-sm">
+                    <super-select
+                        storage-key="seller"
+                        :remote-request-http="sellterApi"
+                        :adjust-structure="formate"
+                    ></super-select>
                 </label-item>
             </div>
                 <label-item label="国家：" class="ml-sm mt-xs">
@@ -113,11 +128,14 @@
     import {api_get_currency} from '@/api/commodity-sales'
     import {api_get_categories} from '@/api/stock-control'
     import { api_get_country } from '@/api/after-sale'
+    import {api_get_seller} from '@/api/amazon-monitor'
     export default {
         data(){
             return {
                 siteOptions:[{label:"",value:""}],
                 accoutOptions:[{label:"",value:""}],
+                channelOptions: [{label:"",value:""}],
+                sellerOptions: [],
                 time_type_list:[
                     {label:'发货时间',value:'shipping_time'},
                     {label:'支付时间',value:'pay_time'},
@@ -128,6 +146,7 @@
                     {label:'订单额',value:'now_pay_total'},
                     {label:'客单量',value:'until_price'}
                 ],
+                sellterApi: api_get_seller,
                 countryList: [],
                 inputTimeStart: {
                     disabledDate: (time)=> {
@@ -149,7 +168,8 @@
                 },//结束时间
             }
         },
-        mounted(){
+        async mounted(){
+            this.get_channel()
             this.get_site(this.searchData.channel_id);
             this.get_country()
         },
@@ -162,9 +182,21 @@
                     }
                 })
             },
-            channel_remote(callback){
-                return this.$http(api_get_channel,{}).then(res=>{
-                    callback(res, [{label:'全部', value: ''}]);
+            select_change(arg, name) {
+                let item
+                if(name === 'account_name') {
+                    item = this.accoutOptions.find(item => {
+                        return item.value === arg[0]
+                    })
+                    this.$set(this.searchData, name, item.account_name || '')
+                } else if(name === 'channel_name'){
+                    item = this.channelOptions.find(item => (item.value === arg[0]))
+                    this.$set(this.searchData, name, item.name || '')
+                }
+            },
+            get_channel() {
+                this.$http(api_get_channel,{}).then(res=>{
+                    this.channelOptions = [{label:'全部', value: ''}, ...res]
                 }).catch(code=>{
                     console.log(code);
                 });
@@ -209,9 +241,18 @@
                     }))
                 })
             },
+            get_seller() {
+
+            },
             search(){
                 this.$emit('search');
             },
+            formate(data) {
+                return data.map(row => ({
+                    value: row.id,
+                    label: row.realname
+                }))
+            }
         },
         computed: {
             accountPlaceholder(){
@@ -262,7 +303,8 @@
             selectRemote:require('../../../components/select-remote.vue').default,
             addGoods:require('./add-goods.vue').default,
             paramAccount:require('../../../api-components/param-account.vue').default,
-            searchCard:require('../../../components/search-card.vue').default
+            searchCard:require('../../../components/search-card.vue').default,
+            superSelect: require('@/components/super-select').default
         },
     }
 </script>

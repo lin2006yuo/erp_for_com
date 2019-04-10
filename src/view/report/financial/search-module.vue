@@ -1,7 +1,7 @@
 <template>
     <div>
         <search-card @search="search" :params="searchData" :clears="clears">
-            <label-item label="站点：">
+            <label-item label="站点：" v-show="siteOptions.length">
                 <el-select :disabled="siteOptions.length<=1"
                            class="s-width-default width-xs"
                            filterable clearable
@@ -74,19 +74,19 @@
 
 </style>
 <script>
-    import {api_get_channel, api_account_list, api_get_warehouse, api_report_aliexpress, api_export_report} from  '../../../../api/report-channel'
+    import {api_get_channel, api_account_list, api_get_warehouse} from  '@/api/report-channel'
     export default {
         data(){
             return {
-                siteOptions:[{label:"",value:""}],
-                accoutOptions:[{label:"",value:""}],
+                siteOptions:[],
+                accoutOptions:[],
                 warehouseList:[],
                 time_type_list:[
                     {label:'发货日期',value:'shipping_time'},
                     {label:'付款日期',value:'pay_time'}
                 ],
                 searchData:{
-                    channel_id:2,
+                    channel_id:this.channelId,
                     site_code:'',
                     account_id:"",
                     warehouse_id:"",
@@ -97,7 +97,7 @@
                     pageSize:20
                 },
                 clears:{
-                    channel_id:2,
+                    channel_id:this.channelId,
                     site_code:'',
                     account_id:"",
                     warehouse_id:"",
@@ -153,16 +153,13 @@
                 });
             },
             get_site(channel_id){
-                if(!channel_id)return this.siteOptions = [{label:"",value:""}];
+                if(!channel_id)return
                 this.$http(api_account_list,{channel_id:channel_id}).then(res=>{
                     if(res.site.length<=0){
                         if(res.account.length>0){
                             res = res.account;
                             this.accoutOptions = [{label:"全部",value:""},...res];
-                        }else{
-                            this.accoutOptions = [{label:"",value:""}];
                         }
-                        this.siteOptions = [{label:"",value:""}]
                     }else{
                         res = res.site;
                         this.siteOptions = [{label:"全部",value:""},...res];
@@ -224,11 +221,15 @@
                 this.get_account(this.searchData.channel_id,val);
             },
         },
-        props: {},
+        props: {
+            channelId: {
+                require: true
+            }
+        },
         components: {
-            labelItem:require('../../../../components/label-item.vue').default,
-            selectRemote:require('../../../../components/select-remote.vue').default,
-            searchCard:require('../../../../components/search-card.vue').default
+            labelItem:require('@/components/label-item.vue').default,
+            selectRemote:require('@/components/select-remote.vue').default,
+            searchCard:require('@/components/search-card.vue').default
         },
     }
 </script>

@@ -122,6 +122,41 @@ export default [
                 component: () => import('@/view/report/area-analysis'),
                 type: 1, title: '区域销量分析'
             },
+            {
+                path: '/report/financial/performance/amazon',
+                component: () => import('@/view/report/selling-profit/amazon/index.vue'),
+                type: 1, title: 'amazon'
+            },
+            // '/package-collection/problem': {
+            //     component: Vue.component('parcel-abnormalities', function (resolve) {
+            //         require(['../view/entrepot/parcel-abnormalities/index.vue'], resolve)
+            //     })
+            // },
+            {
+                path: '/package-collection/problem',
+                component: () => import('@/view/entrepot/parcel-abnormalities2/index.vue'),
+                type: 1, title: '计抛拦截包裹'
+            },
+            // '/member-ship': {
+            //     component: Vue.component('base-member-ship', function (resolve) {
+            //         require(['../view/base/member-ship/index.vue'], resolve)
+            //     })
+            // },
+            {
+                path: '/member-ship',
+                component: () => import('@/view/base/member-ship/index.vue'),
+                type: 1, title: '平台站好绑定'
+            },
+            // '/report/amazon-settlement/summary': {
+            //     component: Vue.component('financial-management-store-capital-accounting-amazon', function (resolve) {
+            //         require(['../view/financial-management/store-capital-accounting/amazon/index.vue'], resolve)
+            //     })
+            // },
+            {
+                path: '/report/amazon-settlement/summary',
+                component: () => import('@/view/financial-management/store-capital-accounting/amazon/index.vue'),
+                type: 1, title: '财务管理资金核算'
+            },
         ]
     }
 ];

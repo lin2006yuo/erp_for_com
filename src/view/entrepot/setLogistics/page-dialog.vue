@@ -1,34 +1,38 @@
 <template>
-    <div class="page-dialog" :style="outer" v-if="show" @click="out_click">
-        <transition name="page-dialog">
-            <div class="inner  showIn " :style="[inner,innerSize,innerPosition]" @click.stop="" ref="inner">
-                <div v-if="!_nottitle" :class="{'dialog-header':true,'title-center':titleCenter}">
-                    <span :class="`title${showRequired?` is-required`:``} ${titleCenter?`titleFont`:``}`">{{title}}</span>
-                    <span class="tag">{{tag}}</span>
-                    <template v-if="showCloseIcon">
-                        <i v-if="countDown" class="close close-text" :title="`${countDown}秒后关闭`" @click="close">{{countDown}}</i>
-                        <i v-else class="close close-icon" @click="close"></i>
-                    </template>
+    <transition name="page-fade">
+        <div class="page-dialog"  v-show="show" @click="out_click">
+            <transition name="bounce">
+                <div class="inner"  @click.stop=""  v-if="show" ref="inner">
+                    <div v-if="!_nottitle" :class="{'dialog-header':true,'title-center':titleCenter}">
+                        <span :class="`title${showRequired?` is-required`:``} ${titleCenter?`titleFont`:``}`">{{title}}</span>
+                        <span class="tag">{{tag}}</span>
+                        <template v-if="showCloseIcon">
+                            <i v-if="countDown" class="close close-text" :title="`${countDown}秒后关闭`" @click="close">{{countDown}}</i>
+                            <i v-else class="close close-icon" @click="close"></i>
+                        </template>
+                    </div>
+                    <div class="dialog__body" v-loading="loading" :style="addStyle" :element-loading-text="loadingText">
+                        <slot></slot>
+                    </div>
+                    <div v-if="$slots.footer" class="dialog__footer">
+                        <slot name="footer"></slot>
+                    </div>
                 </div>
-                <div class="dialog__body" v-loading="loading" :style="addStyle" :element-loading-text="loadingText">
-                    <slot></slot>
-                </div>
-                <div v-if="$slots.footer" class="dialog__footer">
-                    <slot name="footer"></slot>
-                </div>
-            </div>
-        </transition>
-    </div>
+            </transition>
+        </div>
+    </transition>
 </template>
-<style lang="stylus">
-    .fade-enter-active, .fade-leave-active {
-        transition: opacity .5s
-    }
-    .fade-enter, .fade-leave-to /* .fade-leave-active in below version 2.1.8 */ {
-        opacity: 0
-    }
+<style lang="stylus" scoped>
+
+
     .page-dialog {
-        position: relative;
+        position: fixed;
+        z-index: 1002;
+        background-color: rgba(0.0.0.0.5);
+        right: 0
+        bottom: 0
+        left 182px;
+        top: 95px;
         .tag {
             color: #F00;
             float: right;
@@ -40,20 +44,14 @@
             margin-right: 4px;
         }
         .inner {
-            -webkit-border-radius: 4px;
-            -moz-border-radius: 4px;
             border-radius: 4px;
             box-sizing border-box;
             background-color: #FFF;
-            position: absolute;
+            position: relative;
+            margin 5vh auto auto
             overflow: hidden;
             padding-bottom:45px;
-        }
-        .showIn{
-            animation: showIn .25s ease-out;
-        }
-        .showOut{
-            animation: showOut .25s ease-in;
+            width: 96%
         }
         .dialog-header {
             box-sizing: border-box;
@@ -73,7 +71,6 @@
                 background-color:rgba(255,255,255,1);
 
                 background-size:contain;
-                transition:all 0.2s;
                 &:hover{
                     background-size:contain;
                     background-color:rgba(0,0,0,.1);
@@ -81,9 +78,9 @@
                 }
             }
             i.close-icon{
-                background:url('../assets/close-icon-default.png') no-repeat center center;
+                background:url('~@/assets/close-icon-default.png') no-repeat center center;
                 &:hover{
-                    background:url('../assets/close-icon-active.png') no-repeat center center;
+                    background:url('~@/assets/close-icon-active.png') no-repeat center center;
                     cursor:pointer;
                 }
             }
@@ -114,10 +111,13 @@
             padding:0px 10px 5px 10px;
             color: #475669;
             font-size: 1.2rem;
-            overflow-x: hidden;
-            overflow-y: auto;
+            overflow hidden
             box-sizing: border-box;
-            height:100%;
+            height: 60.5vh
+            >>> .el-tabs__content {
+                overflow-y scroll
+                height 55vh
+            }
         }
         .dialog__footer {
             position: absolute;
@@ -127,8 +127,25 @@
         .title-center {
             text-align:center;
         }
+
+
+    }
+    .page-fade-enter-active, .page-fade-leave-active {
+        transition: opacity .2s
+    }
+    .page-fade-enter, .fade-leave-to {
+        opacity: 0
     }
 
+
+
+
+    .bounce-enter-active {
+        animation: showIn .25s ease
+    }
+    .bounce-leave-active {
+        animation: showOut .25s;
+    }
     @keyframes showIn {
         0% {
             -webkit-transform: scale(0.7);
@@ -186,40 +203,38 @@
                 });
             },
             reCenter() {
-                let pageEle = document.getElementById('n-content') || document.body;
-                let nContent = window.getComputedStyle(pageEle);
-                let rect = pageEle.getBoundingClientRect();
-                this.$set(this.outer, 'width', nContent.width);
-                this.$set(this.outer, 'height', nContent.height);
-                this.$set(this.outer, 'position', 'fixed');
-                this.$set(this.outer, 'left', `${rect.left}px`);
-                this.$set(this.outer, 'top', `${rect.top}px`);
-                this.$set(this.outer, 'backgroundColor', 'rgba(0,0,0,.5)');
-                this.$set(this.outer, 'z-index', '1002');
-                this.$set(this.outer,'transition','all .2s');
-                console.log(nContent.width)
-                const innerStyle = window.getComputedStyle(this.$refs.inner);
-                const emptyWidth = Math.max(parseInt(nContent.width) - parseInt(innerStyle.width),0);
-                const emptyHeight = Math.max(parseInt(nContent.height) - parseInt(innerStyle.height),0);
-                this.$set(this.innerPosition, 'left', Math.floor(emptyWidth/2)+"px");
-                this.$set(this.innerPosition, 'top', Math.floor(emptyHeight/this.top2)+"px");
-                switch (this.size){
-                    case 'page':
-                        this.$set(this.addStyle, "max-height", `${parseFloat(nContent.height)}px`);
-                        break;
-                    case 'full':
-                        this.$set(this.addStyle, "max-height", `${parseFloat(nContent.height) * 0.85}px`);
-                        break;
-                    case 'large':
-                        this.$set(this.addStyle, "max-height", `${parseFloat(nContent.height) * 0.8}px`);
-                        break;
-                    case 'small':
-                        this.$set(this.addStyle, 'max-height', `${parseFloat(nContent.height) * 0.85}px`);
-                        break;
-                    default:
-                        this.$set(this.addStyle, 'max-height', `${parseFloat(nContent.height) * 0.85}px`);
-                }
-                this.$forceUpdate();
+                // let pageEle = document.getElementById('n-content') || document.body;
+                // let nContent = window.getComputedStyle(pageEle);
+                // let rect = pageEle.getBoundingClientRect();
+                // const innerStyle = window.getComputedStyle(this.$refs.inner);
+                let modalRect = {}
+                this.leftOpen ? modalRect = { left: 182, top: 95 } : modalRect = { left: 0, top: 0 }
+
+                // this.$set(this.outer, 'width', nContent.width);
+                // this.$set(this.outer, 'height', nContent.height);
+                this.$set(this.outer, 'left', `${modalRect.left}px`);
+                this.$set(this.outer, 'top', `${modalRect.top}px`);
+                // const emptyWidth = Math.max(parseInt(nContent.width) - parseInt(innerStyle.width),0);
+                // const emptyHeight = Math.max(parseInt(nContent.height) - parseInt(innerStyle.height),0);
+                // this.$set(this.innerPosition, 'left', Math.floor(emptyWidth/2)+"px");
+                // this.$set(this.innerPosition, 'top', Math.floor(emptyHeight/this.top2)+"px");
+                // switch (this.size){
+                //     case 'page':
+                //         this.$set(this.addStyle, "max-height", `${parseFloat(nContent.height)}px`);
+                //         break;
+                //     case 'full':
+                //         // this.$set(this.addStyle, "max-height", `${parseFloat(nContent.height) * 0.85}px`);
+                //         break;
+                //     case 'large':
+                //         this.$set(this.addStyle, "max-height", `${parseFloat(nContent.height) * 0.8}px`);
+                //         break;
+                //     case 'small':
+                //         this.$set(this.addStyle, 'max-height', `${parseFloat(nContent.height) * 0.85}px`);
+                //         break;
+                //     default:
+                //         this.$set(this.addStyle, 'max-height', `${parseFloat(nContent.height) * 0.85}px`);
+                // }
+                // this.$forceUpdate();
             },
             /**
              * @private
@@ -406,15 +421,14 @@
                 if (val) {
                     this.show = val;
                     this.$nextTick(() =>{
-                        maker.listenTo(this.$refs.inner, this.reCenter);
+                        // maker.listenTo(this.$refs.inner, this.reCenter);
                     });
                 } else {
-                    maker.removeListener(this.$refs.inner, this.reCenter);
-                    this.$refs.inner&&(this.$refs.inner.toggleClass('showIn showOut'));
-                    this.$set(this.outer, 'backgroundColor', 'rgba(0,0,0,0)');
-                    setTimeout(()=>{
+                    // maker.removeListener(this.$refs.inner, this.reCenter);
+                    // this.$refs.inner&&(this.$refs.inner.toggleClass('showIn showOut'));
+                    // setTimeout(()=>{
                         this.show = val;
-                    },200)
+                    // },200)
                 }
                 this.$emit('change', val);
             }

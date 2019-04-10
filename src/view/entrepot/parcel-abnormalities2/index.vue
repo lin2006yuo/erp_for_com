@@ -8,220 +8,23 @@
                 </el-select>
             </label-item>
         </div>
-        <search-card :params="searchData" :clears="clear" @enter="table_create" @search="table_create"
-                     @init-params="init_status_btn">
-            <!--获取表格的处理状态-->
-            <label-buttons
-                    class="inline"
-                    :buttons="buttons"
-                    label="处理状态："
-                    @select="select_status">
-            </label-buttons>
-            <label-buttons label="处理措施："
-                            v-if="searchData.status === 2"
-                            :buttons="abnormalList"
-                            class="inline"
-                            @select="select_method">
-            </label-buttons>
-            <label>面单号：</label>
-            <order-input v-sf.shipping_number
-                         ref="batchInput"
-                         v-model="searchData.shipping_number"
-                         class="inline width-super pt-sm"
-                         @keydown="table_create"
-                         placeholder="可批量搜索，Shift+回车换行...">
-            </order-input>
-            <label class="ml-sm">包裹号：</label>
-            <order-input v-sf.number
-                         v-model="searchData.number"
-                         class="inline width-super pt-sm"
-                         @keydown="table_create"
-                         placeholder="可批量搜索，Shift+回车换行...">
-            </order-input>
-            <!--<el-input v-model="searchData.shipping_number" class="inline" @keyup.enter.native="table_create"
-                      v-sf.shipping_number></el-input>-->
-            <el-select v-model="searchData.identity" class="inline ml-sm width-xs"
-                       v-sf.identity>
-                <el-option v-for="(item, index) in selectMan"
-                           :key="index"
-                           :label="item.label"
-                           :value="item.value">
-                </el-option>
-            </el-select>
-            <param-account
-                    class="width-sm"
-                    v-model="searchData.user_id"
-                    :param="{data:{content:''}}"
-                    :fix-url="true"
-                    :fix-result="sale_fix_result"
-                    type="warehouseUser"
-                    placeholder="请选择/输入..."
-                    url="get|user/warehouse/staffs">
-            </param-account>
-            <el-select v-model="searchData.time_type" class="inline" style="width: 100px;margin-left: 10px;"
-                       v-sf.time_type>
-                <el-option v-for="(item, index) in selectTime"
-                           :key="index"
-                           :label="item.label"
-                           :value="item.value">
-                </el-option>
-            </el-select>
-            <el-date-picker
-                    v-model="searchData.time_st"
-                    align="right"
-                    type="date"
-                    v-sf.time_st
-                    placeholder="开始时间"
-                    :picker-options="inputTimeStart"
-                    class="date inline">
-            </el-date-picker>
-            <label>--</label>
-            <el-date-picker
-                    v-model="searchData.time_nd"
-                    align="right"
-                    type="date"
-                    v-sf.time_nd
-                    placeholder="结束时间"
-                    :picker-options="inputTimeEnd"
-                    class="date inline mr-sm">
-            </el-date-picker>
-        </search-card>
-        <div class="mt-xs ml-sm mb-xs" style="overflow: hidden">
-            <div class="inline" style="flex:1">
-                <request-button class="inline"
-                                v-if="isBatchHandle"
-                                v-for="item in batchButtons"
-                                :key="item.value"
-                                :disabled="canDeal"
-                                :req-key="req_key(item)"
-                                @click="batch_deal(item)">{{item.label}}
-                </request-button>
-            </div>
-            <span class="fr mr-sm">
-                <span>打印机：</span>
-                <select-printer v-model="printer" class="inline width-lg"></select-printer>
-            </span>
+        <search-module :searchData="searchData"></search-module>
+        <div class="mt-xs ml-sm mb-xs">
+        <request-button
+                   :request="exports"
+                   >批量标记已处理</request-button>
         </div>
-        <!--表格-->
-        <el-table
-                v-resize="{height:40}"
-                v-loading="loading"
-                element-loading-text="拼命加载中"
-                class="scroll-bar"
-                highlight-current-row
-                @selection-change="select"
-                :data="tableData">
-            <el-table-column
-                    v-if="isBatchHandle"
-                    width="30"
-                    type="selection">
-            </el-table-column>
-            <el-table-column
-                    width="180"
-                    inline-template
-                    label="面单号">
-                <div>
-                    <ui-tip :content="row.shipping_number" :width="98"></ui-tip>
-                </div>
-            </el-table-column>
-            <el-table-column
-                    inline-template
-                    label="包裹号"
-                    width="180">
-                <div>
-                    <ui-tip :is-operate="true" :content="row.package_number"
-                            @cur-click="parcel_information(row.package_number)" :width="98"></ui-tip>
-                </div>
-            </el-table-column>
-            <el-table-column
-                    inline-template
-                    label="邮寄方式"
-                    width="200">
-                <div>
-                    <ui-tip :content="row.shipping_name" :width="98"></ui-tip>
-                </div>
-            </el-table-column>
-            <el-table-column
-                    width="100"
-                    inline-template
-                    label="重量(g)">
-                <div>
-                    <ui-tip :content="row.package_weight"></ui-tip>
-                </div>
-            </el-table-column>
-            <el-table-column
-                    width="100"
-                    inline-template
-                    label="预估重量(g)">
-                <div>
-                    <ui-tip :content="row.estimated_weight" :width="98"></ui-tip>
-                </div>
-            </el-table-column>
-            <el-table-column
-                    inline-template
-                    label="异常原因">
-                <div>
-                    <ui-tip :content="row.exception_type" :width="98"></ui-tip>
-                </div>
-            </el-table-column>
-            <el-table-column
-                    v-if="searchData.status !== 1"
-                    width="100"
-                    inline-template
-                    label="处理措施">
-                <div>
-                    <ui-tip :content="row.method_txt" :width="98"></ui-tip>
-                </div>
-            </el-table-column>
-            <el-table-column
-                    inline-template
-                    width="80"
-                    label="集包人">
-                <div>
-                    <ui-tip :content="row.creator" :width="98"></ui-tip>
-                </div>
-            </el-table-column>
-            <el-table-column
-                    inline-template
-                    label="集包时间">
-                <div>
-                    <ui-tip :content="row.create_time | filterTime" :width="98"></ui-tip>
-                </div>
-            </el-table-column>
-            <el-table-column
-                    inline-template
-                    width="80"
-                    label="处理人">
-                <div>
-                    <ui-tip :content="row.handler" :width="98"></ui-tip>
-                </div>
-            </el-table-column>
-            <el-table-column
-                    inline-template
-                    label="处理时间">
-                <div>
-                    <ui-tip :content="row.handle_time | filterTime" :width="98"></ui-tip>
-                </div>
-            </el-table-column>
-            <el-table-column
-                    inline-template
-                    width="80"
-                    label="操作">
-                <div>
-                    <span class="operate" @click="print(row)">打印</span>
-                </div>
-            </el-table-column>
-        </el-table>
-        <el-pagination
-                class="page-fixed"
-                @size-change="handle_size_change"
-                @current-change="handle_current_change"
-                :current-page="searchData.page"
-                :page-sizes="[20, 50, 100, 200]"
-                :page-size="searchData.pageSize"
-                layout="total, sizes, prev, pager, next, jumper"
-                :total="total">
-        </el-pagination>
+        <table-module
+            :search-data.sync="searchData"
+            :table-columns="columnList"
+            :table-data="tableData"
+            :total="total"
+            :loading="loading"
+            :selection="true"
+            @size-change="handle_size_change"
+            @current-change="handle_current_change"
+            @selection-change="handle_selection_change"
+        ></table-module>
 
         <set-weight :table-data="selected" v-model="weightVisible"
                     @set-weight="set_weight"
@@ -328,25 +131,13 @@
                     time_type: 1,
                 },
                 warehouses: [],
-                inputTimeStart: {
-                    disabledDate: (time) => {
-                        if (this.searchData.time_nd) {
-                            return time.getTime() > this.searchData.time_nd;
-                        } else {
-                            return false
-                        }
-                    }
-                },
-                inputTimeEnd: {
-                    disabledDate: (time) => {
-                        if (this.searchData.time_st) {
-                            return time.getTime() < this.searchData.time_st;
-                        } else {
-                            return false
-                        }
-                    }
-                },
-                tableData: [],
+                tableData: [
+                    {'111': '111'},
+                    {'222': '222'},
+                    {'333': '333'},
+                    {'444': '444'},
+                    {'555': '555'},
+                ],
                 total: 0,
                 printer: '',
                 token: '',
@@ -359,6 +150,20 @@
                 isShow: false,
                 weightVisible: false,
                 abnormalList: [{label: '全部', value: ''}],
+                loading: false,
+                columnList: [
+                    { label: '面单号', value: '111' },
+                    { label: '包裹号', value: '222' },
+                    { label: '销售员', value: '333' },
+                    { label: '运输方式', value: '444' },
+                    { label: '计抛重量（g）', value: '555' },
+                    { label: '重量（g）', value: '666' },
+                    { label: '预估重量（g）', value: '777' },
+                    { label: '集包时间', value: '888' },
+                    { label: '处理人', value: '1111111' },
+                    { label: '处理时间', value: '1111111' },
+                    { label: '操作', value: '1111111' },
+                ],
             }
         },
         filters: {//过滤器
@@ -481,12 +286,11 @@
 
             handle_size_change(val) {
                 this.searchData.pageSize = val;
-                this.table_create();
             },
             handle_current_change(val) {
                 this.searchData.page = val;
-                this.table_create();
             },
+            handle_selection_change() {},
             select_type(index, item) {
                 this.searchData.method = '';
                 this.searchData.exception_type = item.value;
@@ -691,7 +495,8 @@
             },
             change_depot() {
                 this.table_create();
-            }
+            },
+            exports() {}
         },
         computed: {//实例计算属性
             canDeal() {
@@ -728,24 +533,26 @@
 
         },
         created() {
-            this.page_create();
-            this.table_create();
-            this.status_change();
-            this.get_abnormal_buttons();
-            this.get_problem_method();
+            // this.page_create();
+            // this.table_create();
+            // this.status_change();
+            // this.get_abnormal_buttons();
+            // this.get_problem_method();
         },
         components: {//实例引用的外部组件
             setWeight: require('./set-weight.vue').default,
-            labelButtons: require('../../../components/label-buttons.vue').default,
+            searchModule: require('./search-card.vue').default,
+            tableModule: require('./table-module').default,
+
+            labelItem:require('@/components/label-item.vue').default,
+            
             uiTip: require('../../../components/ui-tip.vue').default,
-            searchCard: require('../../../components/search-card.vue').default,
+            
             selectPrinter: require('../../../components/select-printer').default,
             scrollSelect: require('../../../components/scroll-select.vue').default,
-            paramAccount: require('../../../api-components/param-account').default,
+
             parcelInformation: require('../placeorder/parcel-information').default,
             formMdf: require("../../order/local/form-mdf.vue").default,
-            labelItem: require('../../../components/label-item.vue').default,
-            orderInput: require("@/components/order-input.vue").default,
         }
     }
 </script>

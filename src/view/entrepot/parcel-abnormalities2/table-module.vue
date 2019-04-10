@@ -1,12 +1,12 @@
 <template>
-    <div class="warehouse-data">
+    <div>
         <el-table
             :data="tableData"
             v-resize="{height:41}"
             v-loading="loading"
             element-loading-text="玩命加载中..."
-            ref="tableModule"
             class="scroll-bar"
+            ref="tableModule"
             @selection-change="handle_selection_change"
             @row-click="handle_row_click"
             highlightCurrentRow>
@@ -14,17 +14,24 @@
                 <i></i>
                 {{emptyText}}
             </div>
-            <el-table-column type="selection"></el-table-column>
-            <el-table-column label="日期" prop="create_time"></el-table-column>
-            <el-table-column label="出入库类型" prop="type"></el-table-column>
-            <el-table-column label="仓库" prop="warehouse_name"></el-table-column>
-            <el-table-column label="sku" prop="sku"></el-table-column>
-            <el-table-column label="产品名称" prop="spu_name"></el-table-column>
-            <el-table-column label="数量" prop="quantity"></el-table-column>
-            <el-table-column label="单价" prop="price"></el-table-column>
-            <el-table-column label="金额" prop="amount"></el-table-column>
-            <el-table-column label="制单人" prop="creator"></el-table-column>
-            <el-table-column label="单据号" prop="stock_inout_code"></el-table-column>
+            <el-table-column v-if="selection" type="selection"></el-table-column>
+            <el-table-column
+                v-for="(item, index) in tableColumns"
+                :key="`${item.value}-${index}-${item.label}`"
+                inline-template
+                :label="item.label">
+                <ui-tip :content="row[item.value]" :width="98"></ui-tip>
+            </el-table-column>
+            <el-table-column label="操作">
+                <template slot-scope="scope">
+                    <el-button
+                        class="mb-xs mt-xs"
+                        size="mini"
+                        type="primary"
+                        @click="handleEdit(scope.$index, scope.row)">标记为已处理</el-button>
+                    <el-button
+                </template>
+            </el-table-column>
         </el-table>
         <el-pagination
             class="page-fixed"
@@ -57,11 +64,15 @@
             },
             handle_row_click(row) {
                 this.$refs.tableModule.toggleRowSelection(row)
-            }
+            },
         },
         props: {
             searchData: {
                 type: Object,
+                require: true
+            },
+            tableColumns: {
+                type: Array,
                 require: true
             },
             tableData: {
@@ -73,23 +84,11 @@
             },
             total: {
                 default: 0
+            },
+            selection: {
+                type: Boolean,
+                default: false
             }
         }
     }
 </script>
-<style lang="stylus">
-    .warehouse-data{
-        .el-table__empty-text {
-            /*left: 18% !important;*/
-            position: fixed;
-            top :50%;
-            left :50%;
-        }
-        .scroll-bar > .el-table__body-wrapper {
-            overflow-x auto
-        }
-        .bold{
-            font-weight: bold;
-        }
-    }
-</style>

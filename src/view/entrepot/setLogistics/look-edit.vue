@@ -1,15 +1,16 @@
 <template>
     <!--<page class="p-look-edit">-->
-    <page-dialog v-model="editVisible" size="full"
-                 :title="titleName" @change="change_dialog">
-        <el-tabs ref="tabs" @tab-click="tab_click" :active-name="action">
-            <el-tab-pane name="base-info" class="scroll" v-resize="{height: 150}" label="基本信息" key="base-info">
+    <page-dialog v-model="editVisible" 
+                 :title="titleName" @change="change_dialog"
+                 size="full">
+        <el-tabs ref="tabs" @tab-click="tab_click" :active-name="action" v-resize="{height: 150}">
+            <el-tab-pane name="base-info" class="scroll"  label="基本信息" key="base-info">
                 <base-info :baseData="baseData"
                            :shipping-method="shippingMethod"
                            :editable="editable"
                            ref="base"></base-info>
             </el-tab-pane>
-            <el-tab-pane name="express-info" class="scroll" v-resize="{height: 150}" label="面单信息" key="express-info">
+            <el-tab-pane name="express-info" class="scroll"  label="面单信息" key="express-info">
                 <express-info
                     v-if="expressShow"
                     :express-data="expressData"
@@ -20,21 +21,21 @@
                     :carrier_id="carrier_id"
                     ref="express"></express-info>
             </el-tab-pane>
-            <el-tab-pane name="effective" class="scroll" v-resize="{height: 150}" label="实效及运费" key="effective">
+            <el-tab-pane name="effective" class="scroll" label="实效及运费" key="effective">
                 <effective v-if="effectiveShow" :effective-data="effData"
                            ref="effective"
                            @effective-change="change_eff_data"
                            :editable="editable" :shipping-id="shipping"
                            @files-success="files_success"></effective>
             </el-tab-pane>
-            <el-tab-pane name="deliver-channel" class="scroll" v-resize="{height: 150}" label="可发货平台"
+            <el-tab-pane name="deliver-channel" class="scroll"  label="可发货平台"
                          key="deliver-channel">
                 <deliver-channel v-if="channelShow" :channel-data="channelData"
                                  :editable="editable"
                                  ref="channel"></deliver-channel>
             </el-tab-pane>
             <!--运费折扣-->
-            <el-tab-pane name="discount" class="scroll" v-resize="{height: 150}" label="运费折扣" key="discount">
+            <el-tab-pane name="discount" class="scroll"  label="运费折扣" key="discount">
                 <discount v-if="discountShow" :discount-data="discountData" @change_discount="discount_status"
                           :editable="editable"></discount>
             </el-tab-pane>
@@ -300,23 +301,52 @@
             //修改运费和折扣
             keep_discount() {
                 let data = clone(this.discountData);
-                //  折扣验证
                 let discount = Number(data.shipping_fee_discount);
-                if(discount > 2){
-                    this.$message({type:"warning",message:"折扣不能大于2"});
-                    return
-                }else if( discount <= 0){
-                    this.$message({type:"warning",message:"折扣输入有误"});
-                    return
-                }else {
-                    data.shipping_fee_discount = discount.toFixed(2);
-                }
+                /**** 折扣验证 ***/
 
-                this.$http(api_logistics_update_keep, data.id, data).then(res => {
-                    this.$message({type: 'success', message: res.message || res});
-                    this.editVisible = false;
-                }).catch(code => {
-                    this.$message({type: 'error', message: code.message || code});
+                // if(data.tracking_rules && data.tracking_rules.length) {
+                //     data.tracking_rules.forEach(i => {
+                //         if(i.id || i.shipping_method_id ||  i. tracking_number_total || i.start_position || i.end_position) {
+                //             return this.$message({type: 'warning', message: '跟踪号规则不能为空'})
+                //         }
+                //     })
+                // }
+
+                new Promise((resolve, reject) => {
+                    if(discount > 2){
+                        // this.$message({type:"warning",message:"折扣不能大于2"});
+                        reject('折扣不能大于2')
+                    }else if( discount <= 0){
+                        // this.$message({type:"warning",message:"折扣输入有误"});
+                        reject('折扣输入有误')
+                    }else {
+                        data.shipping_fee_discount = discount.toFixed(2);
+                    }
+
+                    if(data.tracking_rules && data.tracking_rules.length) {
+                        data.tracking_rules.forEach(i => {
+                            if(i.tracking_number_total == '' || i.start_position == '' || i.end_position == '') {
+                                // return this.$message({type: 'warning', message: '跟踪号规则不能为空'})
+                                return reject('跟踪号规则不能为空')
+                            }
+                            if( Number(i.tracking_number_total) <　Number(i.end_position) || 
+                                Number(i.start_position) > Number(i.end_position)
+                            ) {
+                                reject('请正确填写跟踪号规则')
+                            }
+                        })
+                    }
+
+                    resolve()
+                }).then(() => {
+                    this.$http(api_logistics_update_keep, data.id, data).then(res => {
+                        this.$message({type: 'success', message: res.message || res});
+                        this.editVisible = false;
+                    }).catch(code => {
+                        this.$message({type: 'error', message: code.message || code});
+                    })
+                }).catch(message => {
+                    this.$message({type: 'warning', message: message})
                 })
 
             },
@@ -496,7 +526,7 @@
             effective:
             require('./effective-copy.vue').default,
             pageDialog:
-            require('@/components/page-dialog.vue').default,
+            require('./page-dialog.vue').default,
             expressInfo:
             require('./express-info.vue').default,
             deliverChannel:

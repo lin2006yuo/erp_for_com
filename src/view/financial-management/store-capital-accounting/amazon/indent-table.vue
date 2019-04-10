@@ -1,62 +1,35 @@
 <template>
-    <div class="c-ui-table-important">
-        <table class="template ui-table-head" ref="tableheader" >
-            <colgroup>
-                <col v-for="head in cols" :width="head_width(head)">
-            </colgroup>
+    <div class="c-joom-table">
+        <table class="template ui-table-head" :style="isHidden" ref="tableheader">
             <tbody>
             <tr>
-                <th v-for="(head,index) in heads">
+                <th v-for="(head,index) in heads" :width="head_width(head)">
                     <el-checkbox v-model="checkAll"  v-if="head.isCheck" @change="check_all" ></el-checkbox>
-                    <div v-else :class="{'require-star':head.isRequired}" :style="/|/.test(head_title(head))?'line-height:14px;padding:2px 0;':''">
-                        <div class="inline" v-if="/|/.test(head_title(head))">
-                            <template v-for="(text, t_i) in head_title(head).split('|')">
-                                <span>{{text}}</span><br v-if="t_i<head_title(head).split('|').length">
-                            </template>
-                        </div>
-                        <div v-else>{{head_title(head)}}</div>
-                        <div class="caret-wrapper inline" v-if="head.isSort">
-                            <i class="sort-caret ascending" @click="asc_click(head)"></i>
-                            <i class="sort-caret descending" @click="desc_click(head)"></i>
-                        </div>
-                    </div>
+                    <span>{{head_title(head)}}</span>
                 </th>
             </tr>
             </tbody>
         </table>
-        <div  ref="table"  class="ui-table-body"    v-resize="{height:bodyHeight}" v-if="!isFix">
-            <table v-if="hasData" class="template secTable"    :style="table_resize()">
-                <colgroup>
-                    <col v-for="head in cols" :width="head_width(head)">
-                </colgroup>
+        <div ref="table" class="ui-table-body" :style="isHidden" v-resize="{height:bodyHeight}">
+            <table v-if="hasData" class="template secTable" :style="table_resize()">
+                <!--<colgroup>-->
+                <!--<col v-for="head in cols" :width="head_width(head)">-->
+                <!--</colgroup>-->
                 <slot></slot>
             </table>
-            <span class="no-data-reminder" v-else >
+            <span class="no-data-reminder" v-else>
                 <i></i>
-                <span>{{isdata}}</span>
+                <!--<span>请查询数据！</span>-->
+                <span>{{firstLoading?'请查询数据！':'暂无数据'}}</span>
             </span>
-        </div>
-        <div  ref="table"  class="ui-table-body"  :style="bodyStyle"   v-else>
-            <table class="template secTable"    :style="table_resize()">
-                <colgroup>
-                    <col v-for="head in cols" :width="head_width(head)">
-                </colgroup>
-                <slot></slot>
-            </table>
         </div>
     </div>
 </template>
 <style lang="stylus">
-    .c-ui-table-important{
-        box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, .12), 0px 0px 6px 0px rgba(0, 0, 0, .04);
-        span.require-star:before{
-            content:"*";
-            margin-right:3px;
-            color:red;
-        }
-        table.template thead tr{
+    .c-joom-table{
+        overflow-x: scroll;
+        table .template thead tr{
             background-color: #EFF2F7;
-            /*background-color: #444;*/
             font-weight: 600;
         }
         .caret-wrapper{
@@ -69,7 +42,6 @@
             width: 16px;
             height: 34px;
             /*overflow: visible;*/
-            overflow: initial;
             .sort-caret{
                 display: inline-block;
                 width: 0;
@@ -104,25 +76,20 @@
 
         }
         .ui-table-head{
-            width:100%;
-            /*border-left:1px solid #ddd;*/
-            /*color:#fff;*/
+            width:auto;
+            border-left:1px solid #ddd;
         }
         .ui-table-body{
-            width:100%;
+            width:auto;
             overflow-x: hidden;
             overflow-y: auto;
-            border-bottom:1px solid #ddd;
-            border-right:1px solid #ddd;
+            border:1px solid #ddd;
             border-top:none;
             box-sizing: border-box;
             position: relative;
-            background :#fff;
-            border-bottom-left-radius: 3px;
-            border-bottom-right-radius: 3px;
             .no-data-reminder{
-                position: absolute;
-                top:15%;
+                position: fixed;
+                top:50%;
                 left:50%;
                 transform: translate(-50%, -50%);
                 color: rgb(94, 118, 130);
@@ -134,19 +101,21 @@
                     display:inline-block;
                     width :60px;
                     height :60px;
-                    background-image:url(../assets/no-data.svg);
+                    background-image:url('~@/assets/no-data.svg');
                     background-size :60px 60px;
                 }
             }
+
         }
         .template.secTable{
             border-top:none;
             border-left:none;
         }
     }
+
+
 </style>
 <script>
-    import { addResizeListener, removeResizeListener } from '@/lib/resize';
     import {mapGetters} from 'vuex';
     export default{
         data(){
@@ -156,16 +125,15 @@
             }
         },
         created(){
-            this.$nextTick(()=>{
-                // let btn=document.getElementsByClassName("side-button changeTable")[0]
-                // addResizeListener(btn,this.table_resize)
-                addResizeListener(this.$refs.tableheader,this.table_resize)
-            })
+            window.addEventListener('resize', ()=>{
+                setTimeout(()=>{
+                    if(this.$refs.tableheader){
+                        this.table_resize()
+                    }
+                },100)
+            });
         },
-        beforeDestroy() {
-            // let btn=document.getElementsByClassName("side-button changeTable")[0]
-            // removeResizeListener(btn, this.table_resize);
-            removeResizeListener(this.$refs.tableheader, this.table_resize);
+        mounted(){
         },
         methods:{
             asc_click(val){
@@ -178,29 +146,13 @@
             },
             table_resize(){
                 this.$nextTick(()=>{
-//                    var  a= this.$refs.tableheader.getBoundingClientRect();
                     var b=window.getComputedStyle(this.$refs.tableheader);
                     this.$set(this.tableRect,"width",b.width) ;
                 })
-                return  this.tableRect
+                return this.tableRect
             },
             head_width(head){
-                if(typeof head === 'string'){
-                    return `${1 / this.headsLen * 100}%`;
-                }else{
-                    let parentWidth=parseInt(this.tableRect.width)
-                    if(!!this.isFixLength){
-                        if(head.size){
-                            return `${head.size}`;
-                        }else{
-                            let width=0;
-                            parentWidth&&(parentWidth-this.isFixLength)>0&&(width=(Math.round((parentWidth-this.isFixLength)*head.width/100)))
-                            return `${width}`;
-                        }
-                    }else {
-                        return `${Math.round(head.width*parentWidth/100)}`;
-                    }
-                }
+                return `${head.size}px`;
             },
             head_title(head){
                 if(typeof head === 'string'){
@@ -214,10 +166,6 @@
             },
         },
         computed:{
-            isdata(){
-                let bol=this.firstLoading;
-                return bol?this.$t("ymx-list.checkData"):this.$t("ymx-list.noData")
-            },
             ...mapGetters({
                 viewMode:'ui/viewMode',
             }),
@@ -232,23 +180,13 @@
             cols(){
                 return this.heads;
             },
-            isFixLength(){
-                if(!this.heads[0]) return false
-                if(typeof this.heads[0] ==="string" ){
-                    return false
-                }else {
-                    let find=this.heads.find(row=>row.size)
-                    if(find){
-                        let size=0;
-                        this.heads.forEach(row=>{
-                            row.size&& (size+=row.size)
-                        })
-                        return size
-                    }else {
-                        return  false
+            isHidden(){
+                if(this.width){
+                    return {
+                        width:this.width+"px"
                     }
                 }
-            },
+            }
         },
         watch:{
             checkAll(val){
@@ -256,6 +194,9 @@
             },
             value(val){
                 this.checkAll=val;
+            },
+            bodyHeight(val){
+                console.log(val);
             },
             viewMode(){
                 this.table_resize()
@@ -287,6 +228,12 @@
                 default(){
                     return true;
                 }
+            },
+            width:{
+                type:Number,
+                default(){
+                    return 100;
+                },
             },
             firstLoading:{
                 default(){
