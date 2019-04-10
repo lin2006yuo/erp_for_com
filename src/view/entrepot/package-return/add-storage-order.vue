@@ -188,7 +188,7 @@
                 let reg=/^[0-9]\d*$/g;
                 if(val){
                     if(Number(val)<= row.sku_quantity){
-                        row[me] = +val
+                        row[me] = +val;
                         row[other] = +row.sku_quantity - +row[me]
                     }else {
                         console.log('***')
