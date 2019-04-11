@@ -233,3 +233,9 @@ export const url_compare_price = "post|shipping-method/compare-price";
 export const api_compare_price = function (data) {
     return http(url_compare_price, data);
 };
+
+//删除跟踪号规则
+export const url_delete_racking_rule = "delete|shipping-method/delete-tracking-rule/:id";
+export const api_delete_racking_rule = function (id) {
+    return http(Url2(url_delete_racking_rule,{id}));
+};

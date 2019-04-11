@@ -1,5 +1,5 @@
 <template>
-    <page-dialog title="添加城市" :value.sync="value" @close="close" width="300px">
+    <page-dialog title="添加城市"  :value.sync="value" @close="close" width="300px" height="500px">
         <el-table
             :data="city"
             ref="cityTabel"
@@ -8,7 +8,7 @@
         >
             <el-table-column type="selection"></el-table-column>
             <el-table-column label="英文" prop="en"></el-table-column>
-            <el-table-column label="中文" prop="cn"></el-table-column>
+            <el-table-column label="中文" prop="city_name"></el-table-column>
         </el-table>
         <div slot="footer" class="dialog-footer">
             <el-button size="mini" type="primary" @click="sure">确定</el-button>
@@ -21,10 +21,38 @@ export default {
     data() {
         return {
             city: [
-                {id: 1, cn: '新疆'},
-                {id: 2, cn: '广东'},
-                {id: 3, cn: '浙江'},
-                {id: 4, cn: '福建'},
+                {id: 1, city_name: '新疆'},
+                {id: 2, city_name: '广东'},
+                {id: 3, city_name: '浙江'},
+                {id: 4, city_name: '福建'},
+                                {id: 1, city_name: '新疆'},
+                {id: 2, city_name: '广东'},
+                {id: 3, city_name: '浙江'},
+                {id: 4, city_name: '福建'},
+                                {id: 1, city_name: '新疆'},
+                {id: 2, city_name: '广东'},
+                {id: 3, city_name: '浙江'},
+                {id: 4, city_name: '福建'},
+                                {id: 1, city_name: '新疆'},
+                {id: 2, city_name: '广东'},
+                {id: 3, city_name: '浙江'},
+                {id: 4, city_name: '福建'},
+                                {id: 1, city_name: '新疆'},
+                {id: 2, city_name: '广东'},
+                {id: 3, city_name: '浙江'},
+                {id: 4, city_name: '福建'},
+                                {id: 1, city_name: '新疆'},
+                {id: 2, city_name: '广东'},
+                {id: 3, city_name: '浙江'},
+                {id: 4, city_name: '福建'},
+                                {id: 1, city_name: '新疆'},
+                {id: 2, city_name: '广东'},
+                {id: 3, city_name: '浙江'},
+                {id: 4, city_name: '福建'},
+                                {id: 1, city_name: '新疆'},
+                {id: 2, city_name: '广东'},
+                {id: 3, city_name: '浙江'},
+                {id: 4, city_name: '福建'},
             ],
             selectOptions: [],
             visible: this.value

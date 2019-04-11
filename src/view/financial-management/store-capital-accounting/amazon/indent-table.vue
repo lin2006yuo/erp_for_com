@@ -8,14 +8,16 @@
                     <span>{{head_title(head)}}</span>
                 </th>
             </tr>
-            </tbody>
+            <slot name="header"></slot>
+        </tbody>
         </table>
+
         <div ref="table" class="ui-table-body" :style="isHidden" v-resize="{height:bodyHeight}">
             <table v-if="hasData" class="template secTable" :style="table_resize()">
                 <!--<colgroup>-->
                 <!--<col v-for="head in cols" :width="head_width(head)">-->
                 <!--</colgroup>-->
-                <slot></slot>
+                <slot name="body"></slot>
             </table>
             <span class="no-data-reminder" v-else>
                 <i></i>

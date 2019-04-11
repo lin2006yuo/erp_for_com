@@ -1,0 +1,79 @@
+{
+    "data": [
+        {
+            "id": 79019,
+            "account_id": 13,
+            "settlement_id": 11633454452,
+            "settlement_start_time": 1553739408,
+            "settlement_end_time": 1554687981,
+            "deposit_time": 1554860781,
+            "total_amount": "2,087.72",
+            "currency_code": "€",
+            "to_usd_rate": "7.57",
+            "total_amount_usd": "15804.0400",
+            "create_time": 1554709097,
+            "site_url": "Amazon.it",
+            "report_id": 15699526901017994,
+            "type": 1,
+            "wait_summary": 0,
+            "payment_amount": "2,011.73",
+            "fee_amount": "-289.26",
+            "promotion_return_amount": "0.00",
+            "refund_amount": "-205.61",
+            "refund_commission": "-7.0100",
+            "other_fee_amount": "24.24",
+            "previous_reserve_amount": "5,582.60",
+            "current_reserve_amount": "-5,035.98",
+            "reserve_amount": "546.62",
+            "account_name": "bularyit",
+            "site": "IT",
+            "summary_detail": [
+                {
+                    "shipping_type": "小记",
+                    "payment_amount": "15,228.80",
+                    "fee_amount": "-2,189.70",
+                    "promotion_return_amount": "0.00",
+                    "refund_amount": "-1,556.47"
+                },
+                {
+                    "shipping_type": "本地仓",
+                    "payment_amount": "14,990.49",
+                    "fee_amount": "-2,153.97",
+                    "promotion_return_amount": "0.00",
+                    "refund_amount": "-1,556.47"
+                },
+                {
+                    "shipping_type": "海外仓",
+                    "payment_amount": "238.30",
+                    "fee_amount": "-35.73",
+                    "promotion_return_amount": "0.00",
+                    "refund_amount": "0.00"
+                },
+                {
+                    "shipping_type": "FBA",
+                    "payment_amount": "0.00",
+                    "fee_amount": "0.00",
+                    "promotion_return_amount": "0.00",
+                    "refund_amount": "0.00"
+                }
+            ],
+            "turnover_rmb": "11,666.13",
+            "turnover": "1,541.10",
+            "payment_amount_rmb": "15,228.80",
+            "refund_rate": "-10.22",
+            "total_amount_rate": "103.78",
+            "fee_amount_rmb": "-2,189.70",
+            "promotion_return_amount_rmb": "0.00",
+            "refund_amount_rmb": "-1,556.47",
+            "other_fee_amount_rmb": "183.50",
+            "reserve_amount_rmb": "4,137.91",
+            "total_amount_rmb": "15,804.04",
+            "previous_reserve_amount_rmb": "42,260.28",
+            "current_reserve_amount_rmb": "-38,122.37",
+            "seller_name": "刘艳"
+        }
+    ],
+    "page": "1",
+    "pageSize": "20",
+    "count": 1
+}

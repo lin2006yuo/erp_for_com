@@ -302,16 +302,8 @@
             keep_discount() {
                 let data = clone(this.discountData);
                 let discount = Number(data.shipping_fee_discount);
-                /**** 折扣验证 ***/
 
-                // if(data.tracking_rules && data.tracking_rules.length) {
-                //     data.tracking_rules.forEach(i => {
-                //         if(i.id || i.shipping_method_id ||  i. tracking_number_total || i.start_position || i.end_position) {
-                //             return this.$message({type: 'warning', message: '跟踪号规则不能为空'})
-                //         }
-                //     })
-                // }
-
+                //校验
                 new Promise((resolve, reject) => {
                     if(discount > 2){
                         // this.$message({type:"warning",message:"折扣不能大于2"});
@@ -325,6 +317,9 @@
 
                     if(data.tracking_rules && data.tracking_rules.length) {
                         data.tracking_rules.forEach(i => {
+                            if(Number(i.tracking_number_total) <= 0) {
+                                return reject('跟踪号总位数必须大于0')
+                            }
                             if(i.tracking_number_total == '' || i.start_position == '' || i.end_position == '') {
                                 // return this.$message({type: 'warning', message: '跟踪号规则不能为空'})
                                 return reject('跟踪号规则不能为空')
@@ -332,13 +327,14 @@
                             if( Number(i.tracking_number_total) <　Number(i.end_position) || 
                                 Number(i.start_position) > Number(i.end_position)
                             ) {
-                                reject('请正确填写跟踪号规则')
+                                return reject('请正确填写跟踪号规则')
                             }
                         })
                     }
 
                     resolve()
                 }).then(() => {
+                    //校验成功
                     this.$http(api_logistics_update_keep, data.id, data).then(res => {
                         this.$message({type: 'success', message: res.message || res});
                         this.editVisible = false;
@@ -346,6 +342,7 @@
                         this.$message({type: 'error', message: code.message || code});
                     })
                 }).catch(message => {
+                    //校验失败
                     this.$message({type: 'warning', message: message})
                 })
 

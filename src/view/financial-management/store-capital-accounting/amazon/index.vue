@@ -12,6 +12,8 @@
         <table-list class="mt-sm" 
             @item-click="handle_item_click"
             @select-change="handle_select_change"
+            :tableData="tableData"
+            :sum="sumData"
         >
         </table-list >
         <el-pagination
@@ -43,6 +45,7 @@
 <script>
     import {downloadFile} from '../../../../lib/http';
     import {api_amazon_orders_list,api_amazon_orders_exports,url_amazon_orders_exports,api_amazon_filed,api_goods_export_template,api_amazon_details} from '@/api/store-captial-accounting'
+    let data = require('./data.json')
     export default {
         permission:{
             url_amazon_orders_exports
@@ -102,7 +105,8 @@
                 page:1,
                 pageSize:20,
                 total:0,
-
+                tableData: data,
+                sumData: data,
 
                 //我的
                 detailData: {}  //弹窗的查询准备数据
@@ -137,26 +141,30 @@
             init(){
                 this.loading = true;
                 let data = this.init_params();
-                this.$http(api_amazon_orders_list,data).then(res=>{
-                    this.loading = false;
-
-                    this.table.list= res.data;
-                    this.total = res.count;
-                    this.table.list.forEach(row=>{
-                        row.total_amount = row.total_amount+row.currency_code;
-                        row.payment_amount = row.payment_amount+row.currency_code;
-                        row.fee_amount = row.fee_amount+row.currency_code;
-                        row.promotion_return_amount = row.promotion_return_amount+row.currency_code;
-                        row.refund_amount = row.refund_amount+row.currency_code;
-                        row.other_fee_amount = row.other_fee_amount+row.currency_code;
-                        row.previous_reserve_amount = row.previous_reserve_amount+row.currency_code;
-                        row.current_reserve_amount = row.current_reserve_amount+row.currency_code;
-                        row.refund_commission = row.refund_commission+row.currency_code;
-                        row.reserve_amount =row.reserve_amount+row.currency_code
-                    });
-                }).catch(err=>{
-                    console.log(err)
-                })
+                // console.log()
+                this.tableData.data.shift()
+                this.tableData =  this.tableData.data
+                this.sumData = this.sumData.sum
+                // this.$http(api_amazon_orders_list,data).then(res=>{
+                //     this.loading = false;
+                //     this.tableData = res.data
+                //     // this.table.list= res.data;
+                //     // this.total = res.count;
+                //     // this.table.list.forEach(row=>{
+                //     //     row.total_amount = row.total_amount+row.currency_code;
+                //     //     row.payment_amount = row.payment_amount+row.currency_code;
+                //     //     row.fee_amount = row.fee_amount+row.currency_code;
+                //     //     row.promotion_return_amount = row.promotion_return_amount+row.currency_code;
+                //     //     row.refund_amount = row.refund_amount+row.currency_code;
+                //     //     row.other_fee_amount = row.other_fee_amount+row.currency_code;
+                //     //     row.previous_reserve_amount = row.previous_reserve_amount+row.currency_code;
+                //     //     row.current_reserve_amount = row.current_reserve_amount+row.currency_code;
+                //     //     row.refund_commission = row.refund_commission+row.currency_code;
+                //     //     row.reserve_amount =row.reserve_amount+row.currency_code
+                //     // });
+                // }).catch(err=>{
+                //     console.log(err)
+                // })
             },
 
             

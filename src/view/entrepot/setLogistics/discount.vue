@@ -44,7 +44,7 @@
                                 type="danger" 
                              
                                 class="ml-sm" 
-                                @click="delete_track_rule(index)"
+                                @click="delete_track_rule(index, track)"
                             ></el-button>
                             <!-- 占位添加按钮 -->
                             <el-button 
@@ -98,7 +98,7 @@
     
     <script>
         import number from './mixin/number'
-        import {api_get_currency} from '@/api/setLogistics'
+        import {api_get_currency, api_delete_racking_rule} from '@/api/setLogistics'
         export default {
             mixins: [number],
             name: "discount",
@@ -150,20 +150,39 @@
                     }
                     this.disData.tracking_rules.push({tracking_number_total: '', start_position: '', end_position: ''})
                 },
-                delete_track_rule(index) {
-                    this.$confirm('确定要删除该条跟踪号规则吗?', '提示', {
+                //删除跟踪号规则
+                delete_track_rule(index, item) {
+                    //如果没有填写数据，直接删除
+                    if( item.tracking_number_total === '' || item.start_position === '' || 
+                        item.end_position === '' || Number(item.tracking_number_total) <= 0 ||
+                        !item.id
+                        ) {
+                        this.disData.tracking_rules.splice(index, 1)
+                    } else {
+                        this.$confirm('确定要删除该条跟踪号规则吗?', '提示', {
+                            confirmButtonText: '确定',
+                            cancelButtonText: '取消',
+                            type: 'warning'
+                            }).then(() => {
+                                this.$http(api_delete_racking_rule, item.id).then(res => {
+                                    this.$message({type: 'success', message: res.message})
+                                    this.disData.tracking_rules.splice(index, 1)
+                                }).catch(err => {
+                                    this.$message({type: 'error', message: err})
+                                })
+                            }).catch(() => {
+                        });
+                    }
+                },
+                //删除敏感词
+                handle_delete(tag) {
+                    this.$confirm('确定要删除该敏感词吗?', '提示', {
                         confirmButtonText: '确定',
                         cancelButtonText: '取消',
                         type: 'warning'
                         }).then(() => {
-                            alert(111);
-                        }).catch(() => {
-                    });
-                    // this.disData.tracking_rules.splice(index, 1)
-                },
-                //删除敏感词
-                handle_delete(tag) {
-                    this.disData.sensitive_words.splice(this.disData.sensitive_words.indexOf(tag), 1);
+                            this.disData.sensitive_words.splice(this.disData.sensitive_words.indexOf(tag), 1);
+                        }).catch(() => {});
                 },
                 show_input() {
                     this.inputVisible = true;

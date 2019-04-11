@@ -1,17 +1,17 @@
 <template>
     <div class="c-district-fee">
         <div v-if="country">
-                <el-checkbox @change="handle_checkbox_change(index)" v-model="item.active" v-for="(item, index) in feeList" :key="index">{{item.country}}</el-checkbox>
+                <el-checkbox @change="handle_checkbox_change(index)" v-model="item.active" v-for="(item, index) in remote" :key="index">{{item.country}}</el-checkbox>
         </div>
         <!-- 行 -->
-        <div v-show="countryFee.active" class="fee-box" v-for="(countryFee, cf_index) in feeList" :key="`country_${cf_index}`">
+        <div v-show="countryFee.active" class="fee-box" v-for="(countryFee, cf_index) in remote" :key="`country_${cf_index}`">
             <div class="country-name">
                 <!-- 添加偏远费 -->
                 <el-button type="primary" icon="plus" size="mini" @click="add_district_fee(cf_index)"></el-button>
                 <span class="ml-xs">{{countryFee.country}}：</span>
             </div>
             <div class="inline fee-info">
-                <div class="fee-item" v-for="(districetFee, df_index) in countryFee.district_fee_list" :key="`district_${df_index}`">
+                <div class="fee-item" v-for="(districetFee, df_index) in countryFee.detail" :key="`district_${df_index}`">
                     <el-button-group>
                             <!-- 添加城市 -->
                             <el-button type="primary" size="mini" @click="show_add_city({cf_index, df_index})">添加</el-button>
@@ -22,15 +22,15 @@
                         <li 
                             v-for="(item, index) in districetFee.city" :key="`city_${index}`"
                             class="city-item"
-                        >{{item.cn}}</li>
+                        >{{item.city_name}}</li>
                     </ul>
-                    <span>首重：每 </span><el-input v-model="districetFee.kg" class="inline input-width-xs"></el-input><span> g 收取 </span><el-input class="inline input-width-xs"></el-input><span class="mr-lg"> 元</span>
-                    <span>续重：每 </span><el-input class="inline input-width-xs"></el-input><span> g 收取 </span><el-input class="inline input-width-xs"></el-input><span class="mr-lg"> 元</span>
+                    <span>首重：每 </span><el-input v-model="districetFee.first_weight" class="inline input-width-xs"></el-input><span> g 收取 </span><el-input class="inline input-width-xs" v-model="districetFee.first_fee"></el-input><span class="mr-lg"> 元</span>
+                    <span>续重：每 </span><el-input class="inline input-width-xs" v-model="districetFee.additional_weight"></el-input><span> g 收取 </span><el-input class="inline input-width-xs" v-model="districetFee.additional_fee"></el-input><span class="mr-lg"> 元</span>
                     <div class="inline email-box">
                         <span class="email-name">邮编：</span>
                         <input-group 
                             class="email-input-group"
-                            :data="districetFee.mail"
+                            :data="districetFee.zip_range"
                             @group-value-blur="handel_groupvalue_blur(arguments, {cf_index, df_index})"
                             :input-width="100"
                         />
@@ -48,31 +48,35 @@
 <script>
 import number from './mixin/number'
 
-const feelTemplate = {kg: '', re_kg: '', mail: [], city: []}
+const feelTemplate = {kg: '', re_kg: '', zip_range: [], city: []}
 export default {
     mixins: [number],
     data() {
         return {
             cityModelVisibel: false,
-            feeList: [
+            remote: [
+                //一条偏远费
                 {
                     country: '美国',
-                    district_fee_list: [
+                    detail: [
                         {
-                            kg: '',
-                            re_kg: '',
-                            mail: ['525656', '7777', '8888'],
+                            first_weight: '',
+                            first_fee: '',
+                            additional_weight: '',
+                            additional_fee: '',
+                            zip_range: ['525656', '7777', '8888'],
                             city: [
-                                {id: 1, cn: '新疆'},
-                                {id: 2, cn: '广东'},
+                                {id: 1, city_name: '新疆'},
+                                {id: 2, city_name: '广东'},
                             ]
                         },
                     ],
                     active: true
                 },
+                //二
                 {
                     country: '英国',
-                    district_fee_list: [],
+                    detail: [],
                     active: false
                 }
             ],
@@ -84,7 +88,7 @@ export default {
     },
     methods: {
         add_district_fee(cf_index) {
-            this.feeList[cf_index].district_fee_list.push({kg: '', re_kg: '', mail: [], city: []})
+            this.remote[cf_index].detail.push({kg: '', re_kg: '', zip_range: [], city: []})
         },
         delete_district_fee(cf_index, df_index) {
             // this.$confirm('确认是否删除该条偏远费设置','提示',{
@@ -92,17 +96,17 @@ export default {
             //     cancelButtonText: '取消',
             //     type: 'warning'
             // }).then(() => {
-            //     this.feeList[cf_index].district_fee_list.splice(df_index, 1)
+            //     this.remote[cf_index].detail.splice(df_index, 1)
             //     //如果没有数据
-            //     if(this.feeList[cf_index].district_fee_list === 0) {
-            //         this.feeList[cf_index].district_fee_list.push({kg: '', re_kg: '', mail: [], city: []})
-            //         this.feeList[cf_index].active = false
+            //     if(this.remote[cf_index].detail === 0) {
+            //         this.remote[cf_index].detail.push({kg: '', re_kg: '', mail: [], city: []})
+            //         this.remote[cf_index].active = false
             //     }
             // })
-            this.feeList[cf_index].district_fee_list.splice(df_index, 1)
+            this.remote[cf_index].detail.splice(df_index, 1)
             //如果没有数据
-            if(this.feeList[cf_index].district_fee_list.length === 0) {
-                this.feeList[cf_index].active = false
+            if(this.remote[cf_index].detail.length === 0) {
+                this.remote[cf_index].active = false
             }
         },
         show_add_city(indexs) {
@@ -112,13 +116,13 @@ export default {
         },
         add_city(citys) {
             const { cf_index, df_index } = this.curIndexs
-            this.feeList[cf_index].district_fee_list[df_index].city = citys
+            this.remote[cf_index].detail[df_index].city = citys
         },
         handle_checkbox_change(cf_index,$event) {
             const {checked} = event.target
-            const districtFeeList = this.feeList[cf_index].district_fee_list
+            const districtFeeList = this.remote[cf_index].detail
             if(checked && !districtFeeList.length) {
-                this.feeList[cf_index].district_fee_list.push({kg: '', re_kg: '', mail: [], city: []})
+                this.remote[cf_index].detail.push({kg: '', re_kg: '', zip_range: [], city: []})
             }
         },
         handel_groupvalue_blur(arg, item) {
@@ -141,7 +145,7 @@ export default {
                     ]
                 }
             }, [])
-            this.feeList[cf_index].district_fee_list[df_index].mail = groupValue
+            this.remote[cf_index].detail[df_index].zip_range = groupValue
             console.log(groupValue, item)
         },
         range(start, end) {
@@ -160,14 +164,14 @@ export default {
     },
     computed: {
         curCitys() {
-            const district_fee_list = this.feeList[this.curIndexs.cf_index].district_fee_list
-            if(!district_fee_list.length) {
+            const detail = this.remote[this.curIndexs.cf_index].detail
+            if(!detail.length) {
                 return []
             } else {
-                if(!district_fee_list[this.curIndexs.df_index]) {
+                if(!detail[this.curIndexs.df_index]) {
                     return []
                 } else {
-                    return district_fee_list[this.curIndexs.df_index].city
+                    return detail[this.curIndexs.df_index].city
                 }
             }
         }
@@ -209,7 +213,9 @@ export default {
     .email-box {
         vertical-align: top;
         .email-name {
-            vertical-align: initial
+            vertical-align: top;
+            position: relative;
+            top: 3px;
         }
         .email-input-group {
             display: inline-block

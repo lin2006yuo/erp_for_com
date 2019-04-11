@@ -4,76 +4,151 @@
       v-model="checkAll"
       :first-loading="true"
       @check="changeAll"
-      :body-height="41"
       :width="headsWidth"
       v-loading="loading"
       element-loading-text="玩命加载中..."
       :heads="heads">
-      <tbody>
+          <tr 
+            slot="header"
+            v-for="(trs ,index) in sum.summary_detail"
+            style="width: 1800px"
+            :class="{active:sum.isHighLight, sum: !sum.settlement_start_time}"
+          >
+            <td :rowspan=" sum.summary_detail.length" v-if="index===0 && true" width="50">
+              <el-checkbox v-model="sum.isCheck" @change="changeOne" v-if="false"></el-checkbox>
+            </td>
+                <!-- 日期范围 -->
+                <td :rowspan=" sum.summary_detail.length" v-if="index===0" width="100">
+                    <span class="click" @click="sum_click(sum)">{{sum.settlement_start_time}}</span>
+                </td>
+                <!-- 账号简称 -->
+                <td :rowspan=" sum.summary_detail.length" v-if="index===0" width="80">
+                    <span v-copy>{{sum.account_name}}</span>
+                </td>
+                <!-- 站点 -->
+                <td :rowspan=" sum.summary_detail.length" v-if="index===0" width="80">
+                    <span>{{sum.site}}</span>
+                </td>
+                <!-- 销售员 -->
+                <td :rowspan=" sum.summary_detail.length" v-if="index===0" width="80">
+                    <span>{{sum.seller_name}}</span>
+                </td>
+
+                <!-- 合并的数据 -->
+                    <!-- 发货类型 -->
+                <td v-copy width="100">{{trs.shipping_type}}</td>
+                    <!-- 订单金额 -->
+                <td width="140">{{trs.payment_amount}}</td>
+                    <!-- 亚马逊所收税费 -->
+                <td width="140">{{trs.fee_amount | tofixed}}</td>
+                    <!-- 促销返点总合计 -->
+                <td width="140">{{trs.promotion_return_amount | tofixed}}</td>
+                    <!-- 退款合计 -->
+                <td width="140">{{trs.refund_amount | tofixed}}</td>
+
+                <!-- 退款比例 -->
+                <td :rowspan=" sum.summary_detail.length" v-if="index===0" width="80">
+                    <span>{{sum.refund_rate}}</span>
+                </td>
+
+                <!-- 店铺资金合计 @TODO-->
+                <td :rowspan=" sum.summary_detail.length" v-if="index===0" width="100">
+                    <times :time="sum.other_fee_amount"></times>
+                </td>
+
+                <!-- 营业利润 -->
+                <td :rowspan=" sum.summary_detail.length" v-if="index===0" width="100">
+                    <span v-copy>{{sum.turnover | tofixed}}</span>
+                </td>
+                <!-- 首期预留金额 -->
+                <td :rowspan=" sum.summary_detail.length" v-if="index===0" width="100">
+                    <span v-copy>{{sum.previous_reserve_amount | tofixed}}</span>
+                </td>
+                <!-- 末期预留金额 -->
+                <td :rowspan=" sum.summary_detail.length" v-if="index===0" width="100">
+                    <span v-copy>{{sum.current_reserve_amount | tofixed}}</span>
+                </td>
+                <!-- 转账金额B -->
+                <td :rowspan=" sum.summary_detail.length" v-if="index===0" width="100">
+                    <span v-copy>{{sum.total_amount | tofixed}}</span>
+                </td>
+                <!-- 转账比例 -->
+                <td :rowspan=" sum.summary_detail.length" v-if="index===0" width="80">
+                    <span v-copy>{{sum.total_amount_rate}}</span>
+                </td>
+          </tr>
+      <tbody slot="body">
         <template v-for="(item, i) in tableData">
           <tr 
-            v-for="(trs ,index) in item.info"
-            @click="row_high_light(i)"
-            :class="{active:item.isHighLight}"
+            v-for="(trs ,index) in item.summary_detail"
+            
+            :class="{active:item.isHighLight, sum: !item.settlement_start_time}"
           >
-            <td :rowspan=" item.info.length" v-if="index===0 && true" width="100">
+            <td :rowspan=" item.summary_detail.length" v-if="index===0 && true" width="50">
               <el-checkbox v-model="item.isCheck" @change="changeOne"></el-checkbox>
             </td>
 
 
 
-            <!-- 日期范围 -->
-            <td :rowspan=" item.info.length" v-if="index===0" width="100">
-              <span class="click" @click="item_click(item)">{{item.channel_id}}</span>
-            </td>
-            <td :rowspan=" item.info.length" v-if="index===0" width="100">
-              <span v-copy>{{item.code}}</span>
-            </td>
+                <!-- 日期范围 -->
+                <td :rowspan=" item.summary_detail.length" v-if="index===0" width="100">
+                    <span class="click" @click="item_click(item)">{{item.settlement_start_time}}</span>
+                </td>
+                <!-- 账号简称 -->
+                <td :rowspan=" item.summary_detail.length" v-if="index===0" width="80">
+                    <span v-copy>{{item.account_name}}</span>
+                </td>
+                <!-- 站点 -->
+                <td :rowspan=" item.summary_detail.length" v-if="index===0" width="80">
+                    <span>{{item.site}}</span>
+                </td>
+                <!-- 销售员 -->
+                <td :rowspan=" item.summary_detail.length" v-if="index===0" width="80">
+                    <span>{{item.seller_name}}</span>
+                </td>
 
+                <!-- 合并的数据 -->
+                    <!-- 发货类型 -->
+                <td v-copy width="100" :class="{yellow: index === 0}">{{trs.shipping_type}}</td>
+                    <!-- 订单金额 -->
+                <td width="140" :class="{yellow: index === 0}">{{trs.payment_amount}}</td>
+                    <!-- 亚马逊所收税费 -->
+                <td width="140" :class="{yellow: index === 0}">{{trs.fee_amount | tofixed}}</td>
+                    <!-- 促销返点总合计 -->
+                <td width="140" :class="{yellow: index === 0}">{{trs.promotion_return_amount | tofixed}}</td>
+                    <!-- 退款合计 -->
+                <td width="140" :class="{yellow: index === 0}">{{trs.refund_amount | tofixed}}</td>
 
-            <!-- 合并的数据 -->
-            <td v-copy width="100">{{trs.seller_name}}</td>
-            <td>{{trs.warehouse_type}}</td>
+                <!-- 退款比例 -->
+                <td :rowspan=" item.summary_detail.length" v-if="index===0" width="80">
+                    <span>{{item.refund_rate}}%</span>
+                </td>
 
+                <!-- 店铺资金合计 @TODO-->
+                <td :rowspan=" item.summary_detail.length" v-if="index===0" width="100">
+                    <times :time="item.other_fee_amount"></times>
+                </td>
 
-            <td :rowspan=" item.info.length" v-if="index===0" width="100">
-              <span>{{item.customer_id}}</span>
-            </td>
-
-
-            <td :rowspan=" item.info.length" v-if="index===0" width="100">
-              <times :time="item.create_time"></times>
-            </td>
-            <td :rowspan=" item.info.length" v-if="index===0" width="200">
-                <span v-copy>{{item.name}}</span>
-            </td>
-            <td :rowspan=" item.info.length" v-if="index===0" width="100">
-                <span v-copy>{{item.name}}</span>
-            </td>
-            <td :rowspan=" item.info.length" v-if="index===0" width="100">
-                <span v-copy>{{item.name}}</span>
-            </td>
-            <td :rowspan=" item.info.length" v-if="index===0" width="100">
-                <span v-copy>{{item.name}}</span>
-            </td>
-            <td :rowspan=" item.info.length" v-if="index===0" width="100">
-                <span v-copy>{{item.name}}</span>
-            </td>
-            <td :rowspan=" item.info.length" v-if="index===0" width="100">
-                <span v-copy>{{item.name}}</span>
-            </td>
-            <td :rowspan=" item.info.length" v-if="index===0" width="100">
-                <span v-copy>{{item.name}}</span>
-            </td>
-            <td :rowspan=" item.info.length" v-if="index===0" width="100">
-                <span v-copy>{{item.name}}</span>
-            </td>
-            <td :rowspan=" item.info.length" v-if="index===0" width="100">
-                <span v-copy>{{item.name}}</span>
-            </td>
-            <td :rowspan=" item.info.length" v-if="index===0" width="100">
-                <span v-copy>{{item.name}}</span>
-            </td>
+                <!-- 营业利润 -->
+                <td :rowspan=" item.summary_detail.length" v-if="index===0" width="100">
+                    <span v-copy>{{item.turnover | tofixed}}</span>
+                </td>
+                <!-- 首期预留金额 -->
+                <td :rowspan=" item.summary_detail.length" v-if="index===0" width="100">
+                    <span v-copy>{{item.previous_reserve_amount | tofixed}}</span>
+                </td>
+                <!-- 末期预留金额 -->
+                <td :rowspan=" item.summary_detail.length" v-if="index===0" width="100">
+                    <span v-copy>{{item.current_reserve_amount | tofixed}}</span>
+                </td>
+                <!-- 转账金额B -->
+                <td :rowspan=" item.summary_detail.length" v-if="index===0" width="100">
+                    <span v-copy>{{item.total_amount | tofixed}}</span>
+                </td>
+                <!-- 转账比例 -->
+                <td :rowspan=" item.summary_detail.length" v-if="index===0" width="80">
+                    <span v-copy>{{item.total_amount_rate}}%</span>
+                </td>
 
 
 
@@ -92,6 +167,12 @@
         color: #3cb5fc;
         cursor: pointer;
     }
+    .sum {
+        background-color: #eff2f7
+    }
+    .yellow {
+        background-color: #ffffcc
+    }
 </style>
 <script>
     export default {
@@ -99,99 +180,24 @@
             return {
                 checkAll: false,
                 heads: [
-                    {isCheck:true,size:100},
-                    {label:'日期范围',size:100, value: 'account_id'},
-                    {label:'账号简称',size:100, value: 'account_name'},
-                    {label:'站点',size:100, info: [
-                        {value: 'id'},
-                        {value: 'seller_id'},
-                        {value: 'seller_name'},
-                        {value: 'warehouse_type'},
-                    ]},
-                    {label:'销售员',size:100, value: 'channel_name'},
-                    {label:'发货类型',size:100, value: 'code'},
-                    {label:'订单金额￥',size:100, value: 'create_time'},
-                    {label:'亚马逊所收税费￥',size:200, value: 'customer_id'},
-                    {label:'促销返点总计￥',size:100, value: 'account_id'},
-                    {label:'退款合计￥',size:100, value: 'id'},
-                    {label:'退款比例',size:100, value: 'name'},
-                    {label:'店铺资金合计￥',size:100, value: 'name'},
-                    {label:'营业利润￥',size:100, value: 'name'},
-                    {label:'首期预留金额￥',size:100, value: 'name'},
-                    {label:'末期预留金额￥',size:100, value: 'name'},
-                    {label:'转账金额B￥',size:100, value: 'name'},
-                    {label:'转账比例',size:100, value: 'name'},
+                    {isCheck:true,size:50},
+                    {label:'日期范围',size:100},
+                    {label:'账号简称',size:80},
+                    {label:'站点',size:80},
+                    {label:'销售员',size:80},
+                    {label:'发货类型',size:100},
+                    {label:'订单金额￥',size:140},
+                    {label:'亚马逊所收税费￥',size:140},
+                    {label:'促销返点总计￥',size:140},
+                    {label:'退款合计￥',size:140},
+                    {label:'退款比例',size:80},
+                    {label:'店铺资金合计￥',size:100},
+                    {label:'营业利润￥',size:100},
+                    {label:'首期预留金额￥',size:100},
+                    {label:'末期预留金额￥',size:100},
+                    {label:'转账金额B￥',size:100},
+                    {label:'转账比例',size:80},
                 ],
-                tableData: [
-                    {
-                        account_id: 3219,
-                        account_name: 324,
-                        channel_id: 9,
-                        channel_name: "shopee",
-                        code: "jcmmsg",
-                        create_time: 1554865542,
-                        customer_id: 292,
-                        customer_name: "郑敏",
-                        id: 3445,
-                        info: [
-                            {
-                                id: 3445,
-                                seller_id: 11,
-                                seller_name: "李倩霞",
-                                warehouse_type: 0,
-                            },
-                            {
-                                id: 3418,
-                                seller_id: 11,
-                                seller_name: "李倩霞",
-                                warehouse_type: 2,
-                            },
-                            {
-                                id: 3418,
-                                seller_id: 11,
-                                seller_name: "李倩霞",
-                                warehouse_type: 2,
-                            }
-                        ],
-                        name: '占位',
-                        name: '占位',
-                        name: '占位',
-                    },
-                    {
-                        account_id: 2797,
-                        account_name: 324,
-                        channel_id: 9,
-                        channel_name: "shopee",
-                        code: "jcmmsg",
-                        create_time: 1554865542,
-                        customer_id: 292,
-                        customer_name: "郑敏",
-                        id: 3445,
-                        info: [
-                            {
-                                id: 3445,
-                                seller_id: 11,
-                                seller_name: "李倩霞",
-                                warehouse_type: 0,
-                            },
-                            {
-                                id: 3418,
-                                seller_id: 11,
-                                seller_name: "李倩霞",
-                                warehouse_type: 2,
-                            },
-                            {
-                                id: 3418,
-                                seller_id: 11,
-                                seller_name: "李倩霞",
-                                warehouse_type: 2,
-                            }
-                        ],
-                        name: '占位',
-                        name: '占位',
-                        name: '占位',
-                    }
-                ]
             }
         },
         computed:{
@@ -207,12 +213,19 @@
         filters:{
             fdatetime(val) {
                 return datef("YYYY-MM-dd ", val)
+            },
+            tofixed(num) {
+                // if(typeof num !== 'number') {
+                //     num = Number(num) 
+                // }
+                return num
             }
         },
         methods: {
             changeAll(val) {
                 this.tableData.forEach(row=>{
-                    row.isCheck=val;
+                    // row.isCheck=val;
+                    this.$set(row, 'isCheck', val)
                 })
                 this.$emit('select-change', this.selectData())
             },
@@ -238,7 +251,12 @@
         props:{
             loading:{},
             firstTime:{},
-            table:{}
+            tableData:{
+                default: () => []
+            },
+            sum: {
+                default: () => {}
+            }
         },
         components: {
             indentTable: require('./indent-table').default
