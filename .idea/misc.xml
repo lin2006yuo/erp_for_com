@@ -3,15 +3,4 @@
   <component name="JavaScriptSettings">
     <option name="languageLevel" value="ES6" />
   </component>
-<<<<<<< HEAD
-  <component name="WebPackConfiguration">
-    <option name="path" value="$PROJECT_DIR$/alias.config.js" />
-=======
-  <component name="NodePackageJsonFileManager">
-    <packageJsonPaths />
-  </component>
-  <component name="WebPackConfiguration">
-    <option name="path" value="$PROJECT_DIR$/build/webpack.base.conf.js" />
->>>>>>> 5927619922882495c10a963b3385b4a85d6f5129
-  </component>
 </project>

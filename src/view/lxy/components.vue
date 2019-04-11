@@ -20,7 +20,11 @@
             </div>
             <div>
                 <span class="title">request-button</span>
+<<<<<<< HEAD
+                <div><request-button :request="request" :timeout="0">请求按钮</request-button></div>
+=======
                 <div><request-button :request="request">请求按钮</request-button></div>
+>>>>>>> 48c0906ddfa929e26726a60afdc569d6b27bd9df
             </div>
         </el-card>
     </page>
@@ -60,11 +64,16 @@
             request() {
                 return new Promise((resolve, reject) => {
                     setTimeout(() => {
+<<<<<<< HEAD
+                        resolve('请求')
+                    }, 500)
+=======
                         resolve('请求成功')
                     }, 100)
                 }).then(res => {
                     console.log(res)
                     return Promise.resolve()
+>>>>>>> 48c0906ddfa929e26726a60afdc569d6b27bd9df
                 })
             }
         }

@@ -17,10 +17,10 @@
             <el-table-column v-if="selection" type="selection"></el-table-column>
             <el-table-column
                 v-for="(item, index) in tableColumns"
+                :render-header="renderHeader"
                 :key="`${item.value}-${index}-${item.label}`"
-                inline-template
                 :label="item.label">
-                <ui-tip :content="row[item.value]" :width="98"></ui-tip>
+                ada
             </el-table-column>
         </el-table>
         <el-pagination
@@ -39,8 +39,12 @@
     export default {
         data() {
             return {
-                emptyText: '暂无数据'
+                emptyText: '暂无数据',
+                dataMock: {}
             }
+        },
+        mounted() {
+            this.getData()
         },
         methods: {
             handle_size_change(val) {
@@ -55,6 +59,38 @@
             handle_row_click(row) {
                  this.$refs.tableModule.toggleRowSelection(row)
             },
+            getData() {
+                setTimeout(() => {
+                   this.dataMock = {
+                       a: '哈哈',
+                       b: '比比'
+                   }
+                }, 2000)
+            },
+            renderHeader (h, { column, $index }) {
+                // return h('p', {}, [column.label])
+                const renderColumn = () => {
+                    if($index % 2 ===0) {
+                        return (
+                            <div class="header-div">哈哈</div>
+                        )
+                    }else {
+                        return (
+                            <ul>
+                                <li class="header-li">AA</li>
+                                <li class="header-li">BB</li>
+                            </ul>
+                        )
+                    }
+                }
+                return (
+                    <div>
+                        <p class="header-title">{column.label}</p>
+                        {renderColumn()}
+                        
+                    </div>
+                )
+            }
         },
         props: {
             searchData: {
@@ -82,3 +118,16 @@
         }
     }
 </script>
+<style>
+.header-title {
+    border-bottom: 1px solid #e0e6ed;
+    padding: 0;
+    margin: 0;
+}
+.header-li {
+    height: 40px
+}
+.header-div {
+    height: 80px
+}
+</style>
