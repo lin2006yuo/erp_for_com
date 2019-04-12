@@ -1,14 +1,15 @@
 <template>
-    <page-dialog title="添加城市"  :value.sync="value" @close="close" width="300px" height="500px">
+    <page-dialog title="添加城市"  :value.sync="value" @close="close" width="300px">
         <el-table
             :data="city"
             ref="cityTabel"
             @selection-change="handle_selection_change"
             @row-click="handle_row_click"
+            height="500"
         >
             <el-table-column type="selection"></el-table-column>
-            <el-table-column label="英文" prop="en"></el-table-column>
-            <el-table-column label="中文" prop="city_name"></el-table-column>
+            <el-table-column label="英文" prop="english_name"></el-table-column>
+            <el-table-column label="中文" prop="name"></el-table-column>
         </el-table>
         <div slot="footer" class="dialog-footer">
             <el-button size="mini" type="primary" @click="sure">确定</el-button>
@@ -17,42 +18,43 @@
     </page-dialog>
 </template>
 <script>
+import { api_city } from '@/api/district-fee'
 export default {
     data() {
         return {
             city: [
-                {id: 1, city_name: '新疆'},
-                {id: 2, city_name: '广东'},
-                {id: 3, city_name: '浙江'},
-                {id: 4, city_name: '福建'},
-                                {id: 1, city_name: '新疆'},
-                {id: 2, city_name: '广东'},
-                {id: 3, city_name: '浙江'},
-                {id: 4, city_name: '福建'},
-                                {id: 1, city_name: '新疆'},
-                {id: 2, city_name: '广东'},
-                {id: 3, city_name: '浙江'},
-                {id: 4, city_name: '福建'},
-                                {id: 1, city_name: '新疆'},
-                {id: 2, city_name: '广东'},
-                {id: 3, city_name: '浙江'},
-                {id: 4, city_name: '福建'},
-                                {id: 1, city_name: '新疆'},
-                {id: 2, city_name: '广东'},
-                {id: 3, city_name: '浙江'},
-                {id: 4, city_name: '福建'},
-                                {id: 1, city_name: '新疆'},
-                {id: 2, city_name: '广东'},
-                {id: 3, city_name: '浙江'},
-                {id: 4, city_name: '福建'},
-                                {id: 1, city_name: '新疆'},
-                {id: 2, city_name: '广东'},
-                {id: 3, city_name: '浙江'},
-                {id: 4, city_name: '福建'},
-                                {id: 1, city_name: '新疆'},
-                {id: 2, city_name: '广东'},
-                {id: 3, city_name: '浙江'},
-                {id: 4, city_name: '福建'},
+                {id: 1, name: '新疆'},
+                {id: 2, name: '广东'},
+                {id: 3, name: '浙江'},
+                {id: 4, name: '福建'},
+                                {id: 1, name: '新疆'},
+                {id: 2, name: '广东'},
+                {id: 3, name: '浙江'},
+                {id: 4, name: '福建'},
+                                {id: 1, name: '新疆'},
+                {id: 2, name: '广东'},
+                {id: 3, name: '浙江'},
+                {id: 4, name: '福建'},
+                                {id: 1, name: '新疆'},
+                {id: 2, name: '广东'},
+                {id: 3, name: '浙江'},
+                {id: 4, name: '福建'},
+                                {id: 1, name: '新疆'},
+                {id: 2, name: '广东'},
+                {id: 3, name: '浙江'},
+                {id: 4, name: '福建'},
+                                {id: 1, name: '新疆'},
+                {id: 2, name: '广东'},
+                {id: 3, name: '浙江'},
+                {id: 4, name: '福建'},
+                                {id: 1, name: '新疆'},
+                {id: 2, name: '广东'},
+                {id: 3, name: '浙江'},
+                {id: 4, name: '福建'},
+                                {id: 1, name: '新疆'},
+                {id: 2, name: '广东'},
+                {id: 3, name: '浙江'},
+                {id: 4, name: '福建'},
             ],
             selectOptions: [],
             visible: this.value
@@ -71,16 +73,11 @@ export default {
         },
         handle_row_click(row) {
             this.$refs.cityTabel.toggleRowSelection(row)
-        }
-    },
-    components: {
-        pageDialog: require('@/components/page-dialog.vue').default,
-    },
-    props: {
-        value: '',
-        select: {
-            type: Array,
-            default: () => []
+        },
+        get_citylist(country_code) {
+            this.$http(api_city, {country_code, page: 1, pageSie: 1000}).then(res => {
+                this.city = res.data
+            })
         },
     },
     watch: {
@@ -102,8 +99,23 @@ export default {
                     })
                 })
             }
+        },
+        code(val) {
+            this.get_citylist(val)
         }
-    }
+    },
+    props: {
+        value: '',
+        select: {
+            type: Array,
+            default: () => []
+        },
+        //国家简码
+        code: {}
+    },
+    components: {
+        pageDialog: require('@/components/page-dialog.vue').default,
+    },
 }
 </script>
 <style lang="stylus">

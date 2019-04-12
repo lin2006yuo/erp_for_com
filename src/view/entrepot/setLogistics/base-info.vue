@@ -156,8 +156,8 @@
                 </el-form-item><span> 位</span>
             </el-form-item>
             <el-form-item label="可用于仓库：">
-                <el-checkbox v-model="items.enabled" :disabled="!editable" v-for="items in baseData.warehouses"
-                             :key="items.name">{{items.name}}
+                <el-checkbox v-model="items.enabled" :disabled="!editable" v-for="(items, index) in baseData.warehouses"
+                             :key="items.name + index">{{items.name}}
                 </el-checkbox>
             </el-form-item>
             <el-form-item label="地址最大长度：">

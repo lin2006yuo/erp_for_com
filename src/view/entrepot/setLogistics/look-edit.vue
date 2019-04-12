@@ -6,6 +6,7 @@
         <el-tabs ref="tabs" @tab-click="tab_click" :active-name="action" v-resize="{height: 150}">
             <el-tab-pane name="base-info" class="scroll"  label="基本信息" key="base-info">
                 <base-info :baseData="baseData"
+                            v-if="false"
                            :shipping-method="shippingMethod"
                            :editable="editable"
                            ref="base"></base-info>
@@ -22,7 +23,7 @@
                     ref="express"></express-info>
             </el-tab-pane>
             <el-tab-pane name="effective" class="scroll" label="实效及运费" key="effective">
-                <effective v-if="effectiveShow" :effective-data="effData"
+                <effective v-if="effectiveShow || true" :effective-data="effData"
                            ref="effective"
                            @effective-change="change_eff_data"
                            :editable="editable" :shipping-id="shipping"
@@ -78,7 +79,7 @@
         data() {
             return {
                 editVisible: false,
-                action: "base-info",
+                action: "effective",
                 expressShow: false,
                 effectiveShow: false,
                 channelShow: false,
@@ -357,6 +358,7 @@
                     row.is_oli_additional = row.is_oli_additional ? 1 : 0;
                     row.is_stage_fee = row.is_stage_fee ? 1 : 0;
                     row.is_registered_fee = row.is_registered_fee ? 1 : 0;
+                    row.is_remote = row.is_remote ? 1 : 0
                 });
                 return data;
             },
@@ -385,7 +387,7 @@
             },
             change_dialog(val) {
                 if (!val) {
-                    this.action = "base-info";
+                    this.action = "effective";
                     this.expressShow = false;
                     this.effectiveShow = false;
                     this.channelShow = false;

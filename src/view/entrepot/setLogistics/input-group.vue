@@ -5,16 +5,20 @@
             :style="{width: `${inputWidth}px`}"
             v-for="(input, index) in inputDomain" :key="`input_${index}`"
             v-model="input.value"
+            ref="raInput"
+            :disabled="!editable"
+            @keyup.enter.native="handle_blur(input,index)"
             @blur="handle_blur(input,index)"
             ></el-input>
-        <el-button icon="plus" type="primary" size="mini" @click="add_input"></el-button>
+        <el-button v-if="editable" v-show="buttonVisible" icon="plus" type="primary" size="mini" @click="add_input"></el-button>
     </div>
 </template>
 <script>
 export default {
     data() {
         return {
-            inputDomain: []
+            inputDomain: [],
+            buttonVisible: true
         }
     },
     computed: {
@@ -34,7 +38,12 @@ export default {
             } else {
                 inputDomain.push({value: ''})
             }
-            
+            this.buttonVisible = false
+            this.$nextTick(() => {
+                // this.$refs.raInput.focus()
+                const {length} = this.$refs.raInput
+                this.$refs.raInput[length - 1].$refs.input.focus()
+            })
         },
         handle_blur(input, index) {
             if(!input.value) {
@@ -60,6 +69,7 @@ export default {
             //         ]
             //     }
             // }, [])
+            this.buttonVisible = true
             this.$emit('group-value-blur', groupValue)
         }
     },
@@ -78,6 +88,9 @@ export default {
         },
         message: {
             default: '请输入内容'
+        },
+        editable: {
+            default: false
         }
     },
     watch: {

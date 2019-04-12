@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="padding-test">
         <el-table
             :data="tableData"
             v-resize="{height:41}"
@@ -69,25 +69,41 @@
             },
             renderHeader (h, { column, $index }) {
                 // return h('p', {}, [column.label])
-                const renderColumn = () => {
-                    if($index % 2 ===0) {
+                // const renderColumn = () => {
+                //     if($index % 2 ===0) {
+                //         return (
+                //             <div class="header-div">哈哈</div>
+                //         )
+                //     }else {
+                //         return (
+                //             <ul>
+                //                 <li class="header-li">AA</li>
+                //                 <li class="header-li">BB</li>
+                //             </ul>
+                //         )
+                //     }
+                // }
+                // return (
+                //     <div>
+                //         <p class="header-title">{column.label}</p>
+                //         {renderColumn()}
+                        
+                //     </div>
+                // )
+                const renderHeader = () => {
+                    if($index === 1) {
+                        return <div class="border-top">汇总</div>
+                    } else{
                         return (
-                            <div class="header-div">哈哈</div>
-                        )
-                    }else {
-                        return (
-                            <ul>
-                                <li class="header-li">AA</li>
-                                <li class="header-li">BB</li>
-                            </ul>
+                            <div class="border-top">哈哈</div>
                         )
                     }
+
                 }
                 return (
                     <div>
-                        <p class="header-title">{column.label}</p>
-                        {renderColumn()}
-                        
+                        <div>{column.label}</div>
+                        {renderHeader()}
                     </div>
                 )
             }
@@ -118,7 +134,7 @@
         }
     }
 </script>
-<style>
+<style scope lang="stylus">
 .header-title {
     border-bottom: 1px solid #e0e6ed;
     padding: 0;
@@ -129,5 +145,14 @@
 }
 .header-div {
     height: 80px
+}
+.padding-test th {
+    padding: 0;
+}
+.padding-test .cell {
+    padding: 0;
+}
+.border-top {
+    border-top: 1px solid #e0e6ed;
 }
 </style>

@@ -2,11 +2,12 @@
     <page class="p-effective" v-loading="loading">
         <label class="inline ml-sm">可发货平台：</label>
         <el-checkbox v-model="items.enabled"
+                        v-if="false"
                      class="inline mb-xs"
                      :disabled="!editable" v-for="items in effData.channels"
                      :key="items.id">{{items.title}}
         </el-checkbox>
-        <div v-if="editable" class="shipping-copy mb-sm ml-sm">
+        <div v-if="editable && false" class="shipping-copy mb-sm ml-sm">
             <label-item label="运输方式：" :label-width="80">
                 <el-cascader
                         clearable
@@ -22,7 +23,7 @@
                             class="inline ml-sm">复制物流报价信息
             </request-button>
         </div>
-        <el-card>
+        <el-card v-if="false">
             <el-form ref="form1" :model="effData" label-width="180px">
                 <el-form-item label="按时效分类：">
                     <span>{{effData.period}}</span>
@@ -785,12 +786,15 @@
                                     <el-checkbox v-model="curDetail2.is_stage_fee"
                                                  :disabled="!editable" class="inline">分段收费
                                     </el-checkbox>
-                                    <el-checkbox v-model="curDetail2.pianyuanfei"
-                                                :disabled="!editable" class="inline">偏远费
+                                    <el-checkbox v-model="curDetail2.is_remote"
+                                                :disabled="!editable" class="inline"
+                                                :true-label="1"
+                                                :false-label="0"
+                                                >偏远费
                                     </el-checkbox>
                                     <el-form :model="curDetail2" label-width="90px">
                                         <!-- 偏远费设置 -->
-                                        <district-fee v-if="curDetail2.pianyuanfei"/>
+                                        <district-fee :navIndex="curIndex" v-if="curDetail2.is_remote" :remote="curDetail2.remote" :locations="curDetail2.locations" :editable="editable"/>
                                         <el-form-item label="可达天数：">
                                             <span>最快</span>
                                             <el-input v-model="curDetail2.earliest_days"
