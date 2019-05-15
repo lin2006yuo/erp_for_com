@@ -41,6 +41,7 @@ export default {
             creatorList:[],//Amazon创建人
             saleRule: [],//跟卖规则
             productBrand:[],//品牌
+            salesman: [] // 速卖通每日刊登销售员
         },
         warehouseCargo:[],
         warehouseStaffs:[],

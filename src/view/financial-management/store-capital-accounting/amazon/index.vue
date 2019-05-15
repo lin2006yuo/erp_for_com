@@ -45,7 +45,7 @@
 <script>
     import {downloadFile} from '../../../../lib/http';
     import {api_amazon_orders_list,api_amazon_orders_exports,url_amazon_orders_exports,api_amazon_filed,api_goods_export_template,api_amazon_details} from '@/api/store-captial-accounting'
-    let data = require('./data.json')
+    let data = require('./normal.json')
     export default {
         permission:{
             url_amazon_orders_exports

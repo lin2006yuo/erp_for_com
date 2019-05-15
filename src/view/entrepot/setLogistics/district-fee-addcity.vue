@@ -22,40 +22,7 @@ import { api_city } from '@/api/district-fee'
 export default {
     data() {
         return {
-            city: [
-                {id: 1, name: '新疆'},
-                {id: 2, name: '广东'},
-                {id: 3, name: '浙江'},
-                {id: 4, name: '福建'},
-                                {id: 1, name: '新疆'},
-                {id: 2, name: '广东'},
-                {id: 3, name: '浙江'},
-                {id: 4, name: '福建'},
-                                {id: 1, name: '新疆'},
-                {id: 2, name: '广东'},
-                {id: 3, name: '浙江'},
-                {id: 4, name: '福建'},
-                                {id: 1, name: '新疆'},
-                {id: 2, name: '广东'},
-                {id: 3, name: '浙江'},
-                {id: 4, name: '福建'},
-                                {id: 1, name: '新疆'},
-                {id: 2, name: '广东'},
-                {id: 3, name: '浙江'},
-                {id: 4, name: '福建'},
-                                {id: 1, name: '新疆'},
-                {id: 2, name: '广东'},
-                {id: 3, name: '浙江'},
-                {id: 4, name: '福建'},
-                                {id: 1, name: '新疆'},
-                {id: 2, name: '广东'},
-                {id: 3, name: '浙江'},
-                {id: 4, name: '福建'},
-                                {id: 1, name: '新疆'},
-                {id: 2, name: '广东'},
-                {id: 3, name: '浙江'},
-                {id: 4, name: '福建'},
-            ],
+            city: [],
             selectOptions: [],
             visible: this.value
         }
@@ -77,19 +44,6 @@ export default {
         get_citylist(country_code) {
             this.$http(api_city, {country_code, page: 1, pageSie: 1000}).then(res => {
                 this.city = res.data
-            })
-        },
-    },
-    watch: {
-        value(show) {
-            if(show) {
-                // setTimeout(() => {
-                //     this.select.forEach(row => {
-                //         console.log(row)
-                //         this.$refs.cityTabel.toggleRowSelection(row, true)
-                //     })
-                // }, 200);
-                this.$nextTick(() => {
                     this.select.forEach(row => {
                         for(let val of this.city) {
                             if(val.id === row.id) {
@@ -98,8 +52,10 @@ export default {
                         }
                     })
                 })
-            }
         },
+    },
+    watch: {
+        value() {},
         code(val) {
             this.get_citylist(val)
         }

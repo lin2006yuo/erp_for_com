@@ -6,7 +6,7 @@
         <indent-table
             :has-data="true"
             :first-loading="true"
-            :body-height="80"
+            :body-height="41"
             :width="headsWidth"
             v-loading="loading"
             element-loading-text="玩命加载中..."
@@ -15,86 +15,22 @@
         {{this.tableData.length && this.tableData[0].account_id}}
         <tbody slot="body">
             <template v-for="(item, i) in tableData">
-            <tr 
-                v-for="(trs ,index) in item.summary_detail"
-                @click="row_high_light(i)"
-                :class="{active:item.isHighLight}"
-            >
-                <td :rowspan=" item.summary_detail.length" v-if="index===0 && false" width="100">
-                <el-checkbox v-model="item.isCheck" @change="changeOne"></el-checkbox>
-                </td>
-
-
-
-                <!-- 结算周期 -->
-                <td :rowspan=" item.summary_detail.length" v-if="index===0" width="100">
-                <span class="click" @click="item_click(item)">{{item.settlement_start_time | fdatetime}}<br/>{{item.settlement_end_time | fdatetime}}</span>
-                </td>
-                <!-- 账号简称 -->
-                <td :rowspan=" item.summary_detail.length" v-if="index===0" width="80">
-                    <span v-copy>{{item.account_name}}</span>
-                </td>
-                <!-- 站点 -->
-                <td :rowspan=" item.summary_detail.length" v-if="index===0" width="60">
-                    <span>{{item.site}}</span>
-                </td>
-                <!-- 销售员 -->
-                <td :rowspan=" item.summary_detail.length" v-if="index===0" width="60">
-                    <span>{{item.seller_name}}</span>
-                </td>
-                <!-- 汇率-->
-                <td :rowspan=" item.summary_detail.length" v-if="index===0" width="60">
-                    <span>{{item.to_usd_rate}}</span>
-                </td>
-
-                <!-- 合并的数据 -->
-                    <!-- 发货类型 -->
-                <td v-copy width="80" :class="{yellow: index === 0}">{{trs.shipping_type}}</td>
-                    <!-- 订单金额￥ -->
-                <td width="135" :class="{yellow: index === 0}">{{trs.payment_amount}}</td>
-                    <!-- 亚马逊所收税费￥ -->
-                <td width="135" :class="{yellow: index === 0}">{{trs.fee_amount}}</td>
-                    <!-- 促销返点￥ -->
-                <td width="135" :class="{yellow: index === 0}">{{trs.promotion_return_amount}}</td>
-                    <!-- 退款合计￥ -->
-                <td width="135" :class="{yellow: index === 0}">{{trs.refund_amount}}</td>
-
-                <!-- 退款比例 -->
-                <td :rowspan=" item.summary_detail.length" v-if="index===0" width="80">
-                    <span>{{item.refund_rate}}</span>
-                </td>
-
-                <!-- 店铺资金合计 @TODO-->
-                <td :rowspan=" item.summary_detail.length" v-if="index===0" width="100">
-                    <times :time="item.other_fee_amount"></times>
-                </td>
-
-                <!-- 本期营业利润￥ -->
-                <td :rowspan=" item.summary_detail.length" v-if="index===0" width="100">
-                    <span v-copy>{{item.previous_reserve_amount}}</span>
-                </td>
-                <!-- 上期预留金额￥ -->
-                <td :rowspan=" item.summary_detail.length" v-if="index===0" width="100">
-                    <span v-copy>{{item.current_reserve_amount}}</span>
-                </td>
-                <!-- 本期预留金额￥ -->
-                <td :rowspan=" item.summary_detail.length" v-if="index===0" width="100">
-                    <span v-copy>{{item.current_reserve_amount}}</span>
-                </td>
-                <!-- 转账金额￥ -->
-                <td :rowspan=" item.summary_detail.length" v-if="index===0" width="100">
-                    <span v-copy>{{item.total_amount}}</span>
-                </td>
-                <!-- 转账比例 -->
-                <td :rowspan=" item.summary_detail.length" v-if="index===0" width="80">
-                    <span v-copy>{{item.total_amount_rate}}</span>
-                </td>
-
-
-
-
-
-            </tr>
+                <tr 
+                    v-for="(trs ,index) in item.summary_detail"
+                    :key="`boby-${i}-${index}`"
+                >
+                        <td 
+                            v-if="head.tear || index===0"
+                            :rowspan="!head.tear && item.summary_detail && item.summary_detail.length" 
+                            :class="{yellow: head.tear && index === 0}"
+                            v-for="(head,h_index) in heads" :key="`head-${h_index}`"
+                            :width="head.size"
+                        >
+                            <el-checkbox v-if="head.isCheck" v-model="item.isCheck" @change="changeOne"></el-checkbox>
+                            <span v-else-if="head.tear">{{trs[head.value]}}</span>
+                            <span v-else @click="item_click(item, h_index)" :class="{click: h_index === 1}">{{item[head.value]}}</span>
+                        </td>
+                </tr>
             </template>
         </tbody>
         </indent-table>
@@ -120,7 +56,7 @@
 
 <script>
     import {api_amazon_details} from '@/api/store-captial-accounting'
-    const data = require('./data2.json')
+    const data = require('./detail.json')
     export default {
         data() {
             return {
@@ -129,25 +65,25 @@
                 tableData:[],
                 loading: false,
                 heads: [
-                    {label:'结算周期',size:100 },
-                    {label:'账号简称',size:80 },
-                    {label:'站点',size:60},
-                    {label:'销售员',size:60},
-                    {label:'汇率',size:60},
+                    {label:'结算周期',size:100, value: 'settlement_start_time'},
+                    {label:'账号简称',size:80, value: 'account_name'},
+                    {label:'站点',size:60, value: 'site'},
+                    {label:'销售员',size:60, value: 'seller_name'},
+                    {label:'汇率',size:60, value: 'to_usd_rate'},
 
-                    {label:'发货类型',size:80},
-                    {label:'订单金额￥',size:135},
-                    {label:'亚马逊所收税费￥',size:135},
-                    {label:'促销返点￥',size:135},
-                    {label:'退款合计￥',size:135},
+                    {label:'发货类型',size:80, value: 'shipping_type', tear: true},
+                    {label:'订单金额￥',size:135, value: 'payment_amount', tear: true},
+                    {label:'亚马逊所收税费￥',size:135, value: 'fee_amount', tear: true},
+                    {label:'促销返点￥',size:135, value: 'promotion_return_amount', tear: true},
+                    {label:'退款合计￥',size:135, value: 'refund_amount', tear: true},
 
-                    {label:'退款比例',size:80},
-                    {label:'店铺资金合计￥',size:100},
-                    {label:'本期营业利润￥',size:100},
-                    {label:'上期预留金额￥',size:100},
-                    {label:'末期预留金额￥',size:100},
-                    {label:'转账金额￥',size:100},
-                    {label:'转账比例',size:80},
+                    {label:'退款比例',size:80, value: 'refund_rate'},
+                    {label:'店铺资金合计￥',size:100, value: 'other_fee_amount_rmb'},
+                    {label:'本期营业利润￥',size:100, value: 'turnover_rmb'},
+                    {label:'上期预留金额￥',size:100, value: 'previous_reserve_amount_rmb'},
+                    {label:'末期预留金额￥',size:100, value: 'current_reserve_amount_rmb'},
+                    {label:'转账金额￥',size:100, value: 'total_amount_rmb'},
+                    {label:'转账比例',size:80, value: 'total_amount_rate'},
                 ],
                 data:data,
                 total: 0,
@@ -159,6 +95,7 @@
         },
         mounted() {
             // this.tableData = data.data
+            this.render()
         },
         methods: {
             open() {},
@@ -180,6 +117,9 @@
                 // this.$http(api_amazon_details, data).then(res => {
                     
                 // })
+            },
+            render(h) {
+                console.log(h)
             }
         },
         filters:{

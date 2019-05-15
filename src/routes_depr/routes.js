@@ -53,6 +53,11 @@ export default [
             //     component: () => import('../view/entrepot/package-return/index.vue'),
             //     title: '包裹回退', type: 1
             // },
+            {
+                path: '/package-return',
+                component: () => import('../view/entrepot/abroad-package-return/index.vue'),
+                title: '海外仓退件', type: 1
+            },
             // {
             //     path: '/servers',
             //     component: () => import('../view/base/server-management/index.vue'),
@@ -106,6 +111,11 @@ export default [
                 path: '/inventory',
                 component: () => import('@/view/report/inventory'),
                 type: 1, title: ' 商品进销存'
+            },
+            {
+                path: '/amazon-refund-details',
+                component: () => import('@/view/entrepot/amazon-refund-details'),
+                type: 1, title: '退款明细 amazon'
             },
             {
                 path: '/export',

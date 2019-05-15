@@ -272,6 +272,14 @@
                         data.details = c;
                         break;
                 }
+                data.details.forEach(group => {
+                    group.locations.forEach((location,l_index) => {
+                        //如果改国家没有选择偏远费，则删除国家偏远费
+                        if(!location.is_remote && group.remote[l_index]) {
+                            group.remote[l_index].detail = []
+                        }
+                    })
+                })
                 this.$http(api_effective_keep, data.id, data).then(res => {
                     this.$message({
                         type: 'success',

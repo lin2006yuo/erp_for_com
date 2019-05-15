@@ -17,10 +17,9 @@
             <el-table-column v-if="selection" type="selection"></el-table-column>
             <el-table-column
                 v-for="(item, index) in tableColumns"
-                :render-header="renderHeader"
                 :key="`${item.value}-${index}-${item.label}`"
                 :label="item.label">
-                ada
+                <el-table-column :label="item.value" :prop="item.value">asd</el-table-column>
             </el-table-column>
         </el-table>
         <el-pagination
@@ -40,7 +39,12 @@
         data() {
             return {
                 emptyText: '暂无数据',
-                dataMock: {}
+                dataMock: {},
+                sum: {
+                    sum1: 1,
+                    sum2: 2,
+                    sum3: 3,
+                }
             }
         },
         mounted() {
@@ -91,12 +95,17 @@
                 //     </div>
                 // )
                 const renderHeader = () => {
-                    if($index === 1) {
-                        return <div class="border-top">汇总</div>
-                    } else{
-                        return (
-                            <div class="border-top">哈哈</div>
-                        )
+                    switch ($index) {
+                        case 1:
+                            return (<div class="border-top">汇总</div>)
+                        case 5:
+                             return (<div class="border-top">this.sum.package_num</div>)
+                        case 6:
+                             return (<div class="border-top">this.sum.package_weight</div>)
+                        case 7:
+                             return (<div class="border-top">this.sum.shipping_fee</div>)
+                        default:
+                            return <div></div>
                     }
 
                 }

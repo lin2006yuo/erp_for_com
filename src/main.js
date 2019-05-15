@@ -5,6 +5,7 @@ import Vue from 'vue';
 // import './lib/screen';
 // import './lib/printer';
 // import './lib/pinyin-search';
+import './lib/string';
 import './lib/date';
 import './lib/element';
 import './lib/url';

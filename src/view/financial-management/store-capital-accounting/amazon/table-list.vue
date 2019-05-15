@@ -12,7 +12,7 @@
             slot="header"
             v-for="(trs ,index) in sum.summary_detail"
             :key="`trs-header-${index}`"
-            :class="{active:sum.isHighLight, sum: !sum.settlement_start_time}"
+            :class="{sum: !sum.settlement_start_time}"
           >
 
                 <td 
@@ -22,8 +22,12 @@
                     :width="head.size"
                 >
                     <span v-if="head.isCheck"></span>
-                    <span v-else-if="head.tear">{{trs[head.value]}}</span>
-                    <span v-else>{{sum[head.value]}}</span>
+                    <span v-else-if="head.tear">
+                        {{head.handle ? head.handle(trs[head.value]) : trs[head.value]}}
+                    </span>
+                    <span v-else>
+                        {{head.handle ? head.handle(sum[head.value]) : sum[head.value]}}
+                    </span>
                 </td>
 
                 
@@ -33,17 +37,21 @@
           <tr 
             v-for="(trs ,index) in item.summary_detail"
             :key="`boby-${i}-${index}`"
-            :class="{active:item.isHighLight, sum: !item.settlement_start_time}"
           >
                 <td 
                     v-if="head.tear || index===0"
                     :rowspan="!head.tear && item.summary_detail && item.summary_detail.length" 
+                    :class="{yellow: head.tear && index === 0}"
                     v-for="(head,h_index) in heads" :key="`head-${h_index}`"
                     :width="head.size"
                 >
                     <el-checkbox v-if="head.isCheck" v-model="item.isCheck" @change="changeOne"></el-checkbox>
-                    <span v-else-if="head.tear">{{trs[head.value]}}</span>
-                    <span v-else :class="{click: h_index === 1}">{{item[head.value]}}</span>
+                    <span v-else-if="head.tear">
+                        {{head.handle ? head.handle(trs[head.value]) : trs[head.value]}}
+                    </span>
+                    <span v-else @click="item_click(item, h_index)" :class="{click: h_index === 1}">
+                        {{head.handle ? head.handle(item[head.value]) : item[head.value]}}
+                    </span>
                 </td>
           </tr>
         </template>
@@ -70,6 +78,14 @@
         data() {
             return {
                 checkAll: false,
+                /**
+                    isCheck: 是否多选
+                    label:   列名
+                    value:   列value
+                    size:    列宽
+                    tear:    如果是小单元格，tear为true，否则不填
+                    handle:  value处理函数，回调参数为该单元格的值
+                 */
                 heads: [
                     {isCheck:true,size:50},
                     {label:'日期范围',size:100,value: 'settlement_start_time'},
@@ -83,13 +99,13 @@
                     {label:'促销返点总计￥',size:140,value: 'promotion_return_amount', tear:true},
                     {label:'退款合计￥',size:140,value: 'refund_amount', tear:true},
 
-                    {label:'退款比例',size:80,value: 'refund_rate'},
-                    {label:'店铺资金合计￥',size:100,value: 'other_fee_amount'},
+                    {label:'退款比例',size:80,value: 'refund_rate', handle: (rate) => (`${rate}%`)},
+                    {label:'店铺资金合计￥',size:100,value: 'other_fee_amount_rmb'},
                     {label:'营业利润￥',size:100,value: 'turnover'},
-                    {label:'首期预留金额￥',size:100,value: 'previous_reserve_amount'},
-                    {label:'末期预留金额￥',size:100,value: 'current_reserve_amount'},
-                    {label:'转账金额B￥',size:100,value: 'total_amount'},
-                    {label:'转账比例',size:80,value: 'total_amount_rate'},
+                    {label:'首期预留金额￥',size:100,value: 'promotion_return_amount_rmb'},
+                    {label:'末期预留金额￥',size:100,value: 'current_reserve_amount_rmb'},
+                    {label:'转账金额B￥',size:100,value: 'total_amount_rmb'},
+                    {label:'转账比例',size:80,value: 'total_amount_rate', handle: (rate) => (`${rate}%`)},
                 ],
             }
         },
@@ -137,7 +153,9 @@
             selectData() {
                 return this.tableData.filter(i => i.isCheck)
             },
-            item_click(item) {
+            item_click(item, index) {
+                //如果点击的不是日期范围，return
+                if(index !== 1) return
                 this.$emit('item-click',item)
             }
         },

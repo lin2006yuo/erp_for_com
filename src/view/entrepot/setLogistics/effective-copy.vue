@@ -789,6 +789,7 @@
                                     <el-checkbox v-model="curDetail2.is_remote"
                                                 :disabled="!editable" class="inline"
                                                 :true-label="1"
+                                                @change="checkbox_districtfee(curDetail2.remote, curDetail2.locations)" 
                                                 :false-label="0"
                                                 >偏远费
                                     </el-checkbox>
@@ -1829,6 +1830,21 @@
                     fileName: `价格对比表_${this.compare_code}`,
                     suffix: '.xls',
                 });
+            },
+            checkbox_districtfee(remote, locations, $event) {
+                const {checked} = event.target
+                // if(checked) {
+                //     locations.forEach((item,index) => {
+                //         if(!remote[index]) {
+                //             const { country_code, country_cn_name } = locations[index]
+                //             this.remote.push({
+                //                 country_code,
+                //                 country_name: country_cn_name,
+                //                 detail: [{id: 0, country_code, first_weight: '', additional_weight: '', additional_fee: '',first_fee: '',zip_range: [], city: []}]
+                //             })
+                //         }
+                //     })
+                // }
             }
         },
         computed: {

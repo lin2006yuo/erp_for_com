@@ -4,15 +4,16 @@
         df_index: district_index
      -->
     <div class="c-district-fee">
-        <div v-if="remote.length">
+        <div>
+                <!-- <div v-for="(item, index) in locations" :key="`checkbox-country-${index}`">{{item.country_cn_name}}</div> -->
                 <el-checkbox 
                     @change="handle_checkbox_change(index, item)" 
                     v-model="item.is_remote" 
                     :disabled="!editable"
-                    v-for="(item, index) in locations" :key="index"
+                    v-for="(item, index) in locations" :key="`checkbox-country-${index}`"
                     :true-label="1"
                     :false-label="0"
-                >{{item.country_name}}</el-checkbox>
+                >{{item.country_cn_name}}</el-checkbox>
         </div>
         <!-- 国家 -->
         <div v-show="locations[cf_index].is_remote" class="fee-box" v-for="(countryFee, cf_index) in remote" :key="`country_${cf_index}`">
@@ -82,22 +83,21 @@ export default {
             this.remote[cf_index].detail.push({id: 0, country_code,first_weight: '', additional_weight: '', additional_fee: '',first_fee: '', zip_range: [], city: []})
         },
         delete_district_fee(cf_index, df_index) {
-            // this.$confirm('确认是否删除该条偏远费设置','提示',{
-            //     confirmButtonText: '确定',
-            //     cancelButtonText: '取消',
-            //     type: 'warning'
-            // }).then(() => {
-            //     this.remote[cf_index].detail.splice(df_index, 1)
-            //     //如果没有数据
-            //     if(this.remote[cf_index].detail === 0) {
-            //         this.remote[cf_index].detail.push({kg: '', re_kg: '', mail: [], city: []})
-            //         this.remote[cf_index].is_remote = false
-            //     }
-            // })
-            this.remote[cf_index].detail.splice(df_index, 1)
-            //如果没有数据
-            if(this.remote[cf_index].detail.length === 0) {
+            if(this.remote[cf_index].detail.length === 1) {
+                this.remote[cf_index].detail.splice(0,1,{
+                                        id: 0,
+                                        country_code: this.remote[cf_index].country_code,
+                                        first_weight: '',
+                                        first_fee: '',
+                                        additional_weight: '',
+                                        additional_fee: '',
+                                        zip_range: [],
+                                        city: []
+                                    });
                 this.locations[cf_index].is_remote = 0
+            } else {
+            this.remote[cf_index].detail.splice(df_index, 1)
+
             }
         },
         //显示城市弹窗，调用城市api
@@ -117,7 +117,7 @@ export default {
             const {checked} = event.target
             // checkbox为true
             if(checked) {
-                const {country_code, country_name} = check_country
+                const {country_code, country_cn_name} = check_country
                 const country = this.remote[cf_index]
                 //如果国家已经存在
                 if(country) {
@@ -125,13 +125,6 @@ export default {
                     if(!detail.length) {
                         this.remote[cf_index].detail.push({id: 0, country_code, first_weight: '', additional_weight: '', additional_fee: '',first_fee: '',zip_range: [], city: []})
                     }
-                } else {
-                    //如果国家是后面新增的,没有detail
-                    this.remote.push({
-                        country_code,
-                        country_name,
-                        detail: [{id: 0, country_code, first_weight: '', additional_weight: '', additional_fee: '',first_fee: '',zip_range: [], city: []}]
-                    })
                 }
             }
         },
@@ -183,34 +176,38 @@ export default {
         navIndex: {}
     },
     watch: {
-        // locations: {
-        //     handler() {
-        //         this.locations.forEach((item) => {
-        //             this.remote.push(
-        //                 //一条偏远费
-        //                 {
-        //                     country_code: item.country_code,
-        //                     country_name: item.country_cn_name,
-        //                     detail: [
-        //                         {
-        //                             id: 0,
-        //                             country_code: item.country_code,
-        //                             first_weight: '',
-        //                             first_fee: '',
-        //                             additional_weight: '',
-        //                             additional_fee: '',
-        //                             zip_range: [],
-        //                             city: []
-        //                         },
-        //                     ],
-        //                     is_remote: 0
-        //                 }
-        //             )
-        //         })
-        //     },
-        //     immediate: true,
-        //     deep: true
-        // },
+        locations: {
+            handler() {
+                //准备数据
+                this.locations.forEach((item, index) => {
+
+                    if(!this.remote[index]) {
+                            const { country_code, country_cn_name } = this.locations
+                            this.remote.push(
+                            
+                            {
+                                country_code: item.country_code,
+                                country_name: item.country_cn_name,
+                                detail: [
+                                    {
+                                        id: 0,
+                                        country_code: item.country_code,
+                                        first_weight: '',
+                                        first_fee: '',
+                                        additional_weight: '',
+                                        additional_fee: '',
+                                        zip_range: [],
+                                        city: []
+                                    },
+                                ],
+                            }
+                        )
+                    }
+                })
+            },
+            immediate: true,
+            deep: true
+        },
         // navIndex() {
         //     this.select_nav()
         //     console.log(this.remote)
