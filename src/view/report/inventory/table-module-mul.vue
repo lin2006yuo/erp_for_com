@@ -9,46 +9,64 @@
             ref="multipleTable"
             highlightCurrentRow
             @selection-change="handle_selection_change"
-            @row-click="handle_row_click"
-            >
+            @row-dblclick="handle_row_click"
+        >
             <div slot="empty" class="no-data-reminder">
                 <i></i>
                 {{emptyText}}
             </div>
             <el-table-column type="selection"></el-table-column>
-            <el-table-column label="sku" prop="sku"></el-table-column>
-            <el-table-column label="产品名称" inline-template width="200">
-                <ui-tip :content="row.spu_name" :width="98"></ui-tip>
-            </el-table-column>
-            <el-table-column label="商品分类" prop="category"></el-table-column>
+            <el-table-column label="sku" prop="sku" width="120"></el-table-column>
+            <el-table-column label="产品名称"  width="320" prop="spu_name"></el-table-column>
+            <el-table-column label="商品分类" prop="category" width="150"></el-table-column>
             <el-table-column label="仓库" prop="warehouse_name"></el-table-column>
             <el-table-column label="期初结存">
                 <el-table-column label="数量" prop="init_qty"></el-table-column>
-                <el-table-column label="单价" prop="inti_price"></el-table-column>
-                <el-table-column label="金额" prop="init_amount"></el-table-column>
+                <el-table-column label="单价" inline-template>
+                    <span>{{row.inti_price | formate_price}}</span>
+                </el-table-column>
+                <el-table-column label="金额"  inline-template>
+                    <span>{{row.init_amount | formate_price}}</span>
+                </el-table-column>
             </el-table-column>
             <el-table-column label="本期入库">
                 <el-table-column label="数量" prop="in_qty"></el-table-column>
-                <el-table-column label="单价" prop="in_price"></el-table-column>
-                <el-table-column label="金额" prop="in_amount"></el-table-column>
+                <el-table-column label="单价" inline-template>
+                    <span>{{row.in_price | formate_price}}</span>
+                </el-table-column>
+                <el-table-column label="金额"  inline-template>
+                    <span>{{row.in_amount | formate_price}}</span>
+                </el-table-column>
             </el-table-column>
             <el-table-column label="本期出库">
                 <el-table-column label="数量" prop="out_qty"></el-table-column>
-                <el-table-column label="单价" prop="out_price"></el-table-column>
-                <el-table-column label="金额" prop="out_amount"></el-table-column>
+                <el-table-column label="单价"  inline-template>
+                    <span>{{row.out_price | formate_price}}</span>
+                </el-table-column>
+                <el-table-column label="金额"  inline-template>
+                    <span>{{row.out_amount | formate_price}}</span>
+                </el-table-column>
             </el-table-column>
             <el-table-column label="期末库存">
                 <el-table-column label="数量" prop="end_qty"></el-table-column>
-                <el-table-column label="单价" prop="end_price"></el-table-column>
-                <el-table-column label="金额" prop="end_amount"></el-table-column>
+                <el-table-column label="单价" inline-template>
+                    <span>{{row.end_price | formate_price}}</span>
+                </el-table-column>
+                <el-table-column label="金额"  inline-template>
+                    <span>{{row.end_amount | formate_price}}</span>
+                </el-table-column>
             </el-table-column>
             <el-table-column label="<30" prop="less_third"></el-table-column>
             <el-table-column label="30天<>60天" prop="third_sixty" width="90"></el-table-column>
             <el-table-column label="60天<>90天" prop="sixty_ninety" width="90"></el-table-column>
             <el-table-column label="90天以上" prop="more_ninety"></el-table-column>
             <el-table-column label="盘点数量" prop="check_qty"></el-table-column>
-            <el-table-column label="最近采购单价" prop="latest purchase_price" width="90"></el-table-column>
-            <el-table-column label="最新采购单价" prop="latest_supply_prcie" width="90"></el-table-column>
+            <el-table-column label="最近采购单价"  width="90" inline-template>
+                <span>{{row['latest purchase_price'] | formate_price}}</span>
+            </el-table-column>
+            <el-table-column label="最新采购报价"  width="90" inline-template>
+                <span>{{row.latest_supply_prcie | formate_price}}</span>
+            </el-table-column>
         </el-table>
         <el-pagination
             class="page-fixed"
@@ -64,9 +82,15 @@
 </template>
 <script>
     export default {
+        name: 'inventoryTableMul',
         data() {
             return {
                 emptyText: '暂无数据'
+            }
+        },
+        filters: {
+            formate_price(price) {
+                return Number(price).toFixed(2)
             }
         },
         methods: {

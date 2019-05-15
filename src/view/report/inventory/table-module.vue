@@ -8,7 +8,7 @@
             ref="tableModule"
             class="scroll-bar"
             @selection-change="handle_selection_change"
-            @row-click="handle_row_click"
+            @row-dblclick="handle_row_click"
             highlightCurrentRow>
             <div slot="empty" class="no-data-reminder">
                 <i></i>
@@ -21,8 +21,12 @@
             <el-table-column label="sku" prop="sku"></el-table-column>
             <el-table-column label="产品名称" prop="spu_name"></el-table-column>
             <el-table-column label="数量" prop="quantity"></el-table-column>
-            <el-table-column label="单价" prop="price"></el-table-column>
-            <el-table-column label="金额" prop="amount"></el-table-column>
+            <el-table-column label="单价" inline-template>
+                <span>{{row.price | format_price}}</span>
+            </el-table-column>
+            <el-table-column label="金额" inline-template>
+                <span>{{row.amount | format_price}}</span>
+            </el-table-column>
             <el-table-column label="制单人" prop="creator"></el-table-column>
             <el-table-column label="单据号" prop="stock_inout_code"></el-table-column>
         </el-table>
@@ -40,9 +44,15 @@
 </template>
 <script>
     export default {
+        name: 'inventoryTable',
         data() {
             return {
                 emptyText: '暂无数据'
+            }
+        },
+        filters: {
+            format_price(price) {
+                return Number(price).toFixed(2)
             }
         },
         methods: {
