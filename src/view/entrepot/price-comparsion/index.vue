@@ -13,18 +13,7 @@
                 ></el-cascader>
             </label-item>
             <label-item label="修改时间：" class="ml-sm">
-                <el-date-picker 
-                    class="inline date s-width-small" 
-                    v-model="searchData.data_from" 
-                    v-sf.data_from
-                    :picker-options="pickerstart" placeholder="开始时间">
-                </el-date-picker><span>&nbsp;--&nbsp;</span>
-                <el-date-picker 
-                    class="inline date mr-sm" 
-                    v-model="searchData.date_to" 
-                    v-sf.date_to
-                    :picker-options="pickerend" placeholder="结束时间">
-                </el-date-picker>
+                <timespan :starttime.sync="searchData.data_from" :endtime.sync="searchData.date_to"/>
             </label-item>
         </search-card>
         <!-- 表格 -->
@@ -48,6 +37,7 @@
 
     import {api_get_shipping_price} from '@/api/shipping-price'
     import {api_get_shipping } from '@/api/common.js';
+    import timespan from '@/components/timespan'
     export default {
         permission: {
             url_confirm_export: '12312'
@@ -106,24 +96,6 @@
                 selectOptions: [],
                 loading: false,
                 exportType: 1,
-                pickerstart: {
-                    disabledDate: (time) => {
-                        if (this.searchData.date_to) {
-                            return time.getTime() > this.searchData.date_to;
-                        } else {
-                            return time.getTime() > Date.now()
-                        }
-                    }
-                },
-                pickerend: {
-                    disabledDate: (time) => {
-                        if (this.searchData.data_from && time.getTime() < this.searchData.data_from) {
-                            return time.getTime() < this.searchData.data_from || time.getTime() > Date.now()
-                        } else {
-                            return time.getTime() > Date.now();
-                        }
-                    }
-                },
             }
         },
         mounted() {
@@ -216,6 +188,7 @@
             // excelImport: require('./excel-import.vue').default,
             // exportField: require("@/components/export-field").default,
             exportTip: require('@/components/export-queue-tip').default,
+            timespan
         }
     }
 </script>

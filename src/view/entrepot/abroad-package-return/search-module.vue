@@ -100,7 +100,7 @@ export default {
         selectAccount: require('@/api-components/select-account').default,
         sntextInput: require('@/components/sntext-input.vue').default,
         timespan: require('@/components/timespan.vue').default,
-        shippingSelect: require('@/api-components/shipping-select.vue').default
+        shippingSelect: require('@/api-components/cascader-select.vue').default
     },
 }
 </script>

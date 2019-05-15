@@ -189,11 +189,7 @@
             btn_select(type,btn) {
                 if(!store.getItem(`InventoryTabelData_${this.swith}`)) return
                 //记录滚动高度
-                const preScrollTop = this.$refs.componentTable.$el.querySelector('.el-table__body-wrapper').scrollTop
-                let tableInfo = store.getItem(`InventoryTabelData_${this.swith}`)
-                console.log({tableInfo})
-                tableInfo['scTop'] = preScrollTop
-                store.setItem(`InventoryTabelData_${this.swith}`, tableInfo)
+                this.recordTop()
 
                 this.swith = btn.value
                 if(!store.getItem(`InventoryTabelData_${this.swith}`)) {
@@ -209,7 +205,7 @@
 
                     setTimeout(() => {
                         this.$refs.componentTable.$el.querySelector('.el-table__body-wrapper').scrollTop = res.scTop || 0
-                    }, 50)
+                    }, 0)
                 }
             },
             reset() {
@@ -289,6 +285,12 @@
                 }).catch(code => {
                     this.$message({type: "error", message: code.message || code});
                 })
+            },
+            recordTop() {
+                const preScrollTop = this.$refs.componentTable.$el.querySelector('.el-table__body-wrapper').scrollTop
+                let tableInfo = store.getItem(`InventoryTabelData_${this.swith}`)
+                tableInfo['scTop'] = preScrollTop
+                store.setItem(`InventoryTabelData_${this.swith}`, tableInfo)
             },
             sntypeChange() {
                 this.searchData.snText = ''
