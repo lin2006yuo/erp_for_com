@@ -36,6 +36,10 @@
                         :to.sync="searchData.date_to" 
                         :from.sync="searchData.date_from"></timespan>
                 </label-item>
+                <cascader-select 
+                    v-model="searchData.category_id"
+                    type="goods"
+                />
             </search-card>
             <el-row class="mb-xs">
                 <permission class="ml-sm delivery_comfirm_btn"
@@ -197,6 +201,7 @@
                 selectDropdown: require('@/components/select-dropdown').default,
                 exportTip: require('@/components/export-queue-tip').default,
                 selectAccount: require('@/api-components/select-account').default,
+                cascaderSelect: require('@/api-components/cascader-select').default,
                 timespan,
                 tableModule,
             },

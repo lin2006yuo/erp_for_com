@@ -1,5 +1,5 @@
 <template>
-    <div class="abroad-package-return">
+    <div class="c-abroad-package-return">
         <el-table
             :data="tableData"
             v-resize="{height:41}"

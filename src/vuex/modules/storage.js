@@ -20,6 +20,7 @@ export default {
             }
         },
         setData(state, {key, data}){
+            console.log('mutation setdata', key, data)
             state.storages[key].data = data;
         },
         setCount(state, {key, count}){

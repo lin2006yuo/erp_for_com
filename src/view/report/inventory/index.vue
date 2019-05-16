@@ -10,10 +10,10 @@
                 ></label-buttons>
             </el-row>
             <label-item label="仓库：">
-                <select-account
+                <!-- <select-account
                     v-model="searchData.warehouse_id"
                     type="warehouse_all"
-                ></select-account>
+                ></select-account> -->
             </label-item>
             <label-item label="">
                 <el-select
@@ -42,16 +42,10 @@
                 ></sntext-input>
             </label-item>
             <label-item label="商品分类：" class="inline ml-sm">
-                <el-cascader :options="goodsType"
-                             class="width-sm"
-                             placeholder="可以输入搜索"
-                             size="small"
-                             filterable
-                             clearable
-                             change-on-select
-                             expand-trigger="hover"
-                             v-model="searchData.category_id">
-                </el-cascader>
+                <cascader-select 
+                    v-model="searchData.category_id"
+                    type="goods"
+                />
             </label-item>
             <label-item label="日期范围：" class="ml-sm">
                 <timespan :from.sync="searchData.date_from" :to.sync="searchData.date_to"></timespan>
@@ -105,7 +99,7 @@
         data() {
             return {
                 searchData: {
-                    warehouse_id: 2,
+                    warehouse_id: '',
                     snType: 'name',
                     snText: '',
                     category_id: [],
@@ -159,7 +153,6 @@
             }
         },
         mounted() {
-            this.categories_init()
             this.init()
         },
         methods: {
@@ -266,26 +259,6 @@
 
                 return params
             },
-            categories_init() {
-                this.$http(api_get_categories).then(res => {
-                    this.goodsType = res.map(row => {
-                        return {
-                            value: row.id,
-                            label: row.title,
-                            children: row.childs.map(ch => {
-                                return {
-                                    value: ch.id,
-                                    label: ch.title,
-                                }
-                            })
-                        }
-                    });
-                    let cur = {label: "全部", value: ""};
-                    this.goodsType.unshift(cur);
-                }).catch(code => {
-                    this.$message({type: "error", message: code.message || code});
-                })
-            },
             recordTop() {
                 const preScrollTop = this.$refs.componentTable.$el.querySelector('.el-table__body-wrapper').scrollTop
                 let tableInfo = store.getItem(`InventoryTabelData_${this.swith}`)
@@ -311,6 +284,7 @@
             selectAccount: require('@/api-components/select-account').default,
             sntextInput: require('@/components/sntext-input').default,
             timespan: require('@/components/timespan').default,
+            cascaderSelect: require('@/api-components/cascader-select').default,
             tableModule,
             tableModuleMul
         }

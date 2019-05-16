@@ -29,10 +29,21 @@ export default {
     data() {
         return {
             searchData: {
-                sku: '',
+                skus: '',
+                reason: '',
                 warehouse_id: '',
-                shipping: [],
+                channel_id: '',
+                site_code: '',
+                account_id: '',
+                shipping: '',
                 snType: '',
+                snText: '',
+                shipping: '',
+                snUser: '',
+                snTextUser: '',
+                snDate: '',
+                date_b: '',
+                date_e: '',
                 page: 1,
                 pageSize: 20,
             },

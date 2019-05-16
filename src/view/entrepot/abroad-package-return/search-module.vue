@@ -8,8 +8,8 @@
                 label="退回类型："
                 class="inline"
                 @select="change_reason"
-                :buttons="reasonList">
-            </label-buttons>    
+                :buttons="buttons">
+            </label-buttons>
         </el-row>
         <el-row class="mt-xs mb-xs">
             <label-item label="平台：" class="mr-sm">
@@ -27,7 +27,8 @@
                 <select-account 
                     ref="Account" 
                     class="width-sm" 
-                    type="account" 
+                    type="account"
+                    v-model="searchData.account_id"
                     :param="{channel_id: searchData.channel_id, site_code: searchData.site_code}"/>
             </label-item>
             <!-- 包裹号 -->
@@ -40,44 +41,72 @@
                             :value="item.value"
                         ></el-option>
                 </el-select>
-                <sntext-input v-model="searchData.sku"/>
+                <sntext-input v-model="searchData.snText"/>
             </label-item>
             <label-item label="运输方式：" class="mr-sm">
-                <shipping-select 
+                <cascader-select
                     :warehouseId="searchData.warehouse_id"
                     v-model="searchData.shipping"
+                    type="shipping"
+                    valueType="array"
                 />
             </label-item>
             <label-item label="SKU：" class="mr-sm">
-                <sntext-input v-model="searchData.sku"/>
+                <sntext-input v-model="searchData.skus"/>
             </label-item>
         </el-row>
         <label-item label="创建时间：">
-            <timespan from.sync="searchData.date_from" to.sync="searchData.date_to"></timespan>
+            <timespan type="all" :from.sync="searchData.date_b" :to.sync="searchData.date_e"></timespan>
         </label-item>
     </search-card>
 </template>
 <script>
+    import {api_overseas_package_return, api_overseas_package_return_types,
+            api_overseas_package_return_id, api_overseas_package_return_export} from '@/api/overseas-package-return'
 export default {
     data() {
         return {
-            clears: {},
-            reasonList: [
+            clears: {
+                skus: '',
+                reason: '',
+                warehouse_id: '',
+                channel_id: '',
+                site_code: '',
+                account_id: '',
+                shipping: '',
+                snType: '',
+                snText: '',
+                shipping: '',
+                snUser: '',
+                snTextUser: '',
+                snDate: '',
+                date_b: '',
+                date_e: '',
+            },
+            buttons: [
                 {label: '全部', value: 1}, 
                 {label: "服务商退件", value: 2},
                 {label: "客户退件", value: 3},
                 {label: "未预报退件", value: 4}
             ],
             selectItems: [
-                {label: '退回单号', value: 1},
-                {label: '跟踪号', value: 2},
-                {label: '物流商单号', value: 3},
+                {label: '退回单号', value: 'return_order_number'},
+                {label: '跟踪号', value: 'shipping_number'},
+                {label: '包裹号', value: 'package_number'},
             ]
         }
     },
+    mounted() {
+        this.get_buttons()
+    },
     methods: {
         search() {},
-        change_reason() {}
+        change_reason() {},
+        get_buttons() {
+            this.$http(api_overseas_package_return_types).then(res => {
+                this.buttons = res
+            })
+        }
     },
     watch: {
         'searchData.channel_id'(val) {
@@ -100,7 +129,7 @@ export default {
         selectAccount: require('@/api-components/select-account').default,
         sntextInput: require('@/components/sntext-input.vue').default,
         timespan: require('@/components/timespan.vue').default,
-        shippingSelect: require('@/api-components/cascader-select.vue').default
+        cascaderSelect: require('@/api-components/cascader-select.vue').default,
     },
 }
 </script>
