@@ -1,0 +1,33 @@
+js6(ECMAScript 6)
+http://es6.ruanyifeng.com/
+
+项目所用语法
+
+1、箭头函数：
+    (形参)=>{body}
+        ps:
+            (a) => {return a;} 相等于 (a)=>{a}
+            this.xxx()
+
+
+2、对象函数：
+    {func:function(){}}可以简写成：{func(){}} 不要用{func:function(){}}
+
+3、数组
+    var arr1 = [a,b,c];
+    var arr2 = [...arr1,d,e,f]
+
+4、引入js/vue组件
+    import X from 'xx.js/vue'
+
+5、导出js/vue实例
+    module.exports.xxx1 = xxx1
+    module.exports.xxx2 = xxx2
+
+    module.exports = {xxx1:xxx1, xxx2:xxx2}
+
+6、常量定义
+    const xxx = xxxx
+
+
+

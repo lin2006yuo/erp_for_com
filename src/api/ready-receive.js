@@ -1,0 +1,73 @@
+import {http} from '../lib/http-plus';
+
+//创建接收包裹
+export const url_ready_receive = "post|purchase-parcels/ready-receive";
+export const api_ready_receive = function (data) {
+    return http(url_ready_receive, data);
+};
+
+//查看预接收包裹信息
+export const url_ready_receive_info = "get|purchase-parcels/ready-receive";
+export const api_ready_receive_info = function (data) {
+    return http(url_ready_receive_info, data);
+};
+
+//修改预接收包裹信息
+export const url_ready_receive_edit = "put|purchase-parcels/ready-receive";
+export const api_ready_receive_edit = function (data) {
+    return http(url_ready_receive_edit, data);
+};
+
+//标记收包异常
+export const url_receive_abnormal_mark = "post|purchase-parcels/receive-abnormal";
+export const api_receive_abnormal_mark = function (data) {
+    return http(url_receive_abnormal_mark, data);
+};
+
+//查看收报异常列表
+export const url_receive_abnormal = "get|purchase-parcels/receive-abnormal";
+export const api_receive_abnormal = function (data) {
+    return http(url_receive_abnormal, data);
+};
+
+//回复处理
+export const url_reply_letter = "put|purchase-parcels/reply-letter";
+export const api_reply_letter = function (data) {
+    return http(url_reply_letter, data);
+};
+
+//回复其他处理
+export const url_purchase_order_abnormal_id_other_abnormal_type = "put|purchase-order/:abnormal_id/other-abnormal-type";
+export const api_purchase_order_abnormal_id_other_abnormal_type = function (abnormal_id,data) {
+    return http(Url2(url_purchase_order_abnormal_id_other_abnormal_type,{abnormal_id}), data);
+};
+
+//批量标记已处理
+export const url_process_status = "put|purchase-parcels/process-status";
+export const api_process_status = function (data) {
+    return http(url_process_status, data);
+};
+
+//收货管理包裹异常具体数量
+export const url_abnormal_count = "get|purchase-parcels/abnormal-count";
+export const api_abnormal_count = function () {
+    return http(url_abnormal_count);
+};
+
+//收包异常列表上传凭证
+export const url_abnormal_certificate = "put|purchase-parcels/certificate";
+export const api_abnormal_certificate = function (data) {
+    return http(url_abnormal_certificate, data);
+};
+
+//获取导出字段
+export const url_get_purchase_order_export_fields_no_order = "get|purchase-order/export-fields-no-order";
+export const api_get_purchase_order_export_fields_no_order = function (data) {
+    return http(url_get_purchase_order_export_fields_no_order, data);
+};
+
+//导出
+export const url_post_purchase_order_export_no_order = "post|purchase-order/export-no-order";
+export const api_post_purchase_order_export_no_order = function (data) {
+    return http(url_post_purchase_order_export_no_order, data);
+};

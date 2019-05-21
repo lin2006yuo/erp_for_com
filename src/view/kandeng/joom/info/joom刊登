@@ -1,0 +1,12 @@
+
+joom刊登
+
+index  入口文件
+relevance-goods.vue产品关联信息
+account-tab-box  tab容器
+account-tab-base     每个tab的基本信息
+account-tab-sku-set  每个tab的sku设置
+account-describ  每个tab的图片与描述
+
+实现思路
+   所有数据都在index中声明，单向流绑定到各个组件中，各个组件的交互通过抛出事件到index中，修改数据并更新视图；

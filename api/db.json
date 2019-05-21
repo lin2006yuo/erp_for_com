@@ -1,0 +1,448 @@
+{
+  "posts": [
+    {
+      "name":"商品系统",
+      "subs":[
+        {"name":"产品开发","subs":[
+          {"name":"产品开发","router":"/product/develop"},
+          {"name":"产品创建","router":"/product/new"},
+          {"name":"创建基础","router":"/product/intro"}
+        ]},
+        {"name":"商品管理","subs":[
+          {"name":"商品管理","router":"/product/manager"},
+          {"name":"分类管理","router":"/product/classify"},
+          {"name":"属性管理","router":"/product/attribute"},
+          {"name":"品牌管理","router":"/product/brand"},
+          {"name":"标签管理","router":"/product/tags"},
+          {"name":"单位管理","router":"/product/unit"},
+          {"name":"包装材料","router":"/product/pack"}
+        ]},
+        {"name":"分类管理","subs":[
+          {"name":"分类列表","router":"/product/lists"}
+        ]},
+        {"name":"刊登管理","subs":[
+          {"name":"刊登管理","router":"/product/kandeng"}
+        ]}
+      ]
+    },
+    {
+      "name":"刊登系统",
+      "subs":[
+        {"name":"商品","subs":[
+          {"name":"列表","router":"/kandeng/list"},
+          {"name":"产品库","router":"/kandeng/all"}
+        ]},
+        {"name":"平台","subs":[
+          {"name":"wish","router":"/kandeng/p/wish"},
+          {"name":"ebay","router":"/kandeng/p/ebay"},
+          {"name":"亚马逊","router":"/kandeng/p/ymx"}
+        ]}
+      ]
+    },
+    {
+      "name":"订单系统",
+      "subs":[
+        {"name":"Ebay","subs":[
+          {"name":"Ebay列表","router":"/order/ebay/list"},
+          {"name":"订单","router":"/order/ebay/info"}
+        ]},
+        {"name":"亚马逊","subs":[
+          {"name":"亚马逊列表","router":"/order/ymx/list"},
+          {"name":"订单","router":"/order/ymx/info"}
+        ]},
+        {"name":"AliExpress","subs":[
+          {"name":"AliExpress列表","router":"/order/aliexpress/list"},
+          {"name":"订单","router":"/order/aliexpress/info"}
+        ]},
+        {"name":"Wish","subs":[
+          {"name":"Wish列表","router":"/order/wish/list"},
+          {"name":"订单","router":"/order/wish/info"}
+        ]},
+        {"name":"待审订单","router":"/order/pending/info"},
+        {"name":"本地订单","router":"/order/local"}
+      ]
+    },
+    {
+      "name":" 仓库系统",
+      "subs":[
+        {"name":" 仓储管理","subs":[
+          {"name":"列表","router":"/entrepot"},
+          {"name":"海外","router":"/entrepot/overseas"},
+          {"name":"仓库管理","router":"/entrepot/storeManagementNew"},
+          {"name":"物流设置","router":"/entrepot/setLogistics"},
+          {"name":"出入库记录","router":"/entrepot/inOutStockRecord"}
+        ]},
+        {"name":" 发货管理","subs":[
+          {"name":"等待配货","router":"/entrepot/picking"},
+          {"name":"物流商下单","router":"/entrepot/shipment"}
+        ]}
+      ]
+    },
+    {
+      "name":"基础设置",
+      "subs":[
+          {"name":"权限管理","subs":[
+          {"name":"权限","router":"/base/access"},
+          {"name":"用户","router":"/base/user"}
+        ]},
+        {"name":"账号管理","subs":[
+          {"name":"亚马逊","router":"/base/account/ymx"},
+          {"name":"Wish","router":"/base/account/wish"},
+          {"name":"Ebay","router":"/base/account/ebay"},
+          {"name":"速卖通","router":"/base/account/smt"},
+          {"name":"PayPal账号","router":"/base/account/paypal"}
+
+        ]},
+        {"name":"配置","subs":[
+          {"name":"亚马逊","router":"/base/config/ymx"},
+          {"name":"用户","router":"/base/config"},
+          {"name":"汇率","router":"/base/config/rate"}
+        ]},
+        {"name":"汇率","router":"/base/config/rate"},
+        {"name":"订单规则","router":"/base/order-rule/rate"}
+      ]
+    },
+    {
+      "name":"系统设置",
+      "subs":[
+        {"name":"系统菜单","router":"/system/menu"}
+        ]
+    }
+  ],
+  "comments": [
+    { "id": 1, "body": "some comment", "postId": 1 }
+  ],
+  "product/list":{
+    "total":30,
+    "data":[
+      {"id":1,"name":"xx1","classify":"分类名字","author":"xxx","qc":"xxx","ctime":"xxx","status":"2"},
+      {"id":2,"name":"xx1","classify":"分类名字","author":"xxx","qc":"xxx","ctime":"xxx","status":"2"},
+      {"id":3,"name":"xx1","classify":"分类名字","author":"xxx","qc":"xxx","ctime":"xxx","status":"2"}
+    ]
+  },
+  "yetPublish/list":{
+    "total":30,
+    "current":1,
+    "code":"400",
+    "data":[
+      {
+        "id":"1020134569",
+        "picture": "/static/timg.jpg",
+        "name": "汽车、摩托车 > 内饰/汽车用品 > 车载支架 > 手机座Mini Tools Set Garden Tool Set Shovel Spade Rake House Garden Decoration",
+        "sku": "平台商品ID：58019618c41e9e20f1f23cb4渠道SKU：MUZS382-005-1渠道帐号：eronde销售：王小剑",
+        "time":"上线2016-10-05 16:46:35",
+        "classify":"Home & GradenUS",
+        "site":"美国",
+        "price":200,
+        "sales":100,
+        "visits":2003,
+        "amount":3000,
+        "collection":"120",
+        "supplynum":"卖多少补多少",
+        "num":""
+      },{
+        "id":"1020134568",
+        "picture": "/static/timg.jpg",
+        "name": "汽车、摩托车 > 内饰/汽车用品 > 车载支架 > 手机座Mini Tools Set Garden Tool Set Shovel Spade Rake House Garden Decoration",
+        "sku": "平台商品ID：58019618c41e9e20f1f23cb4渠道SKU：MUZS382-005-1渠道帐号：eronde销售：王小剑",
+        "time":"上线2016-10-05 16:46:35",
+        "classify":"Home & GradenUS",
+        "site":"美国",
+        "price":200,
+        "sales":100,
+        "visits":2003,
+        "amount":3000,
+        "collection":"120",
+        "supplynum":"卖多少补多少",
+        "num":""
+      },{
+        "id":"1020134567",
+        "picture": "/static/timg.jpg",
+        "name": "汽车、摩托车 > 内饰/汽车用品 > 车载支架 > 手机座Mini Tools Set Garden Tool Set Shovel Spade Rake House Garden Decoration",
+        "sku": "平台商品ID：58019618c41e9e20f1f23cb4渠道SKU：MUZS382-005-1渠道帐号：eronde销售：王小剑",
+        "time":"上线2016-10-05 16:46:35",
+        "classify":"Home & GradenUS",
+        "site":"美国",
+        "price":200,
+        "sales":100,
+        "visits":2003,
+        "amount":3000,
+        "collection":"120",
+        "supplynum":"卖多少补多少",
+        "num":""
+      },{
+        "id":"1020134566",
+        "picture": "/static/timg.jpg",
+        "name": "汽车、摩托车 > 内饰/汽车用品 > 车载支架 > 手机座Mini Tools Set Garden Tool Set Shovel Spade Rake House Garden Decoration",
+        "sku": "平台商品ID：58019618c41e9e20f1f23cb4渠道SKU：MUZS382-005-1渠道帐号：eronde销售：王小剑",
+        "time":"上线2016-10-05 16:46:35",
+        "classify":"Home & GradenUS",
+        "site":"美国",
+        "price":200,
+        "sales":100,
+        "visits":2003,
+        "amount":3000,
+        "collection":"120",
+        "supplynum":"卖多少补多少",
+        "num":""
+      },{
+        "id":"1020134565",
+        "picture": "/static/timg.jpg",
+        "name": "汽车、摩托车 > 内饰/汽车用品 > 车载支架 > 手机座Mini Tools Set Garden Tool Set Shovel Spade Rake House Garden Decoration",
+        "sku": "平台商品ID：58019618c41e9e20f1f23cb4渠道SKU：MUZS382-005-1渠道帐号：eronde销售：王小剑",
+        "time":"上线2016-10-05 16:46:35",
+        "classify":"Home & GradenUS",
+        "site":"美国",
+        "price":200,
+        "sales":100,
+        "visits":2003,
+        "amount":3000,
+        "collection":"120",
+        "supplynum":"卖多少补多少",
+        "num":""
+      },{
+        "id":"1020134564",
+        "picture": "/static/timg.jpg",
+        "name": "汽车、摩托车 > 内饰/汽车用品 > 车载支架 > 手机座Mini Tools Set Garden Tool Set Shovel Spade Rake House Garden Decoration",
+        "sku": "平台商品ID：58019618c41e9e20f1f23cb4渠道SKU：MUZS382-005-1渠道帐号：eronde销售：王小剑",
+        "time":"上线2016-10-05 16:46:35",
+        "classify":"Home & GradenUS",
+        "site":"美国",
+        "price":200,
+        "sales":100,
+        "visits":2003,
+        "amount":3000,
+        "collection":"120",
+        "supplynum":"卖多少补多少",
+        "num":""
+      }
+    ]
+  },
+  "stayPublish/list":{
+     "total":30,
+     "current":1,
+      "data":[
+        {
+           "id": "1020134569",
+          "picture": "/static/timg.jpg",
+          "name": "汽车、摩托车 > 内饰/汽车用品 > 车载支架 > 手机座Mini Tools Set Garden Tool Set Shovel Spade Rake House Garden Decoration",
+          "sku": "平台商品ID：58019618c41e9e20f1f23cb4渠道SKU：MUZS382-005-1渠道帐号：eronde销售：王小剑",
+          "time": "2016-10-05 16:46:35",
+          "classify": "Home & GradenUS",
+          "site": "美国",
+          "price": 200,
+          "amount": 3000,
+          "supplynum": "卖多少补多少",
+          "num": ""
+        },{
+          "id": "1020134569",
+          "picture": "/static/timg.jpg",
+          "name": "汽车、摩托车 > 内饰/汽车用品 > 车载支架 > 手机座Mini Tools Set Garden Tool Set Shovel Spade Rake House Garden Decoration",
+          "sku": "平台商品ID：58019618c41e9e20f1f23cb4渠道SKU：MUZS382-005-1渠道帐号：eronde销售：王小剑",
+          "time": "2016-10-05 16:46:35",
+          "classify": "Home & GradenUS",
+          "site": "美国",
+          "price": 200,
+          "amount": 3000,
+          "supplynum": "卖多少补多少",
+          "num": ""
+        },{
+          "id": "1020134569",
+          "picture": "/static/timg.jpg",
+          "name": "汽车、摩托车 > 内饰/汽车用品 > 车载支架 > 手机座Mini Tools Set Garden Tool Set Shovel Spade Rake House Garden Decoration",
+          "sku": "平台商品ID：58019618c41e9e20f1f23cb4渠道SKU：MUZS382-005-1渠道帐号：eronde销售：王小剑",
+          "time": "2016-10-05 16:46:35",
+          "classify": "Home & GradenUS",
+          "site": "美国",
+          "price": 200,
+          "amount": 3000,
+          "supplynum": "卖多少补多少",
+          "num": ""
+        },{
+          "id": "1020134569",
+          "picture": "/static/timg.jpg",
+          "name": "汽车、摩托车 > 内饰/汽车用品 > 车载支架 > 手机座Mini Tools Set Garden Tool Set Shovel Spade Rake House Garden Decoration",
+          "sku": "平台商品ID：58019618c41e9e20f1f23cb4渠道SKU：MUZS382-005-1渠道帐号：eronde销售：王小剑",
+          "time": "2016-10-05 16:46:35",
+          "classify": "Home & GradenUS",
+          "site": "美国",
+          "price": 200,
+          "amount": 3000,
+          "supplynum": "卖多少补多少",
+          "num": ""
+        },{
+          "id": "1020134569",
+          "picture": "/static/timg.jpg",
+          "name": "汽车、摩托车 > 内饰/汽车用品 > 车载支架 > 手机座Mini Tools Set Garden Tool Set Shovel Spade Rake House Garden Decoration",
+          "sku": "平台商品ID：58019618c41e9e20f1f23cb4渠道SKU：MUZS382-005-1渠道帐号：eronde销售：王小剑",
+          "time": "2016-10-05 16:46:35",
+          "classify": "Home & GradenUS",
+          "site": "美国",
+          "price": 200,
+          "amount": 3000,
+          "supplynum": "卖多少补多少",
+          "num": ""
+        }
+      ]},
+    "notPublish/list":{
+    "data":[
+      {
+        "id": "1020134569",
+        "picture": "/static/timg.jpg",
+        "name": "汽车、摩托车 > 内饰/汽车用品 > 车载支架 > 手机座Mini Tools Set Garden Tool Set Shovel Spade Rake House Garden Decoration",
+        "sku": "1061649",
+        "code": "YB168BlackRed3XL",
+        "chineseName": "（金华仓）男韩版青年加厚修身棉服(opp袋子包装）",
+        "eglishName": "Men's Fashion Coat Winter Coat Thick Coat Cotton Jacket"
+      },
+      {
+        "id": "10201345688",
+        "picture": "/static/timg.jpg",
+        "name": "汽车、摩托车 > 内饰/汽车用品 > 车载支架 > 手机座Mini Tools Set Garden Tool Set Shovel Spade Rake House Garden Decoration",
+        "sku": "1061649",
+        "code": "YB168BlackRed3XL",
+        "chineseName": "（金华仓）男韩版青年加厚修身棉服(opp袋子包装）",
+        "eglishName": "Men's Fashion Coat Winter Coat Thick Coat Cotton Jacket"
+      },
+      {
+        "id": "10201398745",
+        "picture": "/static/timg.jpg",
+        "name": "汽车、摩托车 > 内饰/汽车用品 > 车载支架 > 手机座Mini Tools Set Garden Tool Set Shovel Spade Rake House Garden Decoration",
+        "sku": "1061649",
+        "code": "YB168BlackRed3XL",
+        "chineseName": "（金华仓）男韩版青年加厚修身棉服(opp袋子包装）",
+        "eglishName": "Men's Fashion Coat Winter Coat Thick Coat Cotton Jacket"
+      },
+      {
+        "id": "102013213",
+        "picture": "/static/timg.jpg",
+        "name": "汽车、摩托车 > 内饰/汽车用品 > 车载支架 > 手机座Mini Tools Set Garden Tool Set Shovel Spade Rake House Garden Decoration",
+        "sku": "1061649",
+        "code": "YB168BlackRed3XL",
+        "chineseName": "（金华仓）男韩版青年加厚修身棉服(opp袋子包装）",
+        "eglishName": "Men's Fashion Coat Winter Coat Thick Coat Cotton Jacket"
+      }
+    ]},
+    "timPublish/list":{
+      "data":[
+        {
+          "id": "1020134569",
+          "picture": "/static/timg.jpg",
+          "name": "汽车、摩托车 > 内饰/汽车用品 > 车载支架 > 手机座Mini Tools Set Garden Tool Set Shovel Spade Rake House Garden Decoration",
+          "sku": "平台商品ID：58019618c41e9e20f1f23cb4渠道SKU：MUZS382-005-1渠道帐号：eronde销售：王小剑",
+          "time": "2016-10-05 16:46:35",
+          "classify": "Home & GradenUS",
+          "site": "美国",
+          "price": 200,
+          "amount": 3000,
+          "supplynum": "卖多少补多少",
+          "num": ""
+        },{
+          "id": "1020134569",
+          "picture": "/static/timg.jpg",
+          "name": "汽车、摩托车 > 内饰/汽车用品 > 车载支架 > 手机座Mini Tools Set Garden Tool Set Shovel Spade Rake House Garden Decoration",
+          "sku": "平台商品ID：58019618c41e9e20f1f23cb4渠道SKU：MUZS382-005-1渠道帐号：eronde销售：王小剑",
+          "time": "2016-10-05 16:46:35",
+          "classify": "Home & GradenUS",
+          "site": "美国",
+          "price": 200,
+          "amount": 3000,
+          "supplynum": "卖多少补多少",
+          "num": ""
+        },{
+          "id": "1020134569",
+          "picture": "/static/timg.jpg",
+          "name": "汽车、摩托车 > 内饰/汽车用品 > 车载支架 > 手机座Mini Tools Set Garden Tool Set Shovel Spade Rake House Garden Decoration",
+          "sku": "平台商品ID：58019618c41e9e20f1f23cb4渠道SKU：MUZS382-005-1渠道帐号：eronde销售：王小剑",
+          "time": "2016-10-05 16:46:35",
+          "classify": "Home & GradenUS",
+          "site": "美国",
+          "price": 200,
+          "amount": 3000,
+          "supplynum": "卖多少补多少",
+          "num": ""
+        },{
+          "id": "1020134569",
+          "picture": "/static/timg.jpg",
+          "name": "汽车、摩托车 > 内饰/汽车用品 > 车载支架 > 手机座Mini Tools Set Garden Tool Set Shovel Spade Rake House Garden Decoration",
+          "sku": "平台商品ID：58019618c41e9e20f1f23cb4渠道SKU：MUZS382-005-1渠道帐号：eronde销售：王小剑",
+          "time": "2016-10-05 16:46:35",
+          "classify": "Home & GradenUS",
+          "site": "美国",
+          "price": 200,
+          "amount": 3000,
+          "supplynum": "卖多少补多少",
+          "num": ""
+        }
+
+      ]
+    },
+  "brand/list":[
+    {"id":"1","name":"pink","logo":"/static/timg.jpg","brand_url":"www.ymx.com","handle":["查看","删除","浏览商品"]},
+    {"id":"2","name":"pink","logo":"/static/timg.jpg","brand_url":"www.ymx.com","handle":["查看","删除","浏览商品"]},
+    {"id":"3","name":"pink","logo":"/static/timg.jpg","brand_url":"www.ymx.com","handle":["查看","删除","浏览商品"]},
+    {"id":"4","name":"pink","logo":"/static/timg.jpg","brand_url":"www.ymx.com","handle":["查看","删除","浏览商品"]},
+    {"id":"4","name":"pink","logo":"/static/timg.jpg","brand_url":"www.ymx.com","handle":["查看","删除","浏览商品"]},
+    {"id":"4","name":"pink","logo":"/static/timg.jpg","brand_url":"www.ymx.com","handle":["查看","删除","浏览商品"]},
+    {"id":"4","name":"pink","logo":"/static/timg.jpg","brand_url":"www.ymx.com","handle":["查看","删除","浏览商品"]},
+    {"id":"4","name":"pink","logo":"/static/timg.jpg","brand_url":"www.ymx.com","handle":["查看","删除","浏览商品"]},
+    {"id":"4","name":"pink","logo":"/static/timg.jpg","brand_url":"www.ymx.com","handle":["查看","删除","浏览商品"]},
+    {"id":"4","name":"pink","logo":"/static/timg.jpg","brand_url":"www.ymx.com","handle":["查看","删除","浏览商品"]},
+    {"id":"4","name":"pink","logo":"/static/timg.jpg","brand_url":"www.ymx.com","handle":["查看","删除","浏览商品"]},
+    {"id":"4","name":"pink","logo":"/static/timg.jpg","brand_url":"www.ymx.com","handle":["查看","删除","浏览商品"]},
+    {"id":"4","name":"pink","logo":"/static/timg.jpg","brand_url":"www.ymx.com","handle":["查看","删除","浏览商品"]},
+    {"id":"4","name":"pink","logo":"/static/timg.jpg","brand_url":"www.ymx.com","handle":["查看","删除","浏览商品"]},
+    {"id":"4","name":"pink","logo":"/static/timg.jpg","brand_url":"www.ymx.com","handle":["查看","删除","浏览商品"]},
+    {"id":"4","name":"pink","logo":"/static/timg.jpg","brand_url":"www.ymx.com","handle":["查看","删除","浏览商品"]},
+    {"id":"4","name":"pink","logo":"/static/timg.jpg","brand_url":"www.ymx.com","handle":["查看","删除","浏览商品"]},
+    {"id":"4","name":"pink","logo":"/static/timg.jpg","brand_url":"www.ymx.com","handle":["查看","删除","浏览商品"]},
+    {"id":"4","name":"pink","logo":"/static/timg.jpg","brand_url":"www.ymx.com","handle":["查看","删除","浏览商品"]},
+    {"id":"4","name":"pink","logo":"/static/timg.jpg","brand_url":"www.ymx.com","handle":["查看","删除","浏览商品"]},
+    {"id":"4","name":"pink","logo":"/static/timg.jpg","brand_url":"www.ymx.com","handle":["查看","删除","浏览商品"]},
+    {"id":"4","name":"pink","logo":"/static/timg.jpg","brand_url":"www.ymx.com","handle":["查看","删除","浏览商品"]},
+    {"id":"4","name":"pink","logo":"/static/timg.jpg","brand_url":"www.ymx.com","handle":["查看","删除","浏览商品"]},
+    {"id":"4","name":"pink","logo":"/static/timg.jpg","brand_url":"www.ymx.com","handle":["查看","删除","浏览商品"]},
+    {"id":"4","name":"pink","logo":"/static/timg.jpg","brand_url":"www.ymx.com","handle":["查看","删除","浏览商品"]},
+    {"id":"4","name":"pink","logo":"/static/timg.jpg","brand_url":"www.ymx.com","handle":["查看","删除","浏览商品"]}
+  ],
+  "unit/list":[
+    {"id":"1","name":"个","ID":"1","describe":"","handle":["修改","删除"]},
+    {"id":"2","name":"件","ID":"2","describe":"","handle":["修改","删除"]},
+    {"id":"3","name":"袋","ID":"3","describe":"","handle":["修改","删除"]},
+    {"id":"4","name":"桶","ID":"4","describe":"","handle":["修改","删除"]},
+    {"id":"4","name":"桶","ID":"4","describe":"","handle":["修改","删除"]},
+    {"id":"4","name":"桶","ID":"4","describe":"","handle":["修改","删除"]},
+    {"id":"4","name":"桶","ID":"4","describe":"","handle":["修改","删除"]},
+    {"id":"4","name":"桶","ID":"4","describe":"","handle":["修改","删除"]},
+    {"id":"4","name":"桶","ID":"4","describe":"","handle":["修改","删除"]},
+    {"id":"4","name":"桶","ID":"4","describe":"","handle":["修改","删除"]},
+    {"id":"4","name":"桶","ID":"4","describe":"","handle":["修改","删除"]},
+    {"id":"4","name":"桶","ID":"4","describe":"","handle":["修改","删除"]},
+    {"id":"4","name":"桶","ID":"4","describe":"","handle":["修改","删除"]},
+    {"id":"4","name":"桶","ID":"4","describe":"","handle":["修改","删除"]},
+    {"id":"4","name":"桶","ID":"4","describe":"","handle":["修改","删除"]}
+  ],
+  "pack/list":[
+    {"id":"1","name":"气泡袋","ID":"1","cost":"0.18","long":"11","wide":"11","high":"11","handle":["修改","删除"]},
+    {"id":"2","name":"气泡袋","ID":"2","cost":"0.18","long":"11","wide":"11","high":"11","handle":["修改","删除"]},
+    {"id":"3","name":"气泡袋","ID":"3","cost":"0.18","long":"11","wide":"11","high":"11","handle":["修改","删除"]},
+    {"id":"4","name":"气泡袋","ID":"4","cost":"0.18","long":"11","wide":"11","high":"11","handle":["修改","删除"]},
+    {"id":"4","name":"气泡袋","ID":"4","cost":"0.18","long":"11","wide":"11","high":"11","handle":["修改","删除"]},
+    {"id":"4","name":"气泡袋","ID":"4","cost":"0.18","long":"11","wide":"11","high":"11","handle":["修改","删除"]},
+    {"id":"4","name":"气泡袋","ID":"4","cost":"0.18","long":"11","wide":"11","high":"11","handle":["修改","删除"]},
+    {"id":"4","name":"气泡袋","ID":"4","cost":"0.18","long":"11","wide":"11","high":"11","handle":["修改","删除"]},
+    {"id":"4","name":"气泡袋","ID":"4","cost":"0.18","long":"11","wide":"11","high":"11","handle":["修改","删除"]},
+    {"id":"4","name":"气泡袋","ID":"4","cost":"0.18","long":"11","wide":"11","high":"11","handle":["修改","删除"]},
+    {"id":"4","name":"气泡袋","ID":"4","cost":"0.18","long":"11","wide":"11","high":"11","handle":["修改","删除"]},
+    {"id":"4","name":"气泡袋","ID":"4","cost":"0.18","long":"11","wide":"11","high":"11","handle":["修改","删除"]}
+  ],
+  "self":[
+    {"id":1,"data":[{"name":"wuchuguang","age":"22"}]}
+  ],
+  "self2":[
+    {"id":1,"data":[{"name":"wuchuguang","age":"22"}]}
+  ],
+  "product/new":{"result":"success"},
+  "product/new2":{"result":"success"}
+
+}

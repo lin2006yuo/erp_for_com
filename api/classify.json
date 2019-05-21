@@ -1,0 +1,1635 @@
+{"9": {
+  "id": 9,
+  "pid": 0,
+  "name": "software",
+  "title": "常用软件",
+  "parents": [],
+  "depth": 0,
+  "name_path": "software",
+  "children": []
+},"11": {
+  "id": 11,
+  "pid": 0,
+  "name": "dw",
+  "title": "安卓新闻",
+  "parents": [],
+  "depth": 0,
+  "name_path": "dw",
+  "children": []
+},"29": {
+  "id": 29,
+  "pid": 0,
+  "name": "about",
+  "title": "关于我们",
+  "parents": [],
+  "depth": 0,
+  "name_path": "about",
+  "children": []
+},
+  "30": {
+    "id": 30,
+    "pid": 0,
+    "name": "samsung",
+    "title": "三星",
+    "parents": [],
+    "depth": 0,
+    "name_path": "samsung",
+    "children": [
+      118,
+      119,
+      120,
+      121,
+      122,
+      124,
+      125,
+      126
+    ]
+  },
+  "31": {
+    "id": 31,
+    "pid": 0,
+    "name": "os",
+    "title": "OS讨论",
+    "parents": [],
+    "depth": 0,
+    "name_path": "os",
+    "children": [
+      43,
+      44,
+      45,
+      46,
+      47,
+      48,
+      49,
+      50,
+      51,
+      52
+    ]
+  },
+  "32": {
+    "id": 32,
+    "pid": 0,
+    "name": "firmware",
+    "title": "固件发布",
+    "parents": [],
+    "depth": 0,
+    "name_path": "firmware",
+    "children": [
+      53,
+      54,
+      55,
+      56,
+      57,
+      58,
+      59,
+      60,
+      61,
+      62
+    ]
+  },
+  "33": {
+    "id": 33,
+    "pid": 0,
+    "name": "advice",
+    "title": "功能建议",
+    "parents": [],
+    "depth": 0,
+    "name_path": "advice",
+    "children": [
+      63,
+      64,
+      65,
+      66,
+      67,
+      68,
+      69,
+      70,
+      71,
+      72
+    ]
+  },
+  "34": {
+    "id": 34,
+    "pid": 0,
+    "name": "xiaomi",
+    "title": "小米",
+    "parents": [],
+    "depth": 0,
+    "name_path": "xiaomi",
+    "children": [
+      127,
+      128,
+      129,
+      130,
+      131,
+      132,
+      133,
+      134
+    ]
+  },
+  "35": {
+    "id": 35,
+    "pid": 0,
+    "name": "huawei",
+    "title": "华为",
+    "parents": [],
+    "depth": 0,
+    "name_path": "huawei",
+    "children": [
+      135,
+      136,
+      137,
+      138,
+      139,
+      140,
+      141,
+      142
+    ]
+  },
+  "36": {
+    "id": 36,
+    "pid": 0,
+    "name": "htc",
+    "title": "HTC",
+    "parents": [],
+    "depth": 0,
+    "name_path": "htc",
+    "children": [
+      143,
+      144,
+      145,
+      146,
+      147,
+      148,
+      149,
+      150
+    ]
+  },
+  "37": {
+    "id": 37,
+    "pid": 0,
+    "name": "coolpad",
+    "title": "酷派",
+    "parents": [],
+    "depth": 0,
+    "name_path": "coolpad",
+    "children": [
+      73,
+      74,
+      75,
+      76,
+      77,
+      78,
+      80,
+      81
+    ]
+  },
+  "38": {
+    "id": 38,
+    "pid": 0,
+    "name": "ZTE",
+    "title": "中兴",
+    "parents": [],
+    "depth": 0,
+    "name_path": "ZTE",
+    "children": [
+      82,
+      83,
+      84,
+      88,
+      90,
+      91,
+      92,
+      93
+    ]
+  },
+  "39": {
+    "id": 39,
+    "pid": 0,
+    "name": "lenovo",
+    "title": "联想",
+    "parents": [],
+    "depth": 0,
+    "name_path": "lenovo",
+    "children": [
+      94,
+      95,
+      96,
+      97,
+      98,
+      99,
+      100,
+      101
+    ]
+  },
+  "40": {
+    "id": 40,
+    "pid": 0,
+    "name": "vivo",
+    "title": "VIVO",
+    "parents": [],
+    "depth": 0,
+    "name_path": "vivo",
+    "children": [
+      102,
+      103,
+      104,
+      105,
+      106,
+      107,
+      108,
+      109
+    ]
+  },
+  "41": {
+    "id": 41,
+    "pid": 0,
+    "name": "OPPO",
+    "title": "OPPO",
+    "parents": [],
+    "depth": 0,
+    "name_path": "OPPO",
+    "children": [
+      110,
+      111,
+      112,
+      113,
+      114,
+      115,
+      116,
+      117
+    ]
+  },
+  "42": {
+    "id": 42,
+    "pid": 0,
+    "name": "meizu",
+    "title": "魅族",
+    "parents": [],
+    "depth": 0,
+    "name_path": "meizu",
+    "children": [
+      151,
+      152,
+      153,
+      154,
+      155,
+      156,
+      157,
+      158
+    ]
+  },
+  "43": {
+    "id": 43,
+    "pid": 31,
+    "name": "sumsung",
+    "title": "三星",
+    "parents": [
+      31
+    ],
+    "depth": 1,
+    "name_path": "os-sumsung",
+    "children": []
+  },
+  "44": {
+    "id": 44,
+    "pid": 31,
+    "name": "huawei",
+    "title": "华为",
+    "parents": [
+      31
+    ],
+    "depth": 1,
+    "name_path": "os-huawei",
+    "children": []
+  },
+  "45": {
+    "id": 45,
+    "pid": 31,
+    "name": "xiaomi",
+    "title": "小米",
+    "parents": [
+      31
+    ],
+    "depth": 1,
+    "name_path": "os-xiaomi",
+    "children": []
+  },
+  "46": {
+    "id": 46,
+    "pid": 31,
+    "name": "zte",
+    "title": "中兴",
+    "parents": [
+      31
+    ],
+    "depth": 1,
+    "name_path": "os-zte",
+    "children": []
+  },
+  "47": {
+    "id": 47,
+    "pid": 31,
+    "name": "vivo",
+    "title": "VIVO",
+    "parents": [
+      31
+    ],
+    "depth": 1,
+    "name_path": "os-vivo",
+    "children": []
+  },
+  "48": {
+    "id": 48,
+    "pid": 31,
+    "name": "oppo",
+    "title": "OPPO",
+    "parents": [
+      31
+    ],
+    "depth": 1,
+    "name_path": "os-oppo",
+    "children": []
+  },
+  "49": {
+    "id": 49,
+    "pid": 31,
+    "name": "coolpad",
+    "title": "酷派",
+    "parents": [
+      31
+    ],
+    "depth": 1,
+    "name_path": "os-coolpad",
+    "children": []
+  },
+  "50": {
+    "id": 50,
+    "pid": 31,
+    "name": "lenovo",
+    "title": "联想",
+    "parents": [
+      31
+    ],
+    "depth": 1,
+    "name_path": "os-lenovo",
+    "children": []
+  },
+  "51": {
+    "id": 51,
+    "pid": 31,
+    "name": "meizu",
+    "title": "魅族",
+    "parents": [
+      31
+    ],
+    "depth": 1,
+    "name_path": "os-meizu",
+    "children": []
+  },
+  "52": {
+    "id": 52,
+    "pid": 31,
+    "name": "htc",
+    "title": "HTC",
+    "parents": [
+      31
+    ],
+    "depth": 1,
+    "name_path": "os-htc",
+    "children": []
+  },
+  "53": {
+    "id": 53,
+    "pid": 32,
+    "name": "sumsung",
+    "title": "三星",
+    "parents": [
+      32
+    ],
+    "depth": 1,
+    "name_path": "firmware-sumsung",
+    "children": []
+  },
+  "54": {
+    "id": 54,
+    "pid": 32,
+    "name": "huawei",
+    "title": "华为",
+    "parents": [
+      32
+    ],
+    "depth": 1,
+    "name_path": "firmware-huawei",
+    "children": []
+  },
+  "55": {
+    "id": 55,
+    "pid": 32,
+    "name": "xiaomi",
+    "title": "小米",
+    "parents": [
+      32
+    ],
+    "depth": 1,
+    "name_path": "firmware-xiaomi",
+    "children": []
+  },
+  "56": {
+    "id": 56,
+    "pid": 32,
+    "name": "zte",
+    "title": "中兴",
+    "parents": [
+      32
+    ],
+    "depth": 1,
+    "name_path": "firmware-zte",
+    "children": []
+  },
+  "57": {
+    "id": 57,
+    "pid": 32,
+    "name": "vivo",
+    "title": "VIVO",
+    "parents": [
+      32
+    ],
+    "depth": 1,
+    "name_path": "firmware-vivo",
+    "children": []
+  },
+  "58": {
+    "id": 58,
+    "pid": 32,
+    "name": "oppo",
+    "title": "OPPO",
+    "parents": [
+      32
+    ],
+    "depth": 1,
+    "name_path": "firmware-oppo",
+    "children": []
+  },
+  "59": {
+    "id": 59,
+    "pid": 32,
+    "name": "coolpad",
+    "title": "酷派",
+    "parents": [
+      32
+    ],
+    "depth": 1,
+    "name_path": "firmware-coolpad",
+    "children": []
+  },
+  "60": {
+    "id": 60,
+    "pid": 32,
+    "name": "lenovo",
+    "title": "联想",
+    "parents": [
+      32
+    ],
+    "depth": 1,
+    "name_path": "firmware-lenovo",
+    "children": []
+  },
+  "61": {
+    "id": 61,
+    "pid": 32,
+    "name": "meizu",
+    "title": "魅族",
+    "parents": [
+      32
+    ],
+    "depth": 1,
+    "name_path": "firmware-meizu",
+    "children": []
+  },
+  "62": {
+    "id": 62,
+    "pid": 32,
+    "name": "htc",
+    "title": "HTC",
+    "parents": [
+      32
+    ],
+    "depth": 1,
+    "name_path": "firmware-htc",
+    "children": []
+  },
+  "63": {
+    "id": 63,
+    "pid": 33,
+    "name": "sumsung",
+    "title": "三星",
+    "parents": [
+      33
+    ],
+    "depth": 1,
+    "name_path": "advice-sumsung",
+    "children": []
+  },
+  "64": {
+    "id": 64,
+    "pid": 33,
+    "name": "huawei",
+    "title": "华为",
+    "parents": [
+      33
+    ],
+    "depth": 1,
+    "name_path": "advice-huawei",
+    "children": []
+  },
+  "65": {
+    "id": 65,
+    "pid": 33,
+    "name": "xiaomi",
+    "title": "小米",
+    "parents": [
+      33
+    ],
+    "depth": 1,
+    "name_path": "advice-xiaomi",
+    "children": []
+  },
+  "66": {
+    "id": 66,
+    "pid": 33,
+    "name": "zte",
+    "title": "中兴",
+    "parents": [
+      33
+    ],
+    "depth": 1,
+    "name_path": "advice-zte",
+    "children": []
+  },
+  "67": {
+    "id": 67,
+    "pid": 33,
+    "name": "vivo",
+    "title": "VIVO",
+    "parents": [
+      33
+    ],
+    "depth": 1,
+    "name_path": "advice-vivo",
+    "children": []
+  },
+  "68": {
+    "id": 68,
+    "pid": 33,
+    "name": "oppo",
+    "title": "OPPO",
+    "parents": [
+      33
+    ],
+    "depth": 1,
+    "name_path": "advice-oppo",
+    "children": []
+  },
+  "69": {
+    "id": 69,
+    "pid": 33,
+    "name": "coolpad",
+    "title": "酷派",
+    "parents": [
+      33
+    ],
+    "depth": 1,
+    "name_path": "advice-coolpad",
+    "children": []
+  },
+  "70": {
+    "id": 70,
+    "pid": 33,
+    "name": "lenovo",
+    "title": "联想",
+    "parents": [
+      33
+    ],
+    "depth": 1,
+    "name_path": "advice-lenovo",
+    "children": []
+  },
+  "71": {
+    "id": 71,
+    "pid": 33,
+    "name": "meizu",
+    "title": "魅族",
+    "parents": [
+      33
+    ],
+    "depth": 1,
+    "name_path": "advice-meizu",
+    "children": []
+  },
+  "72": {
+    "id": 72,
+    "pid": 33,
+    "name": "htc",
+    "title": "HTC",
+    "parents": [
+      33
+    ],
+    "depth": 1,
+    "name_path": "advice-htc",
+    "children": []
+  },
+  "73": {
+    "id": 73,
+    "pid": 37,
+    "name": "coolpad-5010",
+    "title": "酷派 5010",
+    "parents": [
+      37
+    ],
+    "depth": 1,
+    "name_path": "coolpad-coolpad-5010",
+    "children": [
+      239
+    ]
+  },
+  "74": {
+    "id": 74,
+    "pid": 37,
+    "name": "coolpad-5108",
+    "title": "酷派 5108",
+    "parents": [
+      37
+    ],
+    "depth": 1,
+    "name_path": "coolpad-coolpad-5108",
+    "children": []
+  },
+  "75": {
+    "id": 75,
+    "pid": 37,
+    "name": "coolpad-5109",
+    "title": "酷派 5109",
+    "parents": [
+      37
+    ],
+    "depth": 1,
+    "name_path": "coolpad-coolpad-5109",
+    "children": []
+  },
+  "76": {
+    "id": 76,
+    "pid": 37,
+    "name": "coolpad-5110",
+    "title": "酷派 5110",
+    "parents": [
+      37
+    ],
+    "depth": 1,
+    "name_path": "coolpad-coolpad-5110",
+    "children": []
+  },
+  "77": {
+    "id": 77,
+    "pid": 37,
+    "name": "coolpad-5200",
+    "title": "酷派 5200",
+    "parents": [
+      37
+    ],
+    "depth": 1,
+    "name_path": "coolpad-coolpad-5200",
+    "children": []
+  },
+  "78": {
+    "id": 78,
+    "pid": 37,
+    "name": "coolpad-5210",
+    "title": "酷派 5210",
+    "parents": [
+      37
+    ],
+    "depth": 1,
+    "name_path": "coolpad-coolpad-5210",
+    "children": []
+  },
+  "80": {
+    "id": 80,
+    "pid": 37,
+    "name": "coolpad-5211",
+    "title": "酷派 5211",
+    "parents": [
+      37
+    ],
+    "depth": 1,
+    "name_path": "coolpad-coolpad-5211",
+    "children": []
+  },
+  "81": {
+    "id": 81,
+    "pid": 37,
+    "name": "coolpad-5213",
+    "title": "酷派 5213",
+    "parents": [
+      37
+    ],
+    "depth": 1,
+    "name_path": "coolpad-coolpad-5213",
+    "children": []
+  },
+  "82": {
+    "id": 82,
+    "pid": 38,
+    "name": "zte-009z",
+    "title": "中兴 009Z(Star7)",
+    "parents": [
+      38
+    ],
+    "depth": 1,
+    "name_path": "ZTE-zte-009z",
+    "children": []
+  },
+  "83": {
+    "id": 83,
+    "pid": 38,
+    "name": "zte-a880",
+    "title": "中兴 A880(小鲜)",
+    "parents": [
+      38
+    ],
+    "depth": 1,
+    "name_path": "ZTE-zte-a880",
+    "children": []
+  },
+  "84": {
+    "id": 84,
+    "pid": 38,
+    "name": "zte-b2015",
+    "title": "中兴 Axon天机 Mini",
+    "parents": [
+      38
+    ],
+    "depth": 1,
+    "name_path": "ZTE-zte-b2015",
+    "children": []
+  },
+  "88": {
+    "id": 88,
+    "pid": 38,
+    "name": "zte-a2015",
+    "title": "中兴 Axon天机(智汇版)",
+    "parents": [
+      38
+    ],
+    "depth": 1,
+    "name_path": "ZTE-zte-a2015",
+    "children": []
+  },
+  "90": {
+    "id": 90,
+    "pid": 38,
+    "name": "zte-axon01",
+    "title": "中兴 Axon天机(智尊版)",
+    "parents": [
+      38
+    ],
+    "depth": 1,
+    "name_path": "ZTE-zte-axon01",
+    "children": []
+  },
+  "91": {
+    "id": 91,
+    "pid": 38,
+    "name": "zte-b880",
+    "title": "中兴 B880(小鲜2)",
+    "parents": [
+      38
+    ],
+    "depth": 1,
+    "name_path": "ZTE-zte-b880",
+    "children": []
+  },
+  "92": {
+    "id": 92,
+    "pid": 38,
+    "name": "zte-g717c",
+    "title": "中兴 G717C(青漾2|3G版)",
+    "parents": [
+      38
+    ],
+    "depth": 1,
+    "name_path": "ZTE-zte-g717c",
+    "children": []
+  },
+  "93": {
+    "id": 93,
+    "pid": 38,
+    "name": "zte-g718c",
+    "title": "中兴 G718C(青漾2|4G版)",
+    "parents": [
+      38
+    ],
+    "depth": 1,
+    "name_path": "ZTE-zte-g718c",
+    "children": []
+  },
+  "94": {
+    "id": 94,
+    "pid": 39,
+    "name": "lenovo-a208t",
+    "title": "联想 A208t",
+    "parents": [
+      39
+    ],
+    "depth": 1,
+    "name_path": "lenovo-lenovo-a208t",
+    "children": []
+  },
+  "95": {
+    "id": 95,
+    "pid": 39,
+    "name": "lenovo-a218t",
+    "title": "联想 A218t",
+    "parents": [
+      39
+    ],
+    "depth": 1,
+    "name_path": "lenovo-lenovo-a218t",
+    "children": []
+  },
+  "96": {
+    "id": 96,
+    "pid": 39,
+    "name": "lenovo-a238t",
+    "title": "联想 A238t",
+    "parents": [
+      39
+    ],
+    "depth": 1,
+    "name_path": "lenovo-lenovo-a238t",
+    "children": []
+  },
+  "97": {
+    "id": 97,
+    "pid": 39,
+    "name": "lenovo-a269",
+    "title": "联想 A269",
+    "parents": [
+      39
+    ],
+    "depth": 1,
+    "name_path": "lenovo-lenovo-a269",
+    "children": []
+  },
+  "98": {
+    "id": 98,
+    "pid": 39,
+    "name": "lenovo-a269i",
+    "title": "联想 A269i",
+    "parents": [
+      39
+    ],
+    "depth": 1,
+    "name_path": "lenovo-lenovo-a269i",
+    "children": []
+  },
+  "99": {
+    "id": 99,
+    "pid": 39,
+    "name": "lenovo-a278t",
+    "title": "联想 A278t",
+    "parents": [
+      39
+    ],
+    "depth": 1,
+    "name_path": "lenovo-lenovo-a278t",
+    "children": []
+  },
+  "100": {
+    "id": 100,
+    "pid": 39,
+    "name": "lenovo-a288t",
+    "title": "联想 A288t",
+    "parents": [
+      39
+    ],
+    "depth": 1,
+    "name_path": "lenovo-lenovo-a288t",
+    "children": []
+  },
+  "101": {
+    "id": 101,
+    "pid": 39,
+    "name": "lenovo-a298t",
+    "title": "联想 A298t",
+    "parents": [
+      39
+    ],
+    "depth": 1,
+    "name_path": "lenovo-lenovo-a298t",
+    "children": []
+  },
+  "102": {
+    "id": 102,
+    "pid": 40,
+    "name": "bbk-e1",
+    "title": "vivo E1",
+    "parents": [
+      40
+    ],
+    "depth": 1,
+    "name_path": "vivo-bbk-e1",
+    "children": []
+  },
+  "103": {
+    "id": 103,
+    "pid": 40,
+    "name": "bbk-e3",
+    "title": "vivo E3",
+    "parents": [
+      40
+    ],
+    "depth": 1,
+    "name_path": "vivo-bbk-e3",
+    "children": []
+  },
+  "104": {
+    "id": 104,
+    "pid": 40,
+    "name": "bbk-e5",
+    "title": "vivo E5",
+    "parents": [
+      40
+    ],
+    "depth": 1,
+    "name_path": "vivo-bbk-e5",
+    "children": []
+  },
+  "105": {
+    "id": 105,
+    "pid": 40,
+    "name": "bbk-s11",
+    "title": "vivo S11",
+    "parents": [
+      40
+    ],
+    "depth": 1,
+    "name_path": "vivo-bbk-s11",
+    "children": []
+  },
+  "106": {
+    "id": 106,
+    "pid": 40,
+    "name": "bbk-s12",
+    "title": "vivo S12",
+    "parents": [
+      40
+    ],
+    "depth": 1,
+    "name_path": "vivo-bbk-s12",
+    "children": []
+  },
+  "107": {
+    "id": 107,
+    "pid": 40,
+    "name": "bbk-s3",
+    "title": "vivo S3",
+    "parents": [
+      40
+    ],
+    "depth": 1,
+    "name_path": "vivo-bbk-s3",
+    "children": []
+  },
+  "108": {
+    "id": 108,
+    "pid": 40,
+    "name": "bbk-s3plus",
+    "title": "vivo S3+",
+    "parents": [
+      40
+    ],
+    "depth": 1,
+    "name_path": "vivo-bbk-s3plus",
+    "children": []
+  },
+  "109": {
+    "id": 109,
+    "pid": 40,
+    "name": "bbk-s6",
+    "title": "vivo S6",
+    "parents": [
+      40
+    ],
+    "depth": 1,
+    "name_path": "vivo-bbk-s6",
+    "children": []
+  },
+  "110": {
+    "id": 110,
+    "pid": 41,
+    "name": "oppo-1100",
+    "title": "OPPO 1100",
+    "parents": [
+      41
+    ],
+    "depth": 1,
+    "name_path": "OPPO-oppo-1100",
+    "children": []
+  },
+  "111": {
+    "id": 111,
+    "pid": 41,
+    "name": "oppo-1105",
+    "title": "OPPO 1105",
+    "parents": [
+      41
+    ],
+    "depth": 1,
+    "name_path": "OPPO-oppo-1105",
+    "children": []
+  },
+  "112": {
+    "id": 112,
+    "pid": 41,
+    "name": "oppo-1107",
+    "title": "OPPO 1107",
+    "parents": [
+      41
+    ],
+    "depth": 1,
+    "name_path": "OPPO-oppo-1107",
+    "children": []
+  },
+  "113": {
+    "id": 113,
+    "pid": 41,
+    "name": "oppo-3000",
+    "title": "OPPO 3000",
+    "parents": [
+      41
+    ],
+    "depth": 1,
+    "name_path": "OPPO-oppo-3000",
+    "children": []
+  },
+  "114": {
+    "id": 114,
+    "pid": 41,
+    "name": "oppo-3005",
+    "title": "OPPO 3005",
+    "parents": [
+      41
+    ],
+    "depth": 1,
+    "name_path": "OPPO-oppo-3005",
+    "children": []
+  },
+  "115": {
+    "id": 115,
+    "pid": 41,
+    "name": "oppo-3007",
+    "title": "OPPO 3007",
+    "parents": [
+      41
+    ],
+    "depth": 1,
+    "name_path": "OPPO-oppo-3007",
+    "children": []
+  },
+  "116": {
+    "id": 116,
+    "pid": 41,
+    "name": "oppo-a11",
+    "title": "OPPO A11",
+    "parents": [
+      41
+    ],
+    "depth": 1,
+    "name_path": "OPPO-oppo-a11",
+    "children": []
+  },
+  "117": {
+    "id": 117,
+    "pid": 41,
+    "name": "oppo-a31c",
+    "title": "OPPO A31c",
+    "parents": [
+      41
+    ],
+    "depth": 1,
+    "name_path": "OPPO-oppo-a31c",
+    "children": []
+  },
+  "118": {
+    "id": 118,
+    "pid": 30,
+    "name": "samsung-d710",
+    "title": "三星 D710 (Epic 4G Touch)",
+    "parents": [
+      30
+    ],
+    "depth": 1,
+    "name_path": "samsung-samsung-d710",
+    "children": []
+  },
+  "119": {
+    "id": 119,
+    "pid": 30,
+    "name": "samsung-b9062",
+    "title": "三星 B9062 (移动版)",
+    "parents": [
+      30
+    ],
+    "depth": 1,
+    "name_path": "samsung-samsung-b9062",
+    "children": []
+  },
+  "120": {
+    "id": 120,
+    "pid": 30,
+    "name": "samsung-b9120",
+    "title": "三星 B9120 (大器II)",
+    "parents": [
+      30
+    ],
+    "depth": 1,
+    "name_path": "samsung-samsung-b9120",
+    "children": []
+  },
+  "121": {
+    "id": 121,
+    "pid": 30,
+    "name": "samsung-b9388",
+    "title": "三星 B9388 (移动版)",
+    "parents": [
+      30
+    ],
+    "depth": 1,
+    "name_path": "samsung-samsung-b9388",
+    "children": []
+  },
+  "122": {
+    "id": 122,
+    "pid": 30,
+    "name": "samsung-c101",
+    "title": "三星 C101 (Galaxy S4 Zoom)",
+    "parents": [
+      30
+    ],
+    "depth": 1,
+    "name_path": "samsung-samsung-c101",
+    "children": []
+  },
+  "124": {
+    "id": 124,
+    "pid": 30,
+    "name": "samsung-c105",
+    "title": "三星 C105 (Galaxy S4 Zoom LTE)",
+    "parents": [
+      30
+    ],
+    "depth": 1,
+    "name_path": "samsung-samsung-c105",
+    "children": []
+  },
+  "125": {
+    "id": 125,
+    "pid": 30,
+    "name": "samsung-c1116",
+    "title": "三星 C1116 (Galaxy K Zoom)",
+    "parents": [
+      30
+    ],
+    "depth": 1,
+    "name_path": "samsung-samsung-c1116",
+    "children": []
+  },
+  "126": {
+    "id": 126,
+    "pid": 30,
+    "name": "samsung-c1158",
+    "title": "三星 C1158 (Galaxy K Zoom)",
+    "parents": [
+      30
+    ],
+    "depth": 1,
+    "name_path": "samsung-samsung-c1158",
+    "children": []
+  },
+  "127": {
+    "id": 127,
+    "pid": 34,
+    "name": "xiaomi-hmnote3",
+    "title": "红米 Note3标准版|双网",
+    "parents": [
+      34
+    ],
+    "depth": 1,
+    "name_path": "xiaomi-xiaomi-hmnote3",
+    "children": []
+  },
+  "128": {
+    "id": 128,
+    "pid": 34,
+    "name": "xiaomi-hmnote3qwt",
+    "title": "红米 Note3高配版|全网通",
+    "parents": [
+      34
+    ],
+    "depth": 1,
+    "name_path": "xiaomi-xiaomi-hmnote3qwt",
+    "children": []
+  },
+  "129": {
+    "id": 129,
+    "pid": 34,
+    "name": "xiaomi-mi4iglobal",
+    "title": "小米 4i|国际版",
+    "parents": [
+      34
+    ],
+    "depth": 1,
+    "name_path": "xiaomi-xiaomi-mi4iglobal",
+    "children": []
+  },
+  "130": {
+    "id": 130,
+    "pid": 34,
+    "name": "xiaomi-hm2014501",
+    "title": "小米 红米1S(4G|移动版)",
+    "parents": [
+      34
+    ],
+    "depth": 1,
+    "name_path": "xiaomi-xiaomi-hm2014501",
+    "children": []
+  },
+  "131": {
+    "id": 131,
+    "pid": 34,
+    "name": "xiaomi-hm1s",
+    "title": "小米 红米1S(电信|联通)",
+    "parents": [
+      34
+    ],
+    "depth": 1,
+    "name_path": "xiaomi-xiaomi-hm1s",
+    "children": []
+  },
+  "132": {
+    "id": 132,
+    "pid": 34,
+    "name": "xiaomi-hm1st",
+    "title": "小米 红米1S(移动版)",
+    "parents": [
+      34
+    ],
+    "depth": 1,
+    "name_path": "xiaomi-xiaomi-hm1st",
+    "children": []
+  },
+  "133": {
+    "id": 133,
+    "pid": 34,
+    "name": "xiaomi-hmnotelte",
+    "title": "小米 红米Note(4G|单卡版)",
+    "parents": [
+      34
+    ],
+    "depth": 1,
+    "name_path": "xiaomi-xiaomi-hmnotelte",
+    "children": []
+  },
+  "134": {
+    "id": 134,
+    "pid": 34,
+    "name": "xiaomi-gucci",
+    "title": "小米 红米Note(4G|双卡版)",
+    "parents": [
+      34
+    ],
+    "depth": 1,
+    "name_path": "xiaomi-xiaomi-gucci",
+    "children": []
+  },
+  "135": {
+    "id": 135,
+    "pid": 35,
+    "name": "huawei-a199",
+    "title": "华为 A199(Ascend G710|电信版)",
+    "parents": [
+      35
+    ],
+    "depth": 1,
+    "name_path": "huawei-huawei-a199",
+    "children": []
+  },
+  "136": {
+    "id": 136,
+    "pid": 35,
+    "name": "huawei-u9500",
+    "title": "华为 Ascend D1(U9500)",
+    "parents": [
+      35
+    ],
+    "depth": 1,
+    "name_path": "huawei-huawei-u9500",
+    "children": []
+  },
+  "137": {
+    "id": 137,
+    "pid": 35,
+    "name": "huawei-d26070",
+    "title": "华为 Ascend D2(4G版)",
+    "parents": [
+      35
+    ],
+    "depth": 1,
+    "name_path": "huawei-huawei-d26070",
+    "children": []
+  },
+  "138": {
+    "id": 138,
+    "pid": 35,
+    "name": "huawei-d22010",
+    "title": "华为 Ascend D2(电信版)",
+    "parents": [
+      35
+    ],
+    "depth": 1,
+    "name_path": "huawei-huawei-d22010",
+    "children": []
+  },
+  "139": {
+    "id": 139,
+    "pid": 35,
+    "name": "huawei-d20082",
+    "title": "华为 Ascend D2(联通版)",
+    "parents": [
+      35
+    ],
+    "depth": 1,
+    "name_path": "huawei-huawei-d20082",
+    "children": []
+  },
+  "140": {
+    "id": 140,
+    "pid": 35,
+    "name": "huawei-d25000",
+    "title": "华为 Ascend D2(移动版)",
+    "parents": [
+      35
+    ],
+    "depth": 1,
+    "name_path": "huawei-huawei-d25000",
+    "children": []
+  },
+  "141": {
+    "id": 141,
+    "pid": 35,
+    "name": "huawei-c8825d",
+    "title": "华为 Ascend G330C(C8825D|电信版)",
+    "parents": [
+      35
+    ],
+    "depth": 1,
+    "name_path": "huawei-huawei-c8825d",
+    "children": []
+  },
+  "142": {
+    "id": 142,
+    "pid": 35,
+    "name": "huawei-u8825d",
+    "title": "华为 Ascend G330D(U8825D)",
+    "parents": [
+      35
+    ],
+    "depth": 1,
+    "name_path": "huawei-huawei-u8825d",
+    "children": []
+  },
+  "143": {
+    "id": 143,
+    "pid": 36,
+    "name": "htc-603e",
+    "title": "HTC 603e|E1",
+    "parents": [
+      36
+    ],
+    "depth": 1,
+    "name_path": "htc-htc-603e",
+    "children": []
+  },
+  "144": {
+    "id": 144,
+    "pid": 36,
+    "name": "htc-a310e",
+    "title": "HTC A310e",
+    "parents": [
+      36
+    ],
+    "depth": 1,
+    "name_path": "htc-htc-a310e",
+    "children": []
+  },
+  "145": {
+    "id": 145,
+    "pid": 36,
+    "name": "htc-a320e",
+    "title": "HTC A320e|Desire C",
+    "parents": [
+      36
+    ],
+    "depth": 1,
+    "name_path": "htc-htc-a320e",
+    "children": []
+  },
+  "146": {
+    "id": 146,
+    "pid": 36,
+    "name": "htc-a9188",
+    "title": "HTC A9188",
+    "parents": [
+      36
+    ],
+    "depth": 1,
+    "name_path": "htc-htc-a9188",
+    "children": []
+  },
+  "147": {
+    "id": 147,
+    "pid": 36,
+    "name": "htc-butterflys",
+    "title": "HTC Butterfly S",
+    "parents": [
+      36
+    ],
+    "depth": 1,
+    "name_path": "htc-htc-butterflys",
+    "children": []
+  },
+  "148": {
+    "id": 148,
+    "pid": 36,
+    "name": "htc-606w",
+    "title": "HTC Desire 606w",
+    "parents": [
+      36
+    ],
+    "depth": 1,
+    "name_path": "htc-htc-606w",
+    "children": []
+  },
+  "149": {
+    "id": 149,
+    "pid": 36,
+    "name": "htc-608t",
+    "title": "HTC Desire 608t",
+    "parents": [
+      36
+    ],
+    "depth": 1,
+    "name_path": "htc-htc-608t",
+    "children": []
+  },
+  "150": {
+    "id": 150,
+    "pid": 36,
+    "name": "htc-609d",
+    "title": "HTC Desire 609d",
+    "parents": [
+      36
+    ],
+    "depth": 1,
+    "name_path": "htc-htc-609d",
+    "children": []
+  },
+  "151": {
+    "id": 151,
+    "pid": 42,
+    "name": "meizu-m9",
+    "title": "魅族 M9",
+    "parents": [
+      42
+    ],
+    "depth": 1,
+    "name_path": "meizu-meizu-m9",
+    "children": []
+  },
+  "152": {
+    "id": 152,
+    "pid": 42,
+    "name": "meizu-mx",
+    "title": "魅族 MX",
+    "parents": [
+      42
+    ],
+    "depth": 1,
+    "name_path": "meizu-meizu-mx",
+    "children": []
+  },
+  "153": {
+    "id": 153,
+    "pid": 42,
+    "name": "meizu-mx2",
+    "title": "魅族 MX2",
+    "parents": [
+      42
+    ],
+    "depth": 1,
+    "name_path": "meizu-meizu-mx2",
+    "children": []
+  },
+  "154": {
+    "id": 154,
+    "pid": 42,
+    "name": "meizu-m351",
+    "title": "魅族 MX3",
+    "parents": [
+      42
+    ],
+    "depth": 1,
+    "name_path": "meizu-meizu-m351",
+    "children": []
+  },
+  "155": {
+    "id": 155,
+    "pid": 42,
+    "name": "meizu-mx4",
+    "title": "魅族 MX4(联通版)",
+    "parents": [
+      42
+    ],
+    "depth": 1,
+    "name_path": "meizu-meizu-mx4",
+    "children": []
+  },
+  "156": {
+    "id": 156,
+    "pid": 42,
+    "name": "meizu-mx4t",
+    "title": "魅族 MX4(移动公开版)",
+    "parents": [
+      42
+    ],
+    "depth": 1,
+    "name_path": "meizu-meizu-mx4t",
+    "children": []
+  },
+  "157": {
+    "id": 157,
+    "pid": 42,
+    "name": "meizu-mx4ty",
+    "title": "魅族 MX4(通用版)",
+    "parents": [
+      42
+    ],
+    "depth": 1,
+    "name_path": "meizu-meizu-mx4ty",
+    "children": []
+  },
+  "158": {
+    "id": 158,
+    "pid": 42,
+    "name": "meizu-mx4pro",
+    "title": "魅族 MX4 Pro(通用版)",
+    "parents": [
+      42
+    ],
+    "depth": 1,
+    "name_path": "meizu-meizu-mx4pro",
+    "children": []
+  },
+  "239": {
+    "id": 239,
+    "pid": 73,
+    "name": "ios",
+    "title": "IOS",
+    "parents": [
+      37,
+      73
+    ],
+    "depth": 2,
+    "name_path": "coolpad-coolpad-5010-ios",
+    "children": []
+  },
+  "child_ids": [
+    9,
+    11,
+    29,
+    30,
+    31,
+    32,
+    33,
+    34,
+    35,
+    36,
+    37,
+    38,
+    39,
+    40,
+    41,
+    42
+  ]
+}

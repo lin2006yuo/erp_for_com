@@ -1,0 +1,58 @@
+
+前端开发规范：
+1、样式class命名：
+    （1）class命名中不允许出现大写字母以及英文‘_’；
+    （2）class命名如需使用两个单词及两个以上单词的，用‘ - ’连接，如 left-menu；
+    （3）class名中 p-表示页面级组件 ,c- 表示常用普通组件。
+
+2、文件及页面命名：
+    如需使用两个单词及两个以上单词的，用‘ - ’连接
+
+3、js命名：
+    （1）变量名：如需使用两个单词及两个以上单词的，统一使用驼峰命名；
+    （2）方法名：如需使用两个单词及两个以上单词的，统一使用英文 ‘ _ ’连接；
+
+4、页面级组件模板
+    <template>
+        <page class="p-${NAME}">
+
+        </page>
+    </template>
+    <style lang="stylus">
+
+    </style>
+    <script>
+        export default{
+            data(){
+                return{
+
+                }
+            },
+            components:{
+
+            }
+        }
+    </script>
+
+5、常用普通组件模板
+    <template>
+        <div class="c-${NAME}">
+
+        </div>
+    </template>
+    <style lang="stylus">
+
+    </style>
+    <script>
+        export default{
+            data(){
+                return{
+
+                }
+            },
+            components:{
+
+            }
+        }
+    </script>
+

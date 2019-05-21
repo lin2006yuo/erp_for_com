@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cross-domain-policy xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.adobe.com/xml/schemas/PolicyFile.xsd">
+	<allow-access-from domain="*.172.18.8.13:8081" secure="false"/>
+	<allow-access-from domain="http://172.18.8.13:8081" secure="false"/>
+	<allow-access-from domain="localhost:*" secure="false"/>
+	<allow-access-from domain="localhost" secure="false"/>
+	<allow-access-from domain="*.zrzsoft.com" secure="false"/>
+	<allow-access-from domain="172.18.15.11" secure="false"/>
+	<allow-access-from domain="*.meitu.com"/>
+</cross-domain-policy>

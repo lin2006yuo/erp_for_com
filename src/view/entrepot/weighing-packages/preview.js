@@ -1,0 +1,80 @@
+/**
+ * Created by RondaFul on 2017/7/20.
+ */
+const head = "<html> <head> <meta http-equiv='content-type' content='text/html; charset=utf-8'/><title></title><style> *{margin: 0;padding: 0}img{border: none} .right-table{width: 95%;font-size: 12px;border:1px solid #d3dce6;position: absolute;bottom: 30px;left: 0;right: 0;margin: auto;}.right-table td{text-align: center;border-bottom:1px solid #d3dce6;border-right:1px solid #d3dce6;height:33px;}.bottom-none{border-bottom:none !important;}.right-none{border-right: none  !important;}</style></head><body style='padding:0;margin:0;background-color:gray'>" +
+    "<div id='printMainDiv' style='width:274pt;background-color:white;font-family:Arial;font-size:10pt;margin:0 auto;'>";
+const bottom = "</div></body></html>";
+export const print = function (bool) {
+    let dips = getDPI();
+    let height = (parseFloat(210) * (dips[1] / 25.4)).toFixed(4);
+    let width = (parseFloat(100) * (dips[1] / 25.4)).toFixed(4);
+    let body = getHtml.call(this);
+    if (bool) {
+        this.print_content = head + body + bottom;
+        let data = {
+            Type: 'html',
+            Token: '',
+            Width: 100,
+            Height: 210,
+            NumberList: this.printDetail.expressNo,
+            PrintName: this.printer,
+            content: this.print_content,
+        };
+        this.$printer(this.printer, data);
+    }
+};
+
+function getHtml() {
+    let page = `<div style='width:274pt;font-size:6pt;font-family:Arial;margin:0 auto;background:white;page-break-after:always;'>` +
+                    `<table cellpadding='0' cellspacing='0' style='width:272pt;height: 223pt;overflow: hidden;font-size:9pt;line-height:9pt;table-layout:fixed;word-wrap:break-word;border-collapse:collapse;margin: 0 auto;'>` +
+                        `<tbody>` +
+                            `<tr style='border: solid 1pt #000;height:42pt;'><td colspan='11' style='text-align: center;padding:0;'><div style='height:35pt;'></div><div style='text-align: left;font-size:8pt;margin-left: 5pt'>打印时间：${this.printDetail.printTime}</div></td><td colspan='9' style='text-align: left;padding:0'><div style='text-align: left;height: 35pt'><img style='width:110pt;height:35pt;' src='${getBarCode(this.printDetail.expressNo, false)}' /></div><div style='text-align: center;'><span style='font-weight: bold;font-size: 12pt;vertical-align: top;'>${this.printDetail.expressNo}</span></div></td></tr>` +
+                            `<tr style='border: solid 1pt #000;height:30pt;'><td colspan='1' style='text-align: center;border-right: solid 1pt #000;word-break: break-all;'><div style='margin:1pt 2pt;font-weight: bold;'>寄方</div></td><td colspan='15' style='text-align: left;font-size:8pt;border-right: solid 1pt #000;'><div style='margin-left: 3pt'>${this.printDetail.sendAddress}</div><div style='margin-left: 3pt'>${this.printDetail.sendMan}</div></td><td colspan='4' style='text-align: left;'><div style='text-align: center;font-size: 16pt; font-weight: bold;' >0755</div></td></tr>` +
+                            `<tr style='border: solid 1pt #000;height:30pt;'><td colspan='1' style='text-align: center;border-right: solid 1pt #000;word-break: break-all;'><div style='margin:1pt 2pt;font-weight: bold;'>收方</div></td><td colspan='19' style='text-align: left;font-size:8pt;border-right: solid 1pt #000;'><div style='margin-left: 3pt'>${this.printDetail.receiveMan}</div><div style='margin-left: 2pt;'>${this.printDetail.receiveAddress}</div></td></tr>` +
+                            `<tr style='border: solid 1pt #000;height: 20pt'><td colspan='16' style='text-align: center;border-right: solid 1pt #000; font-weight: 800;word-break: break-all;'><div style='margin-left:3pt;text-align: left;'>寄托物：${this.printDetail.sendGoods}</div></td><td colspan='4' style='text-align: left;'><div style='text-align: center;font-size: 12pt; font-weight: 700;'>${this.printDetail.expressServiceModel}</div></td></tr>` +
+                            `<tr style='border: solid 1pt #000;font-size: 8pt;height:10pt;'><td colspan='5' style='text-align: center;border-right: solid 1pt #000;'><div style='text-align: left;'>寄方签署</div></td><td colspan='5' style='text-align: center;border-right: solid 1pt #000;'><div style='text-align: left;'>收件员</div></td><td colspan='5' style='text-align: center;border-right: solid 1pt #000;'><div style='text-align: left;'>收方签署</div></td><td colspan='5' style='text-align: center;border-right: solid 1pt #000;'><div style='text-align: left;'>派件员</div></td></tr>`+
+                            `<tr style='border: solid 1pt #000;height:12pt;'><td colspan='10' style='text-align: center;border-right: solid 1pt #000;'><div style='text-align: left;'><span style='margin-left:2pt'>寄件时间：</span><span style='margin-left: 8pt'>年</span><span style='margin-left: 8pt'>月</span><span style='margin-left: 8pt'>日</span><span style='margin-left: 8pt'>时</span><span style='margin-left: 8pt'>分</span></div></td><td colspan='10' style='text-align: center;border-right: solid 1pt #000;'><div style='text-align: left;'><span style='margin-left:2pt'>签收时间：</span><span style='margin-left: 8pt'>年</span><span style='margin-left: 8pt'>月</span><span style='margin-left: 8pt'>日</span><span style='margin-left: 8pt'>时</span><span style='margin-left: 8pt'>分</span></div></td></tr>` +
+                            `<tr style='border: solid 1pt #000;font-size:8pt;height:20pt;'><td colspan='20' style='text-align: left;border-right: solid 1pt #000;'><div><span>件数：${this.printDetail.sendNum}</span><span style='margin-left: 8pt'>实重：${this.printDetail.sendWeight}</span><span style='margin-left: 8pt'>计重：${this.printDetail.sendCountWeight}</span><span style='margin-left: 8pt'>运费：￥${this.printDetail.cost}</span><span style='margin-left: 8pt'>合计运费：￥${this.printDetail.countCost}</span></div><div><span>付款方式：<span style='font-weight:bold;'>${this.printDetail.payType}</span></span><span style='margin-left: 25pt'>月结卡号：${this.printDetail.payAccount}</span></div></td></tr>` +
+                            `<tr style='border: solid 1pt #000;border-bottom:none;line-height: 1.4'><td colspan='20' style='text-align: left;border-right: solid 1pt #000;position:relative;'><div style='position: absolute;top:1pt;left:2pt'>备注：</div></td></tr>` +
+                        `</tbody></table>` +
+                    `<table cellpadding='0' cellspacing='0' style='width:272pt;height:185pt;overflow:hidden;font-size:9pt;table-layout:fixed;word-wrap:break-word;border-collapse:collapse;margin: 0 auto;'><tbody>` +
+                        `<tr style='border: solid 1pt #000;border-top:none;height:35pt;'><td colspan='11' style='text-align: center;'><div style='height:25pt;'></div><div style='text-align: left;font-size:7pt;margin-left: 5pt'>打印时间：${this.printDetail.printTime}</div></td><td colspan='9' style='text-align: left;'><div style='text-align: left;height: 25pt'><img style='width:110pt;height:25pt;' src='${getBarCode(this.printDetail.expressNo, false)}' /></div><div style='text-align: center;'><span style='font-weight: bold;font-size: 10pt;vertical-align: top;'>${this.printDetail.expressNo}</span></div></td></tr>` +
+                        `<tr style='border: solid 1pt #000;font-size:8pt;height:26pt;'><td colspan='1' style='text-align: center;border-right: solid 1pt #000; font-weight: 800;word-break: break-all;'><div style='margin:1pt 2pt'>寄方</div></td><td colspan='19' style='text-align: left;font-size:8pt;border-right: solid 1pt #000;'><div style='margin-left: 3pt'>${this.printDetail.sendAddress}</div><div style='margin-left: 3pt'>${this.printDetail.sendMan}</div></td></tr>`+
+                        `<tr style='border: solid 1pt #000;font-size:8pt;height:26pt;'><td colspan='1' style='text-align: center;border-right: solid 1pt #000; font-weight: 800;word-break: break-all;'><div style='margin:1pt 2pt'>收方</div></td><td colspan='19' style='text-align: left;font-size:8pt;border-right: solid 1pt #000;'><div style='margin-left: 3pt'>${this.printDetail.receiveMan}</div><div style='margin-left: 2pt;'>${this.printDetail.receiveAddress}</div></td></tr>` +
+                        `<tr style='border: solid 1pt #000;height: 20pt'><td colspan='16' style='text-align: center;border-right: solid 1pt #000; font-weight: 800;word-break: break-all;'><div style='margin-left:3pt;text-align: left;'>寄托物：${this.printDetail.sendGoods}</div></td><td colspan='4' style='text-align: left;'><div style='text-align: center;font-size: 12pt; font-weight: 800;'>${this.printDetail.expressServiceModel}</div></td></tr>` +
+                        `<tr style='border: solid 1pt #000;font-size: 8pt;height:10pt;'><td colspan='5' style='text-align: center;border-right: solid 1pt #000;'><div style='text-align: left;'>寄方签署</div></td><td colspan='5' style='text-align: center;border-right: solid 1pt #000;'><div style='text-align: left;'>收件员</div></td><td colspan='5' style='text-align: center;border-right: solid 1pt #000;'><div style='text-align: left;'>收方签署</div></td><td colspan='5' style='text-align: center;border-right: solid 1pt #000;'><div style='text-align: left;'>派件员</div></td></tr>` +
+                        `<tr style='border: solid 1pt #000;font-size:8pt;height:10pt;'><td colspan='10' style='text-align: center;border-right: solid 1pt #000;'><div style='text-align: left;'><span style='margin-left:2pt'>寄件时间：</span><span style='margin-left: 10pt'>年</span><span style='margin-left: 9pt'>月</span><span style='margin-left: 9pt'>日</span><span style='margin-left: 9pt'>时</span><span style='margin-left: 9pt'>分</span></div></td><td colspan='10' style='text-align: center;border-right: solid 1pt #000;'><div style='text-align: left;'><span style='margin-left:2pt'>签收时间：</span><span style='margin-left: 10pt'>年</span><span style='margin-left: 9pt'>月</span><span style='margin-left: 9pt'>日</span><span style='margin-left: 9pt'>时</span><span style='margin-left: 8pt'>分</span></div></td></tr>` +
+                        `<tr style='border: solid 1pt #000;font-size:8pt;height:20pt;'><td colspan='20' style='text-align: left;border-right: solid 1pt #000;font-size:8pt;'><div><span>件数：${this.printDetail.sendNum}</span><span style='margin-left: 8pt'>实重：${this.printDetail.sendWeight}</span><span style='margin-left: 8pt'>计重：${this.printDetail.sendCountWeight}</span><span style='margin-left: 8pt'>运费：￥${this.printDetail.cost}</span><span style='margin-left: 8pt'>合计运费：￥${this.printDetail.countCost}</span></div><div><span>付款方式：<span style='font-weight:bold;'>${this.printDetail.payType}</span></span><span style='margin-left: 25pt'>月结卡号：${this.printDetail.payAccount}</span></div></td></tr>` +
+                        `<tr style='border: solid 1pt #000;border-bottom:none;'><td colspan='20' style='text-align: left;border-right: solid 1pt #000;position: relative;'><div style='position: absolute;top:1pt;left:2pt;'>备注：</div></td></tr>` +
+                    `</tbody></table>` +
+                    `<table cellpadding='0' cellspacing='0' style='width:272pt;height:185pt;overflow:hidden;font-size:9pt;table-layout:fixed;word-wrap:break-word;border-collapse:collapse;margin: 0 auto;'><tbody>` +
+                        `<tr style='border: solid 1pt #000;border-top:none;height:35pt;'><td colspan='11' style='text-align: center;'><div style='height:25pt;'></div><div style='text-align: left;font-size:7pt;margin-left: 5pt'>打印时间：${this.printDetail.printTime}</div></td><td colspan='9' style='text-align: left;'><div style='text-align: left;height: 25pt'><img style='width:110pt;height:25pt;' src='${getBarCode(this.printDetail.expressNo, false)}' /></div><div style='text-align: center;'><span style='font-weight: bold;font-size: 10pt;vertical-align: top;'>${this.printDetail.expressNo}</span></div></td></tr>` +
+                        `<tr style='border: solid 1pt #000;font-size:8pt;height:26pt;'><td colspan='1' style='text-align: center;border-right: solid 1pt #000; font-weight: bold;word-break: break-all;'><div style='margin:1pt 2pt'>寄方</div></td><td colspan='15' style='text-align: left;border-right: solid 1pt #000;'><div style='margin-left: 3pt'>${this.printDetail.sendAddress}</div><div style='margin-left: 3pt'>${this.printDetail.sendMan}</div></td><td colspan='4' style='text-align: left;position:relative'><div style='position: absolute;top:0;left:0;' >寄件签署</div></td></tr>` +
+                        `<tr style='border: solid 1pt #000;font-size:8pt;height:26pt;'><td colspan='1' style='text-align: center;border-right: solid 1pt #000; font-weight: bold;word-break: break-all;'><div style='margin:1pt 2pt'>收方</div></td><td colspan='19' style='text-align: left;border-right: solid 1pt #000;'><div style='margin-left: 3pt'>${this.printDetail.receiveMan}</div><div style='margin-left: 2pt;'>${this.printDetail.receiveAddress}</div></td></tr>` +
+                        `<tr style='border: solid 1pt #000;height: 20pt'><td colspan='16' style='text-align: center;border-right: solid 1pt #000; font-weight: bold;word-break: break-all;'><div style='margin-left:3pt;text-align: left;'>寄托物：${this.printDetail.sendGoods}</div></td><td colspan='4' style='text-align: left;'><div style='text-align: center;font-size: 12pt; font-weight: bold;'>${this.printDetail.expressServiceModel}</div></td></tr>` +
+                        `<tr style='border: solid 1pt #000;font-size: 7pt;height: 10pt;'><td colspan='5' style='text-align: center;border-right: solid 1pt #000;'><div style='text-align: left;'>寄方签署</div></td><td colspan='5' style='text-align: center;border-right: solid 1pt #000;'><div style='text-align: left;'>收件员</div></td><td colspan='5' style='text-align: center;border-right: solid 1pt #000;'><div style='text-align: left;'>收方签署</div></td><td colspan='5' style='text-align: center;border-right: solid 1pt #000;'><div style='text-align: left;'>派件员</div></td></tr>` +
+                        `<tr style='border: solid 1pt #000;font-size:7pt;height: 10pt;'><td colspan='10' style='text-align: center;border-right: solid 1pt #000;'><div style='text-align: left;'><span style='margin-left:2pt'>寄件时间：</span><span style='margin-left: 10pt'>年</span><span style='margin-left: 9pt'>月</span><span style='margin-left: 9pt'>日</span><span style='margin-left: 9pt'>时</span><span style='margin-left: 9pt'>分</span></div></td><td colspan='10' style='text-align: center;border-right: solid 1pt #000;'><div style='text-align: left;'><span style='margin-left:2pt'>签收时间：</span><span style='margin-left: 10pt'>年</span><span style='margin-left: 9pt'>月</span><span style='margin-left: 9pt'>日</span><span style='margin-left: 9pt'>时</span><span style='margin-left: 9pt'>分</span></div></td></tr>` +
+                        `<tr style='border: solid 1pt #000;font-size:7pt;height:18pt;'><td colspan='20' style='text-align: left;border-right: solid 1pt #000;'><div><span>件数：${this.printDetail.sendNum}</span><span style='margin-left: 8pt'>实重：${this.printDetail.sendWeight}</span><span style='margin-left: 8pt'>计重：${this.printDetail.sendCountWeight}</span><span style='margin-left: 8pt'>运费：￥${this.printDetail.cost}</span><span style='margin-left: 8pt'>合计运费：￥${this.printDetail.countCost}</span></div><div><span>付款方式：<span style='font-weight:bold;'>${this.printDetail.payType}</span></span><span style='margin-left: 25pt'>月结卡号：${this.printDetail.payAccount}</span></div></td></tr>` +
+                        `<tr style='border: solid 1pt #000;'><td colspan='20' style='text-align: left;border-right: solid 1pt #000;position: relative;'><div style="position: absolute;top:1pt;left:2pt;">备注：</div></td></tr>` +
+                    `</tbody></table>`;
+    return page;
+}
+
+function getBarCode(value, bool) {
+
+    let bar = document.createElement("img");
+    JsBarcode(bar, value, {displayValue: bool, fontSize: 18});
+    document.body.appendChild(bar);
+    return bar.src
+}
+
+function getBackingStorePixelRatio(ctx) {
+    return (
+        ctx.webkitBackingStorePixelRatio ||
+        ctx.mozBackingStorePixelRatio ||
+        ctx.msBackingStorePixelRatio ||
+        ctx.oBackingStorePixelRatio ||
+        ctx.backingStorePixelRatio ||
+        1
+    )
+}
